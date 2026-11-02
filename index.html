@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse - Plataforma</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #f8fafc; text-align: center; padding: 50px; }
+        .card { background: #1e293b; padding: 30px; border-radius: 12px; max-width: 500px; margin: 20px auto; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        h1 { color: #38bdf8; }
+        button { background: #38bdf8; color: #0f172a; border: none; padding: 10px 20px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 15px; }
+        button:hover { background: #0ea5e9; }
+        .status { margin-top: 15px; font-family: monospace; color: #a3e635; }
+    </style>
+</head>
+<body>
+    <h1>Pulse Platform</h1>
+    <p>Tu centro de música e inteligencia artificial</p>
+
+    <div class="card">
+        <h3>Estado del Servidor (Render)</h3>
+        <button onclick="probarBackend()">Verificar Conexión</button>
+        <div id="resultado" class="status">Haz clic para comprobar el backend...</div>
+    </div>
+
+    <script>
+        async function probarBackend() {
+            const resDiv = document.getElementById('resultado');
+            resDiv.innerText = "Conectando con Render...";
+            try {
+                // AQUÍ ESTÁ TU URL DE RENDER CONECTADA
+                const response = await fetch('https://pulse-backend-1-yj1j.onrender.com/api/music/status');
+                const data = await response.json();
+                resDiv.innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resDiv.innerText = "Error al conectar con el backend.";
+            }
+        }
+    </script>
+</body>
+</html>
