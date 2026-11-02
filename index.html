@@ -3,58 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulse Platform</title>
+    <title>Pulse Platform | Música & IA</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background: #0b0f19; color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background: #070913; color: #f3f4f6; min-height: 100vh; overflow-x: hidden; }
         
-        header { text-align: center; margin-bottom: 40px; }
-        h1 { font-size: 2.8rem; background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        p.subtitle { color: #9ca3af; margin-top: 8px; font-size: 1.1rem; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 900px; width: 100%; }
+        /* Efectos de luces de fondo */
+        .glow { position: absolute; width: 400px; height: 400px; background: rgba(56, 189, 248, 0.1); filter: blur(120px); border-radius: 50%; z-index: -1; }
         
-        .card { background: #171e2e; border: 1px solid #2d3748; border-radius: 16px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: space-between; }
-        .card h3 { color: #38bdf8; margin-bottom: 12px; font-size: 1.3rem; display: flex; align-items: center; gap: 8px; }
+        header { text-align: center; padding: 60px 20px 40px; animation: fadeIn 1s ease-in-out; }
+        h1 { font-size: 3.2rem; background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: #9ca3af; margin-top: 10px; font-size: 1.2rem; }
 
-        .status-box { background: #0f172a; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.85rem; color: #a3e635; margin-top: 16px; min-height: 60px; word-break: break-all; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; gap: 40px; }
 
-        button { background: linear-gradient(90deg, #0284c7, #2563eb); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: transform 0.2s, opacity 0.2s; margin-top: 16px; }
-        button:hover { opacity: 0.9; transform: translateY(-2px); }
+        .section-title { font-size: 1.8rem; margin-bottom: 20px; color: #38bdf8; border-left: 4px solid #38bdf8; padding-left: 12px; }
 
-        input { background: #0f172a; border: 1px solid #334155; color: white; padding: 10px; border-radius: 8px; margin-top: 10px; width: 100%; font-size: 0.9rem; }
-        input:focus { outline: none; border-color: #38bdf8; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+        
+        .card { background: rgba(23, 30, 46, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.4); }
+        .card h3 { color: #f8fafc; margin-bottom: 12px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+
+        .status-box { background: #0b0f19; border: 1px solid #1e293b; border-radius: 10px; padding: 15px; font-family: monospace; font-size: 0.9rem; color: #a3e635; margin-top: 16px; min-height: 70px; }
+
+        button { background: linear-gradient(90deg, #0284c7, #4f46e5); color: white; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: opacity 0.2s, transform 0.2s; width: 100%; margin-top: 15px; }
+        button:hover { opacity: 0.9; transform: scale(1.02); }
+
+        input, textarea { background: #0b0f19; border: 1px solid #334155; color: white; padding: 12px; border-radius: 10px; margin-top: 10px; width: 100%; font-size: 0.95rem; resize: none; }
+        input:focus, textarea:focus { outline: none; border-color: #38bdf8; }
+
+        /* Estilos para Artistas y Equipo */
+        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .profile-card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 20px; text-align: center; }
+        .avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8, #6366f1); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: white; }
+        .profile-card h4 { color: #f3f4f6; margin-bottom: 5px; }
+        .profile-card p { color: #9ca3af; font-size: 0.85rem; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
+    <div class="glow" style="top: 10%; left: 20%;"></div>
+    <div class="glow" style="bottom: 20%; right: 15%;"></div>
+
     <header>
-        <h1>Pulse Media System</h1>
-        <p class="subtitle">Panel de Control & Interacción Integrada</p>
+        <h1>PULSE PLATFORM</h1>
+        <p class="subtitle">El ecosistema definitivo de música e Inteligencia Artificial</p>
     </header>
 
-    <div class="grid">
-        <!-- Tarjeta de Música -->
-        <div class="card">
-            <div>
-                <h3>🎵 Controlador de Música</h3>
-                <p style="color: #94a3b8; font-size: 0.9rem;">Consulta el estado del servicio de música en Render.</p>
+    <div class="container">
+
+        <!-- Sección Interactiva: Música y Chat de IA -->
+        <div class="grid">
+            <!-- Tarjeta de Música -->
+            <div class="card">
+                <div>
+                    <h3>🎵 Live Music Stream</h3>
+                    <p style="color: #9ca3af; font-size: 0.9rem;">Conexión en vivo con el motor de audio en Render.</p>
+                </div>
+                <button onclick="checkMusic()">Consultar Estado de Audio</button>
+                <div id="music-status" class="status-box">Sistema en espera de señal...</div>
             </div>
-            <button onclick="checkMusic()">Verificar Spotify Status</button>
-            <div id="music-status" class="status-box">Esperando consulta...</div>
+
+            <!-- Tarjeta de Chat con IA -->
+            <div class="card">
+                <div>
+                    <h3>🤖 Asistente IA Pulse</h3>
+                    <p style="color: #9ca3af; font-size: 0.9rem;">Escribe una consulta y chatea con el núcleo.</p>
+                    <textarea id="ai-prompt" rows="2" placeholder="Pregúntale algo a Pulse..."></textarea>
+                </div>
+                <button onclick="sendAI()">Enviar Mensaje</button>
+                <div id="ai-status" class="status-box">La IA responderá aquí...</div>
+            </div>
         </div>
 
-        <!-- Tarjeta de IA -->
-        <div class="card">
-            <div>
-                <h3>🤖 Asistente de IA</h3>
-                <p style="color: #94a3b8; font-size: 0.9rem;">Envía un mensaje a la API de IA.</p>
-                <input type="text" id="ai-prompt" placeholder="Escribe un prompt para Pulse...">
+        <!-- Sección de Artistas Destacados -->
+        <div>
+            <h2 class="section-title">🎤 Artistas Destacados</h2>
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="avatar">A1</div>
+                    <h4>Luna Sound</h4>
+                    <p>Electronic & Synthwave</p>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">A2</div>
+                    <h4>Echo Valley</h4>
+                    <p>Ambient & Cinematic</p>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">A3</div>
+                    <h4>Cyber Pulse</h4>
+                    <p>Future Bass Producer</p>
+                </div>
             </div>
-            <button onclick="sendAI()">Enviar a IA</button>
-            <div id="ai-status" class="status-box">Sin interacción reciente...</div>
         </div>
+
+        <!-- Sección del Equipo de Trabajo -->
+        <div>
+            <h2 class="section-title">⚡ Equipo de Trabajo</h2>
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">PH</div>
+                    <h4>Pulse Lead</h4>
+                    <p>Arquitectura & Backend</p>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6);">UI</div>
+                    <h4>Frontend Dev</h4>
+                    <p>Interfaz y Experiencia Web</p>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">AI</div>
+                    <h4>Core Intelligence</h4>
+                    <p>Modelos y Automatización</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -62,22 +131,22 @@
 
         async function checkMusic() {
             const box = document.getElementById('music-status');
-            box.innerText = "Consultando Spotify...";
+            box.innerText = "Sintonizando señal...";
             try {
                 const res = await fetch(`${BACKEND_URL}/api/music/status`);
                 const data = await res.json();
-                box.innerText = `[Status]: ${data.status}\n[Track]: ${data.track}\n[Info]: ${data.message}`;
+                box.innerText = `[Estado]: ${data.status}\n[Track]: ${data.track}\n[Info]: ${data.message}`;
             } catch (e) {
-                box.innerText = "Error de conexión.";
+                box.innerText = "Error: No se pudo conectar con Render.";
             }
         }
 
         async function sendAI() {
             const prompt = document.getElementById('ai-prompt').value;
             const box = document.getElementById('ai-status');
-            if(!prompt) return alert("Escribe un mensaje primero");
+            if(!prompt) return alert("Por favor escribe un mensaje para la IA.");
             
-            box.innerText = "Procesando con la IA...";
+            box.innerText = "Pulse AI procesando pensamiento...";
             try {
                 const res = await fetch(`${BACKEND_URL}/api/ai/process`, {
                     method: 'POST',
@@ -87,7 +156,7 @@
                 const data = await res.json();
                 box.innerText = data.response;
             } catch (e) {
-                box.innerText = "Error al enviar la solicitud.";
+                box.innerText = "Error de comunicación con el núcleo de IA.";
             }
         }
     </script>
