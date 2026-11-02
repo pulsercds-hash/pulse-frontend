@@ -1,164 +1,350 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulse Platform | Música & IA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        body { background: #070913; color: #f3f4f6; min-height: 100vh; overflow-x: hidden; }
-        
-        /* Efectos de luces de fondo */
-        .glow { position: absolute; width: 400px; height: 400px; background: rgba(56, 189, 248, 0.1); filter: blur(120px); border-radius: 50%; z-index: -1; }
-        
-        header { text-align: center; padding: 60px 20px 40px; animation: fadeIn 1s ease-in-out; }
-        h1 { font-size: 3.2rem; background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        p.subtitle { color: #9ca3af; margin-top: 10px; font-size: 1.2rem; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse Media - Distribuidora de Música</title>
+  <!-- Fuentes modernas Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       ESTILOS GENERALES Y TEMA NEÓN
+       ========================================== */
+    :root {
+      --bg-color: #0a0a0f;
+      --card-bg: rgba(20, 20, 32, 0.7);
+      --primary-neon: #00f0ff;
+      --secondary-neon: #7000ff;
+      --text-color: #f0f0f8;
+      --text-muted: #a0a0b8;
+    }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; gap: 40px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .section-title { font-size: 1.8rem; margin-bottom: 20px; color: #38bdf8; border-left: 4px solid #38bdf8; padding-left: 12px; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-        
-        .card { background: rgba(23, 30, 46, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: transform 0.3s ease, border-color 0.3s ease; }
-        .card:hover { transform: translateY(-5px); border-color: rgba(56, 189, 248, 0.4); }
-        .card h3 { color: #f8fafc; margin-bottom: 12px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+    /* ==========================================
+       PANTALLA DE CARGA (LOADER)
+       ========================================== */
+    #loader-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
 
-        .status-box { background: #0b0f19; border: 1px solid #1e293b; border-radius: 10px; padding: 15px; font-family: monospace; font-size: 0.9rem; color: #a3e635; margin-top: 16px; min-height: 70px; }
+    .loader-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: var(--primary-neon);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+      margin-bottom: 2rem;
+    }
 
-        button { background: linear-gradient(90deg, #0284c7, #4f46e5); color: white; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: opacity 0.2s, transform 0.2s; width: 100%; margin-top: 15px; }
-        button:hover { opacity: 0.9; transform: scale(1.02); }
+    .progress-container {
+      width: 280px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    }
 
-        input, textarea { background: #0b0f19; border: 1px solid #334155; color: white; padding: 12px; border-radius: 10px; margin-top: 10px; width: 100%; font-size: 0.95rem; resize: none; }
-        input:focus, textarea:focus { outline: none; border-color: #38bdf8; }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
+      border-radius: 10px;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 15px var(--primary-neon);
+    }
 
-        /* Estilos para Artistas y Equipo */
-        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-        .profile-card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 20px; text-align: center; }
-        .avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8, #6366f1); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: white; }
-        .profile-card h4 { color: #f3f4f6; margin-bottom: 5px; }
-        .profile-card p { color: #9ca3af; font-size: 0.85rem; }
+    .loader-text {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+    }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+    /* ==========================================
+       CONTENIDO PRINCIPAL (LANDING PAGE)
+       ========================================== */
+    #main-content {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    /* Navegación */
+    navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary-neon);
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-color);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--primary-neon);
+      color: var(--primary-neon);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--secondary-neon), var(--primary-neon));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(112, 0, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 5%;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(180deg, #ffffff 30%, var(--primary-neon) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+    }
+
+    .about-card {
+      max-width: 800px;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2.5rem;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 3rem;
+    }
+
+    .about-text {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    .highlight {
+      color: var(--primary-neon);
+      font-weight: 600;
+    }
+
+    /* Sección de Contacto */
+    .contact-container {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsivo para móviles */
+    @media (max-width: 768px) {
+      navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .contact-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="glow" style="top: 10%; left: 20%;"></div>
-    <div class="glow" style="bottom: 20%; right: 15%;"></div>
-
-    <header>
-        <h1>PULSE PLATFORM</h1>
-        <p class="subtitle">El ecosistema definitivo de música e Inteligencia Artificial</p>
-    </header>
-
-    <div class="container">
-
-        <!-- Sección Interactiva: Música y Chat de IA -->
-        <div class="grid">
-            <!-- Tarjeta de Música -->
-            <div class="card">
-                <div>
-                    <h3>🎵 Live Music Stream</h3>
-                    <p style="color: #9ca3af; font-size: 0.9rem;">Conexión en vivo con el motor de audio en Render.</p>
-                </div>
-                <button onclick="checkMusic()">Consultar Estado de Audio</button>
-                <div id="music-status" class="status-box">Sistema en espera de señal...</div>
-            </div>
-
-            <!-- Tarjeta de Chat con IA -->
-            <div class="card">
-                <div>
-                    <h3>🤖 Asistente IA Pulse</h3>
-                    <p style="color: #9ca3af; font-size: 0.9rem;">Escribe una consulta y chatea con el núcleo.</p>
-                    <textarea id="ai-prompt" rows="2" placeholder="Pregúntale algo a Pulse..."></textarea>
-                </div>
-                <button onclick="sendAI()">Enviar Mensaje</button>
-                <div id="ai-status" class="status-box">La IA responderá aquí...</div>
-            </div>
-        </div>
-
-        <!-- Sección de Artistas Destacados -->
-        <div>
-            <h2 class="section-title">🎤 Artistas Destacados</h2>
-            <div class="profile-grid">
-                <div class="profile-card">
-                    <div class="avatar">A1</div>
-                    <h4>Luna Sound</h4>
-                    <p>Electronic & Synthwave</p>
-                </div>
-                <div class="profile-card">
-                    <div class="avatar">A2</div>
-                    <h4>Echo Valley</h4>
-                    <p>Ambient & Cinematic</p>
-                </div>
-                <div class="profile-card">
-                    <div class="avatar">A3</div>
-                    <h4>Cyber Pulse</h4>
-                    <p>Future Bass Producer</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sección del Equipo de Trabajo -->
-        <div>
-            <h2 class="section-title">⚡ Equipo de Trabajo</h2>
-            <div class="profile-grid">
-                <div class="profile-card">
-                    <div class="avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">PH</div>
-                    <h4>Pulse Lead</h4>
-                    <p>Arquitectura & Backend</p>
-                </div>
-                <div class="profile-card">
-                    <div class="avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6);">UI</div>
-                    <h4>Frontend Dev</h4>
-                    <p>Interfaz y Experiencia Web</p>
-                </div>
-                <div class="profile-card">
-                    <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">AI</div>
-                    <h4>Core Intelligence</h4>
-                    <p>Modelos y Automatización</p>
-                </div>
-            </div>
-        </div>
-
+  <!-- ==========================================
+       PANTALLA DE CARGA INICIAL
+       ========================================== -->
+  <div id="loader-screen">
+    <div class="loader-title">PULSE MEDIA</div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
     </div>
+    <div class="loader-text" id="loader-text">CARGANDO ECOSISTEMA...</div>
+  </div>
 
-    <script>
-        const BACKEND_URL = 'https://pulse-backend-1-yj1j.onrender.com';
+  <!-- ==========================================
+       CONTENIDO PRINCIPAL DE LA PLATAFORMA
+       ========================================== -->
+  <div id="main-content">
+    
+    <!-- Barra de Navegación -->
+    <navbar>
+      <div class="logo">PULSE MEDIA</div>
+      <div class="nav-buttons">
+        <button class="btn btn-secondary" onclick="alert('Próximamente: Ver Equipo de Administración')">Equipo Admin</button>
+        <button class="btn btn-secondary" onclick="alert('Próximamente: Catálogo de Artistas')">Ver Artistas</button>
+        <button class="btn btn-primary" onclick="alert('Próximamente: Módulo de Registro / Login')">Iniciar Sesión / Registro</button>
+      </div>
+    </navbar>
 
-        async function checkMusic() {
-            const box = document.getElementById('music-status');
-            box.innerText = "Sintonizando señal...";
-            try {
-                const res = await fetch(`${BACKEND_URL}/api/music/status`);
-                const data = await res.json();
-                box.innerText = `[Estado]: ${data.status}\n[Track]: ${data.track}\n[Info]: ${data.message}`;
-            } catch (e) {
-                box.innerText = "Error: No se pudo conectar con Render.";
-            }
+    <!-- Sección Hero Principal -->
+    <main class="hero">
+      <h1 class="hero-title">PULSE MEDIA</h1>
+
+      <!-- Tarjeta de Información sobre Pulse -->
+      <div class="about-card">
+        <p class="about-text">
+          <span class="highlight">Pulse Media</span> nació en <span class="highlight">2025</span> con una visión clara: albergar a artistas del género urbano, cantantes y compositores, creando todo un ecosistema de desarrollo artístico musical.
+        </p>
+        <br>
+        <p class="about-text">
+          Fundado por <span class="highlight">Josue Tecun</span> con residencia en <span class="highlight">Guatemala</span>.
+        </p>
+
+        <!-- Contactos -->
+        <div class="contact-container">
+          <div class="contact-item">
+            📧 <span>josuetecun793@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            📞 <span>+502 37731793</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+      &copy; 2025 - 2026 Pulse Media. Todos los derechos reservados.
+    </footer>
+
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT DE LA BARRA DE CARGA
+       ========================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const progressBar = document.getElementById("progress-bar");
+      const loaderScreen = document.getElementById("loader-screen");
+      const mainContent = document.getElementById("main-content");
+      
+      let progress = 0;
+
+      // Simulación de carga de 0 a 100%
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 15) + 5;
+        
+        if (progress >= 100) {
+          progress = 100;
+          progressBar.style.width = progress + "%";
+          clearInterval(interval);
+
+          // Ocultar loader y mostrar la landing page
+          setTimeout(() => {
+            loaderScreen.style.opacity = "0";
+            loaderScreen.style.visibility = "hidden";
+            mainContent.style.opacity = "1";
+          }, 400);
+        } else {
+          progressBar.style.width = progress + "%";
         }
+      }, 120);
+    });
+  </script>
 
-        async function sendAI() {
-            const prompt = document.getElementById('ai-prompt').value;
-            const box = document.getElementById('ai-status');
-            if(!prompt) return alert("Por favor escribe un mensaje para la IA.");
-            
-            box.innerText = "Pulse AI procesando pensamiento...";
-            try {
-                const res = await fetch(`${BACKEND_URL}/api/ai/process`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt })
-                });
-                const data = await res.json();
-                box.innerText = data.response;
-            } catch (e) {
-                box.innerText = "Error de comunicación con el núcleo de IA.";
-            }
-        }
-    </script>
 </body>
 </html>
