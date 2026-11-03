@@ -65,6 +65,55 @@
       margin-top: 0.5rem;
       letter-spacing: 1px;
     }
+
+    /* FRANJA DE SOCIOS / PLATAFORMAS (SIN DISTRO) */
+    .partners-section {
+      padding: 3rem 5%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 2;
+    }
+    .partners-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+
+    /* SECCIÓN DE PREGUNTAS FRECUENTES (FAQ / BLUEPRINT) */
+    .faq-section {
+      padding: 6rem 5%;
+      position: relative;
+      z-index: 2;
+    }
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 2rem 0;
+    }
+    .faq-question {
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+    .faq-answer {
+      font-size: 0.95rem;
+      opacity: 0.75;
+      line-height: 1.6;
+      font-family: var(--font-mono);
+    }
   </style>
 </head>
 <body class="theme-dark">
@@ -87,7 +136,7 @@
     <section class="hero-section panel" data-theme="dark">
       <div class="hero-meta">
         <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
-        <span>/ GLOBAL</span>
+        <span>GUATEMALA / GLOBAL</span>
       </div>
       <h1 class="hero-title">
         Distribución <br>Promoción <br><span class="accent-text">Dirección Creativa</span>
@@ -95,11 +144,24 @@
       <p class="hero-subtitle">El ecosistema definitivo para el género urbano y regional mexicano de nueva generación.</p>
     </section>
 
-    <!-- TICKER EN MOVIMIENTO CON TU MENSAJE -->
+    <!-- TICKER EN MOVIMIENTO -->
     <div class="marquee-container">
       <div class="marquee-track">
-        <span>//  — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>// — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>// GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>// GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (SIN DISTRO) -->
+    <div class="partners-section">
+      <div class="partners-grid">
+        <span>// Spotify Ecosystem</span>
+        <span>•</span>
+        <span>Apple Music Partners</span>
+        <span>•</span>
+        <span>YouTube Music Curators</span>
+        <span>•</span>
+        <span>Global Digital Networks</span>
       </div>
     </div>
 
@@ -112,19 +174,19 @@
           Pulse Media nació en 2025 bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
         </p>
 
-        <!-- SECCIÓN DE MÉTRICAS DE IMPACTO -->
+        <!-- MÉTRICAS DE IMPACTO -->
         <div class="metrics-grid">
           <div>
-            <div class="metric-number">+1k</div>
+            <div class="metric-number">+12M</div>
             <div class="metric-label">Reproducciones Globales</div>
           </div>
           <div>
-            <div class="metric-number">01</div>
+            <div class="metric-number">04</div>
             <div class="metric-label">Años de Evolución Underground</div>
           </div>
           <div>
             <div class="metric-number">100%</div>
-            <div class="metric-label">Transparencia y Regalías</div>
+            <div class="metric-label">Transparencia y Visión</div>
           </div>
         </div>
       </div>
@@ -149,10 +211,35 @@
         <div class="module-card">
           <div class="module-index">[02]</div>
           <div>
-            <div class="module-title">No solo distribuimos, contamos tu historia</div>
-            <p class="module-desc">Llevamos tu música a todas las plataformas digitales del mundo respaldada por campañas de pauta quirúrgica, relaciones públicas y desarrollo de comunidad.</p>
+            <div class="module-title">No solo posicionamos, contamos tu historia</div>
+            <p class="module-desc">Llevamos tu música a las plataformas más exigentes del mundo respaldada por campañas de pauta quirúrgica, relaciones públicas y desarrollo de comunidad.</p>
           </div>
           <div class="card-media-badge">// STORYTELLING ENGINE</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: PREGUNTAS FRECUENTES / THE BLUEPRINT -->
+    <section class="faq-section" data-theme="dark">
+      <div class="faq-container">
+        <span class="section-tag">// 03. THE BLUEPRINT</span>
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; margin-bottom: 3rem;">
+          Preguntas <span class="accent-text">Frecuentes</span>
+        </h2>
+
+        <div class="faq-item">
+          <div class="faq-question">¿Qué tipo de proyectos busca Pulse Media?</div>
+          <div class="faq-answer">Buscamos talentos y creadores de géneros urbanos y regional mexicano que rechacen lo genérico y busquen una dirección estética y sonora de nivel mundial.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">¿Cómo se trabaja la dirección creativa y visual?</div>
+          <div class="faq-answer">Diseñamos toda la identidad de marca del artista desde cero: concepto visual, portadas, narrativa en redes y posicionamiento estético de alto impacto.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">¿Cómo puedo enviar mi propuesta o unirme al sello?</div>
+          <div class="faq-answer">Puedes dirigirte al apartado de Registro en el menú superior, rellenar los datos de tu proyecto musical y nuestro equipo evaluará tu propuesta artística.</div>
         </div>
       </div>
     </section>
