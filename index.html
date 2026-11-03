@@ -149,7 +149,7 @@
       text-align: center;
     }
 
-    /* HERO SECTION CON VIDEO NATIVO DE FONDO */
+    /* HERO SECTION CON VIDEO DE FONDO Y BLOQUEO DE CURSOR */
     .hero-section {
       position: relative;
       overflow: hidden;
@@ -160,19 +160,26 @@
       top: 50%;
       left: 50%;
       width: 100vw;
-      height: 100vh;
-      object-fit: cover;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.77vh;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.35;
+      opacity: 0.4;
+    }
+    .hero-video-bg iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      pointer-events: none;
     }
     .hero-section > *:not(.hero-video-bg) {
       position: relative;
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO NATIVO EN TARJETAS */
+    /* CONTENEDOR DE VIDEO EN TARJETAS */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -185,13 +192,13 @@
       background: #000;
       pointer-events: none;
     }
-    .video-wrapper video {
+    .video-wrapper iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      border: 0;
       pointer-events: none;
     }
 
@@ -250,11 +257,11 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO CON VIDEO NATIVO DE FONDO -->
+    <!-- SECCIÓN 1: HERO CON MOJABI GHOST DE FONDO -->
     <section class="hero-section panel" data-theme="dark">
-      <video class="hero-video-bg" autoplay muted loop playsinline preload="auto">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-numbers-31950-large.mp4" type="video/mp4">
-      </video>
+      <div class="hero-video-bg">
+        <iframe src="https://www.youtube.com/embed/O1wUdB7MQbI?autoplay=1&mute=1&controls=0&loop=1&playlist=O1wUdB7MQbI&disablekb=1&modestbranding=1&iv_load_policy=3" title="Background Visual" allow="autoplay"></iframe>
+      </div>
 
       <div class="hero-meta">
         <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
@@ -314,7 +321,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS CON VIDEOS NATIVOS -->
+    <!-- SECCIÓN 3: MÓDULOS CON VIDEOS DE YOUTUBE RESTAURADOS Y BLINDADOS -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
@@ -330,9 +337,7 @@
           </div>
           
           <div class="video-wrapper">
-            <video autoplay muted loop playsinline preload="auto">
-              <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-holding-a-neon-sign-in-a-dark-room-41525-large.mp4" type="video/mp4">
-            </video>
+            <iframe src="https://www.youtube.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&disablekb=1&modestbranding=1&iv_load_policy=3" title="Pulse Media Identity" allow="autoplay"></iframe>
           </div>
         </div>
 
@@ -345,9 +350,7 @@
           </div>
           
           <div class="video-wrapper">
-            <video autoplay muted loop playsinline preload="auto">
-              <source src="https://assets.mixkit.co/videos/preview/mixkit-dj-mixing-music-in-a-club-41523-large.mp4" type="video/mp4">
-            </video>
+            <iframe src="https://www.youtube.com/embed/7f6SxWMOpdU?autoplay=1&mute=1&controls=0&loop=1&playlist=7f6SxWMOpdU&disablekb=1&modestbranding=1&iv_load_policy=3" title="Pulse Media Storytelling" allow="autoplay"></iframe>
           </div>
         </div>
       </div>
