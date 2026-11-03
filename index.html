@@ -17,7 +17,7 @@
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   
   <style>
-    /* ESTILOS DEL PRELOADER / PANTALLA DE CARGA CON BARRITA */
+    /* PRELOADER CON BARRITA */
     #app-preloader {
       position: fixed;
       top: 0;
@@ -78,7 +78,7 @@
       letter-spacing: 2px;
     }
 
-    /* ESTILOS EXCLUSIVOS PARA EL TICKER MARQUEE */
+    /* TICKER MARQUEE */
     .marquee-container {
       background: var(--accent-neon);
       color: #000;
@@ -102,7 +102,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* MÉTRICAS DE IMPACTO REALES */
+    /* MÉTRICAS */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -127,7 +127,7 @@
       letter-spacing: 1px;
     }
 
-    /* FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (CENTRADOS) */
+    /* SOCIOS / PLATAFORMAS */
     .partners-section {
       padding: 3rem 5%;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -149,7 +149,7 @@
       text-align: center;
     }
 
-    /* HERO SECTION CON VIDEO DE FONDO Y BLOQUEO DE CURSOR */
+    /* HERO SECTION CON VIDEO NATIVO DE FONDO (CERO INTERFERENCIAS) */
     .hero-section {
       position: relative;
       overflow: hidden;
@@ -160,27 +160,19 @@
       top: 50%;
       left: 50%;
       width: 100vw;
-      height: 56.25vw;
-      min-height: 100vh;
-      min-width: 177.77vh;
+      height: 100vh;
+      object-fit: cover;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
       opacity: 0.35;
-      background: #000;
-    }
-    .hero-video-bg iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      pointer-events: none;
     }
     .hero-section > *:not(.hero-video-bg) {
       position: relative;
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO EN TARJETAS CON FONDO NEGRO */
+    /* CONTENEDOR DE VIDEO NATIVO EN TARJETAS */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -193,17 +185,17 @@
       background: #000;
       pointer-events: none;
     }
-    .video-wrapper iframe {
+    .video-wrapper video {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border: 0;
+      object-fit: cover;
       pointer-events: none;
     }
 
-    /* PREGUNTAS FRECUENTES (FAQ / BLUEPRINT) */
+    /* PREGUNTAS FRECUENTES */
     .faq-section {
       padding: 6rem 5%;
       position: relative;
@@ -234,7 +226,7 @@
 </head>
 <body class="theme-dark">
 
-  <!-- PANTALLA DE CARGA INICIAL (PRELOADER CON BARRITA) -->
+  <!-- PRELOADER CON BARRITA -->
   <div id="app-preloader">
     <div class="preloader-welcome">// Bienvenido al sistema</div>
     <div class="preloader-title">Pulse Media</div>
@@ -258,11 +250,12 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO -->
+    <!-- SECCIÓN 1: HERO CON VIDEO NATIVO -->
     <section class="hero-section panel" data-theme="dark">
-      <div class="hero-video-bg">
-        <iframe src="https://www.youtube.com/embed/O1wUdB7MQbI?autoplay=1&mute=1&controls=0&loop=1&playlist=O1wUdB7MQbI&disablekb=1&modestbranding=1" title="Background Visual" allow="autoplay"></iframe>
-      </div>
+      <!-- Cambia el link por un archivo .mp4 directo si lo deseas -->
+      <video class="hero-video-bg" autoplay muted loop playsinline>
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+      </video>
 
       <div class="hero-meta">
         <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
@@ -274,7 +267,7 @@
       <p class="hero-subtitle">El ecosistema definitivo para el género urbano y regional mexicano de nueva generación.</p>
     </section>
 
-    <!-- TICKER EN MOVIMIENTO -->
+    <!-- TICKER -->
     <div class="marquee-container">
       <div class="marquee-track">
         <span>// GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -282,7 +275,7 @@
       </div>
     </div>
 
-    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES -->
+    <!-- SOCIOS / PLATAFORMAS -->
     <div class="partners-section">
       <div class="partners-grid">
         <span>// Spotify Ecosystem</span>
@@ -295,7 +288,7 @@
       </div>
     </div>
 
-    <!-- SECCIÓN 2: MANIFIESTO (TEMA CLARO) -->
+    <!-- SECCIÓN 2: MANIFIESTO -->
     <section class="manifesto-section panel" data-theme="light">
       <div class="manifesto-content">
         <span class="section-tag">// 01. NUESTRA GÉNESIS</span>
@@ -304,7 +297,7 @@
           Pulse Media nació bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
         </p>
 
-        <!-- MÉTRICAS REALES -->
+        <!-- MÉTRICAS -->
         <div class="metrics-grid">
           <div>
             <div class="metric-number">1K+</div>
@@ -322,7 +315,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS / PILARES -->
+    <!-- SECCIÓN 3: MÓDULOS CON VIDEOS NATIVOS -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
@@ -338,7 +331,9 @@
           </div>
           
           <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&disablekb=1&modestbranding=1" title="Pulse Media Identity" allow="autoplay"></iframe>
+            <video autoplay muted loop playsinline>
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
 
@@ -351,13 +346,15 @@
           </div>
           
           <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/7f6SxWMOpdU?autoplay=1&mute=1&controls=0&loop=1&playlist=7f6SxWMOpdU&disablekb=1&modestbranding=1" title="Pulse Media Storytelling" allow="autoplay"></iframe>
+            <video autoplay muted loop playsinline>
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 4: PREGUNTAS FRECUENTES / THE BLUEPRINT -->
+    <!-- SECCIÓN 4: PREGUNTAS FRECUENTES -->
     <section class="faq-section" data-theme="dark">
       <div class="faq-container">
         <span class="section-tag">// 03. THE BLUEPRINT</span>
@@ -392,7 +389,7 @@
   <script src="app.js"></script>
   
   <script>
-    /* SCRIPT DE CARGA FLUIDA CON BARRA DE PROGRESO DE 1.8 SEGUNDOS */
+    /* PRELOADER CON BARRITA Y TIEMPO DE ESPERA */
     window.addEventListener('load', () => {
       const bar = document.getElementById('preload-bar');
       const percent = document.getElementById('preload-percent');
@@ -400,16 +397,15 @@
       
       let progress = 0;
       const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 15) + 5;
+        progress += Math.floor(Math.random() * 20) + 10;
         if (progress >= 100) {
           progress = 100;
           clearInterval(interval);
           
-          // Animación de salida suave con GSAP
           gsap.to(preloader, {
             opacity: 0,
             duration: 0.8,
-            delay: 0.2,
+            delay: 0.3,
             onComplete: () => {
               preloader.style.display = 'none';
             }
@@ -417,7 +413,7 @@
         }
         bar.style.width = progress + '%';
         percent.textContent = progress + '%';
-      }, 120);
+      }, 100);
     });
   </script>
 </body>
