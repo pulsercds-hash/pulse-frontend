@@ -28,53 +28,108 @@
   <header>
     <a href="#" class="brand-logo" onclick="triggerCurtain(event, '#')">Pulse Media</a>
     <nav>
-      <a href="#" class="nav-link" onclick="triggerCurtain(event, '#')"><span>Roster</span></a>
-      <a href="#" class="nav-link" onclick="triggerCurtain(event, '#')"><span>Studio</span></a>
-      <a href="#" class="nav-link" onclick="triggerCurtain(event, '#')"><span>System</span></a>
+      <a href="#team" class="nav-link"><span>Team</span></a>
+      <a href="#artists" class="nav-link"><span>Artistas</span></a>
+      <a href="#register" class="nav-link"><span>Registrar</span></a>
     </nav>
   </header>
 
-  <!-- SECCIÓN 1: HERO (FONDO OSCURO) -->
   <main>
+    <!-- SECCIÓN 1: HERO -->
     <section class="hero-section panel" data-theme="dark">
       <div class="hero-meta">
         <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
         <span>GUATEMALA / GLOBAL</span>
       </div>
       <h1 class="hero-title">
-        Always <br>Bringing <span class="accent-text">The Flow.</span>
+        Distribución <br>Promoción <br><span class="accent-text">Dirección Creativa</span>
       </h1>
+      <p class="hero-subtitle">El ecosistema definitivo para el género urbano y regional mexicano de nueva generación.</p>
     </section>
 
-    <!-- SECCIÓN 2: MANIFIESTO / CAMBIO DE COLOR DINÁMICO AL SCROLL -->
+    <!-- SECCIÓN 2: MANIFIESTO (TEMA CLARO) -->
     <section class="manifesto-section panel" data-theme="light">
       <div class="manifesto-content">
-        <span class="section-tag">// 01. FILOSOFÍA</span>
-        <h2 class="manifesto-title">Rechazamos lo genérico. Creamos la infraestructura sonora del género urbano y regional de nueva generación.</h2>
+        <span class="section-tag">// 01. NUESTRA GÉNESIS</span>
+        <h2 class="manifesto-title">Rechazamos lo genérico. Creamos la infraestructura sonora y visual que rompe las reglas de la industria.</h2>
+        <p class="manifesto-text">
+          Pulse Media nació en 2025 bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
+        </p>
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS (RETORNO A OSCURO INDUSTRIAL) -->
-    <section class="modules-section panel" data-theme="dark">
+    <!-- SECCIÓN 3: MÓDULOS / PILARES CON ENFOQUE AUDIO-VISUAL (DARK) -->
+    <section class="modules-section panel" data-theme="dark" id="artists">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
-        02 // SYSTEM MODULES
+        02 // SYSTEM CORE MODULES
       </div>
       
       <div class="modules-grid">
         <div class="module-card">
           <div class="module-index">[01]</div>
           <div>
-            <div class="module-title">Global Distribution</div>
-            <p class="module-desc">Conexión directa a plataformas digitales globales con métricas en tiempo real.</p>
+            <div class="module-title">Hacemos que tengas tu propia identidad</div>
+            <p class="module-desc">Construimos marcas de artistas sólidas desde cero: dirección de arte, concepto visual, estilismo y narrativa de alto voltaje adaptada al mercado global.</p>
           </div>
+          <div class="card-media-badge">// VIDEO ASSET READY</div>
         </div>
 
         <div class="module-card">
           <div class="module-index">[02]</div>
           <div>
-            <div class="module-title">Visual Direction</div>
-            <p class="module-desc">Dirección de arte agresiva, underground y de alto impacto estético.</p>
+            <div class="module-title">No solo distribuimos, contamos tu historia</div>
+            <p class="module-desc">Llevamos tu música a todas las plataformas digitales del mundo respaldada por campañas de pauta quirúrgica, relaciones públicas y desarrollo de comunidad.</p>
           </div>
+          <div class="card-media-badge">// STORYTELLING ENGINE</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: REGISTRO / CREACIÓN DE CUENTA (SYSTEM / REGISTRAR) -->
+    <section class="register-section panel" data-theme="dark" id="register">
+      <div class="register-container">
+        <span class="section-tag">// 03. ÚNETE AL SISTEMA</span>
+        <h2 class="register-title">Crea tu cuenta en <span class="accent-text">Pulse</span></h2>
+        <p class="register-sub">Envía tu propuesta artística o activa el acceso a la consola de gestión de tu proyecto.</p>
+        
+        <form class="register-form" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label>Nombre del Artista / Proyecto</label>
+            <input type="text" placeholder="Ej. Elías El Klan" required>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" placeholder="contacto@pulselabel.com" required>
+          </div>
+          <div class="form-group">
+            <label>Género Principal</label>
+            <select required>
+              <option value="" disabled selected>Selecciona un género</option>
+              <option value="urbano">Urbano / Trap / Reggaeton</option>
+              <option value="regional">Regional Mexicano / Corridos</option>
+              <option value="alternativo">Fusión / Alternativo</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn">Inicializar Registro</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: TEAM (EQUIPO DE ADMINISTRACIÓN) -->
+    <section class="team-section panel" data-theme="dark" id="team">
+      <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
+        04 // MANAGEMENT & LEADERSHIP
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <h3>Josue Tecun</h3>
+          <p class="team-role">Founder & CEO</p>
+          <p class="team-desc">Dirección general, visión estratégica y expansión global de catálogos.</p>
+        </div>
+        <div class="team-card">
+          <h3>Pulse Operations</h3>
+          <p class="team-role">Global Management</p>
+          <p class="team-desc">Supervisión de distribución digital, monetización y desarrollo de artistas.</p>
         </div>
       </div>
     </section>
@@ -83,7 +138,7 @@
   <!-- FOOTER -->
   <footer>
     <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
-    <div>ALL RIGHTS RESERVED</div>
+    <div>GUATEMALA // GLOBAL OPS</div>
   </footer>
 
   <script src="app.js"></script>
