@@ -132,7 +132,7 @@
       letter-spacing: 1px;
     }
 
-    /* SOCIOS / PLATAFORMAS (CENTRADOS) */
+    /* SOCIOS / PLATAFORMAS */
     .partners-section {
       padding: 3rem 5%;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -154,7 +154,7 @@
       text-align: center;
     }
 
-    /* HERO SECTION CON VIDEO LOCAL DE FONDO */
+    /* HERO SECTION */
     .hero-section {
       position: relative;
       overflow: hidden;
@@ -177,7 +177,6 @@
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO LOCAL EN TARJETAS */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -228,7 +227,62 @@
       font-family: var(--font-mono);
     }
 
-    /* NUEVO APARTADO FINAL CON TARJETA2.MP4 */
+    /* NUEVO APARTADO: ACERCA DE PULSE (TEASER PREVIEW) */
+    .about-teaser-section {
+      padding: 7rem 5%;
+      background: linear-gradient(to bottom, #000, #080808);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .about-teaser-card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(15, 15, 15, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    }
+    .about-teaser-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+    .about-teaser-desc {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      max-width: 650px;
+      margin: 0 auto 2.5rem auto;
+    }
+    .btn-about-explore {
+      display: inline-block;
+      background: var(--accent-neon);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 1rem 2.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-about-explore:hover {
+      background: #fff;
+      box-shadow: 0 0 20px rgba(220, 255, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* APARTADO FINAL CON TARJETA2.MP4 */
     .join-team-section {
       position: relative;
       padding: 8rem 5%;
@@ -285,6 +339,12 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
+    @media (max-width: 768px) {
+      .about-teaser-card {
+        padding: 2.5rem 1.5rem;
+      }
+    }
   </style>
 </head>
 <body class="theme-dark">
@@ -302,17 +362,18 @@
   <canvas id="webgl-canvas"></canvas>
   <div id="page-curtain"></div>
 
-  <!-- HEADER (SIN REGISTRAR) -->
+  <!-- HEADER ACTUALIZADO CON ENLACE A ACERCA -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <nav>
       <a href="team.html" class="nav-link" onclick="triggerCurtain(event, 'team.html')"><span>Team</span></a>
       <a href="artists.html" class="nav-link" onclick="triggerCurtain(event, 'artists.html')"><span>Artistas</span></a>
+      <a href="acerca.html" class="nav-link" onclick="triggerCurtain(event, 'acerca.html')"><span>Acerca</span></a>
     </nav>
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO CON FONDO.MP4 -->
+    <!-- SECCIÓN 1: HERO -->
     <section class="hero-section panel" data-theme="dark">
       <video class="hero-video-bg" autoplay muted loop playsinline webkit-playsinline preload="metadata">
         <source src="videos/fondo.mp4" type="video/mp4">
@@ -336,7 +397,7 @@
       </div>
     </div>
 
-    <!-- SOCIOS / PLATAFORMAS -->
+    <!-- SOCIOS -->
     <div class="partners-section">
       <div class="partners-grid">
         <span>Spotify Ecosystem</span>
@@ -349,7 +410,7 @@
       </div>
     </div>
 
-    <!-- SECCIÓN 2: MANIFIESTO -->
+    <!-- MANIFIESTO -->
     <section class="manifesto-section panel" data-theme="light">
       <div class="manifesto-content">
         <span class="section-tag">01. NUESTRA GÉNESIS</span>
@@ -358,7 +419,6 @@
           Pulse Media nació bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
         </p>
 
-        <!-- MÉTRICAS -->
         <div class="metrics-grid">
           <div>
             <div class="metric-number">1K+</div>
@@ -376,21 +436,19 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS CON TARJETA1.MP4 Y TARJETA2.MP4 -->
+    <!-- MÓDULOS -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
       </div>
       
       <div class="modules-grid">
-        <!-- TARJETA 1 -->
         <div class="module-card">
           <div>
             <div class="module-index">[01]</div>
             <div class="module-title" style="margin-top: 1rem;">Hacemos que tengas tu propia identidad</div>
             <p class="module-desc" style="margin-top: 0.8rem;">Construimos marcas de artistas sólidas desde cero: dirección de arte, concepto visual, estilismo y narrativa de alto voltaje adaptada al mercado global.</p>
           </div>
-          
           <div class="video-wrapper">
             <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
               <source src="videos/tarjeta1.mp4" type="video/mp4">
@@ -398,14 +456,12 @@
           </div>
         </div>
 
-        <!-- TARJETA 2 -->
         <div class="module-card">
           <div>
             <div class="module-index">[02]</div>
             <div class="module-title" style="margin-top: 1rem;">No solo posicionamos, contamos tu historia</div>
             <p class="module-desc" style="margin-top: 0.8rem;">Llevamos tu música a las plataformas más exigentes del mundo respaldada por campañas de pauta quirúrgica, relaciones públicas y desarrollo de comunidad.</p>
           </div>
-          
           <div class="video-wrapper">
             <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
               <source src="videos/tarjeta2.mp4" type="video/mp4">
@@ -415,7 +471,19 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 4: PREGUNTAS FRECUENTES -->
+    <!-- NUEVO APARTADO: ACERCA DE PULSE (TEASER) -->
+    <section class="about-teaser-section">
+      <div class="about-teaser-card">
+        <span class="section-tag" style="margin-bottom: 1rem; display: inline-block;">// ARCHIVO CONFIDENCIAL</span>
+        <h2 class="about-teaser-title">Acerca de <span class="accent-text" style="color: var(--accent-neon);">Pulse</span></h2>
+        <p class="about-teaser-desc">
+          Adéntrate en los cimientos del sello. Una mirada íntima al archivo de origen, el material de estudio inédito y la visión detrás de la creación del movimiento en Guatemala.
+        </p>
+        <a href="acerca.html" class="btn-about-explore" onclick="triggerCurtain(event, 'acerca.html')">Explorar Archivo Íntimo</a>
+      </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
     <section class="faq-section" data-theme="dark">
       <div class="faq-container">
         <span class="section-tag">03. THE BLUEPRINT</span>
@@ -440,7 +508,7 @@
       </div>
     </section>
 
-    <!-- NUEVO APARTADO FINAL: ¿ESTÁS LISTO PARA FORMAR PARTE DE NUESTRO EQUIPO? -->
+    <!-- APARTADO FINAL -->
     <section class="join-team-section">
       <div class="join-team-bg">
         <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
@@ -459,7 +527,6 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
     <div>GUATEMALA // GLOBAL OPS</div>
@@ -468,7 +535,6 @@
   <script src="app.js"></script>
   
   <script>
-    /* PRELOADER CON BARRITA Y TIEMPO DE ESPERA FLUIDO */
     window.addEventListener('load', () => {
       const bar = document.getElementById('preload-bar');
       const percent = document.getElementById('preload-percent');
