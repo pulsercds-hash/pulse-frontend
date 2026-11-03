@@ -29,7 +29,7 @@
       padding: 0;
     }
 
-    /* HEADER FIJO */
+    /* HEADER FIJO COMPATIBLE CON TEAM Y ARTISTAS */
     header {
       position: fixed;
       top: 0;
@@ -62,11 +62,49 @@
       color: var(--accent-neon);
     }
 
-    /* CONTENEDOR PRINCIPAL DE REGISTRO */
+    /* CONTENEDOR HERO CON VIDEO DE FONDO */
+    .register-hero-wrapper {
+      position: relative;
+      min-height: 100vh;
+      padding: 11rem 5% 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .register-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .register-video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      filter: contrast(1.15) brightness(0.5);
+    }
+
+    .register-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.92) 100%);
+    }
+
+    /* CONTENEDOR PRINCIPAL DEL FORMULARIO */
     .register-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 13rem 5% 8rem;
+      max-width: 620px;
+      width: 100%;
       position: relative;
       z-index: 2;
     }
@@ -90,30 +128,66 @@
       text-transform: uppercase;
       letter-spacing: -1px;
       margin-bottom: 1rem;
+      text-align: center;
     }
 
-    .register-subtitle {
+    /* SELECTOR DE PESTAÑAS: REGISTRO / LOGIN */
+    .auth-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 0.5rem;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.5);
       font-family: var(--font-mono);
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.6;
-      margin-bottom: 3rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.8rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-btn.active {
+      color: var(--accent-neon);
+      border-bottom: 2px solid var(--accent-neon);
     }
 
     /* TARJETA DEL FORMULARIO ESTILO EXPEDIENTE */
     .form-card-secure {
-      background: rgba(12, 12, 12, 0.9);
+      background: rgba(12, 12, 12, 0.88);
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 6px;
       padding: 2.5rem;
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
     }
 
+    .input-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .input-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .input-group {
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .input-group label {
@@ -127,13 +201,13 @@
 
     .input-group input, 
     .input-group select {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 4px;
-      padding: 1rem;
+      padding: 0.9rem 1rem;
       color: #fff;
       font-family: var(--font-mono);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       outline: none;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
@@ -154,7 +228,7 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 2px;
-      padding: 1.2rem;
+      padding: 1.1rem;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -168,21 +242,24 @@
       transform: translateY(-2px);
     }
 
-    /* SECCIÓN DE VERIFICACIÓN DE CÓDIGO (OCULTA INICIALMENTE) */
-    .verification-section {
+    /* SECCIONES OCULTAS SEGÚN LA PESTAÑA */
+    .auth-section {
       display: none;
-      margin-top: 2rem;
-      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .auth-section.active {
+      display: block;
+      animation: fadeIn 0.4s ease forwards;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .verification-notice {
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: rgba(255, 255, 255, 0.7);
       line-height: 1.5;
       margin-bottom: 1.5rem;
@@ -201,66 +278,138 @@
     <a href="index.html" class="btn-back-home" onclick="triggerCurtain(event, 'index.html')">&larr; INICIO</a>
   </header>
 
-  <main>
+  <main class="register-hero-wrapper">
+    
+    <!-- VIDEO DE FONDO AMBIENTAL -->
+    <div class="register-video-bg">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="videos/fondoregistro.mp4" type="video/mp4">
+      </video>
+      <div class="register-video-overlay"></div>
+    </div>
+
     <div class="register-container">
       <div class="register-header-meta">
         <span>// SECURE GATEWAY</span>
-        <span>ACREDITACIÓN DE ARTISTAS</span>
+        <span>SISTEMA DE ACCESO</span>
       </div>
       
-      <h1 class="register-title">Registro <span class="accent-green-font" style="font-family: 'Cinzel Decorative', serif; color: var(--accent-neon);">Oficial</span></h1>
-      <p class="register-subtitle">
-        Ingresa tus credenciales institucionales. El sistema validará tu elegibilidad y emitirá un código de acceso exclusivo de 24 horas a tu correo.
-      </p>
+      <h1 class="register-title">Acreditación <span class="accent-green-font" style="font-family: 'Cinzel Decorative', serif; color: var(--accent-neon);">Oficial</span></h1>
+
+      <!-- PESTAÑAS PARA CAMBIAR ENTRE REGISTRO E INICIO DE SESIÓN -->
+      <div class="auth-tabs">
+        <button class="tab-btn active" onclick="switchTab('register')">Nuevo Registro</button>
+        <button class="tab-btn" onclick="switchTab('login')">Iniciar Sesión</button>
+      </div>
 
       <div class="form-card-secure">
-        <!-- FORMULARIO DE REGISTRO INICIAL -->
-        <form id="artistRegisterForm" onsubmit="handleRegister(event)">
-          <div class="input-group">
-            <label for="fullName">Nombre Completo</label>
-            <input type="text" id="fullName" required placeholder="Ej. Josue Tecun">
-          </div>
 
-          <div class="input-group">
-            <label for="artistName">Nombre Artístico / Proyecto</label>
-            <input type="text" id="artistName" required placeholder="Ej. Pulse Sound">
-          </div>
-
-          <div class="input-group">
-            <label for="email">Correo Electrónico Institucional / Personal</label>
-            <input type="email" id="email" required placeholder="ejemplo@correo.com">
-          </div>
-
-          <div class="input-group">
-            <label for="country">País de Operación</label>
-            <select id="country" required>
-              <option value="" disabled selected>Selecciona tu país</option>
-              <option value="Guatemala">Guatemala</option>
-              <option value="México">México</option>
-              <option value="Estados Unidos">Estados Unidos</option>
-              <option value="Colombia">Colombia</option>
-              <option value="Argentina">Argentina</option>
-              <option value="España">España</option>
-              <option value="Otro">Otro Global</option>
-            </select>
-          </div>
-
-          <button type="submit" class="btn-submit-secure">Generar Código de Acceso</button>
-        </form>
-
-        <!-- SECCIÓN DE INGRESO DE CÓDIGO (APARECE DESPUÉS DE REGISTRARSE) -->
-        <div id="verificationSection" class="verification-section">
-          <div class="verification-notice">
-            // CÓDIGO ENVIADO. Revisa tu bandeja de entrada. Este código tiene una validez estricta de 24 horas y acceso exclusivo para tu correo.
-          </div>
-          <form onsubmit="handleVerifyCode(event)">
-            <div class="input-group">
-              <label for="accessCode">Código de Acceso (6 Dígitos)</label>
-              <input type="text" id="accessCode" required maxlength="6" placeholder="Ej. 849201" style="text-align: center; letter-spacing: 4px; font-size: 1.2rem;">
+        <!-- BLOQUE 1: FORMULARIO DE NUEVO REGISTRO -->
+        <div id="sectionRegister" class="auth-section active">
+          <form id="artistRegisterForm" onsubmit="handleRegister(event)">
+            
+            <div class="input-grid-2">
+              <div class="input-group">
+                <label for="firstName">Nombre</label>
+                <input type="text" id="firstName" required placeholder="Nombre">
+              </div>
+              <div class="input-group">
+                <label for="lastName">Apellido</label>
+                <input type="text" id="lastName" required placeholder="Apellido">
+              </div>
             </div>
-            <button type="submit" class="btn-submit-secure">Verificar y Acceder</button>
+
+            <div class="input-group">
+              <label for="artistName">Nombre Artístico / Proyecto</label>
+              <input type="text" id="artistName" required placeholder="Nombre Artístico">
+            </div>
+
+            <div class="input-group">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" id="email" required placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="input-grid-2">
+              <div class="input-group">
+                <label for="birthDate">Fecha de Nacimiento</label>
+                <input type="date" id="birthDate" required style="color-scheme: dark;">
+              </div>
+
+              <div class="input-group">
+                <label for="country">País de Operación</label>
+                <select id="country" required>
+                  <option value="" disabled selected>Selecciona tu país</option>
+                  <!-- NORTEAMÉRICA & CENTROAMÉRICA -->
+                  <option value="Guatemala">Guatemala</option>
+                  <option value="México">México</option>
+                  <option value="Estados Unidos">Estados Unidos</option>
+                  <option value="Canadá">Canadá</option>
+                  <option value="El Salvador">El Salvador</option>
+                  <option value="Honduras">Honduras</option>
+                  <option value="Costa Rica">Costa Rica</option>
+                  <option value="Panamá">Panamá</option>
+                  <option value="Nicaragua">Nicaragua</option>
+                  <option value="Puerto Rico">Puerto Rico</option>
+                  <option value="República Dominicana">República Dominicana</option>
+
+                  <!-- SUDAMÉRICA -->
+                  <option value="Colombia">Colombia</option>
+                  <option value="Argentina">Argentina</option>
+                  <option value="Chile">Chile</option>
+                  <option value="Perú">Perú</option>
+                  <option value="Ecuador">Ecuador</option>
+                  <option value="Venezuela">Venezuela</option>
+                  <option value="Uruguay">Uruguay</option>
+                  <option value="Bolivia">Bolivia</option>
+                  <option value="Paraguay">Paraguay</option>
+                  <option value="Brasil">Brasil</option>
+
+                  <!-- EUROPA & OTROS -->
+                  <option value="España">España</option>
+                  <option value="Reino Unido">Reino Unido</option>
+                  <option value="Francia">Francia</option>
+                  <option value="Alemania">Alemania</option>
+                  <option value="Italia">Italia</option>
+                  <option value="Otro Global">Otro País / Global</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit-secure">Solicitar Código de Acceso</button>
+          </form>
+
+          <!-- SECCIÓN DE VERIFICACIÓN DE CÓDIGO -->
+          <div id="verificationSection" style="display: none; margin-top: 1rem;">
+            <div class="verification-notice">
+              // CÓDIGO ENVIADO. Revisa tu correo. El código de 6 dígitos tiene una vigencia exclusiva de 24 horas.
+            </div>
+            <form onsubmit="handleVerifyCode(event)">
+              <div class="input-group">
+                <label for="accessCode">Código de Acceso (6 Dígitos)</label>
+                <input type="text" id="accessCode" required maxlength="6" placeholder="000000" style="text-align: center; letter-spacing: 6px; font-size: 1.3rem;">
+              </div>
+              <button type="submit" class="btn-submit-secure">Validar e Ingresar</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- BLOQUE 2: FORMULARIO DE INICIAR SESIÓN (CUENTA YA EXISTENTE) -->
+        <div id="sectionLogin" class="auth-section">
+          <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+              <label for="loginEmail">Correo Electrónico Registrado</label>
+              <input type="email" id="loginEmail" required placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="input-group">
+              <label for="loginCode">Código de Acceso de 24h</label>
+              <input type="text" id="loginCode" required maxlength="6" placeholder="000000" style="text-align: center; letter-spacing: 6px; font-size: 1.3rem;">
+            </div>
+
+            <button type="submit" class="btn-submit-secure">Acceder al Panel</button>
           </form>
         </div>
+
       </div>
     </div>
   </main>
@@ -272,27 +421,36 @@
   </footer>
 
   <script>
+    // CAMBIO ENTRE REGISTRO E INICIO DE SESIÓN
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.auth-section').forEach(sec => sec.classList.remove('active'));
+
+      if (tab === 'register') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('sectionRegister').classList.add('active');
+      } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('sectionLogin').classList.add('active');
+      }
+    }
+
     function handleRegister(event) {
       event.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const artistName = document.getElementById('artistName').value;
-      const country = document.getElementById('country').value;
-
-      // Ocultar formulario y mostrar sección de código de verificación
       document.getElementById('artistRegisterForm').style.display = 'none';
       document.getElementById('verificationSection').style.display = 'block';
-
-      // Nota técnica: Aquí conectaremos el backend (Firebase/Supabase) 
-      // para guardar el país y generar el código de 1 día que llegue al correo de Gmail.
-      console.log("Registrado:", { email, artistName, country });
     }
 
     function handleVerifyCode(event) {
       event.preventDefault();
       const code = document.getElementById('accessCode').value;
-      
-      alert("Código ingresado: " + code + ". (Validación de acceso exclusivo en proceso)");
+      alert("Verificando código: " + code);
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      alert("Iniciando sesión para: " + email);
     }
   </script>
 
