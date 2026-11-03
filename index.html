@@ -37,6 +37,20 @@
       overflow-x: hidden;
       min-height: 100vh;
       line-height: 1.7;
+      position: relative;
+    }
+
+    /* DESTELLOS AMBIENTALES DE FONDO */
+    .ambient-glow {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(112, 0, 255, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* PANTALLA DE CARGA */
@@ -83,6 +97,8 @@
     #main-content {
       opacity: 0;
       transition: opacity 0.8s ease;
+      position: relative;
+      z-index: 1;
     }
 
     nav {
@@ -223,6 +239,62 @@
       line-height: 1.6;
     }
 
+    /* CONTENEDOR DE VIDEOS SHOWCASE */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+
+    .video-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .video-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-info {
+      padding: 1.2rem;
+      text-align: left;
+    }
+
+    .video-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 0.3rem;
+    }
+
+    .video-sub {
+      font-size: 0.8rem;
+      color: var(--text-gray);
+    }
+
     .faq-container {
       width: 100%;
       display: flex;
@@ -358,7 +430,7 @@
     }
 
     /* ==========================================
-       MODAL DE AUTENTICACIÓN
+       MODAL SIN BARRA FAEA DE DESPLAZAMIENTO
        ========================================== */
     .modal-overlay {
       position: fixed;
@@ -366,8 +438,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(14px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -391,11 +463,19 @@
       width: 100%;
       max-width: 440px;
       position: relative;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
       transform: scale(0.9);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       max-height: 90vh;
       overflow-y: auto;
+      
+      /* OCULTAR BARRA DE DESPLAZAMIENTO (SCROLLBAR INVISIBLE) */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+    }
+
+    .modal-box::-webkit-scrollbar {
+      display: none; /* Chrome, Safari and Opera */
     }
 
     .modal-overlay.active .modal-box {
@@ -418,7 +498,6 @@
       color: var(--text-white);
     }
 
-    /* SWITCH DE ACCIONES (REGISTRARSE / INICIAR SESIÓN) */
     .auth-toggle {
       display: flex;
       background: rgba(255, 255, 255, 0.04);
@@ -495,6 +574,8 @@
 </head>
 <body>
 
+  <div class="ambient-glow"></div>
+
   <!-- PANTALLA DE CARGA -->
   <div id="loader-screen">
     <div class="loader-title">PULSE MEDIA</div>
@@ -540,7 +621,42 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 2: PILARES Y PROPÓSITO -->
+    <!-- SECCIÓN 2: VIDEOS SHOWCASE LA ESCENA URBANA -->
+    <section>
+      <div class="badge">Inspiración & Identidad</div>
+      <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Estética de la Escena Global</h2>
+      <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 0.95rem; max-width: 600px;">
+        Visualizamos la música con la misma excelencia y dirección de arte que define a los máximos exponentes del movimiento urbano.
+      </p>
+
+      <div class="video-grid">
+        <!-- Video 1: Tainy / Data Concept -->
+        <div class="video-card">
+          <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/S43mF4Edf2g?rel=0" title="Tainy - Visual Concept" allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Dirección de Arte & Sonido</div>
+            <div class="video-sub">Concepto de Identidad Sonora y Visual</div>
+          </div>
+        </div>
+
+        <!-- Video 2: Bad Bunny / Un Verano Sin Ti Aesthetic -->
+        <div class="video-card">
+          <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/5U_Z97l9YgY?rel=0" title="Bad Bunny - Aesthetic" allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Cultura & Movimiento</div>
+            <div class="video-sub">Desarrollo de Imagen de Artista</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SECCIÓN 3: PILARES -->
     <section>
       <div class="badge">Pilares de la Plataforma</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Infraestructura diseñada para escalar</h2>
@@ -566,7 +682,7 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 3: DESCUBRIR -->
+    <!-- SECCIÓN 4: DESCUBRIR -->
     <section>
       <div class="badge">Estructura</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Explora el nucleo de la plataforma</h2>
@@ -586,7 +702,7 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 4: PREGUNTAS FRECUENTES -->
+    <!-- SECCIÓN 5: PREGUNTAS FRECUENTES -->
     <section>
       <div class="badge">Preguntas Frecuentes</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Resuelve tus dudas sobre Pulse</h2>
@@ -626,7 +742,7 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 5: ACCESO Y REGISTRO -->
+    <!-- SECCIÓN 6: ACCESO Y REGISTRO -->
     <section style="padding-bottom: 6rem;">
       <div class="badge">Acceso Privado</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Tu espacio de trabajo independiente</h2>
@@ -647,14 +763,11 @@
 
   </div>
 
-  <!-- ==========================================
-       MODAL DE AUTENTICACIÓN
-       ========================================== -->
+  <!-- MODAL DE AUTENTICACIÓN SIN SCROLLBAR FEA -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-box">
       <button class="close-modal" onclick="closeAuthModal()">&times;</button>
       
-      <!-- BOTONES SUPERIORES: REGISTRARSE / INICIAR SESIÓN -->
       <div class="auth-toggle">
         <button class="auth-tab active" id="tab-register" onclick="switchTab('register')">Crear Cuenta</button>
         <button class="auth-tab" id="tab-login" onclick="switchTab('login')">Ya tengo cuenta</button>
@@ -775,7 +888,6 @@
       element.classList.toggle("active");
     }
 
-    // MODAL Y SWITCH REGISTRO / LOGIN
     const authModal = document.getElementById("auth-modal");
     const formRegister = document.getElementById("form-register");
     const formLogin = document.getElementById("form-login");
