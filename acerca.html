@@ -11,8 +11,6 @@
   
   <link rel="stylesheet" href="styles.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  
   <style>
     *, *::before, *::after {
       box-sizing: border-box !important;
@@ -71,7 +69,6 @@
       overflow: hidden;
     }
 
-    /* Video de fondo atras de la tele */
     .bg-pulsfond {
       position: absolute;
       top: 0;
@@ -98,7 +95,6 @@
       color: #fff;
     }
 
-    /* CONTENEDOR DE LA TELE Y SU VIDEO INTERNO */
     .tv-container {
       position: relative;
       width: 100%;
@@ -115,7 +111,6 @@
       filter: drop-shadow(0 20px 40px rgba(0,0,0,0.9));
     }
 
-    /* Video que va dentro de la pantalla de la tele calculada exactamente */
     .tv-screen-video {
       position: absolute;
       top: 17.5%;
@@ -183,7 +178,6 @@
       letter-spacing: -0.5px;
     }
 
-    /* CARRUSEL DE FOTOS */
     .carousel-container {
       max-width: 900px;
       margin: 0 auto;
@@ -310,17 +304,16 @@
     <!-- SECCIÓN 1: NOSOTROS Y LA TELE CON FONDO PULSFOND -->
     <section class="about-hero-section">
       <video class="bg-pulsfond" autoplay muted loop playsinline preload="metadata">
-        <source src="pulsfond.mp4" type="video/mp4">
+        <source src="acercade/pulsfond.mp4" type="video/mp4">
       </video>
 
       <h1 class="nosotros-title">Nosotros</h1>
 
-      <!-- Contenedor con la tele.png y el televideo.mp4 adentro -->
       <div class="tv-container">
         <video class="tv-screen-video" autoplay muted loop playsinline preload="metadata">
-          <source src="televideo.mp4" type="video/mp4">
+          <source src="acercade/televideo.mp4" type="video/mp4">
         </video>
-        <img src="tele.png" alt="Monitor Retro Pulse" class="tv-frame">
+        <img src="acercade/tele.png" alt="Monitor Retro Pulse" class="tv-frame">
       </div>
     </section>
 
@@ -334,7 +327,7 @@
     <!-- SECCIÓN 3: TIRA DIVISORA -->
     <div class="tira-banner">
       <video autoplay muted loop playsinline preload="metadata">
-        <source src="tira.mp4" type="video/mp4">
+        <source src="acercade/tira.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -347,21 +340,21 @@
         <button class="carousel-btn carousel-next" onclick="moveSlide(1)">&#10095;</button>
 
         <div class="carousel-track" id="carouselTrack">
-          <div class="carousel-slide"><img src="foto1.jpg" alt="Archivo Pulse 1"></div>
-          <div class="carousel-slide"><img src="foto2.jpg" alt="Archivo Pulse 2"></div>
-          <div class="carousel-slide"><img src="foto3.jpg" alt="Archivo Pulse 3"></div>
-          <div class="carousel-slide"><img src="foto4.jpg" alt="Archivo Pulse 4"></div>
-          <div class="carousel-slide"><img src="foto5.jpg" alt="Archivo Pulse 5"></div>
-          <div class="carousel-slide"><img src="foto6.jpg" alt="Archivo Pulse 6"></div>
-          <div class="carousel-slide"><img src="foto7.jpg" alt="Archivo Pulse 7"></div>
+          <div class="carousel-slide"><img src="acercade/foto1.jpg" alt="Archivo Pulse 1"></div>
+          <div class="carousel-slide"><img src="acercade/foto2.jpg" alt="Archivo Pulse 2"></div>
+          <div class="carousel-slide"><img src="acercade/foto3.png" alt="Archivo Pulse 3"></div>
+          <div class="carousel-slide"><img src="acercade/foto4.jpg" alt="Archivo Pulse 4"></div>
+          <div class="carousel-slide"><img src="acercade/foto5.png" alt="Archivo Pulse 5"></div>
+          <div class="carousel-slide"><img src="acercade/foto6.png" alt="Archivo Pulse 6"></div>
+          <div class="carousel-slide"><img src="acercade/foto7.png" alt="Archivo Pulse 7"></div>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 5: APARTADO FINAL CONTACTANOS CON PULSFOND -->
+    <!-- SECCIÓN 5: CONTACTANOS -->
     <section class="contact-section">
       <video class="bg-pulsfond" autoplay muted loop playsinline preload="metadata">
-        <source src="pulsfond.mp4" type="video/mp4">
+        <source src="acercade/pulsfond.mp4" type="video/mp4">
       </video>
 
       <div class="contact-content">
@@ -375,14 +368,12 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div style="text-align: center; padding: 2.5rem 0; font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.5; border-top: 1px solid rgba(255,255,255,0.08);">
       &copy; 2025 - 2026 PULSE MEDIA PUBLISHING // GUATEMALA
     </div>
   </footer>
 
-  <!-- SCRIPT PARA EL CARRUSEL -->
   <script>
     let currentIndex = 0;
     const track = document.getElementById('carouselTrack');
@@ -399,7 +390,6 @@
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
-    // Auto-avance del carrusel cada 4 segundos
     setInterval(() => {
       moveSlide(1);
     }, 4000);
