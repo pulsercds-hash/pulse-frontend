@@ -149,7 +149,7 @@
       text-align: center;
     }
 
-    /* HERO SECTION CON VIDEO DE FONDO Y BLOQUEO DE CURSOR */
+    /* HERO SECTION CON VIDEO DE FONDO */
     .hero-section {
       position: relative;
       overflow: hidden;
@@ -179,7 +179,7 @@
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO EN TARJETAS */
+    /* CONTENEDOR DE VIDEO EN TARJETAS CON BLINDAJE ANTI-INTERACCIÓN (OVERLAY) */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -190,16 +190,26 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: #000;
-      pointer-events: none;
     }
     .video-wrapper iframe {
+      position: absolute;
+      top: -55px; /* Empuja el iframe hacia arriba para ocultar títulos y botones superiores de YouTube */
+      left: 0;
+      width: 100%;
+      height: calc(100% + 110px); /* Extiende el alto para compensar el recorte */
+      border: 0;
+      pointer-events: none;
+    }
+    /* CAPA INVISIBLE (OVERLAY) QUE BLOQUEA CUALQUIER CLIC O CURSOR SOBRE EL VIDEO */
+    .video-overlay-blocker {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border: 0;
-      pointer-events: none;
+      z-index: 10;
+      background: transparent;
+      pointer-events: auto; /* Captura el mouse antes de que toque el iframe */
     }
 
     /* PREGUNTAS FRECUENTES */
@@ -257,7 +267,7 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO CON MOJABI GHOST DE FONDO -->
+    <!-- SECCIÓN 1: HERO -->
     <section class="hero-section panel" data-theme="dark">
       <div class="hero-video-bg">
         <iframe src="https://www.youtube.com/embed/O1wUdB7MQbI?autoplay=1&mute=1&controls=0&loop=1&playlist=O1wUdB7MQbI&disablekb=1&modestbranding=1&iv_load_policy=3" title="Background Visual" allow="autoplay"></iframe>
@@ -321,7 +331,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS CON VIDEOS DE YOUTUBE RESTAURADOS Y BLINDADOS -->
+    <!-- SECCIÓN 3: MÓDULOS CON BLOQUEADOR TOTAL DE CURSOR (OVERLAY) -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
@@ -337,6 +347,8 @@
           </div>
           
           <div class="video-wrapper">
+            <!-- Capa invisible que intercepta el mouse para que YouTube jamás detecte el cursor -->
+            <div class="video-overlay-blocker"></div>
             <iframe src="https://www.youtube.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&disablekb=1&modestbranding=1&iv_load_policy=3" title="Pulse Media Identity" allow="autoplay"></iframe>
           </div>
         </div>
@@ -350,6 +362,8 @@
           </div>
           
           <div class="video-wrapper">
+            <!-- Capa invisible que intercepta el mouse para que YouTube jamás detecte el cursor -->
+            <div class="video-overlay-blocker"></div>
             <iframe src="https://www.youtube.com/embed/7f6SxWMOpdU?autoplay=1&mute=1&controls=0&loop=1&playlist=7f6SxWMOpdU&disablekb=1&modestbranding=1&iv_load_policy=3" title="Pulse Media Storytelling" allow="autoplay"></iframe>
           </div>
         </div>
