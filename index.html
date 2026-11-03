@@ -41,7 +41,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ESTILOS PARA LAS MÉTRICAS DE IMPACTO */
+    /* ESTILOS PARA LAS MÉTRICAS DE IMPACTO REALES */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -66,7 +66,7 @@
       letter-spacing: 1px;
     }
 
-    /* FRANJA DE SOCIOS / PLATAFORMAS (SIN DISTRO) */
+    /* FRANJA DE SOCIOS / PLATAFORMAS GLOBALES */
     .partners-section {
       padding: 3rem 5%;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -85,6 +85,27 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       opacity: 0.65;
+    }
+
+    /* CONTENEDOR DE VIDEO DE YOUTUBE EN TARJETAS Y HERO */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Proporción 16:9 */
+      height: 0;
+      margin-top: 1.5rem;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #000;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     /* SECCIÓN DE PREGUNTAS FRECUENTES (FAQ / BLUEPRINT) */
@@ -132,7 +153,7 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO -->
+    <!-- SECCIÓN 1: HERO CON VIDEO DE YOUTUBE PRINCIPAL -->
     <section class="hero-section panel" data-theme="dark">
       <div class="hero-meta">
         <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
@@ -142,6 +163,11 @@
         Distribución <br>Promoción <br><span class="accent-text">Dirección Creativa</span>
       </h1>
       <p class="hero-subtitle">El ecosistema definitivo para el género urbano y regional mexicano de nueva generación.</p>
+      
+      <!-- Video principal incrustado en la sección hero -->
+      <div class="video-wrapper" style="max-width: 800px; margin-top: 2.5rem;">
+        <iframe src="https://www.youtube.com/embed/O1wUdB7MQbI" title="Pulse Media Main Visual" allowfullscreen></iframe>
+      </div>
     </section>
 
     <!-- TICKER EN MOVIMIENTO -->
@@ -152,7 +178,7 @@
       </div>
     </div>
 
-    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (SIN DISTRO) -->
+    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES -->
     <div class="partners-section">
       <div class="partners-grid">
         <span>// Spotify Ecosystem</span>
@@ -171,18 +197,18 @@
         <span class="section-tag">// 01. NUESTRA GÉNESIS</span>
         <h2 class="manifesto-title">Rechazamos lo genérico. Creamos la infraestructura sonora y visual que rompe las reglas de la industria.</h2>
         <p class="manifesto-text">
-          Pulse Media nació en 2025 bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
+          Pulse Media nació bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
         </p>
 
-        <!-- MÉTRICAS DE IMPACTO -->
+        <!-- MÉTRICAS ACTUALIZADAS A 1K+ REPRODUCCIONES Y 1 AÑO -->
         <div class="metrics-grid">
           <div>
-            <div class="metric-number">+12M</div>
+            <div class="metric-number">1K+</div>
             <div class="metric-label">Reproducciones Globales</div>
           </div>
           <div>
-            <div class="metric-number">04</div>
-            <div class="metric-label">Años de Evolución Underground</div>
+            <div class="metric-number">01</div>
+            <div class="metric-label">Año de Trayectoria y Crecimiento</div>
           </div>
           <div>
             <div class="metric-number">100%</div>
@@ -192,29 +218,37 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS / PILARES -->
+    <!-- SECCIÓN 3: MÓDULOS / PILARES CON VIDEOS DE YOUTUBE Y SIN LETRAS VERDES -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
-        02 // SYSTEM CORE MODULES
+        02 // SYSTEM CORE MODULES & VISUALS
       </div>
       
       <div class="modules-grid">
+        <!-- TARJETA 1 (CREAMOS TU PROPIA IDENTIDAD) -->
         <div class="module-card">
-          <div class="module-index">[01]</div>
           <div>
-            <div class="module-title">Hacemos que tengas tu propia identidad</div>
-            <p class="module-desc">Construimos marcas de artistas sólidas desde cero: dirección de arte, concepto visual, estilismo y narrativa de alto voltaje adaptada al mercado global.</p>
+            <div class="module-index">[01]</div>
+            <div class="module-title" style="margin-top: 1rem;">Hacemos que tengas tu propia identidad</div>
+            <p class="module-desc" style="margin-top: 0.8rem;">Construimos marcas de artistas sólidas desde cero: dirección de arte, concepto visual, estilismo y narrativa de alto voltaje adaptada al mercado global.</p>
           </div>
-          <div class="card-media-badge">// VIDEO ASSET READY</div>
+          
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/O-WsQlXaa0E" title="Pulse Media Identity" allowfullscreen></iframe>
+          </div>
         </div>
 
+        <!-- TARJETA 2 (NO SOLO POSICIONAMOS) -->
         <div class="module-card">
-          <div class="module-index">[02]</div>
           <div>
-            <div class="module-title">No solo posicionamos, contamos tu historia</div>
-            <p class="module-desc">Llevamos tu música a las plataformas más exigentes del mundo respaldada por campañas de pauta quirúrgica, relaciones públicas y desarrollo de comunidad.</p>
+            <div class="module-index">[02]</div>
+            <div class="module-title" style="margin-top: 1rem;">No solo posicionamos, contamos tu historia</div>
+            <p class="module-desc" style="margin-top: 0.8rem;">Llevamos tu música a las plataformas más exigentes del mundo respaldada por campañas de pauta quirúrgica, relaciones públicas y desarrollo de comunidad.</p>
           </div>
-          <div class="card-media-badge">// STORYTELLING ENGINE</div>
+          
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/7f6SxWMOpdU" title="Pulse Media Storytelling" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </section>
