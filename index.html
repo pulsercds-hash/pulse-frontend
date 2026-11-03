@@ -17,7 +17,7 @@
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   
   <style>
-    /* ESTILOS DEL PRELOADER / PANTALLA DE CARGA INICIAL */
+    /* ESTILOS DEL PRELOADER / PANTALLA DE CARGA CON BARRITA */
     #app-preloader {
       position: fixed;
       top: 0;
@@ -30,23 +30,52 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 0 10%;
       font-family: var(--font-display);
       color: #fff;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.6s ease;
     }
-    .preloader-title {
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 900;
+    .preloader-welcome {
+      font-family: var(--font-mono);
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      color: var(--accent-neon);
       letter-spacing: 4px;
       text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      text-align: center;
     }
-    .preloader-sub {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent-neon);
+    .preloader-title {
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      font-weight: 900;
       letter-spacing: 3px;
-      margin-top: 1rem;
       text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .preloader-bar-container {
+      width: 100%;
+      max-width: 350px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .preloader-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: var(--accent-neon);
+      box-shadow: 0 0 10px var(--accent-neon);
+    }
+    .preloader-percentage {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin-top: 1rem;
+      letter-spacing: 2px;
     }
 
     /* ESTILOS EXCLUSIVOS PARA EL TICKER MARQUEE */
@@ -124,7 +153,7 @@
     .hero-section {
       position: relative;
       overflow: hidden;
-      background: #000; /* Fondo negro de respaldo para evitar parpadeos */
+      background: #000;
     }
     .hero-video-bg {
       position: absolute;
@@ -151,7 +180,7 @@
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO EN TARJETAS CON FONDO NEGRO DE RESPALDO */
+    /* CONTENEDOR DE VIDEO EN TARJETAS CON FONDO NEGRO */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -161,7 +190,7 @@
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: #000; /* Fondo negro mientras carga el video[cite: 6] */
+      background: #000;
       pointer-events: none;
     }
     .video-wrapper iframe {
@@ -205,10 +234,14 @@
 </head>
 <body class="theme-dark">
 
-  <!-- PANTALLA DE CARGA INICIAL (PRELOADER) -->
+  <!-- PANTALLA DE CARGA INICIAL (PRELOADER CON BARRITA) -->
   <div id="app-preloader">
+    <div class="preloader-welcome">// Bienvenido al sistema</div>
     <div class="preloader-title">Pulse Media</div>
-    <div class="preloader-sub">// Initializing Ecosystem...</div>
+    <div class="preloader-bar-container">
+      <div class="preloader-bar-fill" id="preload-bar"></div>
+    </div>
+    <div class="preloader-percentage" id="preload-percent">0%</div>
   </div>
 
   <canvas id="webgl-canvas"></canvas>
@@ -359,18 +392,32 @@
   <script src="app.js"></script>
   
   <script>
-    /* SCRIPT PARA QUITAR EL PRELOADER EN CUANTO CARGA LA PÁGINA */
+    /* SCRIPT DE CARGA FLUIDA CON BARRA DE PROGRESO DE 1.8 SEGUNDOS */
     window.addEventListener('load', () => {
+      const bar = document.getElementById('preload-bar');
+      const percent = document.getElementById('preload-percent');
       const preloader = document.getElementById('app-preloader');
-      if (preloader) {
-        gsap.to(preloader, {
-          opacity: 0,
-          duration: 0.6,
-          onComplete: () => {
-            preloader.style.display = 'none';
-          }
-        });
-      }
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 15) + 5;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          
+          // Animación de salida suave con GSAP
+          gsap.to(preloader, {
+            opacity: 0,
+            duration: 0.8,
+            delay: 0.2,
+            onComplete: () => {
+              preloader.style.display = 'none';
+            }
+          });
+        }
+        bar.style.width = progress + '%';
+        percent.textContent = progress + '%';
+      }, 120);
     });
   </script>
 </body>
