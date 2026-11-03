@@ -17,6 +17,11 @@
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   
   <style>
+    /* BLOQUEO TOTAL DE INTERACCIÓN TÁCTIL Y NATIVA EN VIDEOS */
+    video {
+      pointer-events: none !important;
+    }
+
     /* PRELOADER CON BARRITA Y BIENVENIDA */
     #app-preloader {
       position: fixed;
@@ -226,9 +231,9 @@
 </head>
 <body class="theme-dark">
 
-  <!-- PRELOADER CON BARRITA Y BIENVENIDA -->
+  <!-- PRELOADER -->
   <div id="app-preloader">
-    <div class="preloader-welcome">// Bienvenido al sistema</div>
+    <div class="preloader-welcome">Bienvenido al sistema</div>
     <div class="preloader-title">Pulse Media</div>
     <div class="preloader-bar-container">
       <div class="preloader-bar-fill" id="preload-bar"></div>
@@ -252,12 +257,12 @@
   <main>
     <!-- SECCIÓN 1: HERO CON FONDO.MP4 -->
     <section class="hero-section panel" data-theme="dark">
-      <video class="hero-video-bg" autoplay muted loop playsinline preload="metadata">
+      <video class="hero-video-bg" autoplay muted loop playsinline webkit-playsinline preload="metadata">
         <source src="videos/fondo.mp4" type="video/mp4">
       </video>
 
       <div class="hero-meta">
-        <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
+        <span>INDEPENDENT MUSIC ECOSYSTEM</span>
         <span>GUATEMALA / GLOBAL</span>
       </div>
       <h1 class="hero-title">
@@ -269,15 +274,15 @@
     <!-- TICKER -->
     <div class="marquee-container">
       <div class="marquee-track">
-        <span>// GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>// GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
 
     <!-- SOCIOS / PLATAFORMAS -->
     <div class="partners-section">
       <div class="partners-grid">
-        <span>// Spotify Ecosystem</span>
+        <span>Spotify Ecosystem</span>
         <span>•</span>
         <span>Apple Music Partners</span>
         <span>•</span>
@@ -290,7 +295,7 @@
     <!-- SECCIÓN 2: MANIFIESTO -->
     <section class="manifesto-section panel" data-theme="light">
       <div class="manifesto-content">
-        <span class="section-tag">// 01. NUESTRA GÉNESIS</span>
+        <span class="section-tag">01. NUESTRA GÉNESIS</span>
         <h2 class="manifesto-title">Rechazamos lo genérico. Creamos la infraestructura sonora y visual que rompe las reglas de la industria.</h2>
         <p class="manifesto-text">
           Pulse Media nació bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
@@ -330,7 +335,7 @@
           </div>
           
           <div class="video-wrapper">
-            <video autoplay muted loop playsinline preload="metadata">
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
               <source src="videos/tarjeta1.mp4" type="video/mp4">
             </video>
           </div>
@@ -345,7 +350,7 @@
           </div>
           
           <div class="video-wrapper">
-            <video autoplay muted loop playsinline preload="metadata">
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
               <source src="videos/tarjeta2.mp4" type="video/mp4">
             </video>
           </div>
@@ -356,7 +361,7 @@
     <!-- SECCIÓN 4: PREGUNTAS FRECUENTES -->
     <section class="faq-section" data-theme="dark">
       <div class="faq-container">
-        <span class="section-tag">// 03. THE BLUEPRINT</span>
+        <span class="section-tag">03. THE BLUEPRINT</span>
         <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; margin-bottom: 3rem;">
           Preguntas <span class="accent-text">Frecuentes</span>
         </h2>
