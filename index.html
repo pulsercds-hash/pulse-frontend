@@ -123,11 +123,11 @@
     }
 
     /* ==========================================
-       SECCIONES Y ANIMACIONES DE APARICIÓN (SCROLL)
+       SECCIONES Y ANIMACIONES DE APARICIÓN
        ========================================== */
     section {
-      padding: 6rem 6%;
-      max-width: 900px;
+      padding: 5rem 6%;
+      max-width: 950px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -156,11 +156,12 @@
     }
 
     .hero-title {
-      font-size: clamp(2.3rem, 5vw, 4rem);
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
       font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.15;
+      letter-spacing: 2px;
+      line-height: 1.1;
       margin-bottom: 1.8rem;
+      text-transform: uppercase;
       background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.4) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -195,7 +196,87 @@
       font-weight: 600;
     }
 
-    /* Botones Minimalistas */
+    /* GRID DE PILARES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-4px);
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    /* PREGUNTAS FRECUENTES (FAQ ACCORDION) */
+    .faq-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-glow);
+    }
+
+    .faq-question {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      margin-top: 0.8rem;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* BOTONES */
     .btn-group {
       display: flex;
       flex-wrap: wrap;
@@ -246,7 +327,7 @@
       box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
     }
 
-    /* Contactos */
+    /* CONTACTOS */
     .contact-card {
       display: flex;
       flex-direction: column;
@@ -273,7 +354,7 @@
       font-weight: 500;
     }
 
-    /* Separadores visuales */
+    /* SEPARADOR */
     .divider {
       width: 1px;
       height: 80px;
@@ -281,7 +362,7 @@
       margin: 0 auto;
     }
 
-    /* Footer */
+    /* FOOTER */
     footer {
       padding: 3rem 1rem;
       border-top: 1px solid var(--border-card);
@@ -290,16 +371,13 @@
       letter-spacing: 1px;
     }
 
-    /* Responsivo para móviles */
+    /* RESPONSIVO MÓVIL */
     @media (max-width: 600px) {
       section {
-        padding: 4rem 5%;
+        padding: 3.5rem 5%;
       }
       .story-card {
         padding: 2rem 1.2rem;
-      }
-      .hero-title {
-        font-size: 2.1rem;
       }
       .btn {
         max-width: 100%;
@@ -309,9 +387,7 @@
 </head>
 <body>
 
-  <!-- ==========================================
-       PANTALLA DE CARGA MINIMALISTA
-       ========================================== -->
+  <!-- PANTALLA DE CARGA -->
   <div id="loader-screen">
     <div class="loader-title">PULSE MEDIA</div>
     <div class="progress-container">
@@ -319,9 +395,7 @@
     </div>
   </div>
 
-  <!-- ==========================================
-       CONTENIDO PRINCIPAL
-       ========================================== -->
+  <!-- CONTENIDO PRINCIPAL -->
   <div id="main-content">
     
     <nav>
@@ -329,10 +403,10 @@
       <div class="nav-tag">EST. 2025</div>
     </nav>
 
-    <!-- SECCIÓN 1: PRESENTACIÓN E HISTORIA -->
+    <!-- SECCIÓN 1: INICIO E HISTORIA -->
     <section class="visible">
       <div class="badge">Ecosistema Musical</div>
-      <h1 class="hero-title">Más que distribución. Identidad y visión.</h1>
+      <h1 class="hero-title">PULSE MEDIA</h1>
 
       <div class="story-card">
         <p class="story-text">
@@ -345,7 +419,6 @@
           Por eso creo Pulse: para ofrecer no solo un servicio de distribucion transparente, sino un acompañamiento integral en direccion creativa, diseño y desarrollo artistico desde la raiz.
         </p>
 
-        <!-- Datos de contacto centrados -->
         <div class="contact-card">
           <div class="contact-item">
             Correo: <span>pulselabel.oficial@gmail.com</span>
@@ -359,7 +432,33 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 2: DESCUBRIR (Layout para futuras subpáginas) -->
+    <!-- SECCIÓN 2: PILARES Y PROPÓSITO -->
+    <section>
+      <div class="badge">Pilares de la Plataforma</div>
+      <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Infraestructura diseñada para escalar</h2>
+      <p style="color: var(--text-gray); margin-bottom: 2.5rem; font-size: 0.95rem; max-width: 600px;">
+        Combinamos herramientas tecnologicas modernas con direccion de arte para elevar cada proyecto al nivel que se merece.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-title">Distribucion Transparente</div>
+          <div class="feature-desc">Llegada a las principales tiendas de streaming globales con un control total y claro sobre tus regalias y comisiones.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-title">Identidad & Diseño</div>
+          <div class="feature-desc">Acompañamiento en direccion creativa, portadas y concepto visual pensado especificamente para el artista urbano y regional.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-title">Panel de Artista Privado</div>
+          <div class="feature-desc">Una experiencia Single Page Application donde gestionas tu catalogo de forma independiente y segura.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SECCIÓN 3: DESCUBRIR (EQUIPO & ARTISTAS) -->
     <section>
       <div class="badge">Estructura</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Explora el nucleo de la plataforma</h2>
@@ -379,7 +478,47 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 3: ACCESO Y REGISTRO -->
+    <!-- SECCIÓN 4: PREGUNTAS FRECUENTES -->
+    <section>
+      <div class="badge">Preguntas Frecuentes</div>
+      <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Resuelve tus dudas sobre Pulse</h2>
+
+      <div class="faq-container">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>¿Como funciona la distribucion con Pulse Media?</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Registras tu cuenta en nuestro panel privado de artista, subes tus archivos y metadatos, y nuestro equipo valida la calidad tecnica para distribuir tu musica a Spotify, Apple Music, YouTube y todas las tiendas globales.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>¿Mantengo la propiedad de mis canciones?</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Si, en Pulse Media los artistas mantienen el 100% de la propiedad y los derechos master de su musica. Nosotros trabajamos como tu aliado de distribucion y desarrollo visual.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>¿Como se maneja el soporte de diseño e identidad visual?</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Al ser fundados por un diseñador y productor musical, brindamos asesoria en la creacion de portadas, branding e identidad visual para asegurarnos de que la estetica del proyecto refleje exactamente su sonido.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SECCIÓN 5: REGISTRO Y ACCESO -->
     <section style="padding-bottom: 6rem;">
       <div class="badge">Acceso Privado</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Tu espacio de trabajo independiente</h2>
@@ -400,11 +539,10 @@
 
   </div>
 
-  <!-- ==========================================
-       JAVASCRIPT (LOADER Y ANIMACIONES DE SCROLL)
-       ========================================== -->
+  <!-- JAVASCRIPT -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Loader JS
       const progressBar = document.getElementById("progress-bar");
       const loaderScreen = document.getElementById("loader-screen");
       const mainContent = document.getElementById("main-content");
@@ -429,9 +567,8 @@
         }
       }, 90);
 
-      // Animación suave al hacer scroll (Scroll Reveal para secciones)
+      // Scroll Reveal
       const sections = document.querySelectorAll("section");
-
       const checkScroll = () => {
         const triggerBottom = window.innerHeight * 0.85;
         sections.forEach(section => {
@@ -443,8 +580,13 @@
       };
 
       window.addEventListener("scroll", checkScroll);
-      checkScroll(); // Comprobar al cargar por si acaso
+      checkScroll();
     });
+
+    // Función FAQ
+    function toggleFaq(element) {
+      element.classList.toggle("active");
+    }
   </script>
 
 </body>
