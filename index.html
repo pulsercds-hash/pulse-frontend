@@ -3,27 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PULSE MEDIA — Cyber Brutalism Archive Platform</title>
+  <title>PULSE MEDIA — Cyber Brutalism Platform</title>
   
-  <!-- Fuentes Google: Space Grotesk, JetBrains Mono y Courier Prime para estética de archivo escaneado -->
+  <!-- Fuentes Google: JetBrains Mono y Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   
   <style>
     /* ==========================================
-       ESTILOS CYBER BRUTALISM / RAW ARCHIVE EDITORIAL
+       CYBER BRUTALISM MINIMALISTA (CLEAN & DYNAMIC)
        ========================================== */
     :root {
-      --bg-raw: #09090b;
-      --bg-paper: #121216;
-      --paper-accent: #e4e4e7;
-      --border-stark: #ffffff;
-      --border-muted: rgba(255, 255, 255, 0.18);
+      --bg-raw: #08080c;
+      --bg-card: rgba(15, 15, 20, 0.85);
+      --border-white: #ffffff;
+      --border-muted: rgba(255, 255, 255, 0.15);
       --accent-red: #ff3333;
-      --text-main: #f4f4f5;
-      --text-sub: #a1a1aa;
-      --stamp-gray: #71717a;
+      --text-main: #ffffff;
+      --text-sub: #9090a2;
     }
 
     * {
@@ -37,38 +35,61 @@
       color: var(--text-main);
       font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
-      line-height: 1.5;
-      padding: 12px;
+      line-height: 1.6;
+      overflow-x: hidden;
       position: relative;
     }
 
-    /* RETÍCULA Y MARCAS TÉCNICAS DE IMPRESIÓN IMPRESA (GRID PRINT) */
-    .print-grid {
+    /* FONDO DINÁMICO EN MOVIMIENTO (AMBIENT MESH MOTION) */
+    .motion-bg-1 {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(120, 40, 255, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+      top: -200px;
+      left: 10%;
+      pointer-events: none;
+      z-index: 0;
+      animation: meshFloat1 14s infinite alternate ease-in-out;
+    }
+
+    .motion-bg-2 {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 51, 51, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+      bottom: -150px;
+      right: 10%;
+      pointer-events: none;
+      z-index: 0;
+      animation: meshFloat2 18s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes meshFloat1 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.1); }
+      100% { transform: translate(-30px, 80px) scale(0.95); }
+    }
+
+    @keyframes meshFloat2 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-50px, -40px) scale(1.15); }
+      100% { transform: translate(40px, -60px) scale(0.9); }
+    }
+
+    /* RETÍCULA MINIMALISTA SUTIL */
+    .grid-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background-image: 
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 24px 24px;
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* MARCAS DE ENCUADRE DE IMPRENTA EN LAS ESQUINAS DEL DOCUMENTO */
-    .crop-mark {
-      position: fixed;
-      font-family: 'Courier Prime', monospace;
-      font-size: 10px;
-      color: var(--stamp-gray);
-      pointer-events: none;
-      z-index: 2;
-    }
-    .crop-tl { top: 6px; left: 6px; }
-    .crop-tr { top: 6px; right: 6px; }
-    .crop-bl { bottom: 6px; left: 6px; }
-    .crop-br { bottom: 6px; right: 6px; }
-
-    /* PANTALLA DE CARGA CON ESTÉTIKA DE SCANNER INDUSTRIAL */
+    /* PANTALLA DE CARGA */
     #loader-screen {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -82,16 +103,6 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    .loader-stamp {
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.75rem;
-      color: var(--accent-red);
-      letter-spacing: 3px;
-      margin-bottom: 0.5rem;
-      border: 1px dashed var(--accent-red);
-      padding: 2px 8px;
-    }
-
     .loader-title {
       font-size: 1.4rem;
       font-weight: 800;
@@ -101,17 +112,16 @@
     }
 
     .progress-bar-wrap {
-      width: 220px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-stark);
+      width: 200px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
       position: relative;
     }
 
     .progress-bar-fill {
       width: 0%;
       height: 100%;
-      background: var(--paper-accent);
+      background: var(--text-main);
       transition: width 0.08s linear;
     }
 
@@ -122,62 +132,52 @@
       z-index: 1;
     }
 
-    /* HEADER EDITORIAL CYBER BRUTALIST */
+    /* HEADER NETO Y LIMPIO */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.5rem;
-      border: 2px solid var(--border-stark);
-      background: var(--bg-paper);
-      margin-bottom: 2rem;
-    }
-
-    .logo-block {
-      font-family: 'JetBrains Mono', monospace;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      padding: 1.2rem 5%;
+      border-bottom: 1px solid var(--border-muted);
+      background: rgba(8, 8, 12, 0.85);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo-main {
-      font-size: 1.3rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: 4px;
       text-transform: uppercase;
-      background: var(--paper-accent);
-      color: var(--bg-raw);
-      padding: 2px 8px;
     }
 
-    .logo-sub {
+    .header-tag {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
       color: var(--text-sub);
-      letter-spacing: 2px;
-    }
-
-    .header-meta {
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.75rem;
-      color: var(--stamp-gray);
-      text-align: right;
+      border: 1px solid var(--border-muted);
+      padding: 0.3rem 0.8rem;
     }
 
     main {
-      max-width: 1280px;
+      max-width: 1140px;
       margin: 0 auto;
+      padding: 3rem 4%;
     }
 
     .section-tag {
-      font-family: 'Courier Prime', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--text-sub);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .section-tag::after {
       content: '';
@@ -186,119 +186,110 @@
       background: var(--border-muted);
     }
 
-    /* MANIFIESTO E HISTORIA CON ANOTACIONES DE ARCHIVO RAW */
-    .hero-archive {
-      border: 2px solid var(--border-stark);
-      background: var(--bg-paper);
-      padding: 3rem 2.5rem;
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .archive-watermark {
-      position: absolute;
-      top: 1rem; right: 1.5rem;
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.7rem;
-      color: var(--accent-red);
-      border: 1px solid var(--accent-red);
-      padding: 2px 6px;
-      transform: rotate(-2deg);
+    /* MANIFIESTO MINIMALISTA */
+    .hero-box {
+      border: 1px solid var(--border-white);
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      padding: 3.5rem 3rem;
+      margin-bottom: 4rem;
     }
 
     .hero-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
       font-weight: 800;
       text-transform: uppercase;
-      line-height: 0.95;
+      line-height: 1;
       margin-bottom: 2rem;
       letter-spacing: -1px;
     }
 
-    .story-text-container p {
-      font-size: 1rem;
+    .story-body p {
+      font-size: 1.05rem;
       color: var(--text-sub);
       margin-bottom: 1.2rem;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
-    .story-text-container p span {
-      color: var(--paper-accent);
+    .story-body p span {
+      color: var(--text-main);
       font-weight: 600;
-      border-bottom: 1px solid var(--border-muted);
-    }
-
-    .handwritten-annotation {
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.8rem;
-      color: var(--stamp-gray);
-      margin-top: 1.5rem;
-      font-style: italic;
     }
 
     .contact-strip {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.2rem;
       margin-top: 2rem;
       padding-top: 1.5rem;
-      border-top: 1px dashed var(--border-muted);
+      border-top: 1px solid var(--border-muted);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
 
     .contact-badge {
-      border: 1px solid var(--border-stark);
-      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border-muted);
+      padding: 0.5rem 1rem;
       background: rgba(255,255,255,0.02);
     }
+    .contact-badge span {
+      color: var(--accent-red);
+    }
 
-    /* SECCIÓN DE VIDEOS INDUSTRIALES LIMPIOS (NATIVOS HTML5 EN BUCLE) */
-    .media-raw-grid {
+    /* SECCIÓN DE VIDEOS EN BUCLE FLUIDOS (HTML5 NATIVOS) */
+    .media-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2rem;
-      margin-bottom: 3.5rem;
+      margin-bottom: 4rem;
     }
 
-    .media-raw-box {
-      border: 1px solid var(--border-stark);
-      background: var(--bg-paper);
-      padding: 12px;
+    .media-box {
+      border: 1px solid var(--border-white);
+      background: var(--bg-card);
+      padding: 14px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .video-viewport {
+    .media-box:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-red);
+    }
+
+    .video-container {
       position: relative;
       width: 100%;
-      height: 230px;
+      height: 220px;
       overflow: hidden;
-      border: 1px solid var(--border-muted);
       background: #000;
+      border: 1px solid var(--border-muted);
     }
 
-    .video-viewport video {
+    .video-container video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(25%) contrast(115%);
+      filter: grayscale(20%) contrast(110%);
+      pointer-events: none;
     }
 
-    .media-label {
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.75rem;
-      margin-top: 0.8rem;
+    .media-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      margin-top: 1rem;
       display: flex;
       justify-content: space-between;
       color: var(--text-sub);
     }
 
-    /* NAVEGACIÓN Y LAYOUT DE SUBPÁGINAS (DESPLIEGUE A FUTURO) */
+    /* LAYOUT NAVEGABLE SPA */
     .directory-layout {
-      border: 2px solid var(--border-stark);
-      background: var(--bg-paper);
-      padding: 2.5rem 2rem;
-      margin-bottom: 3.5rem;
+      border: 1px solid var(--border-white);
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      padding: 3rem 2.5rem;
+      margin-bottom: 4rem;
     }
 
     .directory-grid {
@@ -309,12 +300,12 @@
     }
 
     .dir-button {
-      border: 1px solid var(--border-stark);
-      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-muted);
+      background: rgba(255,255,255,0.02);
       padding: 1.8rem 1.5rem;
       text-align: left;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       font-family: 'JetBrains Mono', monospace;
       text-decoration: none;
       color: var(--text-main);
@@ -322,15 +313,15 @@
     }
 
     .dir-button:hover {
-      background: var(--paper-accent);
+      background: var(--text-main);
       color: var(--bg-raw);
+      border-color: var(--text-main);
     }
 
     .dir-code {
       font-size: 0.75rem;
       color: var(--accent-red);
       margin-bottom: 0.5rem;
-      font-family: 'Courier Prime', monospace;
     }
     .dir-button:hover .dir-code {
       color: var(--bg-raw);
@@ -344,9 +335,9 @@
     }
 
     .dir-desc {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-sub);
-      line-height: 1.4;
+      line-height: 1.5;
     }
     .dir-button:hover .dir-desc {
       color: #3f3f46;
@@ -357,23 +348,24 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-bottom: 3.5rem;
+      margin-bottom: 4rem;
     }
 
     .faq-item {
       border: 1px solid var(--border-muted);
-      background: var(--bg-paper);
+      background: var(--bg-card);
       padding: 1.2rem 1.5rem;
       cursor: pointer;
+      transition: border-color 0.25s;
     }
 
     .faq-item:hover {
-      border-color: var(--border-stark);
+      border-color: var(--border-white);
     }
 
     .faq-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 700;
       display: flex;
       justify-content: space-between;
@@ -381,12 +373,12 @@
     }
 
     .faq-content {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--text-sub);
       margin-top: 1rem;
       display: none;
       line-height: 1.6;
-      border-top: 1px dashed var(--border-muted);
+      border-top: 1px solid var(--border-muted);
       padding-top: 0.8rem;
     }
 
@@ -394,18 +386,18 @@
       display: block;
     }
 
-    /* BOTONES INDUSTRIALES CYBER BRUTALISM */
+    /* BOTONES ACCIÓN BRUTALISTAS */
     .btn-brutal-action {
-      background: var(--paper-accent);
+      background: var(--text-main);
       color: var(--bg-raw);
       font-family: 'JetBrains Mono', monospace;
       font-weight: 800;
-      padding: 1.1rem 2.2rem;
+      padding: 1.1rem 2.4rem;
       border: none;
       text-transform: uppercase;
       cursor: pointer;
       letter-spacing: 1px;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       display: inline-block;
       text-decoration: none;
     }
@@ -416,13 +408,13 @@
     }
 
     /* ==========================================
-       MODAL CORREGIDO (X AFUERA / SIN SCROLLBARS)
+       MODAL PRIVADO (SIN SCROLLBAR FEA + X CORREGIDA)
        ========================================== */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(9, 9, 11, 0.94);
-      backdrop-filter: blur(10px);
+      background: rgba(6, 6, 8, 0.94);
+      backdrop-filter: blur(12px);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -439,17 +431,16 @@
     }
 
     .modal-box {
-      border: 2px solid var(--border-stark);
-      background: var(--bg-paper);
+      border: 1px solid var(--border-white);
+      background: var(--bg-card);
       padding: 2.5rem 2rem;
       width: 100%;
-      max-width: 480px;
+      max-width: 460px;
       position: relative;
       font-family: 'JetBrains Mono', monospace;
       max-height: 85vh;
       overflow-y: auto;
       
-      /* BARRA DE DESPLAZAMIENTO 100% OCULTA */
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -458,13 +449,13 @@
       display: none;
     }
 
-    /* BOTÓN X DE CIERRE UBICADO DE MANERA LIMPIA Y SEPARADA */
+    /* BOTÓN DE CIERRE UBICADO DE FORMA LIMPIA */
     .close-btn-fix {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--bg-raw);
-      border: 1px solid var(--border-stark);
+      top: 1.2rem;
+      right: 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-muted);
       color: var(--text-main);
       width: 32px;
       height: 32px;
@@ -473,14 +464,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      line-height: 1;
-      z-index: 10;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
 
     .close-btn-fix:hover {
       background: var(--accent-red);
       color: #fff;
+      border-color: var(--accent-red);
     }
 
     .auth-tab-switch {
@@ -503,7 +493,7 @@
     }
 
     .tab-btn.active {
-      background: var(--paper-accent);
+      background: var(--text-main);
       color: var(--bg-raw);
       font-weight: 800;
     }
@@ -534,35 +524,32 @@
     }
 
     .input-clean:focus {
-      border-color: var(--border-stark);
+      border-color: var(--border-white);
     }
 
     footer {
-      border-top: 2px solid var(--border-stark);
-      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border-muted);
+      padding: 2rem 5%;
       margin-top: 4rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 1rem;
-      font-family: 'Courier Prime', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      color: var(--stamp-gray);
+      color: var(--text-sub);
     }
   </style>
 </head>
 <body>
 
-  <!-- RETÍCULA DE IMPRESIÓN Y MARCAS DE ENCUADRE -->
-  <div class="print-grid"></div>
-  <div class="crop-mark crop-tl">+ 01_PULSE_GRID</div>
-  <div class="crop-mark crop-tr">REF: GT_2025 +</div>
-  <div class="crop-mark crop-bl">+ SYSTEM_RAW</div>
-  <div class="crop-mark crop-br">CONFIDENTIAL +</div>
+  <!-- ELEMENTOS ANIMADOS DE FONDO EN MOVIMIENTO CONTINUO -->
+  <div class="motion-bg-1"></div>
+  <div class="motion-bg-2"></div>
+  <div class="grid-overlay"></div>
 
   <!-- PANTALLA DE CARGA -->
   <div id="loader-screen">
-    <div class="loader-stamp">OFFICIAL ARCHIVE SYSTEM</div>
     <div class="loader-title">PULSE // MEDIA</div>
     <div class="progress-bar-wrap">
       <div class="progress-bar-fill" id="progress-bar"></div>
@@ -573,26 +560,19 @@
   <div id="main-content">
 
     <header>
-      <div class="logo-block">
-        <span class="logo-main">PULSE</span>
-        <span class="logo-sub">// MEDIA PLATFORM</span>
-      </div>
-      <div class="header-meta">
-        <div>SYS_STATUS: ONLINE</div>
-        <div>EST. GUATEMALA 2025</div>
-      </div>
+      <div class="logo-main">PULSE // MEDIA</div>
+      <div class="header-tag">EST. GUATEMALA 2025</div>
     </header>
 
     <main>
       
       <!-- SECCIÓN 1: MANIFIESTO E HISTORIA OFICIAL -->
-      <section class="hero-archive">
-        <div class="archive-watermark">ARCHIVE_ID: #2025-GT</div>
-        <div class="section-tag">01 // ORIGINS & MANIFESTO</div>
+      <section class="hero-box">
+        <div class="section-tag">01 // MANIFESTO & ORIGINS</div>
         
         <h1 class="hero-title">PULSE MEDIA</h1>
         
-        <div class="story-text-container">
+        <div class="story-body">
           <p>
             <span>Pulse Media</span> nació en <span>2025</span> a partir de una visión profunda: albergar y potenciar a artistas del <span>género urbano y regional mexicano</span>, sin limitarse únicamente a subir canciones a las plataformas digitales.
           </p>
@@ -604,40 +584,38 @@
           </p>
         </div>
 
-        <div class="handwritten-annotation">> Ref: 1072x1290 (1217KB) — Documento oficial de fundación.</div>
-
         <div class="contact-strip">
-          <div class="contact-badge">CONTACT_MAIL: <span>pulselabel.oficial@gmail.com</span></div>
+          <div class="contact-badge">OFFICIAL_MAIL: <span>pulselabel.oficial@gmail.com</span></div>
           <div class="contact-badge">DIRECT_LINE: <span>+502 37731793</span></div>
         </div>
       </section>
 
-      <!-- SECCIÓN 2: VIDEOS NATIVOS SILENCIADOS EN BUCLE -->
-      <section style="margin-bottom: 3.5rem;">
-        <div class="section-tag">02 // VISUAL & MOTION ARCHIVE</div>
+      <!-- SECCIÓN 2: VIDEOS NATIVOS NATIVOS EN BUCLE FLUIDO -->
+      <section style="margin-bottom: 4rem;">
+        <div class="section-tag">02 // VISUAL & MOTION ASSETS</div>
         
-        <div class="media-raw-grid">
+        <div class="media-grid">
           
-          <div class="media-raw-box">
-            <div class="video-viewport">
+          <div class="media-box">
+            <div class="video-container">
               <video autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-lights-41795-large.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="media-label">
-              <span>[ASSET_01] SOUND_IDENTITY.RAW</span>
+            <div class="media-meta">
+              <span>[ASSET_01] IDENTIDAD SONORA</span>
               <span>AUTOPLAY // MUTE</span>
             </div>
           </div>
 
-          <div class="media-raw-box">
-            <div class="video-viewport">
+          <div class="media-box">
+            <div class="video-container">
               <video autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-digital-background-screen-31128-large.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="media-label">
-              <span>[ASSET_02] VISUAL_MOTION.RAW</span>
+            <div class="media-meta">
+              <span>[ASSET_02] MOVIMIENTO CREATIVO</span>
               <span>AUTOPLAY // MUTE</span>
             </div>
           </div>
@@ -645,11 +623,11 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 3: NAVEGACIÓN Y ESTRUCTURA DE SUBPÁGINAS (LAYOUT PREPARADO) -->
+      <!-- SECCIÓN 3: NAVEGACIÓN Y ESTRUCTURA DE SUBPÁGINAS -->
       <section class="directory-layout">
-        <div class="section-tag">03 // SYSTEM DIRECTORY & SUB-PAGES</div>
+        <div class="section-tag">03 // SYSTEM DIRECTORY</div>
         <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.5rem;">
-          Explora los apartados de la plataforma
+          Módulos de la Plataforma
         </h2>
         <p style="color: var(--text-sub); font-size: 0.9rem;">
           Acceso estructurado a los módulos principales de la disquera y visualización de expedientes.
@@ -657,14 +635,14 @@
 
         <div class="directory-grid">
           
-          <!-- BOTÓN A SUBPÁGINA: ARTISTAS -->
+          <!-- BOTÓN SUBPÁGINA: ARTISTAS -->
           <a class="dir-button" onclick="alert('SUBPÁGINA: Cargando catálogo de expedientes de artistas...')">
             <div class="dir-code">[SUBPAGE_01]</div>
             <div class="dir-title">Catálogo de Artistas</div>
             <div class="dir-desc">Expedientes cibernéticos, métricas de flow, atributos técnicos y discografía oficial.</div>
           </a>
 
-          <!-- BOTÓN A SUBPÁGINA: EQUIPO ADMIN -->
+          <!-- BOTÓN SUBPÁGINA: EQUIPO ADMIN -->
           <a class="dir-button" onclick="alert('SUBPÁGINA: Cargando estructura del equipo directivo...')">
             <div class="dir-code">[SUBPAGE_02]</div>
             <div class="dir-title">Equipo Directivo</div>
@@ -713,14 +691,14 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 5: ACCESO Y REGISTRO PRIVADO -->
+      <!-- SECCIÓN 5: ACCESO AL PORTAL -->
       <section style="text-align: center; margin-bottom: 4rem;">
         <div class="section-tag" style="justify-content: center;">05 // PORTAL ENTRY</div>
-        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 1rem;">
+        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem;">
           Panel Privado de Artista
         </h2>
         <p style="color: var(--text-sub); margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;">
-          Gestión transparente de lanzamientos, regalias y control de tu catálogo musical.
+          Gestión transparente de lanzamientos, regalías y control de tu catálogo musical.
         </p>
         <button class="btn-brutal-action" onclick="openAuthModal('register')">Acceder al Sistema</button>
       </section>
@@ -728,18 +706,15 @@
     </main>
 
     <footer>
-      <div>&copy; 2025 - 2026 PULSE MEDIA // ARCHIVE SYSTEM</div>
-      <div>CLASSIFIED DOCUMENT — ALL RIGHTS RESERVED</div>
+      <div>&copy; 2025 - 2026 PULSE MEDIA // PLATFORM</div>
+      <div>ALL RIGHTS RESERVED</div>
     </footer>
 
   </div>
 
-  <!-- ==========================================
-       MODAL DE AUTENTICACIÓN MEJORADO
-       ========================================== -->
+  <!-- MODAL DE AUTENTICACIÓN -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-box">
-      <!-- BOTÓN X UBICADO DE FORMA LIMPIA Y SEPARADA -->
       <button class="close-btn-fix" onclick="closeAuthModal()">×</button>
       
       <div class="auth-tab-switch">
@@ -747,7 +722,7 @@
         <button class="tab-btn" id="tab-login" onclick="switchTab('login')">Iniciar Sesión</button>
       </div>
 
-      <!-- FORMULARIO DE REGISTRO (CON LISTA MASIVA DE PAÍSES DEL MUNDO) -->
+      <!-- FORMULARIO DE REGISTRO CON LISTA COMPLETA DE PAÍSES -->
       <div id="form-register">
         
         <div class="form-field-wrap">
@@ -872,7 +847,7 @@
       element.classList.toggle("active");
     }
 
-    // CONTROL DEL MODAL DE AUTENTICACIÓN
+    // MODAL
     const authModal = document.getElementById("auth-modal");
     const formRegister = document.getElementById("form-register");
     const formLogin = document.getElementById("form-login");
@@ -911,11 +886,11 @@
       const pass = document.getElementById("reg-password").value;
 
       if (!name || !artistName || !age || !email || !pass) {
-        alert("ERROR: Por favor completa todos los campos del expediente.");
+        alert("ERROR: Todos los campos son obligatorios.");
         return;
       }
 
-      alert("¡Cuenta creada exitosamente en " + country + "! Te hemos enviado un correo de confirmación.");
+      alert("¡Cuenta registrada exitosamente para " + country + "! Te enviamos un correo de confirmación.");
       closeAuthModal();
     }
 
