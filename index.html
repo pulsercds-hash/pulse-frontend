@@ -66,7 +66,7 @@
       letter-spacing: 1px;
     }
 
-    /* FRANJA DE SOCIOS / PLATAFORMAS GLOBALES */
+    /* FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (PERFECTAMENTE CENTRADA) */
     .partners-section {
       padding: 3rem 5%;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -77,17 +77,18 @@
     .partners-grid {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 2rem;
+      justify-content: center;
       align-items: center;
+      gap: 2.5rem;
       font-family: var(--font-mono);
       font-size: clamp(0.85rem, 1.2vw, 1rem);
       letter-spacing: 3px;
       text-transform: uppercase;
-      opacity: 0.65;
+      opacity: 0.75;
+      text-align: center;
     }
 
-    /* HERO SECTION CON VIDEO DE FONDO Y CAPA OSCURA */
+    /* HERO SECTION CON VIDEO DE FONDO Y BLOQUEO DE CURSOR */
     .hero-section {
       position: relative;
       overflow: hidden;
@@ -97,35 +98,37 @@
       top: 50%;
       left: 50%;
       width: 100vw;
-      height: 56.25vw; /* Proporción 16:9 mínima */
+      height: 56.25vw;
       min-height: 100vh;
-      min-width: 177.77vh; /* Proporción inversa 16:9 */
+      min-width: 177.77vh;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.35; /* Oscurecido para que las letras resalten al 100% */
+      opacity: 0.35;
     }
     .hero-video-bg iframe {
       width: 100%;
       height: 100%;
       border: 0;
+      pointer-events: none;
     }
     .hero-section > *:not(.hero-video-bg) {
       position: relative;
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO DE YOUTUBE EN TARJETAS DE ABAJO */
+    /* CONTENEDOR DE VIDEO DE YOUTUBE EN TARJETAS CON BLOQUEO DE CURSOR */
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* Proporción 16:9 */
+      padding-bottom: 56.25%;
       height: 0;
       margin-top: 1.5rem;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: #000;
+      pointer-events: none; /* Bloquea cualquier interacción del mouse con el video */
     }
     .video-wrapper iframe {
       position: absolute;
@@ -134,6 +137,7 @@
       width: 100%;
       height: 100%;
       border: 0;
+      pointer-events: none;
     }
 
     /* SECCIÓN DE PREGUNTAS FRECUENTES (FAQ / BLUEPRINT) */
@@ -181,9 +185,8 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO CON MOJABI GHOST LITERALMENTE DE FONDO DETRÁS DE LAS LETRAS -->
+    <!-- SECCIÓN 1: HERO -->
     <section class="hero-section panel" data-theme="dark">
-      <!-- Video de fondo en bucle, silenciado y sin controles -->
       <div class="hero-video-bg">
         <iframe src="https://www.youtube.com/embed/O1wUdB7MQbI?autoplay=1&mute=1&controls=0&loop=1&playlist=O1wUdB7MQbI&disablekb=1&modestbranding=1" title="Background Visual" allow="autoplay"></iframe>
       </div>
@@ -206,7 +209,7 @@
       </div>
     </div>
 
-    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES -->
+    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (CENTRADOS) -->
     <div class="partners-section">
       <div class="partners-grid">
         <span>// Spotify Ecosystem</span>
@@ -246,14 +249,14 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS / PILARES CON VIDEOS LIMPIOS Y SIN LETRAS VERDES -->
+    <!-- SECCIÓN 3: MÓDULOS / PILARES CON VIDEOS BLOQUEADOS Y SIN TEXTO VERDE -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
       </div>
       
       <div class="modules-grid">
-        <!-- TARJETA 1 (CREAMOS TU PROPIA IDENTIDAD) -->
+        <!-- TARJETA 1 -->
         <div class="module-card">
           <div>
             <div class="module-index">[01]</div>
@@ -262,11 +265,11 @@
           </div>
           
           <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E" title="Pulse Media Identity" allow="autoplay"></iframe>
+            <iframe src="https://www.youtube.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&disablekb=1&modestbranding=1" title="Pulse Media Identity" allow="autoplay"></iframe>
           </div>
         </div>
 
-        <!-- TARJETA 2 (NO SOLO POSICIONAMOS) -->
+        <!-- TARJETA 2 -->
         <div class="module-card">
           <div>
             <div class="module-index">[02]</div>
@@ -275,7 +278,7 @@
           </div>
           
           <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/7f6SxWMOpdU?autoplay=1&mute=1&controls=0&loop=1&playlist=7f6SxWMOpdU" title="Pulse Media Storytelling" allow="autoplay"></iframe>
+            <iframe src="https://www.youtube.com/embed/7f6SxWMOpdU?autoplay=1&mute=1&controls=0&loop=1&playlist=7f6SxWMOpdU&disablekb=1&modestbranding=1" title="Pulse Media Storytelling" allow="autoplay"></iframe>
           </div>
         </div>
       </div>
