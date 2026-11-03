@@ -17,7 +17,7 @@
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   
   <style>
-    /* PRELOADER CON BARRITA */
+    /* PRELOADER CON BARRITA Y BIENVENIDA */
     #app-preloader {
       position: fixed;
       top: 0;
@@ -127,7 +127,7 @@
       letter-spacing: 1px;
     }
 
-    /* SOCIOS / PLATAFORMAS */
+    /* SOCIOS / PLATAFORMAS (CENTRADOS) */
     .partners-section {
       padding: 3rem 5%;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -149,7 +149,7 @@
       text-align: center;
     }
 
-    /* HERO SECTION CON VIDEO NATIVO DE FONDO (CERO INTERFERENCIAS) */
+    /* HERO SECTION CON VIDEO NATIVO DE FONDO */
     .hero-section {
       position: relative;
       overflow: hidden;
@@ -226,7 +226,7 @@
 </head>
 <body class="theme-dark">
 
-  <!-- PRELOADER CON BARRITA -->
+  <!-- PRELOADER CON BARRITA Y BIENVENIDA -->
   <div id="app-preloader">
     <div class="preloader-welcome">// Bienvenido al sistema</div>
     <div class="preloader-title">Pulse Media</div>
@@ -250,9 +250,8 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO CON VIDEO NATIVO -->
+    <!-- SECCIÓN 1: HERO CON VIDEO NATIVO DE FONDO -->
     <section class="hero-section panel" data-theme="dark">
-      <!-- Cambia el link por un archivo .mp4 directo si lo deseas -->
       <video class="hero-video-bg" autoplay muted loop playsinline>
         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
       </video>
@@ -389,7 +388,7 @@
   <script src="app.js"></script>
   
   <script>
-    /* PRELOADER CON BARRITA Y TIEMPO DE ESPERA */
+    /* PRELOADER CON BARRITA Y TIEMPO DE ESPERA FLUIDO */
     window.addEventListener('load', () => {
       const bar = document.getElementById('preload-bar');
       const percent = document.getElementById('preload-percent');
