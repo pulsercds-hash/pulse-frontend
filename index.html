@@ -358,7 +358,7 @@
     }
 
     /* ==========================================
-       MODAL DE AUTENTICACIÓN (REGISTRO / LOGIN)
+       MODAL DE AUTENTICACIÓN
        ========================================== */
     .modal-overlay {
       position: fixed;
@@ -418,18 +418,33 @@
       color: var(--text-white);
     }
 
-    .modal-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-white);
-      margin-bottom: 0.4rem;
+    /* SWITCH DE ACCIONES (REGISTRARSE / INICIAR SESIÓN) */
+    .auth-toggle {
+      display: flex;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 1.8rem;
+      border: 1px solid var(--border-card);
     }
 
-    .modal-subtitle {
+    .auth-tab {
+      flex: 1;
+      padding: 0.6rem;
       font-size: 0.85rem;
+      font-weight: 600;
       color: var(--text-gray);
-      margin-bottom: 1.8rem;
-      line-height: 1.5;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .auth-tab.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 700;
     }
 
     .form-group {
@@ -620,7 +635,7 @@
       </p>
 
       <div class="btn-group">
-        <button class="btn btn-primary" onclick="openAuthModal()">
+        <button class="btn btn-primary" onclick="openAuthModal('register')">
           Iniciar Sesion / Registrarse
         </button>
       </div>
@@ -633,87 +648,82 @@
   </div>
 
   <!-- ==========================================
-       MODAL DE AUTENTICACIÓN (REGISTRO Y LOGIN)
+       MODAL DE AUTENTICACIÓN
        ========================================== -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-box">
       <button class="close-modal" onclick="closeAuthModal()">&times;</button>
       
-      <!-- PASO 1: VERIFICAR CORREO -->
-      <div id="step-email">
-        <div class="modal-title">Acceso Artistas</div>
-        <div class="modal-subtitle">Ingresa tu correo para continuar en Pulse Media.</div>
-        
-        <div class="form-group">
-          <label>Correo Electrónico</label>
-          <input type="email" class="input-field" id="check-email" placeholder="tu@artista.com">
-        </div>
-
-        <button class="btn btn-primary" onclick="checkEmailExists()" style="max-width: 100%;">
-          Continuar
-        </button>
+      <!-- BOTONES SUPERIORES: REGISTRARSE / INICIAR SESIÓN -->
+      <div class="auth-toggle">
+        <button class="auth-tab active" id="tab-register" onclick="switchTab('register')">Crear Cuenta</button>
+        <button class="auth-tab" id="tab-login" onclick="switchTab('login')">Ya tengo cuenta</button>
       </div>
 
-      <!-- PASO 2A: SI YA TIENE CUENTA (LOGIN) -->
-      <div id="step-login" style="display: none;">
-        <div class="modal-title">¡Bienvenido de vuelta!</div>
-        <div class="modal-subtitle">Ingresa tu contraseña para acceder a tu panel.</div>
-        
+      <!-- FORMULARIO DE REGISTRO -->
+      <div id="form-register">
         <div class="form-group">
-          <label>Contraseña</label>
-          <input type="password" class="input-field" id="login-password" placeholder="Tu contraseña">
-        </div>
+          <div>
+            <label>Nombre Real</label>
+            <input type="text" class="input-field" id="reg-name">
+          </div>
 
-        <button class="btn btn-primary" onclick="submitLogin()" style="max-width: 100%;">
-          Iniciar Sesión
-        </button>
-        
-        <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 1.2rem; cursor: pointer;" onclick="resetAuthModal()">
-          ← Usar otro correo
-        </p>
-      </div>
-
-      <!-- PASO 2B: SI ES NUEVO (REGISTRO COMPLETO) -->
-      <div id="step-register" style="display: none;">
-        <div class="modal-title">Crear Cuenta de Artista</div>
-        <div class="modal-subtitle">Completa tus datos para configurar tu perfil en la plataforma.</div>
-        
-        <div class="form-group">
-          <label>Nombre Real</label>
-          <input type="text" class="input-field" id="reg-name" placeholder="Ej. Juan Pérez">
-
-          <label>Nombre Artístico</label>
-          <input type="text" class="input-field" id="reg-artist-name" placeholder="Ej. Jay Flow">
+          <div>
+            <label>Nombre Artístico</label>
+            <input type="text" class="input-field" id="reg-artist-name">
+          </div>
 
           <div style="display: flex; gap: 1rem;">
             <div style="flex: 1;">
               <label>Edad</label>
-              <input type="number" class="input-field" id="reg-age" placeholder="Ej. 22">
+              <input type="number" class="input-field" id="reg-age">
             </div>
             <div style="flex: 2;">
               <label>País</label>
               <select class="input-field" id="reg-country" style="background: #16161e;">
-                <option value="Guatemala">Guatemala 🇬🇹</option>
-                <option value="México">México 🇲🇽</option>
-                <option value="Colombia">Colombia 🇨🇴</option>
-                <option value="Estados Unidos">Estados Unidos 🇺🇸</option>
-                <option value="España">España 🇪🇸</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="México">México</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+                <option value="España">España</option>
                 <option value="Otro">Otro</option>
               </select>
             </div>
           </div>
 
-          <label>Contraseña de Acceso</label>
-          <input type="password" class="input-field" id="reg-password" placeholder="Crea una contraseña segura">
+          <div>
+            <label>Correo Electrónico</label>
+            <input type="email" class="input-field" id="reg-email">
+          </div>
+
+          <div>
+            <label>Contraseña</label>
+            <input type="password" class="input-field" id="reg-password">
+          </div>
         </div>
 
         <button class="btn btn-primary" onclick="submitRegister()" style="max-width: 100%;">
-          Completar Registro
+          Crear mi Cuenta
         </button>
+      </div>
 
-        <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 1.2rem; cursor: pointer;" onclick="resetAuthModal()">
-          ← Usar otro correo
-        </p>
+      <!-- FORMULARIO DE INICIO DE SESIÓN -->
+      <div id="form-login" style="display: none;">
+        <div class="form-group">
+          <div>
+            <label>Correo Electrónico</label>
+            <input type="email" class="input-field" id="login-email">
+          </div>
+
+          <div>
+            <label>Contraseña</label>
+            <input type="password" class="input-field" id="login-password">
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="submitLogin()" style="max-width: 100%;">
+          Iniciar Sesión
+        </button>
       </div>
 
     </div>
@@ -765,68 +775,62 @@
       element.classList.toggle("active");
     }
 
-    // LÓGICA DE MODAL & REGISTRO
+    // MODAL Y SWITCH REGISTRO / LOGIN
     const authModal = document.getElementById("auth-modal");
-    const stepEmail = document.getElementById("step-email");
-    const stepLogin = document.getElementById("step-login");
-    const stepRegister = document.getElementById("step-register");
+    const formRegister = document.getElementById("form-register");
+    const formLogin = document.getElementById("form-login");
+    const tabRegister = document.getElementById("tab-register");
+    const tabLogin = document.getElementById("tab-login");
 
-    function openAuthModal() {
+    function openAuthModal(mode) {
       authModal.classList.add("active");
+      switchTab(mode);
     }
 
     function closeAuthModal() {
       authModal.classList.remove("active");
-      resetAuthModal();
     }
 
-    function resetAuthModal() {
-      stepLogin.style.display = "none";
-      stepRegister.style.display = "none";
-      stepEmail.style.display = "block";
-      document.getElementById("check-email").value = "";
-    }
-
-    // Simulación inteligente: Si el correo incluye "test", fingimos que ya existe; si no, es nuevo registro.
-    function checkEmailExists() {
-      const email = document.getElementById("check-email").value;
-      if (!email || !email.includes("@")) {
-        alert("Ingresa un correo electrónico válido.");
-        return;
-      }
-
-      stepEmail.style.display = "none";
-
-      // Lógica de prueba (aquí luego se conectará con la base de datos en Render)
-      if (email.includes("admin") || email.includes("registered")) {
-        stepLogin.style.display = "block"; // Ya tiene cuenta
+    function switchTab(mode) {
+      if (mode === 'register') {
+        tabRegister.classList.add("active");
+        tabLogin.classList.remove("active");
+        formRegister.style.display = "block";
+        formLogin.style.display = "none";
       } else {
-        stepRegister.style.display = "block"; // Es nuevo usuario
+        tabLogin.classList.add("active");
+        tabRegister.classList.remove("active");
+        formLogin.style.display = "block";
+        formRegister.style.display = "none";
       }
-    }
-
-    function submitLogin() {
-      const pass = document.getElementById("login-password").value;
-      if (!pass) {
-        alert("Ingresa tu contraseña.");
-        return;
-      }
-      alert("¡Inicio de sesión exitoso! Entrando a tu panel...");
-      closeAuthModal();
     }
 
     function submitRegister() {
       const name = document.getElementById("reg-name").value;
       const artistName = document.getElementById("reg-artist-name").value;
       const age = document.getElementById("reg-age").value;
+      const email = document.getElementById("reg-email").value;
       const pass = document.getElementById("reg-password").value;
 
-      if (!name || !artistName || !age || !pass) {
-        alert("Por favor completa todos los campos de registro.");
+      if (!name || !artistName || !age || !email || !pass) {
+        alert("Por favor completa todos los campos para registrarte.");
         return;
       }
 
-      alert("¡Registro exitoso en Pulse Media! Te hemos enviado un correo de confirmación. Bienvenido al ecosistema.");
+      alert("¡Cuenta creada exitosamente! Te hemos enviado un correo de confirmación. Bienvenido a Pulse Media.");
+      closeAuthModal();
+    }
+
+    function submitLogin() {
+      const email = document.getElementById("login-email").value;
+      const pass = document.getElementById("login-password").value;
+
+      if (!email || !pass) {
+        alert("Ingresa tu correo y contraseña.");
+        return;
+      }
+
+      alert("¡Inicio de sesión correcto! Entrando al panel del artista...");
       closeAuthModal();
     }
   </script>
