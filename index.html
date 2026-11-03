@@ -11,9 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* ==========================================
-       ESTILOS MINIMALISTAS (DARK SAAS / UNDERGROUND)
-       ========================================== */
     :root {
       --bg-main: #060608;
       --bg-card: rgba(16, 16, 22, 0.7);
@@ -40,7 +37,6 @@
       position: relative;
     }
 
-    /* DESTELLOS AMBIENTALES DISCRETOS DE FONDO */
     .ambient-glow-1 {
       position: fixed;
       width: 500px;
@@ -63,7 +59,6 @@
       z-index: 0;
     }
 
-    /* PANTALLA DE CARGA */
     #loader-screen {
       position: fixed;
       top: 0;
@@ -174,7 +169,6 @@
       margin-bottom: 1.5rem;
     }
 
-    /* TÍTULO PULSE MEDIA PLANO Y ELEGANTE (SIN GLOW) */
     .hero-title {
       font-family: 'Orbitron', sans-serif;
       font-size: clamp(2.5rem, 8vw, 5.2rem);
@@ -215,8 +209,8 @@
       font-weight: 600;
     }
 
-    /* SECCIÓN VISUAL ABSTRACTA UNDERGROUND (REEMPLAZANDO YOUTUBE) */
-    .visual-grid {
+    /* TARJETAS CON VIDEO NATIVO HTML5 (SIN CONTROLES NI MARCAS) */
+    .video-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
@@ -224,49 +218,50 @@
       margin-top: 1.5rem;
     }
 
-    .visual-card {
+    .video-card {
       background: var(--bg-card);
       border: 1px solid var(--border-card);
       border-radius: 20px;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-      height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.5rem;
-      text-align: left;
-      background-size: cover;
-      background-position: center;
     }
 
-    .visual-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(180deg, rgba(6,6,8,0.1) 0%, rgba(6,6,8,0.9) 90%);
-      z-index: 1;
-    }
-
-    .visual-card:hover {
+    .video-card:hover {
       border-color: var(--border-glow);
       transform: translateY(-4px);
     }
 
-    .visual-content {
+    .video-container {
       position: relative;
-      z-index: 2;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: #000;
     }
 
-    .visual-title {
-      font-size: 1rem;
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(110%) grayscale(20%);
+    }
+
+    .video-info {
+      padding: 1.2rem;
+      text-align: left;
+      background: rgba(12, 12, 16, 0.95);
+      border-top: 1px solid var(--border-card);
+    }
+
+    .video-title {
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--text-white);
       margin-bottom: 0.2rem;
     }
 
-    .visual-sub {
+    .video-sub {
       font-size: 0.8rem;
       color: var(--text-gray);
     }
@@ -440,7 +435,7 @@
       letter-spacing: 1px;
     }
 
-    /* MODAL SIN SCROLLBAR */
+    /* MODAL */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -581,7 +576,6 @@
 </head>
 <body>
 
-  <!-- LUCES AMBIENTALES -->
   <div class="ambient-glow-1"></div>
   <div class="ambient-glow-2"></div>
 
@@ -630,7 +624,7 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 2: ESTÉTICA VISUAL UNDERGROUND (SIN YOUTUBE NI BOTONES) -->
+    <!-- SECCIÓN 2: VIDEOS NATIVOS EN BUCLE (SIN YOUTUBE NI CONTROLES) -->
     <section>
       <div class="badge">Inspiración & Identidad</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Estética de la Escena Global</h2>
@@ -638,20 +632,30 @@
         Visualizamos la música con la misma excelencia y dirección de arte que define al movimiento de la industria actual.
       </p>
 
-      <div class="visual-grid">
-        <!-- Tarjeta Visual 1 -->
-        <div class="visual-card" style="background: radial-gradient(circle at center, #1b162c 0%, #0a0a0f 100%);">
-          <div class="visual-content">
-            <div class="visual-title">Tu Identidad Sonora</div>
-            <div class="visual-sub">Desarrollo visual y concepto de arte independiente</div>
+      <div class="video-grid">
+        <!-- Video 1 NATIVO -->
+        <div class="video-card">
+          <div class="video-container">
+            <video autoplay muted loop playsinline>
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-lights-41795-large.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Tu Identidad Sonora</div>
+            <div class="video-sub">Desarrollo visual y concepto de arte independiente</div>
           </div>
         </div>
 
-        <!-- Tarjeta Visual 2 -->
-        <div class="visual-card" style="background: radial-gradient(circle at center, #16242c 0%, #0a0a0f 100%);">
-          <div class="visual-content">
-            <div class="visual-title">Identidad & Movimiento Visual</div>
-            <div class="visual-sub">Cultura, presencia e imagen de artista</div>
+        <!-- Video 2 NATIVO -->
+        <div class="video-card">
+          <div class="video-container">
+            <video autoplay muted loop playsinline>
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-digital-background-screen-31128-large.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Identidad & Movimiento Visual</div>
+            <div class="video-sub">Cultura, presencia e imagen de artista</div>
           </div>
         </div>
       </div>
