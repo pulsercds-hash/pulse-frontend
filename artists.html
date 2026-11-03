@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   
   <style>
-    /* DESBLOQUEO TOTAL Y FORZADO DE SCROLL EN PC Y MÓVIL */
+    /* DESBLOQUEO TOTAL Y NATIVO DE SCROLL */
     html, body {
       background: #000 !important;
       color: #fff !important;
@@ -27,7 +27,7 @@
       position: static !important;
     }
 
-    /* HEADER IDÉNTICO A TEAM.HTML */
+    /* HEADER FIJO COMPATIBLE CON TEAM.HTML */
     header {
       position: fixed;
       top: 0;
@@ -38,7 +38,7 @@
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
       pointer-events: none;
     }
 
@@ -108,125 +108,112 @@
       line-height: 1.6;
     }
 
-    /* GRID DE CARPETAS USANDO TUS IMÁGENES REALES COMO FONDO */
+    /* GRID DE TARJETAS INTERACTIVAS */
     .folder-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 3rem;
-      padding: 4rem 5% 8rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3.5rem;
+      padding: 3rem 5% 8rem;
       position: relative;
       z-index: 2;
     }
 
-    .folder-card-real {
+    /* CONTENEDOR DEL FOLDER */
+    .folder-card-item {
       position: relative;
       width: 100%;
-      height: 480px;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       cursor: pointer;
     }
 
-    .folder-card-real:hover {
-      transform: translateY(-8px);
-      border-color: var(--accent-neon);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(220, 255, 0, 0.15);
+    /* LA IMAGEN PNG/JPG DEL FOLDER QUE SE ILUMINA AL HOVER */
+    .folder-image-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
     }
 
-    /* IMAGEN DE FONDO DE LA CARPETA SUBIDA A GITHUB */
-    .folder-bg-img {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .folder-img {
       width: 100%;
-      height: 100%;
+      height: auto;
+      display: block;
       object-fit: cover;
-      opacity: 0.85;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: transform 0.4s ease;
     }
 
-    .folder-card-real:hover .folder-bg-img {
-      transform: scale(1.03);
-      opacity: 1;
+    /* HOVER INTERACTIVO: ILUMINA SOLO EL PNG / FOLDER CON RESPLANDOR NEÓN */
+    .folder-card-item:hover .folder-image-wrapper {
+      transform: translateY(-8px) scale(1.02);
+      filter: drop-shadow(0 0 25px rgba(220, 255, 0, 0.5)) drop-shadow(0 15px 30px rgba(0,0,0,0.9));
     }
 
-    /* CAPA DE SUPERPOSICIÓN PARA TEXTOS E INTERACTIVIDAD */
-    .folder-overlay-content {
-      position: absolute;
-      top: 0;
-      left: 0;
+    /* ETIQUETA SUPERIOR Y TEXTOS DEBAJO O SOBREPUESTOS */
+    .folder-info-panel {
       width: 100%;
-      height: 100%;
-      padding: 2.5rem 2rem;
+      margin-top: 1.2rem;
+      background: rgba(15, 15, 15, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      padding: 1.2rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+      gap: 0.5rem;
+      transition: border-color 0.3s ease;
     }
 
-    .folder-tag-top {
+    .folder-card-item:hover .folder-info-panel {
+      border-color: var(--accent-neon);
+    }
+
+    .folder-ref-code {
       font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--accent-neon);
       letter-spacing: 2px;
       text-transform: uppercase;
-      font-weight: 700;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
-      align-self: flex-start;
-      border: 1px solid rgba(220, 255, 0, 0.3);
-    }
-
-    .folder-artist-box {
-      background: rgba(15, 15, 15, 0.85);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 1.5rem;
-      border-radius: 6px;
     }
 
     .folder-artist-name {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 1px;
       color: #fff;
-      margin-bottom: 0.4rem;
+      letter-spacing: 1px;
     }
 
     .folder-artist-genre {
       font-family: var(--font-mono);
       font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.5);
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
-    /* BADGE DE ESTADO DINÁMICO */
     .folder-status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(220, 255, 0, 0.1);
+      background: rgba(220, 255, 0, 0.08);
       border: 1px solid var(--accent-neon);
       color: var(--accent-neon);
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 0.4rem 1rem;
+      padding: 0.4rem 0.8rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       border-radius: 2px;
-      margin-top: 1rem;
+      width: fit-content;
+      margin-top: 0.4rem;
     }
 
     .status-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       background: var(--accent-neon);
       border-radius: 50%;
       box-shadow: 0 0 8px var(--accent-neon);
@@ -243,14 +230,14 @@
 
   <div id="page-curtain"></div>
 
-  <!-- HEADER CON BOTÓN INICIO -->
+  <!-- HEADER FIJO CON BOTÓN DE REGRESO -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <a href="index.html" class="btn-back-home" onclick="triggerCurtain(event, 'index.html')">&larr; INICIO</a>
   </header>
 
   <main>
-    <!-- HERO SECCIÓN -->
+    <!-- HERO SECTION -->
     <section class="artists-hero">
       <div class="hero-meta-artists">
         <span>// ROSTER OFICIAL</span>
@@ -264,80 +251,80 @@
       </p>
     </section>
 
-    <!-- GRID DE TARJETAS CON LAS FOTOS REALES DE GITHUB -->
+    <!-- GRID DE LOS 5 ARTISTAS APUNTANDO A LA CARPETA ARTIST/ -->
     <section class="folder-grid">
       
       <!-- ARTISTA 01 -->
-      <div class="folder-card-real">
-        <img src="artists/artista1.jpg" alt="Artista 01" class="folder-bg-img">
-        <div class="folder-overlay-content">
-          <div class="folder-tag-top">FILE // 001</div>
-          <div class="folder-artist-box">
-            <div class="folder-artist-name">Artista 01</div>
-            <div class="folder-artist-genre">Urban / New Wave</div>
-            <div class="folder-status-badge">
-              <span class="status-dot"></span> Próximamente
-            </div>
+      <div class="folder-card-item">
+        <div class="folder-image-wrapper">
+          <img src="artist/artista1.jpg" alt="Artista 01" class="folder-img">
+        </div>
+        <div class="folder-info-panel">
+          <div class="folder-ref-code">FILE // 001</div>
+          <div class="folder-artist-name">Artista 01</div>
+          <div class="folder-artist-genre">Urban / New Wave</div>
+          <div class="folder-status-badge">
+            <span class="status-dot"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 02 -->
-      <div class="folder-card-real">
-        <img src="artists/artista2.jpg" alt="Artista 02" class="folder-bg-img">
-        <div class="folder-overlay-content">
-          <div class="folder-tag-top">FILE // 002</div>
-          <div class="folder-artist-box">
-            <div class="folder-artist-name">Artista 02</div>
-            <div class="folder-artist-genre">Regional Urbano</div>
-            <div class="folder-status-badge">
-              <span class="status-dot"></span> Próximamente
-            </div>
+      <div class="folder-card-item">
+        <div class="folder-image-wrapper">
+          <img src="artist/artista2.jpg" alt="Artista 02" class="folder-img">
+        </div>
+        <div class="folder-info-panel">
+          <div class="folder-ref-code">FILE // 002</div>
+          <div class="folder-artist-name">Artista 02</div>
+          <div class="folder-artist-genre">Regional Urbano</div>
+          <div class="folder-status-badge">
+            <span class="status-dot"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 03 -->
-      <div class="folder-card-real">
-        <img src="artists/artista3.jpg" alt="Artista 03" class="folder-bg-img">
-        <div class="folder-overlay-content">
-          <div class="folder-tag-top">FILE // 003</div>
-          <div class="folder-artist-box">
-            <div class="folder-artist-name">Artista 03</div>
-            <div class="folder-artist-genre">Alternative Sound</div>
-            <div class="folder-status-badge">
-              <span class="status-dot"></span> Próximamente
-            </div>
+      <div class="folder-card-item">
+        <div class="folder-image-wrapper">
+          <img src="artist/artista3.jpg" alt="Artista 03" class="folder-img">
+        </div>
+        <div class="folder-info-panel">
+          <div class="folder-ref-code">FILE // 003</div>
+          <div class="folder-artist-name">Artista 03</div>
+          <div class="folder-artist-genre">Alternative Sound</div>
+          <div class="folder-status-badge">
+            <span class="status-dot"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 04 -->
-      <div class="folder-card-real">
-        <img src="artists/artista4.jpg" alt="Artista 04" class="folder-bg-img">
-        <div class="folder-overlay-content">
-          <div class="folder-tag-top">FILE // 004</div>
-          <div class="folder-artist-box">
-            <div class="folder-artist-name">Artista 04</div>
-            <div class="folder-artist-genre">Producer / Composer</div>
-            <div class="folder-status-badge">
-              <span class="status-dot"></span> Próximamente
-            </div>
+      <div class="folder-card-item">
+        <div class="folder-image-wrapper">
+          <img src="artist/artista4.jpg" alt="Artista 04" class="folder-img">
+        </div>
+        <div class="folder-info-panel">
+          <div class="folder-ref-code">FILE // 004</div>
+          <div class="folder-artist-name">Artista 04</div>
+          <div class="folder-artist-genre">Producer / Composer</div>
+          <div class="folder-status-badge">
+            <span class="status-dot"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 05 -->
-      <div class="folder-card-real">
-        <img src="artists/artista5.jpg" alt="Artista 05" class="folder-bg-img">
-        <div class="folder-overlay-content">
-          <div class="folder-tag-top">FILE // 005</div>
-          <div class="folder-artist-box">
-            <div class="folder-artist-name">Artista 05</div>
-            <div class="folder-artist-genre">Secret Roster</div>
-            <div class="folder-status-badge">
-              <span class="status-dot"></span> Próximamente
-            </div>
+      <div class="folder-card-item">
+        <div class="folder-image-wrapper">
+          <img src="artist/artista5.jpg" alt="Artista 05" class="folder-img">
+        </div>
+        <div class="folder-info-panel">
+          <div class="folder-ref-code">FILE // 005</div>
+          <div class="folder-artist-name">Artista 05</div>
+          <div class="folder-artist-genre">Secret Roster</div>
+          <div class="folder-status-badge">
+            <span class="status-dot"></span> Próximamente
           </div>
         </div>
       </div>
