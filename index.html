@@ -3,25 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PULSE MEDIA — Cyber Brutalism Platform</title>
+  <title>PULSE MEDIA — Underground Music Ecosystem</title>
   
-  <!-- Fuentes Google: JetBrains Mono y Space Grotesk -->
+  <!-- FUENTES: Gótica (UnifrakturMaguntia) + Industrial (JetBrains Mono) + Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Space+Grotesk:wght@400;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   
   <style>
     /* ==========================================
-       CYBER BRUTALISM MINIMALISTA (CLEAN & DYNAMIC)
+       CYBER-GOTHIC BRUTALISM (HIGH IMPACT UI)
        ========================================== */
     :root {
-      --bg-raw: #08080c;
-      --bg-card: rgba(15, 15, 20, 0.85);
-      --border-white: #ffffff;
-      --border-muted: rgba(255, 255, 255, 0.15);
-      --accent-red: #ff3333;
-      --text-main: #ffffff;
-      --text-sub: #9090a2;
+      --bg-dark: #050507;
+      --bg-card: rgba(12, 12, 16, 0.88);
+      --border-stark: #ffffff;
+      --border-subtle: rgba(255, 255, 255, 0.15);
+      --accent-red: #ff2222;
+      --accent-purple: #8800ff;
+      --text-white: #ffffff;
+      --text-muted: #8a8a9e;
     }
 
     * {
@@ -31,149 +32,139 @@
     }
 
     body {
-      background-color: var(--bg-raw);
-      color: var(--text-main);
+      background-color: var(--bg-dark);
+      color: var(--text-white);
       font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
-      line-height: 1.6;
       overflow-x: hidden;
-      position: relative;
+      perspective: 1000px;
+      line-height: 1.5;
     }
 
-    /* FONDO DINÁMICO EN MOVIMIENTO (AMBIENT MESH MOTION) */
-    .motion-bg-1 {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(120, 40, 255, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
-      top: -200px;
-      left: 10%;
-      pointer-events: none;
-      z-index: 0;
-      animation: meshFloat1 14s infinite alternate ease-in-out;
-    }
-
-    .motion-bg-2 {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255, 51, 51, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
-      bottom: -150px;
-      right: 10%;
-      pointer-events: none;
-      z-index: 0;
-      animation: meshFloat2 18s infinite alternate-reverse ease-in-out;
-    }
-
-    @keyframes meshFloat1 {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, 40px) scale(1.1); }
-      100% { transform: translate(-30px, 80px) scale(0.95); }
-    }
-
-    @keyframes meshFloat2 {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-50px, -40px) scale(1.15); }
-      100% { transform: translate(40px, -60px) scale(0.9); }
-    }
-
-    /* RETÍCULA MINIMALISTA SUTIL */
-    .grid-overlay {
+    /* RUIDO Y GRAIN ANALÓGICO SOBRE LA PANTALLA */
+    .noise-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-image: 
-        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
       pointer-events: none;
-      z-index: 0;
+      z-index: 2;
+      opacity: 0.6;
     }
 
-    /* PANTALLA DE CARGA */
+    /* FONDO DE LUZ Y AMBIENTE EN MOVIMIENTO */
+    .gothic-mesh-1 {
+      position: fixed;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(136, 0, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+      top: -250px; left: -100px;
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientRotate 18s infinite alternate ease-in-out;
+    }
+
+    .gothic-mesh-2 {
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255, 34, 34, 0.1) 0%, rgba(0,0,0,0) 70%);
+      bottom: -200px; right: -100px;
+      pointer-events: none;
+      z-index: 0;
+      animation: ambientRotate 22s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes ambientRotate {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(80px, 50px) scale(1.1); }
+      100% { transform: translate(-40px, 100px) scale(0.9); }
+    }
+
+    /* LOADER HEAVY */
     #loader-screen {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-color: var(--bg-raw);
+      background-color: var(--bg-dark);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      z-index: 99999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
       font-family: 'JetBrains Mono', monospace;
     }
 
-    .loader-title {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
+    .gothic-loader-title {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: 3.5rem;
+      color: var(--text-white);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      margin-bottom: 1rem;
     }
 
-    .progress-bar-wrap {
-      width: 200px;
+    .progress-track {
+      width: 240px;
       height: 3px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
       position: relative;
     }
 
-    .progress-bar-fill {
+    .progress-fill {
       width: 0%;
       height: 100%;
-      background: var(--text-main);
+      background: var(--accent-red);
       transition: width 0.08s linear;
     }
 
     #main-content {
       opacity: 0;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.8s ease;
       position: relative;
-      z-index: 1;
+      z-index: 3;
     }
 
-    /* HEADER NETO Y LIMPIO */
+    /* HEADER INDUSTRIAL */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 5%;
-      border-bottom: 1px solid var(--border-muted);
-      background: rgba(8, 8, 12, 0.85);
-      backdrop-filter: blur(16px);
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(5, 5, 7, 0.85);
+      backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
-    .logo-main {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: 4px;
-      text-transform: uppercase;
+    .logo-gothic {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: 2.2rem;
+      color: var(--text-white);
+      letter-spacing: 2px;
+      line-height: 1;
     }
 
-    .header-tag {
+    .header-badge {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      color: var(--text-sub);
-      border: 1px solid var(--border-muted);
-      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border-stark);
+      padding: 0.35rem 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     main {
-      max-width: 1140px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 3rem 4%;
+      padding: 3.5rem 4%;
     }
 
     .section-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--text-sub);
+      color: var(--text-muted);
       margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
@@ -183,61 +174,65 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--border-muted);
+      background: var(--border-subtle);
     }
 
-    /* MANIFIESTO MINIMALISTA */
-    .hero-box {
-      border: 1px solid var(--border-white);
+    /* MANIFIESTO HERO CON EFECTO TILT 3D */
+    .tilt-card {
+      border: 1px solid var(--border-stark);
       background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      padding: 3.5rem 3rem;
+      backdrop-filter: blur(16px);
+      padding: 4rem 3.2rem;
       margin-bottom: 4rem;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+      position: relative;
     }
 
-    .hero-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 2rem;
-      letter-spacing: -1px;
+    .hero-gothic-title {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      margin-bottom: 1.8rem;
+      color: var(--text-white);
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     }
 
-    .story-body p {
-      font-size: 1.05rem;
-      color: var(--text-sub);
-      margin-bottom: 1.2rem;
+    .story-content p {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
       line-height: 1.8;
     }
 
-    .story-body p span {
-      color: var(--text-main);
-      font-weight: 600;
+    .story-content p span {
+      color: var(--text-white);
+      font-weight: 700;
+      border-bottom: 1px solid var(--accent-red);
     }
 
-    .contact-strip {
+    .contact-row {
       display: flex;
       flex-wrap: wrap;
       gap: 1.2rem;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-muted);
+      margin-top: 2.2rem;
+      padding-top: 1.8rem;
+      border-top: 1px dashed var(--border-subtle);
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.85rem;
     }
 
     .contact-badge {
-      border: 1px solid var(--border-muted);
+      border: 1px solid var(--border-subtle);
       padding: 0.5rem 1rem;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
     }
     .contact-badge span {
       color: var(--accent-red);
     }
 
-    /* SECCIÓN DE VIDEOS EN BUCLE FLUIDOS (HTML5 NATIVOS) */
+    /* VIDEOS HTML5 FLUIDOS */
     .media-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -245,49 +240,49 @@
       margin-bottom: 4rem;
     }
 
-    .media-box {
-      border: 1px solid var(--border-white);
+    .media-card-tilt {
+      border: 1px solid var(--border-stark);
       background: var(--bg-card);
       padding: 14px;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, border-color 0.3s ease;
     }
 
-    .media-box:hover {
-      transform: translateY(-4px);
+    .media-card-tilt:hover {
       border-color: var(--accent-red);
     }
 
-    .video-container {
+    .video-frame {
       position: relative;
       width: 100%;
-      height: 220px;
+      height: 230px;
       overflow: hidden;
       background: #000;
-      border: 1px solid var(--border-muted);
+      border: 1px solid var(--border-subtle);
     }
 
-    .video-container video {
+    .video-frame video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(20%) contrast(110%);
+      filter: grayscale(15%) contrast(115%);
       pointer-events: none;
     }
 
-    .media-meta {
+    .media-info {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
       margin-top: 1rem;
       display: flex;
       justify-content: space-between;
-      color: var(--text-sub);
+      color: var(--text-muted);
     }
 
-    /* LAYOUT NAVEGABLE SPA */
-    .directory-layout {
-      border: 1px solid var(--border-white);
+    /* LAYOUT NAVEGABLE SUBPÁGINAS */
+    .directory-box {
+      border: 1px solid var(--border-stark);
       background: var(--bg-card);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
       padding: 3rem 2.5rem;
       margin-bottom: 4rem;
     }
@@ -296,26 +291,27 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      margin-top: 1.5rem;
+      margin-top: 1.8rem;
     }
 
-    .dir-button {
-      border: 1px solid var(--border-muted);
+    .dir-btn {
+      border: 1px solid var(--border-subtle);
       background: rgba(255,255,255,0.02);
-      padding: 1.8rem 1.5rem;
+      padding: 2rem 1.6rem;
       text-align: left;
       cursor: pointer;
       transition: all 0.25s ease;
       font-family: 'JetBrains Mono', monospace;
+      color: var(--text-white);
       text-decoration: none;
-      color: var(--text-main);
       display: block;
     }
 
-    .dir-button:hover {
-      background: var(--text-main);
-      color: var(--bg-raw);
-      border-color: var(--text-main);
+    .dir-btn:hover {
+      background: var(--text-white);
+      color: var(--bg-dark);
+      border-color: var(--text-white);
+      transform: translateY(-4px);
     }
 
     .dir-code {
@@ -323,44 +319,44 @@
       color: var(--accent-red);
       margin-bottom: 0.5rem;
     }
-    .dir-button:hover .dir-code {
-      color: var(--bg-raw);
+    .dir-btn:hover .dir-code {
+      color: var(--bg-dark);
     }
 
     .dir-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       text-transform: uppercase;
       margin-bottom: 0.4rem;
     }
 
     .dir-desc {
-      font-size: 0.82rem;
-      color: var(--text-sub);
+      font-size: 0.83rem;
+      color: var(--text-muted);
       line-height: 1.5;
     }
-    .dir-button:hover .dir-desc {
-      color: #3f3f46;
+    .dir-btn:hover .dir-desc {
+      color: #333333;
     }
 
-    /* FAQ INTERACTIVO */
-    .faq-stack {
+    /* FAQ ACCORDEON */
+    .faq-container {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin-bottom: 4rem;
     }
 
-    .faq-item {
-      border: 1px solid var(--border-muted);
+    .faq-card {
+      border: 1px solid var(--border-subtle);
       background: var(--bg-card);
-      padding: 1.2rem 1.5rem;
+      padding: 1.3rem 1.6rem;
       cursor: pointer;
       transition: border-color 0.25s;
     }
 
-    .faq-item:hover {
-      border-color: var(--border-white);
+    .faq-card:hover {
+      border-color: var(--border-stark);
     }
 
     .faq-title {
@@ -372,27 +368,27 @@
       text-transform: uppercase;
     }
 
-    .faq-content {
-      font-size: 0.9rem;
-      color: var(--text-sub);
+    .faq-answer {
+      font-size: 0.92rem;
+      color: var(--text-muted);
       margin-top: 1rem;
       display: none;
-      line-height: 1.6;
-      border-top: 1px solid var(--border-muted);
+      line-height: 1.7;
+      border-top: 1px solid var(--border-subtle);
       padding-top: 0.8rem;
     }
 
-    .faq-item.active .faq-content {
+    .faq-card.active .faq-answer {
       display: block;
     }
 
-    /* BOTONES ACCIÓN BRUTALISTAS */
-    .btn-brutal-action {
-      background: var(--text-main);
-      color: var(--bg-raw);
+    /* BOTONES ACCIÓN HEAVY */
+    .btn-heavy {
+      background: var(--text-white);
+      color: var(--bg-dark);
       font-family: 'JetBrains Mono', monospace;
       font-weight: 800;
-      padding: 1.1rem 2.4rem;
+      padding: 1.2rem 2.6rem;
       border: none;
       text-transform: uppercase;
       cursor: pointer;
@@ -402,23 +398,24 @@
       text-decoration: none;
     }
 
-    .btn-brutal-action:hover {
+    .btn-heavy:hover {
       background: var(--accent-red);
-      color: #ffffff;
+      color: var(--text-white);
+      box-shadow: 0 0 25px rgba(255, 34, 34, 0.4);
     }
 
     /* ==========================================
-       MODAL PRIVADO (SIN SCROLLBAR FEA + X CORREGIDA)
+       MODAL DE REGISTRO (CON PAÍSES GLOBAL Y X LIMPIA)
        ========================================== */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(6, 6, 8, 0.94);
-      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 7, 0.95);
+      backdrop-filter: blur(16px);
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 10000;
+      z-index: 100000;
       opacity: 0;
       visibility: hidden;
       transition: all 0.25s ease;
@@ -431,11 +428,11 @@
     }
 
     .modal-box {
-      border: 1px solid var(--border-white);
+      border: 1px solid var(--border-stark);
       background: var(--bg-card);
-      padding: 2.5rem 2rem;
+      padding: 2.8rem 2.2rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 480px;
       position: relative;
       font-family: 'JetBrains Mono', monospace;
       max-height: 85vh;
@@ -449,17 +446,16 @@
       display: none;
     }
 
-    /* BOTÓN DE CIERRE UBICADO DE FORMA LIMPIA */
-    .close-btn-fix {
+    .close-btn-clean {
       position: absolute;
       top: 1.2rem;
       right: 1.2rem;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-muted);
-      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-white);
       width: 32px;
       height: 32px;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -467,7 +463,7 @@
       transition: all 0.2s;
     }
 
-    .close-btn-fix:hover {
+    .close-btn-clean:hover {
       background: var(--accent-red);
       color: #fff;
       border-color: var(--accent-red);
@@ -475,7 +471,7 @@
 
     .auth-tab-switch {
       display: flex;
-      border: 1px solid var(--border-muted);
+      border: 1px solid var(--border-subtle);
       margin-bottom: 2rem;
       margin-top: 0.5rem;
     }
@@ -484,52 +480,52 @@
       flex: 1;
       background: transparent;
       border: none;
-      color: var(--text-sub);
+      color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
-      padding: 0.7rem;
+      padding: 0.75rem;
       cursor: pointer;
       font-size: 0.8rem;
       text-transform: uppercase;
     }
 
     .tab-btn.active {
-      background: var(--text-main);
-      color: var(--bg-raw);
+      background: var(--text-white);
+      color: var(--bg-dark);
       font-weight: 800;
     }
 
-    .form-field-wrap {
+    .form-group {
       margin-bottom: 1.2rem;
       text-align: left;
     }
 
-    .form-field-wrap label {
+    .form-group label {
       display: block;
       font-size: 0.72rem;
-      color: var(--text-sub);
+      color: var(--text-muted);
       margin-bottom: 0.4rem;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    .input-clean {
+    .input-field {
       width: 100%;
-      background: var(--bg-raw);
-      border: 1px solid var(--border-muted);
-      color: var(--text-main);
+      background: var(--bg-dark);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-white);
       padding: 0.85rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.9rem;
       outline: none;
     }
 
-    .input-clean:focus {
-      border-color: var(--border-white);
+    .input-field:focus {
+      border-color: var(--border-stark);
     }
 
     footer {
-      border-top: 1px solid var(--border-muted);
-      padding: 2rem 5%;
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.2rem 5%;
       margin-top: 4rem;
       display: flex;
       flex-wrap: wrap;
@@ -537,22 +533,22 @@
       gap: 1rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      color: var(--text-sub);
+      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
-  <!-- ELEMENTOS ANIMADOS DE FONDO EN MOVIMIENTO CONTINUO -->
-  <div class="motion-bg-1"></div>
-  <div class="motion-bg-2"></div>
-  <div class="grid-overlay"></div>
+  <!-- RUIDO Y LUCES DINÁMICAS -->
+  <div class="noise-overlay"></div>
+  <div class="gothic-mesh-1"></div>
+  <div class="gothic-mesh-2"></div>
 
   <!-- PANTALLA DE CARGA -->
   <div id="loader-screen">
-    <div class="loader-title">PULSE // MEDIA</div>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progress-bar"></div>
+    <div class="gothic-loader-title">Pulse Media</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar"></div>
     </div>
   </div>
 
@@ -560,19 +556,19 @@
   <div id="main-content">
 
     <header>
-      <div class="logo-main">PULSE // MEDIA</div>
-      <div class="header-tag">EST. GUATEMALA 2025</div>
+      <div class="logo-gothic">Pulse Media</div>
+      <div class="header-badge">EST. GUATEMALA 2025</div>
     </header>
 
     <main>
       
-      <!-- SECCIÓN 1: MANIFIESTO E HISTORIA OFICIAL -->
-      <section class="hero-box">
+      <!-- MANIFIESTO CON TILT 3D INTERACTIVO -->
+      <section class="tilt-card" id="hero-card">
         <div class="section-tag">01 // MANIFESTO & ORIGINS</div>
         
-        <h1 class="hero-title">PULSE MEDIA</h1>
+        <h1 class="hero-gothic-title">Pulse Media</h1>
         
-        <div class="story-body">
+        <div class="story-content">
           <p>
             <span>Pulse Media</span> nació en <span>2025</span> a partir de una visión profunda: albergar y potenciar a artistas del <span>género urbano y regional mexicano</span>, sin limitarse únicamente a subir canciones a las plataformas digitales.
           </p>
@@ -584,37 +580,37 @@
           </p>
         </div>
 
-        <div class="contact-strip">
+        <div class="contact-row">
           <div class="contact-badge">OFFICIAL_MAIL: <span>pulselabel.oficial@gmail.com</span></div>
           <div class="contact-badge">DIRECT_LINE: <span>+502 37731793</span></div>
         </div>
       </section>
 
-      <!-- SECCIÓN 2: VIDEOS NATIVOS NATIVOS EN BUCLE FLUIDO -->
+      <!-- VIDEOS NATIVOS BUCLE -->
       <section style="margin-bottom: 4rem;">
         <div class="section-tag">02 // VISUAL & MOTION ASSETS</div>
         
         <div class="media-grid">
           
-          <div class="media-box">
-            <div class="video-container">
+          <div class="media-card-tilt">
+            <div class="video-frame">
               <video autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-lights-41795-large.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="media-meta">
+            <div class="media-info">
               <span>[ASSET_01] IDENTIDAD SONORA</span>
               <span>AUTOPLAY // MUTE</span>
             </div>
           </div>
 
-          <div class="media-box">
-            <div class="video-container">
+          <div class="media-card-tilt">
+            <div class="video-frame">
               <video autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-digital-background-screen-31128-large.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="media-meta">
+            <div class="media-info">
               <span>[ASSET_02] MOVIMIENTO CREATIVO</span>
               <span>AUTOPLAY // MUTE</span>
             </div>
@@ -623,27 +619,25 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 3: NAVEGACIÓN Y ESTRUCTURA DE SUBPÁGINAS -->
-      <section class="directory-layout">
+      <!-- DIRECTORIO DE SUBPÁGINAS -->
+      <section class="directory-box">
         <div class="section-tag">03 // SYSTEM DIRECTORY</div>
         <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.5rem;">
           Módulos de la Plataforma
         </h2>
-        <p style="color: var(--text-sub); font-size: 0.9rem;">
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
           Acceso estructurado a los módulos principales de la disquera y visualización de expedientes.
         </p>
 
         <div class="directory-grid">
           
-          <!-- BOTÓN SUBPÁGINA: ARTISTAS -->
-          <a class="dir-button" onclick="alert('SUBPÁGINA: Cargando catálogo de expedientes de artistas...')">
+          <a class="dir-btn" onclick="alert('SUBPÁGINA: Cargando catálogo de expedientes de artistas...')">
             <div class="dir-code">[SUBPAGE_01]</div>
             <div class="dir-title">Catálogo de Artistas</div>
             <div class="dir-desc">Expedientes cibernéticos, métricas de flow, atributos técnicos y discografía oficial.</div>
           </a>
 
-          <!-- BOTÓN SUBPÁGINA: EQUIPO ADMIN -->
-          <a class="dir-button" onclick="alert('SUBPÁGINA: Cargando estructura del equipo directivo...')">
+          <a class="dir-btn" onclick="alert('SUBPÁGINA: Cargando estructura del equipo directivo...')">
             <div class="dir-code">[SUBPAGE_02]</div>
             <div class="dir-title">Equipo Directivo</div>
             <div class="dir-desc">Estructura administrativa, dirección creativa de Josue Tecun y soporte.</div>
@@ -652,38 +646,38 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 4: PREGUNTAS FRECUENTES -->
+      <!-- PREGUNTAS FRECUENTES -->
       <section>
         <div class="section-tag">04 // KNOWLEDGE BASE & FAQ</div>
         
-        <div class="faq-stack">
+        <div class="faq-container">
           
-          <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-card" onclick="toggleFaq(this)">
             <div class="faq-title">
               <span>¿Cómo funciona la distribución con Pulse Media?</span>
               <span>+</span>
             </div>
-            <div class="faq-content">
+            <div class="faq-answer">
               Registras tu cuenta en nuestro panel privado de artista, subes tus archivos y metadatos, y nuestro equipo valida la calidad técnica para distribuir tu música a Spotify, Apple Music, YouTube y todas las tiendas globales.
             </div>
           </div>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-card" onclick="toggleFaq(this)">
             <div class="faq-title">
               <span>¿Mantengo la propiedad de mis canciones?</span>
               <span>+</span>
             </div>
-            <div class="faq-content">
+            <div class="faq-answer">
               Sí, en Pulse Media los artistas mantienen el 100% de la propiedad y los derechos máster de su música. Nosotros trabajamos como tu aliado de distribución y desarrollo visual.
             </div>
           </div>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-card" onclick="toggleFaq(this)">
             <div class="faq-title">
               <span>¿Cómo se maneja el soporte de diseño e identidad visual?</span>
               <span>+</span>
             </div>
-            <div class="faq-content">
+            <div class="faq-answer">
               Al ser fundados por un diseñador y productor musical, brindamos asesoría en la creación de portadas, branding e identidad visual para asegurarnos de que la estética del proyecto refleje exactamente su sonido.
             </div>
           </div>
@@ -691,16 +685,16 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 5: ACCESO AL PORTAL -->
+      <!-- PORTAL ENTRY -->
       <section style="text-align: center; margin-bottom: 4rem;">
         <div class="section-tag" style="justify-content: center;">05 // PORTAL ENTRY</div>
         <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem;">
           Panel Privado de Artista
         </h2>
-        <p style="color: var(--text-sub); margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;">
+        <p style="color: var(--text-muted); margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;">
           Gestión transparente de lanzamientos, regalías y control de tu catálogo musical.
         </p>
-        <button class="btn-brutal-action" onclick="openAuthModal('register')">Acceder al Sistema</button>
+        <button class="btn-heavy" onclick="openAuthModal('register')">Acceder al Sistema</button>
       </section>
 
     </main>
@@ -712,37 +706,37 @@
 
   </div>
 
-  <!-- MODAL DE AUTENTICACIÓN -->
+  <!-- MODAL DE AUTENTICACIÓN GLOBAL -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-box">
-      <button class="close-btn-fix" onclick="closeAuthModal()">×</button>
+      <button class="close-btn-clean" onclick="closeAuthModal()">×</button>
       
       <div class="auth-tab-switch">
         <button class="tab-btn active" id="tab-register" onclick="switchTab('register')">Crear Cuenta</button>
         <button class="tab-btn" id="tab-login" onclick="switchTab('login')">Iniciar Sesión</button>
       </div>
 
-      <!-- FORMULARIO DE REGISTRO CON LISTA COMPLETA DE PAÍSES -->
+      <!-- FORMULARIO DE REGISTRO PAÍSES DEL MUNDO -->
       <div id="form-register">
         
-        <div class="form-field-wrap">
+        <div class="form-group">
           <label>Nombre Real</label>
-          <input type="text" class="input-clean" id="reg-name">
+          <input type="text" class="input-field" id="reg-name">
         </div>
 
-        <div class="form-field-wrap">
+        <div class="form-group">
           <label>Nombre Artístico</label>
-          <input type="text" class="input-clean" id="reg-artist-name">
+          <input type="text" class="input-field" id="reg-artist-name">
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
-          <div class="form-field-wrap">
+          <div class="form-group">
             <label>Edad</label>
-            <input type="number" class="input-clean" id="reg-age">
+            <input type="number" class="input-field" id="reg-age">
           </div>
-          <div class="form-field-wrap">
+          <div class="form-group">
             <label>País de Origen</label>
-            <select class="input-clean" id="reg-country" style="background: var(--bg-raw);">
+            <select class="input-field" id="reg-country" style="background: var(--bg-dark);">
               <optgroup label="América Latina">
                 <option value="Guatemala" selected>Guatemala 🇬🇹</option>
                 <option value="México">México 🇲🇽</option>
@@ -787,39 +781,39 @@
           </div>
         </div>
 
-        <div class="form-field-wrap">
+        <div class="form-group">
           <label>Correo Electrónico</label>
-          <input type="email" class="input-clean" id="reg-email">
+          <input type="email" class="input-field" id="reg-email">
         </div>
 
-        <div class="form-field-wrap">
+        <div class="form-group">
           <label>Contraseña</label>
-          <input type="password" class="input-clean" id="reg-password">
+          <input type="password" class="input-field" id="reg-password">
         </div>
 
-        <button class="btn-brutal-action" style="width: 100%; margin-top: 0.8rem;" onclick="submitRegister()">Registrar Perfil</button>
+        <button class="btn-heavy" style="width: 100%; margin-top: 0.8rem;" onclick="submitRegister()">Registrar Perfil</button>
       </div>
 
-      <!-- FORMULARIO DE INICIO DE SESIÓN -->
+      <!-- FORMULARIO LOGIN -->
       <div id="form-login" style="display: none;">
-        <div class="form-field-wrap">
+        <div class="form-group">
           <label>Correo Electrónico</label>
-          <input type="email" class="input-clean" id="login-email">
+          <input type="email" class="input-field" id="login-email">
         </div>
 
-        <div class="form-field-wrap">
+        <div class="form-group">
           <label>Contraseña</label>
-          <input type="password" class="input-clean" id="login-password">
+          <input type="password" class="input-field" id="login-password">
         </div>
 
-        <button class="btn-brutal-action" style="width: 100%; margin-top: 0.8rem;" onclick="submitLogin()">Ingresar al Sistema</button>
+        <button class="btn-heavy" style="width: 100%; margin-top: 0.8rem;" onclick="submitLogin()">Ingresar al Sistema</button>
       </div>
 
     </div>
   </div>
 
   <script>
-    // PANTALLA DE CARGA
+    // LOADER
     document.addEventListener("DOMContentLoaded", () => {
       const progressBar = document.getElementById("progress-bar");
       const loaderScreen = document.getElementById("loader-screen");
@@ -841,6 +835,15 @@
           progressBar.style.width = progress + "%";
         }
       }, 70);
+    });
+
+    // EFECTO TILT 3D CON EL CURSOR
+    const heroCard = document.getElementById('hero-card');
+    document.addEventListener('mousemove', (e) => {
+      if(!heroCard) return;
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+      heroCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     });
 
     function toggleFaq(element) {
