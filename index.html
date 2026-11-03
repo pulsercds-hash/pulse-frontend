@@ -122,9 +122,7 @@
       text-transform: uppercase;
     }
 
-    /* ==========================================
-       SECCIONES Y ANIMACIONES DE APARICIÓN
-       ========================================== */
+    /* SECCIONES Y ANIMACIONES DE APARICIÓN */
     section {
       padding: 5rem 6%;
       max-width: 950px;
@@ -232,7 +230,7 @@
       line-height: 1.6;
     }
 
-    /* PREGUNTAS FRECUENTES (FAQ ACCORDION) */
+    /* FAQ ACCORDION */
     .faq-container {
       width: 100%;
       display: flex;
@@ -354,7 +352,6 @@
       font-weight: 500;
     }
 
-    /* SEPARADOR */
     .divider {
       width: 1px;
       height: 80px;
@@ -362,13 +359,146 @@
       margin: 0 auto;
     }
 
-    /* FOOTER */
     footer {
       padding: 3rem 1rem;
       border-top: 1px solid var(--border-card);
       font-size: 0.8rem;
       color: var(--text-gray);
       letter-spacing: 1px;
+    }
+
+    /* ==========================================
+       MODAL DE AUTENTICACIÓN OTP (NUEVO)
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: #0f0f14;
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .close-modal:hover {
+      color: var(--text-white);
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 1.8rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-card);
+      color: var(--text-white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: var(--text-white);
+    }
+
+    /* TECLADO DE 6 DIGITOS OTP */
+    .otp-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .otp-input {
+      width: 48px;
+      height: 56px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-card);
+      color: var(--text-white);
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .otp-input:focus {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
     }
 
     /* RESPONSIVO MÓVIL */
@@ -381,6 +511,11 @@
       }
       .btn {
         max-width: 100%;
+      }
+      .otp-input {
+        width: 40px;
+        height: 50px;
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -458,7 +593,7 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 3: DESCUBRIR (EQUIPO & ARTISTAS) -->
+    <!-- SECCIÓN 3: DESCUBRIR -->
     <section>
       <div class="badge">Estructura</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Explora el nucleo de la plataforma</h2>
@@ -518,7 +653,7 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 5: REGISTRO Y ACCESO -->
+    <!-- SECCIÓN 5: ACCESO Y REGISTRO -->
     <section style="padding-bottom: 6rem;">
       <div class="badge">Acceso Privado</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Tu espacio de trabajo independiente</h2>
@@ -527,7 +662,7 @@
       </p>
 
       <div class="btn-group">
-        <button class="btn btn-primary" onclick="alert('Proximamente: Modulo de Registro y Login con codigo por correo')">
+        <button class="btn btn-primary" onclick="openAuthModal()">
           Iniciar Sesion / Registrarse
         </button>
       </div>
@@ -537,6 +672,67 @@
       &copy; 2025 - 2026 PULSE MEDIA. Todos los derechos reservados.
     </footer>
 
+  </div>
+
+  <!-- ==========================================
+       MODAL FLOTANTE DE REGISTRO / LOGIN (OTP)
+       ========================================== -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-box">
+      <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+      
+      <!-- PASO 1: INGRESAR CORREO Y PAÍS -->
+      <div id="step-1">
+        <div class="modal-title">Acceder a Pulse Media</div>
+        <div class="modal-subtitle">Ingresa tu correo para recibir un codigo de acceso seguro. Sin contraseñas.</div>
+        
+        <div class="form-group">
+          <div>
+            <label>Correo Electrónico</label>
+            <input type="email" class="input-field" id="user-email" placeholder="tu@artista.com" style="margin-top: 0.4rem;">
+          </div>
+          <div>
+            <label>País de Origen</label>
+            <select class="input-field" id="user-country" style="margin-top: 0.4rem; background: #16161e;">
+              <option value="Guatemala">Guatemala 🇬🇹</option>
+              <option value="México">México 🇲🇽</option>
+              <option value="Colombia">Colombia 🇨🇴</option>
+              <option value="Estados Unidos">Estados Unidos 🇺🇸</option>
+              <option value="España">España 🇪🇸</option>
+              <option value="Otro">Otro País</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="sendOtpCode()" style="max-width: 100%;">
+          Enviar Código por Correo
+        </button>
+      </div>
+
+      <!-- PASO 2: INGRESAR CÓDIGO DE 6 DÍGITOS -->
+      <div id="step-2" style="display: none;">
+        <div class="modal-title">Verifica tu Código</div>
+        <div class="modal-subtitle">Enviamos un código de 6 dígitos a <span id="sent-email-display" style="color: #fff; font-weight: 600;"></span></div>
+
+        <div class="otp-container">
+          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 1)">
+          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 2)">
+          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 3)">
+          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 4)">
+          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 5)">
+          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 6)">
+        </div>
+
+        <button class="btn btn-primary" onclick="verifyOtpCode()" style="max-width: 100%; margin-top: 1rem;">
+          Ingresar al Panel
+        </button>
+        
+        <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 1.2rem; cursor: pointer;" onclick="backToStep1()">
+          ← Cambiar correo electrónico
+        </p>
+      </div>
+
+    </div>
   </div>
 
   <!-- JAVASCRIPT -->
@@ -586,6 +782,63 @@
     // Función FAQ
     function toggleFaq(element) {
       element.classList.toggle("active");
+    }
+
+    // LÓGICA DE MODAL Y OTP
+    const authModal = document.getElementById("auth-modal");
+    const step1 = document.getElementById("step-1");
+    const step2 = document.getElementById("step-2");
+
+    function openAuthModal() {
+      authModal.classList.add("active");
+    }
+
+    function closeAuthModal() {
+      authModal.classList.remove("active");
+    }
+
+    function sendOtpCode() {
+      const email = document.getElementById("user-email").value;
+      if (!email || !email.includes("@")) {
+        alert("Por favor ingresa un correo electrónico válido.");
+        return;
+      }
+
+      document.getElementById("sent-email-display").innerText = email;
+      step1.style.display = "none";
+      step2.style.display = "block";
+
+      // Enfocar el primer dígito automáticamente
+      setTimeout(() => {
+        document.querySelectorAll(".otp-input")[0].focus();
+      }, 100);
+    }
+
+    function backToStep1() {
+      step2.style.display = "none";
+      step1.style.display = "block";
+    }
+
+    // Saltar automáticamente de casilla al escribir el código de 6 dígitos
+    function moveOtpFocus(element, index) {
+      const inputs = document.querySelectorAll(".otp-input");
+      if (element.value.length === 1 && index < 6) {
+        inputs[index].focus();
+      }
+    }
+
+    function verifyOtpCode() {
+      const inputs = document.querySelectorAll(".otp-input");
+      let code = "";
+      inputs.forEach(input => code += input.value);
+
+      if (code.length < 6) {
+        alert("Ingresa el código completo de 6 dígitos.");
+        return;
+      }
+
+      alert("¡Verificación exitosa! Conectando con tu panel de artista...");
+      closeAuthModal();
     }
   </script>
 
