@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   
   <style>
-    /* DESBLOQUEO TOTAL DE SCROLL NATIVO */
+    /* SCROLL NATIVO Y FLUIDO */
     html, body {
       background: #000 !important;
       color: #fff !important;
@@ -29,13 +29,13 @@
       padding: 0;
     }
 
-    /* HEADER FIJO COMPATIBLE CON TEAM Y ARTISTAS */
+    /* HEADER FIJO RESPETANDO ESPACIO */
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 2rem 5%;
+      padding: 1.8rem 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -66,11 +66,11 @@
     .register-hero-wrapper {
       position: relative;
       min-height: 100vh;
-      padding: 11rem 5% 6rem;
+      padding: 13rem 5% 6rem; /* Aumentado a 13rem para no encimar el header */
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       overflow: hidden;
     }
 
@@ -88,7 +88,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.35;
+      opacity: 0.3;
       filter: contrast(1.15) brightness(0.5);
     }
 
@@ -98,12 +98,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.92) 100%);
+      background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.95) 100%);
     }
 
     /* CONTENEDOR PRINCIPAL DEL FORMULARIO */
     .register-container {
-      max-width: 620px;
+      max-width: 600px;
       width: 100%;
       position: relative;
       z-index: 2;
@@ -112,23 +112,24 @@
     .register-header-meta {
       font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.4);
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       padding-bottom: 0.8rem;
       display: flex;
       justify-content: space-between;
     }
 
     .register-title {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-size: clamp(1.8rem, 4vw, 3rem); /* Tamaño adaptativo para no chocar */
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: -1px;
-      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+      margin-bottom: 2rem;
       text-align: center;
+      line-height: 1.2;
     }
 
     /* SELECTOR DE PESTAÑAS: REGISTRO / LOGIN */
@@ -144,7 +145,7 @@
       flex: 1;
       background: transparent;
       border: none;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.4);
       font-family: var(--font-mono);
       font-size: 0.8rem;
       font-weight: 700;
@@ -157,18 +158,18 @@
     }
 
     .tab-btn.active {
-      color: var(--accent-neon);
+      color: #fff;
       border-bottom: 2px solid var(--accent-neon);
     }
 
-    /* TARJETA DEL FORMULARIO ESTILO EXPEDIENTE */
+    /* TARJETA DEL FORMULARIO */
     .form-card-secure {
-      background: rgba(12, 12, 12, 0.88);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(12, 12, 12, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 6px;
-      padding: 2.5rem;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      padding: 2.2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.85);
     }
 
     .input-grid-2 {
@@ -177,37 +178,41 @@
       gap: 1.2rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 580px) {
       .input-grid-2 {
         grid-template-columns: 1fr;
+      }
+      .form-card-secure {
+        padding: 1.5rem;
       }
     }
 
     .input-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.4rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
     }
 
+    /* LABELS EN BLANCO/GRIS SUAVE EN LUGAR DE VERDE CHILLÓN */
     .input-group label {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 2px;
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--accent-neon);
+      color: rgba(255, 255, 255, 0.75);
       font-weight: 700;
     }
 
     .input-group input, 
     .input-group select {
-      background: rgba(0, 0, 0, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 4px;
-      padding: 0.9rem 1rem;
+      padding: 0.85rem 1rem;
       color: #fff;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
@@ -215,7 +220,7 @@
     .input-group input:focus, 
     .input-group select:focus {
       border-color: var(--accent-neon);
-      box-shadow: 0 0 12px rgba(220, 255, 0, 0.2);
+      box-shadow: 0 0 10px rgba(220, 255, 0, 0.15);
     }
 
     /* BOTÓN DE ACCIÓN PRINCIPAL */
@@ -224,7 +229,7 @@
       background: var(--accent-neon);
       color: #000;
       font-family: var(--font-mono);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -238,11 +243,11 @@
 
     .btn-submit-secure:hover {
       background: #fff;
-      box-shadow: 0 0 20px rgba(220, 255, 0, 0.4);
+      box-shadow: 0 0 20px rgba(220, 255, 0, 0.35);
       transform: translateY(-2px);
     }
 
-    /* SECCIONES OCULTAS SEGÚN LA PESTAÑA */
+    /* BLOQUES DE FORMULARIO */
     .auth-section {
       display: none;
     }
@@ -259,8 +264,8 @@
 
     .verification-notice {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.65);
       line-height: 1.5;
       margin-bottom: 1.5rem;
       border-left: 2px solid var(--accent-neon);
@@ -296,7 +301,7 @@
       
       <h1 class="register-title">Acreditación <span class="accent-green-font" style="font-family: 'Cinzel Decorative', serif; color: var(--accent-neon);">Oficial</span></h1>
 
-      <!-- PESTAÑAS PARA CAMBIAR ENTRE REGISTRO E INICIO DE SESIÓN -->
+      <!-- PESTAÑAS PARA CAMBIAR ENTRE REGISTRO E INICIAR SESIÓN -->
       <div class="auth-tabs">
         <button class="tab-btn active" onclick="switchTab('register')">Nuevo Registro</button>
         <button class="tab-btn" onclick="switchTab('login')">Iniciar Sesión</button>
@@ -327,6 +332,12 @@
             <div class="input-group">
               <label for="email">Correo Electrónico</label>
               <input type="email" id="email" required placeholder="ejemplo@correo.com">
+            </div>
+
+            <!-- CONTRASEÑA PARA REGISTRO -->
+            <div class="input-group">
+              <label for="registerPassword">Crear Contraseña</label>
+              <input type="password" id="registerPassword" required placeholder="••••••••">
             </div>
 
             <div class="input-grid-2">
@@ -375,38 +386,38 @@
               </div>
             </div>
 
-            <button type="submit" class="btn-submit-secure">Solicitar Código de Acceso</button>
+            <button type="submit" class="btn-submit-secure">Enviar y Solicitar Código</button>
           </form>
 
-          <!-- SECCIÓN DE VERIFICACIÓN DE CÓDIGO -->
+          <!-- SECCIÓN DE VERIFICACIÓN ÚNICA POR CÓDIGO -->
           <div id="verificationSection" style="display: none; margin-top: 1rem;">
             <div class="verification-notice">
-              // CÓDIGO ENVIADO. Revisa tu correo. El código de 6 dígitos tiene una vigencia exclusiva de 24 horas.
+              // CÓDIGO ENVIADO A TU CORREO. Ingresa el código de 6 dígitos para validar tu cuenta por primera vez.
             </div>
             <form onsubmit="handleVerifyCode(event)">
               <div class="input-group">
-                <label for="accessCode">Código de Acceso (6 Dígitos)</label>
+                <label for="accessCode">Código de Activación (6 Dígitos)</label>
                 <input type="text" id="accessCode" required maxlength="6" placeholder="000000" style="text-align: center; letter-spacing: 6px; font-size: 1.3rem;">
               </div>
-              <button type="submit" class="btn-submit-secure">Validar e Ingresar</button>
+              <button type="submit" class="btn-submit-secure">Activar Cuenta e Ingresar</button>
             </form>
           </div>
         </div>
 
-        <!-- BLOQUE 2: FORMULARIO DE INICIAR SESIÓN (CUENTA YA EXISTENTE) -->
+        <!-- BLOQUE 2: FORMULARIO DE INICIAR SESIÓN TRADICIONAL (CORREO Y CONTRASEÑA) -->
         <div id="sectionLogin" class="auth-section">
           <form onsubmit="handleLogin(event)">
             <div class="input-group">
-              <label for="loginEmail">Correo Electrónico Registrado</label>
+              <label for="loginEmail">Correo Electrónico</label>
               <input type="email" id="loginEmail" required placeholder="ejemplo@correo.com">
             </div>
 
             <div class="input-group">
-              <label for="loginCode">Código de Acceso de 24h</label>
-              <input type="text" id="loginCode" required maxlength="6" placeholder="000000" style="text-align: center; letter-spacing: 6px; font-size: 1.3rem;">
+              <label for="loginPassword">Contraseña</label>
+              <input type="password" id="loginPassword" required placeholder="••••••••">
             </div>
 
-            <button type="submit" class="btn-submit-secure">Acceder al Panel</button>
+            <button type="submit" class="btn-submit-secure">Iniciar Sesión</button>
           </form>
         </div>
 
@@ -421,7 +432,7 @@
   </footer>
 
   <script>
-    // CAMBIO ENTRE REGISTRO E INICIO DE SESIÓN
+    // PESTAÑAS
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.auth-section').forEach(sec => sec.classList.remove('active'));
@@ -444,13 +455,13 @@
     function handleVerifyCode(event) {
       event.preventDefault();
       const code = document.getElementById('accessCode').value;
-      alert("Verificando código: " + code);
+      alert("Cuenta activada con éxito. ¡Bienvenido!");
     }
 
     function handleLogin(event) {
       event.preventDefault();
       const email = document.getElementById('loginEmail').value;
-      alert("Iniciando sesión para: " + email);
+      alert("Iniciando sesión con contraseña para: " + email);
     }
   </script>
 
