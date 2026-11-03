@@ -149,37 +149,28 @@
       text-align: center;
     }
 
-    /* HERO SECTION CON VIDEO DE FONDO */
+    /* HERO SECTION CON IMAGEN DE FONDO LIMPIA Y PROFESIONAL */
     .hero-section {
       position: relative;
       overflow: hidden;
       background: #000;
     }
-    .hero-video-bg {
+    .hero-bg-img {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100vw;
-      height: 56.25vw;
-      min-height: 100vh;
-      min-width: 177.77vh;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-    .hero-video-bg iframe {
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      border: 0;
-      pointer-events: none;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.3;
     }
-    .hero-section > *:not(.hero-video-bg) {
+    .hero-section > *:not(.hero-bg-img) {
       position: relative;
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO EN TARJETAS CON BLINDAJE ANTI-INTERACCIÓN (OVERLAY) */
+    /* CONTENEDOR DE IMAGEN EN TARJETAS (LIMPIO, SIN YOUTUBE) */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -191,25 +182,18 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: #000;
     }
-    .video-wrapper iframe {
-      position: absolute;
-      top: -55px; /* Empuja el iframe hacia arriba para ocultar títulos y botones superiores de YouTube */
-      left: 0;
-      width: 100%;
-      height: calc(100% + 110px); /* Extiende el alto para compensar el recorte */
-      border: 0;
-      pointer-events: none;
-    }
-    /* CAPA INVISIBLE (OVERLAY) QUE BLOQUEA CUALQUIER CLIC O CURSOR SOBRE EL VIDEO */
-    .video-overlay-blocker {
+    .video-wrapper img {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 10;
-      background: transparent;
-      pointer-events: auto; /* Captura el mouse antes de que toque el iframe */
+      object-fit: cover;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+    .video-wrapper img:hover {
+      opacity: 1;
     }
 
     /* PREGUNTAS FRECUENTES */
@@ -267,11 +251,10 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO -->
+    <!-- SECCIÓN 1: HERO CON IMAGEN DE FONDO -->
     <section class="hero-section panel" data-theme="dark">
-      <div class="hero-video-bg">
-        <iframe src="https://www.youtube.com/embed/O1wUdB7MQbI?autoplay=1&mute=1&controls=0&loop=1&playlist=O1wUdB7MQbI&disablekb=1&modestbranding=1&iv_load_policy=3" title="Background Visual" allow="autoplay"></iframe>
-      </div>
+      <!-- Usamos una imagen de alta calidad oscura y estética de respaldo -->
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1920&auto=format&fit=crop" alt="Hero Background" class="hero-bg-img">
 
       <div class="hero-meta">
         <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
@@ -331,7 +314,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS CON BLOQUEADOR TOTAL DE CURSOR (OVERLAY) -->
+    <!-- SECCIÓN 3: MÓDULOS CON IMÁGENES ESTÉTICAS DE ÉLITE -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
@@ -347,9 +330,7 @@
           </div>
           
           <div class="video-wrapper">
-            <!-- Capa invisible que intercepta el mouse para que YouTube jamás detecte el cursor -->
-            <div class="video-overlay-blocker"></div>
-            <iframe src="https://www.youtube.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&disablekb=1&modestbranding=1&iv_load_policy=3" title="Pulse Media Identity" allow="autoplay"></iframe>
+            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=1000&auto=format&fit=crop" alt="Pulse Media Identity">
           </div>
         </div>
 
@@ -362,9 +343,7 @@
           </div>
           
           <div class="video-wrapper">
-            <!-- Capa invisible que intercepta el mouse para que YouTube jamás detecte el cursor -->
-            <div class="video-overlay-blocker"></div>
-            <iframe src="https://www.youtube.com/embed/7f6SxWMOpdU?autoplay=1&mute=1&controls=0&loop=1&playlist=7f6SxWMOpdU&disablekb=1&modestbranding=1&iv_load_policy=3" title="Pulse Media Storytelling" allow="autoplay"></iframe>
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop" alt="Pulse Media Storytelling">
           </div>
         </div>
       </div>
