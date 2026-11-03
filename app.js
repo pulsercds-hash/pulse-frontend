@@ -1,17 +1,41 @@
-// 1. INERCIA DE SCROLL SUAVE (LENIS)
+// 1. INERCIA DE SCROLL SUAVE (LENIS + GSAP SCROLLTRIGGER)
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smoothWheel: true
 });
 
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
+lenis.on('scroll', ScrollTrigger.update);
 
-// 2. MOTOR THREE.JS DE FONDO (Optimizado a 60 FPS fijos)
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
+// 2. CAMBIO DE TEMA Y COLOR DINÁMICO AL HACER SCROLL
+gsap.utils.toArray('.panel').forEach((panel) => {
+  const theme = panel.getAttribute('data-theme');
+  
+  ScrollTrigger.create({
+    trigger: panel,
+    start: 'top center',
+    end: 'bottom center',
+    onEnter: () => updateTheme(theme),
+    onEnterBack: () => updateTheme(theme)
+  });
+});
+
+function updateTheme(theme) {
+  if (theme === 'light') {
+    document.body.classList.remove('theme-dark');
+    document.body.classList.add('theme-light');
+  } else {
+    document.body.classList.remove('theme-light');
+    document.body.classList.add('theme-dark');
+  }
+}
+
+// 3. FONDO THREE.JS LIGERO Y FLUIDO
 const canvas = document.getElementById('webgl-canvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -57,7 +81,7 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// 3. TRANSICIÓN DE CORTINA ENTRE PÁGINAS (STUDIO CURTAIN)
+// 4. TRANSICIÓN DE CORTINA DE PÁGINA
 function triggerCurtain(event, url) {
   event.preventDefault();
   const curtain = document.getElementById('page-curtain');
