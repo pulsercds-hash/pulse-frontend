@@ -1,72 +1,236 @@
-  <div class="dossier-grid">
-    <!-- EXPEDIENTE 01 -->
-    <div class="dossier-card">
-      <div class="dossier-stamp">Próximamente</div>
-      <div>
-        <div class="dossier-id">DOSSIER // REF. 001</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PULSE MEDIA — Artistas / Expedientes</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  
+  <style>
+    body {
+      background: #080808;
+      color: #fff;
+      font-family: var(--font-display);
+      min-height: 100vh;
+    }
+
+    .artists-header {
+      padding: 10rem 5% 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .artists-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .artists-sub {
+      font-family: var(--font-mono);
+      color: var(--accent-neon);
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    /* GRID DE EXPEDIENTES / CARPETAS TIPO CLASSIFIED FILE */
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 4rem 5%;
+    }
+
+    .dossier-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .dossier-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-neon);
+      box-shadow: 0 10px 30px rgba(220, 255, 0, 0.15);
+    }
+
+    /* PESTAÑA / CORTE SUPERIOR TIPO MANILA */
+    .dossier-tab {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom-left-radius: 8px;
+      padding: 0.4rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-neon);
+      letter-spacing: 2px;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dossier-ref {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+    }
+
+    .dossier-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .dossier-genre {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    /* SELLO CONFIDENCIAL / PRÓXIMAMENTE */
+    .stamp-badge {
+      display: inline-block;
+      border: 2px solid #ff3333;
+      color: #ff3333;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.4rem 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transform: rotate(-4deg);
+      border-radius: 4px;
+      background: rgba(255, 51, 51, 0.05);
+    }
+
+    .dossier-footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body class="theme-dark">
+
+  <div id="page-curtain"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
+    <nav>
+      <a href="team.html" class="nav-link" onclick="triggerCurtain(event, 'team.html')"><span>Team</span></a>
+      <a href="artists.html" class="nav-link active" onclick="triggerCurtain(event, 'artists.html')"><span>Artistas</span></a>
+      <a href="register.html" class="nav-link" onclick="triggerCurtain(event, 'register.html')"><span>Registrar</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="artists-header">
+      <h1 class="artists-title">Roster / Expedientes</h1>
+      <div class="artists-sub">Confidential Artist Dossiers & Archives</div>
+    </section>
+
+    <!-- GRID DE LOS 5 EXPEDIENTES -->
+    <section class="dossier-grid">
+      
+      <!-- EXPEDIENTE 01 -->
+      <div class="dossier-card">
+        <div class="dossier-tab">FILE // 001</div>
+        <div class="dossier-ref">REF. PM-ART-01</div>
         <div class="dossier-name">Artista 01</div>
-        <div class="dossier-info">Urban / New Wave<br>Guatemala City</div>
+        <div class="dossier-genre">Urban / New Wave — Guatemala City</div>
+        <div class="stamp-badge">Próximamente</div>
+        <div class="dossier-footer">
+          <span>STATUS: RESTRICTED</span>
+          <span>PULSE RECORDS</span>
+        </div>
       </div>
-      <div class="dossier-footer">
-        <span>[ Expediente Sellado ]</span>
-        <span>---</span>
-      </div>
-    </div>
 
-    <!-- EXPEDIENTE 02 -->
-    <div class="dossier-card">
-      <div class="dossier-stamp">Próximamente</div>
-      <div>
-        <div class="dossier-id">DOSSIER // REF. 002</div>
+      <!-- EXPEDIENTE 02 -->
+      <div class="dossier-card">
+        <div class="dossier-tab">FILE // 002</div>
+        <div class="dossier-ref">REF. PM-ART-02</div>
         <div class="dossier-name">Artista 02</div>
-        <div class="dossier-info">Regional Urbano<br>Global Ops</div>
+        <div class="dossier-genre">Regional Urbano — Global Ops</div>
+        <div class="stamp-badge">Próximamente</div>
+        <div class="dossier-footer">
+          <span>STATUS: RESTRICTED</span>
+          <span>PULSE RECORDS</span>
+        </div>
       </div>
-      <div class="dossier-footer">
-        <span>[ Expediente Sellado ]</span>
-        <span>---</span>
-      </div>
-    </div>
 
-    <!-- EXPEDIENTE 03 -->
-    <div class="dossier-card">
-      <div class="dossier-stamp">Próximamente</div>
-      <div>
-        <div class="dossier-id">DOSSIER // REF. 003</div>
+      <!-- EXPEDIENTE 03 -->
+      <div class="dossier-card">
+        <div class="dossier-tab">FILE // 003</div>
+        <div class="dossier-ref">REF. PM-ART-03</div>
         <div class="dossier-name">Artista 03</div>
-        <div class="dossier-info">Alternative Sound<br>Guatemala</div>
+        <div class="dossier-genre">Alternative Sound — Guatemala</div>
+        <div class="stamp-badge">Próximamente</div>
+        <div class="dossier-footer">
+          <span>STATUS: RESTRICTED</span>
+          <span>PULSE RECORDS</span>
+        </div>
       </div>
-      <div class="dossier-footer">
-        <span>[ Expediente Sellado ]</span>
-        <span>---</span>
-      </div>
-    </div>
 
-    <!-- EXPEDIENTE 04 -->
-    <div class="dossier-card">
-      <div class="dossier-stamp">Próximamente</div>
-      <div>
-        <div class="dossier-id">DOSSIER // REF. 004</div>
+      <!-- EXPEDIENTE 04 -->
+      <div class="dossier-card">
+        <div class="dossier-tab">FILE // 004</div>
+        <div class="dossier-ref">REF. PM-ART-04</div>
         <div class="dossier-name">Artista 04</div>
-        <div class="dossier-info">Producer / Writer<br>Global</div>
+        <div class="dossier-genre">Producer / Writer — Global</div>
+        <div class="stamp-badge">Próximamente</div>
+        <div class="dossier-footer">
+          <span>STATUS: RESTRICTED</span>
+          <span>PULSE RECORDS</span>
+        </div>
       </div>
-      <div class="dossier-footer">
-        <span>[ Expediente Sellado ]</span>
-        <span>---</span>
-      </div>
-    </div>
 
-    <!-- EXPEDIENTE 05 -->
-    <div class="dossier-card">
-      <div class="dossier-stamp">Próximamente</div>
-      <div>
-        <div class="dossier-id">DOSSIER // REF. 005</div>
+      <!-- EXPEDIENTE 05 -->
+      <div class="dossier-card">
+        <div class="dossier-tab">FILE // 005</div>
+        <div class="dossier-ref">REF. PM-ART-05</div>
         <div class="dossier-name">Artista 05</div>
-        <div class="dossier-info">Secret Roster<br>Pending Release</div>
+        <div class="dossier-genre">Secret Roster — Pending Release</div>
+        <div class="stamp-badge">Próximamente</div>
+        <div class="dossier-footer">
+          <span>STATUS: RESTRICTED</span>
+          <span>PULSE RECORDS</span>
+        </div>
       </div>
-      <div class="dossier-footer">
-        <span>[ Expediente Sellado ]</span>
-        <span>---</span>
-      </div>
-    </div>
-  </div>
-</div>
+
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
+    <div>GUATEMALA // GLOBAL OPS</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
