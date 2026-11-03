@@ -1,0 +1,143 @@
+:root {
+  --bg-color: #050608;
+  --card-bg: #0b0c10;
+  --accent-neon: #ccff00;
+  --text-main: #f4f4f8;
+  --text-muted: #78788c;
+  --font-display: 'Syne', sans-serif;
+  --font-accent: 'Cinzel Decorative', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* CANVAS 3D DE FONDO */
+#webgl-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* TRANSICIÓN DE CORTINA */
+#page-curtain {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--accent-neon);
+  z-index: 99999;
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  padding: 2.5rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  mix-blend-mode: difference;
+}
+
+.brand-logo {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+/* HERO ASIMÉTRICO */
+.hero-section {
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 5% 3rem 5%;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin-bottom: 2rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8.5vw, 8.5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.hero-title .accent-text {
+  color: var(--accent-neon);
+  font-family: var(--font-accent);
+  font-weight: 700;
+}
+
+/* MARCO EDITORIAL */
+.editorial-frame {
+  width: 90%;
+  max-width: 1300px;
+  margin: 4rem auto;
+  height: clamp(300px, 45vh, 500px);
+  background: var(--card-bg);
+  clip-path: polygon(0% 0%, 100% 3%, 97% 100%, 0% 97%);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.editorial-frame-text {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.4vw, 1rem);
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 2rem;
+}
