@@ -20,20 +20,17 @@
   <canvas id="webgl-canvas"></canvas>
   <div id="page-curtain"></div>
 
-  <!-- HEADER CON ENLACES FUNCIONALES PARA REGRESAR Y NAVEGAR -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <nav>
-      <a href="index.html" class="nav-link" onclick="triggerCurtain(event, 'index.html')"><span>Inicio</span></a>
-      <a href="team.html" class="nav-link" onclick="triggerCurtain(event, 'team.html')"><span>Team</span></a>
-      <a href="register.html" class="nav-link" onclick="triggerCurtain(event, 'register.html')"><span>Registrar</span></a>
+      <a href="index.html" class="nav-link" onclick="triggerCurtain(event, 'index.html')"><span>← Inicio</span></a>
     </nav>
   </header>
 
   <main>
     <section class="panel" data-theme="dark">
       <div class="hero-meta">
-        <span>// ROSTER OFicial</span>
+        <span>// ROSTER OFICIAL</span>
         <span>URBANO / REGIONAL MEXICANO</span>
       </div>
       <h1 class="hero-title">
@@ -42,7 +39,7 @@
       <p class="hero-subtitle">El talento de nueva generación rompiendo esquemas en la escena global.</p>
     </section>
 
-    <section class="modules-section panel" data-theme="dark">
+    <section class="modules-section" data-theme="dark" style="padding: 4rem 5%;">
       <div class="modules-grid">
         <div class="module-card">
           <div class="module-index">[ARTIST 01]</div>
@@ -56,9 +53,9 @@
     </section>
   </main>
 
-  <footer>
+  <footer style="margin-top: 3rem;">
     <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
-    <div><a href="index.html" onclick="triggerCurtain(event, 'index.html')" style="color: inherit; text-decoration: underline;">Volver al Inicio</a></div>
+    <div>GUATEMALA // GLOBAL OPS</div>
   </footer>
 
   <script src="app.js"></script>
