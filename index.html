@@ -10,445 +10,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
-  <!-- LIBRERÍAS (THREE.JS, GSAP, LENIS SCROLL) -->
+  <!-- HOJA DE ESTILOS EXTERNA -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- LIBRERÍAS DE NIVEL MUNDIAL (THREE.JS, GSAP, LENIS) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-
-  <style>
-    :root {
-      --bg-color: #050608;
-      --card-bg: #0b0c10;
-      --accent-neon: #ccff00;
-      --text-main: #f4f4f8;
-      --text-muted: #78788c;
-      --font-display: 'Syne', sans-serif;
-      --font-accent: 'Cinzel Decorative', serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: var(--font-display);
-      overflow-x: hidden;
-      width: 100%;
-    }
-
-    /* CANVAS 3D DE FONDO */
-    #webgl-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* TRANSICIÓN DE CORTINA ESTILO ESTUDIO */
-    #page-curtain {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: var(--accent-neon);
-      z-index: 99999;
-      transform: translateY(100%);
-      pointer-events: none;
-    }
-
-    /* HEADER EDITORIAL */
-    header {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      padding: 2.5rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      mix-blend-mode: difference;
-    }
-
-    .brand-logo {
-      font-family: var(--font-display);
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-      font-weight: 900;
-      letter-spacing: -1px;
-      text-transform: uppercase;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .nav-link {
-      font-family: var(--font-mono);
-      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--text-main);
-      display: inline-flex;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .nav-char {
-      display: inline-block;
-      transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
-    }
-
-    .nav-link:hover .nav-char {
-      transform: translateY(-100%);
-    }
-
-    /* HERO ASIMÉTRICO DE ALTO IMPACTO */
-    .hero-section {
-      min-height: 95vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 5% 3rem 5%;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1300px;
-      margin-bottom: 2rem;
-      font-family: var(--font-mono);
-      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
-      color: var(--text-muted);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 1rem;
-    }
-
-    .hero-title {
-      font-size: clamp(3rem, 8.5vw, 8.5rem);
-      font-weight: 900;
-      line-height: 0.92;
-      text-transform: uppercase;
-      letter-spacing: -2px;
-    }
-
-    .hero-title .accent-text {
-      color: var(--accent-neon);
-      font-family: var(--font-accent);
-      font-weight: 700;
-    }
-
-    /* CONTENEDOR CON MÁSCARA ORGÁNICA */
-    .editorial-frame {
-      width: 90%;
-      max-width: 1300px;
-      margin: 4rem auto;
-      height: clamp(300px, 45vh, 500px);
-      background: var(--card-bg);
-      clip-path: polygon(0% 0%, 100% 3%, 97% 100%, 0% 97%);
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .editorial-frame-text {
-      font-family: var(--font-mono);
-      font-size: clamp(0.75rem, 1.4vw, 1rem);
-      color: var(--text-muted);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    /* SECCIÓN DE MÓDULOS EDITORIALES */
-    .modules-section {
-      padding: 5rem 5%;
-      position: relative;
-      z-index: 2;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .modules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-      margin-top: 3rem;
-    }
-
-    .module-card {
-      min-height: 460px;
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.4s ease;
-    }
-
-    .module-card:hover {
-      border-color: var(--accent-neon);
-    }
-
-    .module-card::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 0px; height: 0px;
-      background: var(--accent-neon);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1), height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 0;
-    }
-
-    .module-card:hover::before {
-      width: 800px;
-      height: 800px;
-    }
-
-    .module-card > * {
-      position: relative;
-      z-index: 1;
-      transition: color 0.4s ease;
-    }
-
-    .module-card:hover * {
-      color: #050608;
-    }
-
-    .module-index {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .module-title {
-      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 1.1;
-      word-break: break-word;
-    }
-
-    .module-desc {
-      margin-top: 1.2rem;
-      font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* FOOTER MINIMALISTA PESADO */
-    footer {
-      padding: 4rem 5%;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: var(--font-mono);
-      font-size: clamp(0.75rem, 1vw, 0.85rem);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 1.5rem;
-      color: var(--text-muted);
-      position: relative;
-      z-index: 2;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-  </style>
 </head>
 <body>
 
   <!-- CANVAS 3D WEBGL DE FONDO -->
   <canvas id="webgl-canvas"></canvas>
 
-  <!-- TRANSICIÓN DE CORTINA -->
+  <!-- TRANSICIÓN DE CORTINA ESTUDIO -->
   <div id="page-curtain"></div>
 
-  <!-- HEADER -->
+  <!-- HEADER EDITORIAL -->
   <header>
-    <a href="#" class="brand-logo" onclick="triggerCurtain(event)">Pulse Media</a>
+    <a href="#" class="brand-logo" onclick="triggerCurtain(event, '#')">Pulse Media</a>
     <nav>
-      <a href="#" class="nav-link" onclick="triggerCurtain(event)"><span class="nav-text">ROSTER</span></a>
-      <a href="#" class="nav-link" onclick="triggerCurtain(event)"><span class="nav-text">STUDIO</span></a>
-      <a href="#" class="nav-link" onclick="triggerCurtain(event)"><span class="nav-text">SYSTEM</span></a>
+      <a href="#" class="nav-link" onclick="triggerCurtain(event, '#')"><span>Roster</span></a>
+      <a href="#" class="nav-link" onclick="triggerCurtain(event, '#')"><span>Studio</span></a>
+      <a href="#" class="nav-link" onclick="triggerCurtain(event, '#')"><span>System</span></a>
     </nav>
   </header>
 
-  <!-- HERO PRINCIPAL -->
-  <section class="hero-section">
-    <div class="hero-meta">
-      <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
-      <span>GUATEMALA / GLOBAL</span>
-    </div>
-    <h1 class="hero-title">
-      ALWAYS <br>BRINGING <span class="accent-text">THE FLOW.</span>
-    </h1>
-  </section>
-
-  <!-- MARCO EDITORIAL CON MÁSCARA -->
-  <div class="editorial-frame">
-    <div class="editorial-frame-text">[CREATIVE DIRECTION & PUBLISHING ARCHITECTURE]</div>
-  </div>
-
-  <!-- SECCIÓN DE MÓDULOS -->
-  <section class="modules-section">
-    <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase;">
-      01 // SYSTEM MODULES
-    </div>
-    
-    <div class="modules-grid">
-      
-      <div class="module-card">
-        <div class="module-index">[01]</div>
-        <div>
-          <div class="module-title">Global Distribution</div>
-          <p class="module-desc">Conexión directa a plataformas digitales globales con métricas y sincronización en tiempo real.</p>
-        </div>
+  <!-- HERO ASIMÉTRICO -->
+  <main>
+    <section class="hero-section">
+      <div class="hero-meta">
+        <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
+        <span>GUATEMALA / GLOBAL</span>
       </div>
+      <h1 class="hero-title">
+        Always <br>Bringing <span class="accent-text">The Flow.</span>
+      </h1>
+    </section>
 
-      <div class="module-card">
-        <div class="module-index">[02]</div>
-        <div>
-          <div class="module-title">Visual Direction</div>
-          <p class="module-desc">Dirección de arte agresiva, underground y de alto impacto creada a la medida del artista.</p>
-        </div>
-      </div>
+    <!-- MARCO EDITORIAL CON MÁSCARA ORGÁNICA -->
+    <section class="editorial-frame">
+      <div class="editorial-frame-text">[CREATIVE DIRECTION & PUBLISHING ARCHITECTURE]</div>
+    </section>
+  </main>
 
-      <div class="module-card">
-        <div class="module-index">[03]</div>
-        <div>
-          <div class="module-title">Analytics Engine</div>
-          <p class="module-desc">Consola centralizada para el monitoreo transparente de ingresos, regalías y audiencias.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
-    <div>ALL RIGHTS RESERVED</div>
-  </footer>
-
-  <!-- SCRIPT TÉCNICO DE ANIMACIÓN Y SCROLL -->
-  <script>
-    // 1. SMOOTH SCROLL INERCIAL CON LENIS
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // 2. EFECTO ROLL DE TEXTO EN EL MENÚ
-    document.querySelectorAll('.nav-link').forEach(link => {
-      const text = link.textContent.trim();
-      link.innerHTML = '';
-      const container = document.createElement('span');
-      container.style.display = 'inline-block';
-      container.style.overflow = 'hidden';
-
-      [...text].forEach((char, index) => {
-        const span = document.createElement('span');
-        span.className = 'nav-char';
-        span.textContent = char;
-        span.style.transitionDelay = `${index * 0.025}s`;
-        container.appendChild(span);
-      });
-      link.appendChild(container);
-    });
-
-    // 3. FONDO THREE.JS LIGERO Y FLUIDO
-    const canvas = document.getElementById('webgl-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 1200;
-    const posArray = new Float32Array(particlesCount * 3);
-
-    for(let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 16;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.013,
-      color: 0xccff00,
-      transparent: true,
-      opacity: 0.35
-    });
-
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-    camera.position.z = 3.5;
-
-    const clock = new THREE.Clock();
-    function animate3D() {
-      requestAnimationFrame(animate3D);
-      const elapsedTime = clock.getElapsedTime();
-
-      particlesMesh.rotation.y = elapsedTime * 0.02;
-      particlesMesh.rotation.x = elapsedTime * 0.01;
-
-      renderer.render(scene, camera);
-    }
-    animate3D();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // 4. TRANSICIÓN DE CORTINA DE PÁGINA
-    function triggerCurtain(event) {
-      event.preventDefault();
-      const curtain = document.getElementById('page-curtain');
-      
-      gsap.to(curtain, {
-        y: '0%',
-        duration: 0.5,
-        ease: 'power4.inOut',
-        onComplete: () => {
-          setTimeout(() => {
-            gsap.to(curtain, {
-              y: '-100%',
-              duration: 0.5,
-              ease: 'power4.inOut',
-              onComplete: () => {
-                gsap.set(curtain, { y: '100%' });
-              }
-            });
-          }, 200);
-        }
-      });
-    }
-  </script>
-
+  <!-- SCRIPT DE LÓGICA MODULAR -->
+  <script src="app.js"></script>
 </body>
 </html>
