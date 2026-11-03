@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse Media — Cyber Brutalism Platform</title>
+  <title>PULSE MEDIA — Cyber Brutalism Archive Platform</title>
   
-  <!-- Fuentes Google: Space Grotesk & JetBrains Mono -->
+  <!-- Fuentes Google: Space Grotesk, JetBrains Mono y Courier Prime para estética de archivo escaneado -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   
   <style>
     /* ==========================================
-       ESTILOS CYBER BRUTALISM / INDUSTRIAL EDITORIAL
+       ESTILOS CYBER BRUTALISM / RAW ARCHIVE EDITORIAL
        ========================================== */
     :root {
-      --bg-main: #060608;
-      --bg-card: #0e0e12;
-      --border-white: #ffffff;
+      --bg-raw: #09090b;
+      --bg-paper: #121216;
+      --paper-accent: #e4e4e7;
+      --border-stark: #ffffff;
       --border-muted: rgba(255, 255, 255, 0.18);
       --accent-red: #ff3333;
-      --text-white: #ffffff;
-      --text-gray: #9999aa;
+      --text-main: #f4f4f5;
+      --text-sub: #a1a1aa;
+      --stamp-gray: #71717a;
     }
 
     * {
@@ -31,401 +33,404 @@
     }
 
     body {
-      background-color: var(--bg-main);
-      color: var(--text-white);
+      background-color: var(--bg-raw);
+      color: var(--text-main);
       font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
-      line-height: 1.6;
-      border: 1px solid var(--border-muted);
-      margin: 8px;
+      line-height: 1.5;
+      padding: 12px;
+      position: relative;
     }
 
-    /* LÍNEAS TÉCNICAS DE RETÍCULA */
-    .grid-bg {
+    /* RETÍCULA Y MARCAS TÉCNICAS DE IMPRESIÓN IMPRESA (GRID PRINT) */
+    .print-grid {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background-image: 
         linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background-size: 24px 24px;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* PANTALLA DE CARGA INDUSTRIAL */
+    /* MARCAS DE ENCUADRE DE IMPRENTA EN LAS ESQUINAS DEL DOCUMENTO */
+    .crop-mark {
+      position: fixed;
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      color: var(--stamp-gray);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .crop-tl { top: 6px; left: 6px; }
+    .crop-tr { top: 6px; right: 6px; }
+    .crop-bl { bottom: 6px; left: 6px; }
+    .crop-br { bottom: 6px; right: 6px; }
+
+    /* PANTALLA DE CARGA CON ESTÉTIKA DE SCANNER INDUSTRIAL */
     #loader-screen {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-color: var(--bg-main);
+      background-color: var(--bg-raw);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
       font-family: 'JetBrains Mono', monospace;
     }
 
+    .loader-stamp {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-red);
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      border: 1px dashed var(--accent-red);
+      padding: 2px 8px;
+    }
+
     .loader-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: 6px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 8px;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
 
-    .progress-container {
-      width: 200px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--border-white);
+    .progress-bar-wrap {
+      width: 220px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-stark);
+      position: relative;
     }
 
-    .progress-bar {
+    .progress-bar-fill {
       width: 0%;
       height: 100%;
-      background: var(--accent-red);
-      transition: width 0.1s linear;
+      background: var(--paper-accent);
+      transition: width 0.08s linear;
     }
 
     #main-content {
       opacity: 0;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.6s ease;
       position: relative;
       z-index: 1;
     }
 
-    /* HEADER */
+    /* HEADER EDITORIAL CYBER BRUTALIST */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 4%;
-      border-bottom: 2px solid var(--border-white);
-      background: var(--bg-main);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--border-stark);
+      background: var(--bg-paper);
+      margin-bottom: 2rem;
     }
 
-    .logo {
+    .logo-block {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-main {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 4px;
       text-transform: uppercase;
+      background: var(--paper-accent);
+      color: var(--bg-raw);
+      padding: 2px 8px;
     }
 
-    .sys-tag {
-      font-family: 'JetBrains Mono', monospace;
+    .logo-sub {
       font-size: 0.75rem;
-      color: var(--text-gray);
-      border: 1px solid var(--border-muted);
-      padding: 0.3rem 0.8rem;
+      color: var(--text-sub);
+      letter-spacing: 2px;
+    }
+
+    .header-meta {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75rem;
+      color: var(--stamp-gray);
+      text-align: right;
     }
 
     main {
-      padding: 3rem 4%;
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
     }
 
-    .section-header {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+    .section-tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--text-gray);
-      margin-bottom: 1.5rem;
-      border-left: 3px solid var(--accent-red);
-      padding-left: 0.8rem;
+      color: var(--text-sub);
+      margin-bottom: 1.2rem;
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-muted);
     }
 
-    /* HISTORIA & HERO */
-    .hero-card {
-      border: 2px solid var(--border-white);
-      background: var(--bg-card);
+    /* MANIFIESTO E HISTORIA CON ANOTACIONES DE ARCHIVO RAW */
+    .hero-archive {
+      border: 2px solid var(--border-stark);
+      background: var(--bg-paper);
       padding: 3rem 2.5rem;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
       position: relative;
+    }
+
+    .archive-watermark {
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.7rem;
+      color: var(--accent-red);
+      border: 1px solid var(--accent-red);
+      padding: 2px 6px;
+      transform: rotate(-2deg);
     }
 
     .hero-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(2.2rem, 5vw, 4.2rem);
-      font-weight: 700;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      font-weight: 800;
       text-transform: uppercase;
-      line-height: 1;
+      line-height: 0.95;
       margin-bottom: 2rem;
       letter-spacing: -1px;
     }
 
-    .story-body p {
+    .story-text-container p {
       font-size: 1rem;
-      color: var(--text-gray);
+      color: var(--text-sub);
       margin-bottom: 1.2rem;
       line-height: 1.7;
     }
 
-    .story-body p span {
-      color: var(--text-white);
+    .story-text-container p span {
+      color: var(--paper-accent);
       font-weight: 600;
+      border-bottom: 1px solid var(--border-muted);
     }
 
-    .contact-grid {
+    .handwritten-annotation {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
+      color: var(--stamp-gray);
+      margin-top: 1.5rem;
+      font-style: italic;
+    }
+
+    .contact-strip {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1rem;
       margin-top: 2rem;
       padding-top: 1.5rem;
-      border-top: 1px solid var(--border-muted);
+      border-top: 1px dashed var(--border-muted);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
-    .contact-tag {
-      border: 1px solid var(--border-muted);
-      padding: 0.5rem 1rem;
+    .contact-badge {
+      border: 1px solid var(--border-stark);
+      padding: 0.4rem 0.8rem;
+      background: rgba(255,255,255,0.02);
     }
 
-    .contact-tag span {
-      color: var(--accent-red);
-    }
-
-    /* VIDEOS HTML5 NATIVOS LIMPIOS */
-    .media-grid {
+    /* SECCIÓN DE VIDEOS INDUSTRIALES LIMPIOS (NATIVOS HTML5 EN BUCLE) */
+    .media-raw-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2rem;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
     }
 
-    .media-card {
-      border: 1px solid var(--border-white);
-      background: var(--bg-card);
-      padding: 1rem;
+    .media-raw-box {
+      border: 1px solid var(--border-stark);
+      background: var(--bg-paper);
+      padding: 12px;
     }
 
-    .video-wrapper {
+    .video-viewport {
       position: relative;
       width: 100%;
-      height: 220px;
+      height: 230px;
       overflow: hidden;
       border: 1px solid var(--border-muted);
       background: #000;
     }
 
-    .video-wrapper video {
+    .video-viewport video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(30%) contrast(110%);
+      filter: grayscale(25%) contrast(115%);
     }
 
-    .media-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      margin-top: 1rem;
+    .media-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75rem;
+      margin-top: 0.8rem;
       display: flex;
       justify-content: space-between;
-      color: var(--text-gray);
+      color: var(--text-sub);
     }
 
-    /* PILARES */
-    .pilares-grid {
+    /* NAVEGACIÓN Y LAYOUT DE SUBPÁGINAS (DESPLIEGUE A FUTURO) */
+    .directory-layout {
+      border: 2px solid var(--border-stark);
+      background: var(--bg-paper);
+      padding: 2.5rem 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .directory-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      margin-bottom: 4rem;
+      margin-top: 1.5rem;
     }
 
-    .pilar-card {
-      border: 1px solid var(--border-muted);
-      background: var(--bg-card);
-      padding: 2rem 1.5rem;
-    }
-
-    .pilar-card:hover {
-      border-color: var(--border-white);
-    }
-
-    .pilar-title {
+    .dir-button {
+      border: 1px solid var(--border-stark);
+      background: rgba(255,255,255,0.03);
+      padding: 1.8rem 1.5rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-main);
+      display: block;
     }
 
-    .pilar-desc {
-      font-size: 0.9rem;
-      color: var(--text-gray);
+    .dir-button:hover {
+      background: var(--paper-accent);
+      color: var(--bg-raw);
     }
 
-    /* EXPEDIENTES CIBERNÉTICOS (EQUIPO & ARTISTAS) */
-    .roster-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
-
-    .id-card {
-      border: 2px solid var(--border-white);
-      background: var(--bg-card);
-      padding: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .id-top {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-muted);
-      padding-bottom: 0.8rem;
-      margin-bottom: 1.2rem;
+    .dir-code {
       font-size: 0.75rem;
-      color: var(--text-gray);
+      color: var(--accent-red);
+      margin-bottom: 0.5rem;
+      font-family: 'Courier Prime', monospace;
+    }
+    .dir-button:hover .dir-code {
+      color: var(--bg-raw);
     }
 
-    .id-main {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 1.2rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .id-avatar {
-      width: 100%;
-      height: 130px;
-      background: #181822;
-      border: 1px solid var(--border-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--border-white);
-    }
-
-    .id-info h3 {
+    .dir-title {
       font-size: 1.1rem;
-      text-transform: uppercase;
-      margin-bottom: 0.3rem;
-    }
-
-    .id-role {
-      font-size: 0.75rem;
-      background: var(--border-white);
-      color: var(--bg-main);
-      padding: 0.1rem 0.5rem;
       font-weight: 700;
-      display: inline-block;
-      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
     }
 
-    .attribute-bar {
-      font-size: 0.7rem;
-      color: var(--text-gray);
-      margin-top: 0.4rem;
+    .dir-desc {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+    .dir-button:hover .dir-desc {
+      color: #3f3f46;
     }
 
-    .bar-track {
-      height: 6px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid var(--border-muted);
-      margin-top: 2px;
-    }
-
-    .bar-fill {
-      height: 100%;
-      background: var(--accent-red);
-    }
-
-    .id-bottom {
-      border-top: 1px solid var(--border-muted);
-      padding-top: 0.8rem;
-      font-size: 0.7rem;
-      color: var(--text-gray);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* FAQ ACCORDEON */
-    .faq-list {
+    /* FAQ INTERACTIVO */
+    .faq-stack {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
     }
 
-    .faq-box {
+    .faq-item {
       border: 1px solid var(--border-muted);
-      background: var(--bg-card);
+      background: var(--bg-paper);
       padding: 1.2rem 1.5rem;
       cursor: pointer;
     }
 
-    .faq-box:hover {
-      border-color: var(--border-white);
+    .faq-item:hover {
+      border-color: var(--border-stark);
     }
 
-    .faq-head {
+    .faq-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       display: flex;
       justify-content: space-between;
+      text-transform: uppercase;
     }
 
-    .faq-body {
-      font-size: 0.9rem;
-      color: var(--text-gray);
-      margin-top: 0.8rem;
+    .faq-content {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      margin-top: 1rem;
       display: none;
       line-height: 1.6;
+      border-top: 1px dashed var(--border-muted);
+      padding-top: 0.8rem;
     }
 
-    .faq-box.active .faq-body {
+    .faq-item.active .faq-content {
       display: block;
     }
 
-    /* BOTONES INDUSTRIALES */
-    .btn-brutal {
-      background: var(--border-white);
-      color: var(--bg-main);
+    /* BOTONES INDUSTRIALES CYBER BRUTALISM */
+    .btn-brutal-action {
+      background: var(--paper-accent);
+      color: var(--bg-raw);
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      padding: 1rem 2rem;
+      font-weight: 800;
+      padding: 1.1rem 2.2rem;
       border: none;
       text-transform: uppercase;
       cursor: pointer;
+      letter-spacing: 1px;
       transition: all 0.2s ease;
       display: inline-block;
       text-decoration: none;
-      text-align: center;
     }
 
-    .btn-brutal:hover {
+    .btn-brutal-action:hover {
       background: var(--accent-red);
-      color: var(--text-white);
+      color: #ffffff;
     }
 
-    /* MODAL INDUSTRIAL SIN SCROLLBARS FEAS */
+    /* ==========================================
+       MODAL CORREGIDO (X AFUERA / SIN SCROLLBARS)
+       ========================================== */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(6, 6, 8, 0.94);
+      background: rgba(9, 9, 11, 0.94);
       backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 10000;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
-      padding: 1rem;
+      transition: all 0.25s ease;
+      padding: 1.5rem;
     }
 
     .modal-overlay.active {
@@ -434,17 +439,17 @@
     }
 
     .modal-box {
-      border: 2px solid var(--border-white);
-      background: var(--bg-card);
+      border: 2px solid var(--border-stark);
+      background: var(--bg-paper);
       padding: 2.5rem 2rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 480px;
       position: relative;
       font-family: 'JetBrains Mono', monospace;
-      max-height: 90vh;
+      max-height: 85vh;
       overflow-y: auto;
       
-      /* OCULTAR BARRA DE DESPLAZAMIENTO FEA */
+      /* BARRA DE DESPLAZAMIENTO 100% OCULTA */
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -453,90 +458,114 @@
       display: none;
     }
 
-    .close-btn {
+    /* BOTÓN X DE CIERRE UBICADO DE MANERA LIMPIA Y SEPARADA */
+    .close-btn-fix {
       position: absolute;
-      top: 1rem; right: 1rem;
-      background: none;
-      border: 1px solid var(--border-muted);
-      color: var(--text-white);
-      width: 32px; height: 32px;
+      top: 1rem;
+      right: 1rem;
+      background: var(--bg-raw);
+      border: 1px solid var(--border-stark);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      font-size: 1.1rem;
       cursor: pointer;
-      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      z-index: 10;
+      transition: background 0.2s;
     }
 
-    .auth-tabs {
+    .close-btn-fix:hover {
+      background: var(--accent-red);
+      color: #fff;
+    }
+
+    .auth-tab-switch {
       display: flex;
       border: 1px solid var(--border-muted);
-      margin-bottom: 1.8rem;
+      margin-bottom: 2rem;
+      margin-top: 0.5rem;
     }
 
-    .auth-tab {
+    .tab-btn {
       flex: 1;
       background: transparent;
       border: none;
-      color: var(--text-gray);
+      color: var(--text-sub);
       font-family: 'JetBrains Mono', monospace;
       padding: 0.7rem;
       cursor: pointer;
       font-size: 0.8rem;
+      text-transform: uppercase;
     }
 
-    .auth-tab.active {
-      background: var(--border-white);
-      color: var(--bg-main);
-      font-weight: 700;
+    .tab-btn.active {
+      background: var(--paper-accent);
+      color: var(--bg-raw);
+      font-weight: 800;
     }
 
-    .form-group {
+    .form-field-wrap {
       margin-bottom: 1.2rem;
       text-align: left;
     }
 
-    .form-group label {
+    .form-field-wrap label {
       display: block;
-      font-size: 0.75rem;
-      color: var(--text-gray);
+      font-size: 0.72rem;
+      color: var(--text-sub);
       margin-bottom: 0.4rem;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .input-field {
+    .input-clean {
       width: 100%;
-      background: var(--bg-main);
+      background: var(--bg-raw);
       border: 1px solid var(--border-muted);
-      color: var(--text-white);
-      padding: 0.8rem;
+      color: var(--text-main);
+      padding: 0.85rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.9rem;
       outline: none;
     }
 
-    .input-field:focus {
-      border-color: var(--border-white);
+    .input-clean:focus {
+      border-color: var(--border-stark);
     }
 
     footer {
-      border-top: 2px solid var(--border-white);
-      padding: 2rem 4%;
+      border-top: 2px solid var(--border-stark);
+      padding: 2rem 1.5rem;
+      margin-top: 4rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 1rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Courier Prime', monospace;
       font-size: 0.75rem;
-      color: var(--text-gray);
+      color: var(--stamp-gray);
     }
   </style>
 </head>
 <body>
 
-  <div class="grid-bg"></div>
+  <!-- RETÍCULA DE IMPRESIÓN Y MARCAS DE ENCUADRE -->
+  <div class="print-grid"></div>
+  <div class="crop-mark crop-tl">+ 01_PULSE_GRID</div>
+  <div class="crop-mark crop-tr">REF: GT_2025 +</div>
+  <div class="crop-mark crop-bl">+ SYSTEM_RAW</div>
+  <div class="crop-mark crop-br">CONFIDENTIAL +</div>
 
   <!-- PANTALLA DE CARGA -->
   <div id="loader-screen">
+    <div class="loader-stamp">OFFICIAL ARCHIVE SYSTEM</div>
     <div class="loader-title">PULSE // MEDIA</div>
-    <div class="progress-container">
-      <div class="progress-bar" id="progress-bar"></div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar"></div>
     </div>
   </div>
 
@@ -544,21 +573,26 @@
   <div id="main-content">
 
     <header>
-      <div class="logo">PULSE // MEDIA</div>
-      <div class="sys-tag">SYS.SECURE // EST. 2025</div>
+      <div class="logo-block">
+        <span class="logo-main">PULSE</span>
+        <span class="logo-sub">// MEDIA PLATFORM</span>
+      </div>
+      <div class="header-meta">
+        <div>SYS_STATUS: ONLINE</div>
+        <div>EST. GUATEMALA 2025</div>
+      </div>
     </header>
 
     <main>
       
-      <!-- SECCIÓN 1: MANIFIESTO E HISTORIA -->
-      <section class="hero-card">
-        <div class="section-header">
-          <span>01 // MANIFESTO & ORIGINS</span>
-          <span>GUATEMALA</span>
-        </div>
+      <!-- SECCIÓN 1: MANIFIESTO E HISTORIA OFICIAL -->
+      <section class="hero-archive">
+        <div class="archive-watermark">ARCHIVE_ID: #2025-GT</div>
+        <div class="section-tag">01 // ORIGINS & MANIFESTO</div>
+        
         <h1 class="hero-title">PULSE MEDIA</h1>
         
-        <div class="story-body">
+        <div class="story-text-container">
           <p>
             <span>Pulse Media</span> nació en <span>2025</span> a partir de una visión profunda: albergar y potenciar a artistas del <span>género urbano y regional mexicano</span>, sin limitarse únicamente a subir canciones a las plataformas digitales.
           </p>
@@ -570,168 +604,108 @@
           </p>
         </div>
 
-        <div class="contact-grid">
-          <div class="contact-tag">OFFICIAL_MAIL: <span>pulselabel.oficial@gmail.com</span></div>
-          <div class="contact-tag">PHONE_LINE: <span>+502 37731793</span></div>
+        <div class="handwritten-annotation">> Ref: 1072x1290 (1217KB) — Documento oficial de fundación.</div>
+
+        <div class="contact-strip">
+          <div class="contact-badge">CONTACT_MAIL: <span>pulselabel.oficial@gmail.com</span></div>
+          <div class="contact-badge">DIRECT_LINE: <span>+502 37731793</span></div>
         </div>
       </section>
 
-      <!-- SECCIÓN 2: VIDEOS NATIVOS LIMPIOS EN BUCLE -->
-      <section>
-        <div class="section-header">
-          <span>02 // VISUAL ASSETS & MOTION</span>
-          <span>PURE HTML5</span>
-        </div>
-        <div class="media-grid">
+      <!-- SECCIÓN 2: VIDEOS NATIVOS SILENCIADOS EN BUCLE -->
+      <section style="margin-bottom: 3.5rem;">
+        <div class="section-tag">02 // VISUAL & MOTION ARCHIVE</div>
+        
+        <div class="media-raw-grid">
           
-          <div class="media-card">
-            <div class="video-wrapper">
+          <div class="media-raw-box">
+            <div class="video-viewport">
               <video autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-lights-41795-large.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="media-meta">
-              <span>[ASSET_01] IDENTIDAD SONORA</span>
-              <span>LOOP // MUTE</span>
+            <div class="media-label">
+              <span>[ASSET_01] SOUND_IDENTITY.RAW</span>
+              <span>AUTOPLAY // MUTE</span>
             </div>
           </div>
 
-          <div class="media-card">
-            <div class="video-wrapper">
+          <div class="media-raw-box">
+            <div class="video-viewport">
               <video autoplay muted loop playsinline>
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-digital-background-screen-31128-large.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="media-meta">
-              <span>[ASSET_02] MOVIMIENTO CREATIVO</span>
-              <span>LOOP // MUTE</span>
+            <div class="media-label">
+              <span>[ASSET_02] VISUAL_MOTION.RAW</span>
+              <span>AUTOPLAY // MUTE</span>
             </div>
           </div>
 
         </div>
       </section>
 
-      <!-- SECCIÓN 3: PILARES -->
-      <section>
-        <div class="section-header">
-          <span>03 // SYSTEM ARCHITECTURE</span>
-          <span>CORE INFRASTRUCTURE</span>
-        </div>
-        <div class="pilares-grid">
-          <div class="pilar-card">
-            <div class="pilar-title">Distribución Transparente</div>
-            <div class="pilar-desc">Llegada a las principales tiendas de streaming globales con un control total y claro sobre tus regalías y comisiones.</div>
-          </div>
-          <div class="pilar-card">
-            <div class="pilar-title">Identidad & Dirección</div>
-            <div class="pilar-desc">Acompañamiento en dirección creativa, portadas y concepto visual pensado específicamente para la escena urbana y regional.</div>
-          </div>
-          <div class="pilar-card">
-            <div class="pilar-title">Panel de Artista Privado</div>
-            <div class="pilar-desc">Una experiencia Single Page Application donde gestionas tu catálogo de forma independiente y segura.</div>
-          </div>
-        </div>
-      </section>
+      <!-- SECCIÓN 3: NAVEGACIÓN Y ESTRUCTURA DE SUBPÁGINAS (LAYOUT PREPARADO) -->
+      <section class="directory-layout">
+        <div class="section-tag">03 // SYSTEM DIRECTORY & SUB-PAGES</div>
+        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+          Explora los apartados de la plataforma
+        </h2>
+        <p style="color: var(--text-sub); font-size: 0.9rem;">
+          Acceso estructurado a los módulos principales de la disquera y visualización de expedientes.
+        </p>
 
-      <!-- SECCIÓN 4: EXPEDIENTES CIBERNÉTICOS (EQUIPO & ARTISTAS) -->
-      <section>
-        <div class="section-header">
-          <span>04 // PERSONNEL & ARTIST DIRECTORY</span>
-          <span>EXPEDIENTES ACTIVOS</span>
-        </div>
-        <div class="roster-grid">
+        <div class="directory-grid">
           
-          <!-- Expediente 1: Fundador -->
-          <div class="id-card">
-            <div class="id-top">
-              <span>ID: JOSUE_TECUN</span>
-              <span>SYS_ADMIN</span>
-            </div>
-            <div class="id-main">
-              <div class="id-avatar">JT</div>
-              <div class="id-info">
-                <h3>Josue Tecun</h3>
-                <span class="id-role">Founder & Director</span>
-                <div class="attribute-bar">
-                  <span>CREATIVE_DIRECTION</span>
-                  <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
-                </div>
-                <div class="attribute-bar">
-                  <span>PRODUCTION</span>
-                  <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
-                </div>
-              </div>
-            </div>
-            <div class="id-bottom">
-              <span>ORIGIN: GUATEMALA (GT)</span>
-              <span>FOUNDER_2025</span>
-            </div>
-          </div>
+          <!-- BOTÓN A SUBPÁGINA: ARTISTAS -->
+          <a class="dir-button" onclick="alert('SUBPÁGINA: Cargando catálogo de expedientes de artistas...')">
+            <div class="dir-code">[SUBPAGE_01]</div>
+            <div class="dir-title">Catálogo de Artistas</div>
+            <div class="dir-desc">Expedientes cibernéticos, métricas de flow, atributos técnicos y discografía oficial.</div>
+          </a>
 
-          <!-- Expediente 2: Artista Destacado -->
-          <div class="id-card">
-            <div class="id-top">
-              <span>ID: ARTIST_01</span>
-              <span>ROSTER_ACTIVE</span>
-            </div>
-            <div class="id-main">
-              <div class="id-avatar">JF</div>
-              <div class="id-info">
-                <h3>Jay Flow</h3>
-                <span class="id-role">Urban Artist</span>
-                <div class="attribute-bar">
-                  <span>FLOW & LYRICS</span>
-                  <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
-                </div>
-                <div class="attribute-bar">
-                  <span>STAGE_PRESENCE</span>
-                  <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
-                </div>
-              </div>
-            </div>
-            <div class="id-bottom">
-              <span>GENRE: URBAN / REGIONAL</span>
-              <span>VERIFIED_ARTIST</span>
-            </div>
-          </div>
+          <!-- BOTÓN A SUBPÁGINA: EQUIPO ADMIN -->
+          <a class="dir-button" onclick="alert('SUBPÁGINA: Cargando estructura del equipo directivo...')">
+            <div class="dir-code">[SUBPAGE_02]</div>
+            <div class="dir-title">Equipo Directivo</div>
+            <div class="dir-desc">Estructura administrativa, dirección creativa de Josue Tecun y soporte.</div>
+          </a>
 
         </div>
       </section>
 
-      <!-- SECCIÓN 5: FAQ -->
+      <!-- SECCIÓN 4: PREGUNTAS FRECUENTES -->
       <section>
-        <div class="section-header">
-          <span>05 // FREQUENTLY ASKED QUESTIONS</span>
-          <span>KNOWLEDGE BASE</span>
-        </div>
-        <div class="faq-list">
+        <div class="section-tag">04 // KNOWLEDGE BASE & FAQ</div>
+        
+        <div class="faq-stack">
           
-          <div class="faq-box" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <span>¿CÓMO FUNCIONA LA DISTRIBUCIÓN CON PULSE MEDIA?</span>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-title">
+              <span>¿Cómo funciona la distribución con Pulse Media?</span>
               <span>+</span>
             </div>
-            <div class="faq-body">
+            <div class="faq-content">
               Registras tu cuenta en nuestro panel privado de artista, subes tus archivos y metadatos, y nuestro equipo valida la calidad técnica para distribuir tu música a Spotify, Apple Music, YouTube y todas las tiendas globales.
             </div>
           </div>
 
-          <div class="faq-box" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <span>¿MANTENGO LA PROPIEDAD DE MIS CANCIONES?</span>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-title">
+              <span>¿Mantengo la propiedad de mis canciones?</span>
               <span>+</span>
             </div>
-            <div class="faq-body">
-              Sí, en Pulse Media los artistas mantienen el 100% de la propiedad y los derechos master de su música. Nosotros trabajamos como tu aliado de distribución y desarrollo visual.
+            <div class="faq-content">
+              Sí, en Pulse Media los artistas mantienen el 100% de la propiedad y los derechos máster de su música. Nosotros trabajamos como tu aliado de distribución y desarrollo visual.
             </div>
           </div>
 
-          <div class="faq-box" onclick="toggleFaq(this)">
-            <div class="faq-head">
-              <span>¿CÓMO SE MANEJA EL SOPORTE DE DISEÑO E IDENTIDAD VISUAL?</span>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-title">
+              <span>¿Cómo se maneja el soporte de diseño e identidad visual?</span>
               <span>+</span>
             </div>
-            <div class="faq-body">
+            <div class="faq-content">
               Al ser fundados por un diseñador y productor musical, brindamos asesoría en la creación de portadas, branding e identidad visual para asegurarnos de que la estética del proyecto refleje exactamente su sonido.
             </div>
           </div>
@@ -739,91 +713,131 @@
         </div>
       </section>
 
-      <!-- SECCIÓN 6: ACCESO PÚBLICO -->
+      <!-- SECCIÓN 5: ACCESO Y REGISTRO PRIVADO -->
       <section style="text-align: center; margin-bottom: 4rem;">
-        <div class="section-header">
-          <span>06 // ACCESS TERMINAL</span>
-          <span>SECURE PORTAL</span>
-        </div>
-        <p style="color: var(--text-gray); margin-bottom: 2rem;">Ingresa a tu panel de artista para gestionar tus lanzamientos y proyectos musicales.</p>
-        <button class="btn-brutal" onclick="openAuthModal('register')">Iniciar Sesión / Registrarse</button>
+        <div class="section-tag" style="justify-content: center;">05 // PORTAL ENTRY</div>
+        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 1rem;">
+          Panel Privado de Artista
+        </h2>
+        <p style="color: var(--text-sub); margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;">
+          Gestión transparente de lanzamientos, regalias y control de tu catálogo musical.
+        </p>
+        <button class="btn-brutal-action" onclick="openAuthModal('register')">Acceder al Sistema</button>
       </section>
 
     </main>
 
     <footer>
-      <div>&copy; 2025 - 2026 PULSE MEDIA // ALL RIGHTS RESERVED</div>
-      <div>SYSTEM LOG: ONLINE</div>
+      <div>&copy; 2025 - 2026 PULSE MEDIA // ARCHIVE SYSTEM</div>
+      <div>CLASSIFIED DOCUMENT — ALL RIGHTS RESERVED</div>
     </footer>
 
   </div>
 
-  <!-- MODAL DE AUTENTICACIÓN -->
+  <!-- ==========================================
+       MODAL DE AUTENTICACIÓN MEJORADO
+       ========================================== -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-box">
-      <button class="close-btn" onclick="closeAuthModal()">×</button>
+      <!-- BOTÓN X UBICADO DE FORMA LIMPIA Y SEPARADA -->
+      <button class="close-btn-fix" onclick="closeAuthModal()">×</button>
       
-      <div class="auth-tabs">
-        <button class="auth-tab active" id="tab-register" onclick="switchTab('register')">CREAR CUENTA</button>
-        <button class="auth-tab" id="tab-login" onclick="switchTab('login')">INICIAR SESIÓN</button>
+      <div class="auth-tab-switch">
+        <button class="tab-btn active" id="tab-register" onclick="switchTab('register')">Crear Cuenta</button>
+        <button class="tab-btn" id="tab-login" onclick="switchTab('login')">Iniciar Sesión</button>
       </div>
 
-      <!-- FORMULARIO DE REGISTRO -->
+      <!-- FORMULARIO DE REGISTRO (CON LISTA MASIVA DE PAÍSES DEL MUNDO) -->
       <div id="form-register">
-        <div class="form-group">
+        
+        <div class="form-field-wrap">
           <label>Nombre Real</label>
-          <input type="text" class="input-field" id="reg-name">
+          <input type="text" class="input-clean" id="reg-name">
         </div>
 
-        <div class="form-group">
+        <div class="form-field-wrap">
           <label>Nombre Artístico</label>
-          <input type="text" class="input-field" id="reg-artist-name">
+          <input type="text" class="input-clean" id="reg-artist-name">
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
-          <div class="form-group">
+          <div class="form-field-wrap">
             <label>Edad</label>
-            <input type="number" class="input-field" id="reg-age">
+            <input type="number" class="input-clean" id="reg-age">
           </div>
-          <div class="form-group">
-            <label>País</label>
-            <select class="input-field" id="reg-country" style="background: var(--bg-main);">
-              <option value="Guatemala">Guatemala 🇬🇹</option>
-              <option value="México">México 🇲🇽</option>
-              <option value="Colombia">Colombia 🇨🇴</option>
-              <option value="Estados Unidos">Estados Unidos 🇺🇸</option>
-              <option value="España">España 🇪🇸</option>
-              <option value="Otro">Otro</option>
+          <div class="form-field-wrap">
+            <label>País de Origen</label>
+            <select class="input-clean" id="reg-country" style="background: var(--bg-raw);">
+              <optgroup label="América Latina">
+                <option value="Guatemala" selected>Guatemala 🇬🇹</option>
+                <option value="México">México 🇲🇽</option>
+                <option value="Colombia">Colombia 🇨🇴</option>
+                <option value="Argentina">Argentina 🇦🇷</option>
+                <option value="Chile">Chile 🇨🇱</option>
+                <option value="Perú">Perú 🇵🇪</option>
+                <option value="Ecuador">Ecuador 🇪🇨</option>
+                <option value="Venezuela">Venezuela 🇻🇪</option>
+                <option value="República Dominicana">República Dominicana 🇩🇴</option>
+                <option value="Puerto Rico">Puerto Rico 🇵🇷</option>
+                <option value="Costa Rica">Costa Rica 🇨🇷</option>
+                <option value="Panamá">Panamá 🇵🇦</option>
+                <option value="El Salvador">El Salvador 🇸🇻</option>
+                <option value="Honduras">Honduras 🇭🇳</option>
+                <option value="Nicaragua">Nicaragua 🇳🇮</option>
+                <option value="Bolivia">Bolivia 🇧🇴</option>
+                <option value="Uruguay">Uruguay 🇺🇾</option>
+                <option value="Paraguay">Paraguay 🇵🇾</option>
+                <option value="Cuba">Cuba 🇨🇺</option>
+              </optgroup>
+              <optgroup label="Norteamérica">
+                <option value="Estados Unidos">Estados Unidos 🇺🇸</option>
+                <option value="Canadá">Canadá 🇨🇦</option>
+              </optgroup>
+              <optgroup label="Europa">
+                <option value="España">España 🇪🇸</option>
+                <option value="Reino Unido">Reino Unido 🇬🇧</option>
+                <option value="Francia">Francia 🇫🇷</option>
+                <option value="Alemania">Alemania 🇩🇪</option>
+                <option value="Italia">Italia 🇮🇹</option>
+                <option value="Portugal">Portugal 🇵🇹</option>
+                <option value="Países Bajos">Países Bajos 🇳🇱</option>
+              </optgroup>
+              <optgroup label="Otros">
+                <option value="Brasil">Brasil 🇧🇷</option>
+                <option value="Japón">Japón 🇯🇵</option>
+                <option value="Australia">Australia 🇦🇺</option>
+                <option value="Otro País">Otro / Resto del Mundo</option>
+              </optgroup>
             </select>
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-field-wrap">
           <label>Correo Electrónico</label>
-          <input type="email" class="input-field" id="reg-email">
+          <input type="email" class="input-clean" id="reg-email">
         </div>
 
-        <div class="form-group">
+        <div class="form-field-wrap">
           <label>Contraseña</label>
-          <input type="password" class="input-field" id="reg-password">
+          <input type="password" class="input-clean" id="reg-password">
         </div>
 
-        <button class="btn-brutal" style="width: 100%; margin-top: 1rem;" onclick="submitRegister()">Registrar Perfil</button>
+        <button class="btn-brutal-action" style="width: 100%; margin-top: 0.8rem;" onclick="submitRegister()">Registrar Perfil</button>
       </div>
 
       <!-- FORMULARIO DE INICIO DE SESIÓN -->
       <div id="form-login" style="display: none;">
-        <div class="form-group">
+        <div class="form-field-wrap">
           <label>Correo Electrónico</label>
-          <input type="email" class="input-field" id="login-email">
+          <input type="email" class="input-clean" id="login-email">
         </div>
 
-        <div class="form-group">
+        <div class="form-field-wrap">
           <label>Contraseña</label>
-          <input type="password" class="input-field" id="login-password">
+          <input type="password" class="input-clean" id="login-password">
         </div>
 
-        <button class="btn-brutal" style="width: 100%; margin-top: 1rem;" onclick="submitLogin()">Ingresar al Sistema</button>
+        <button class="btn-brutal-action" style="width: 100%; margin-top: 0.8rem;" onclick="submitLogin()">Ingresar al Sistema</button>
       </div>
 
     </div>
@@ -847,18 +861,18 @@
             loaderScreen.style.opacity = "0";
             loaderScreen.style.visibility = "hidden";
             mainContent.style.opacity = "1";
-          }, 300);
+          }, 250);
         } else {
           progressBar.style.width = progress + "%";
         }
-      }, 80);
+      }, 70);
     });
 
     function toggleFaq(element) {
       element.classList.toggle("active");
     }
 
-    // MODAL Y SWITCH REGISTRO / LOGIN
+    // CONTROL DEL MODAL DE AUTENTICACIÓN
     const authModal = document.getElementById("auth-modal");
     const formRegister = document.getElementById("form-register");
     const formLogin = document.getElementById("form-login");
@@ -892,15 +906,16 @@
       const name = document.getElementById("reg-name").value;
       const artistName = document.getElementById("reg-artist-name").value;
       const age = document.getElementById("reg-age").value;
+      const country = document.getElementById("reg-country").value;
       const email = document.getElementById("reg-email").value;
       const pass = document.getElementById("reg-password").value;
 
       if (!name || !artistName || !age || !email || !pass) {
-        alert("ERROR: Todos los campos del registro son obligatorios.");
+        alert("ERROR: Por favor completa todos los campos del expediente.");
         return;
       }
 
-      alert("¡Cuenta creada exitosamente! Te hemos enviado un correo de confirmación.");
+      alert("¡Cuenta creada exitosamente en " + country + "! Te hemos enviado un correo de confirmación.");
       closeAuthModal();
     }
 
@@ -913,7 +928,7 @@
         return;
       }
 
-      alert("¡Acceso correcto! Entrando al panel del artista...");
+      alert("¡Acceso concedido! Entrando al panel de artista...");
       closeAuthModal();
     }
   </script>
