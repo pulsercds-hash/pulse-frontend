@@ -17,6 +17,38 @@
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   
   <style>
+    /* ESTILOS DEL PRELOADER / PANTALLA DE CARGA INICIAL */
+    #app-preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: var(--font-display);
+      color: #fff;
+      transition: opacity 0.5s ease;
+    }
+    .preloader-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+    .preloader-sub {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-neon);
+      letter-spacing: 3px;
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
+
     /* ESTILOS EXCLUSIVOS PARA EL TICKER MARQUEE */
     .marquee-container {
       background: var(--accent-neon);
@@ -41,7 +73,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ESTILOS PARA LAS MÉTRICAS DE IMPACTO REALES */
+    /* MÉTRICAS DE IMPACTO REALES */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -66,7 +98,7 @@
       letter-spacing: 1px;
     }
 
-    /* FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (PERFECTAMENTE CENTRADA) */
+    /* FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (CENTRADOS) */
     .partners-section {
       padding: 3rem 5%;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -92,6 +124,7 @@
     .hero-section {
       position: relative;
       overflow: hidden;
+      background: #000; /* Fondo negro de respaldo para evitar parpadeos */
     }
     .hero-video-bg {
       position: absolute;
@@ -105,6 +138,7 @@
       pointer-events: none;
       z-index: 0;
       opacity: 0.35;
+      background: #000;
     }
     .hero-video-bg iframe {
       width: 100%;
@@ -117,7 +151,7 @@
       z-index: 2;
     }
 
-    /* CONTENEDOR DE VIDEO DE YOUTUBE EN TARJETAS CON BLOQUEO DE CURSOR */
+    /* CONTENEDOR DE VIDEO EN TARJETAS CON FONDO NEGRO DE RESPALDO */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -127,8 +161,8 @@
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: #000;
-      pointer-events: none; /* Bloquea cualquier interacción del mouse con el video */
+      background: #000; /* Fondo negro mientras carga el video[cite: 6] */
+      pointer-events: none;
     }
     .video-wrapper iframe {
       position: absolute;
@@ -140,7 +174,7 @@
       pointer-events: none;
     }
 
-    /* SECCIÓN DE PREGUNTAS FRECUENTES (FAQ / BLUEPRINT) */
+    /* PREGUNTAS FRECUENTES (FAQ / BLUEPRINT) */
     .faq-section {
       padding: 6rem 5%;
       position: relative;
@@ -170,6 +204,12 @@
   </style>
 </head>
 <body class="theme-dark">
+
+  <!-- PANTALLA DE CARGA INICIAL (PRELOADER) -->
+  <div id="app-preloader">
+    <div class="preloader-title">Pulse Media</div>
+    <div class="preloader-sub">// Initializing Ecosystem...</div>
+  </div>
 
   <canvas id="webgl-canvas"></canvas>
   <div id="page-curtain"></div>
@@ -209,7 +249,7 @@
       </div>
     </div>
 
-    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES (CENTRADOS) -->
+    <!-- FRANJA DE SOCIOS / PLATAFORMAS GLOBALES -->
     <div class="partners-section">
       <div class="partners-grid">
         <span>// Spotify Ecosystem</span>
@@ -249,7 +289,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS / PILARES CON VIDEOS BLOQUEADOS Y SIN TEXTO VERDE -->
+    <!-- SECCIÓN 3: MÓDULOS / PILARES -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
@@ -317,5 +357,21 @@
   </footer>
 
   <script src="app.js"></script>
+  
+  <script>
+    /* SCRIPT PARA QUITAR EL PRELOADER EN CUANTO CARGA LA PÁGINA */
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('app-preloader');
+      if (preloader) {
+        gsap.to(preloader, {
+          opacity: 0,
+          duration: 0.6,
+          onComplete: () => {
+            preloader.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
