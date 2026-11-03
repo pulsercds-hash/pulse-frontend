@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PULSE MEDIA — Artistas / Expedientes</title>
+  <title>PULSE MEDIA — Expedientes de Artistas</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 
@@ -16,121 +16,189 @@
   
   <style>
     body {
-      background: #080808;
+      background: #000;
       color: #fff;
       font-family: var(--font-display);
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    .artists-header {
-      padding: 10rem 5% 3rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .artists-title {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .artists-sub {
-      font-family: var(--font-mono);
-      color: var(--accent-neon);
-      font-size: 0.9rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-    }
-
-    /* GRID DE EXPEDIENTES / CARPETAS TIPO CLASSIFIED FILE */
-    .dossier-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 4rem 5%;
-    }
-
-    .dossier-card {
-      background: #111111;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 6px;
-      padding: 2rem;
+    /* ENCABEZADO HEREDADO DE LA VIBRA HERO */
+    .artists-hero {
+      padding: 11rem 5% 4rem;
       position: relative;
-      overflow: hidden;
-      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-      cursor: pointer;
-    }
-
-    .dossier-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--accent-neon);
-      box-shadow: 0 10px 30px rgba(220, 255, 0, 0.15);
-    }
-
-    /* PESTAÑA / CORTE SUPERIOR TIPO MANILA */
-    .dossier-tab {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.05);
-      border-bottom-left-radius: 8px;
-      padding: 0.4rem 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent-neon);
-      letter-spacing: 2px;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: radial-gradient(circle at 10% 20%, rgba(220, 255, 0, 0.03) 0%, transparent 40%);
     }
 
-    .dossier-ref {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      opacity: 0.5;
-      margin-bottom: 1.5rem;
-      letter-spacing: 2px;
-    }
-
-    .dossier-name {
-      font-size: 1.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      letter-spacing: 1px;
-    }
-
-    .dossier-genre {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: #aaa;
-      margin-bottom: 2rem;
-    }
-
-    /* SELLO CONFIDENCIAL / PRÓXIMAMENTE */
-    .stamp-badge {
-      display: inline-block;
-      border: 2px solid #ff3333;
-      color: #ff3333;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 0.4rem 1rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      transform: rotate(-4deg);
-      border-radius: 4px;
-      background: rgba(255, 51, 51, 0.05);
-    }
-
-    .dossier-footer {
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    .hero-meta-artists {
       display: flex;
       justify-content: space-between;
       font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-neon);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .artists-title {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .artists-subtitle {
+      font-family: var(--font-mono);
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 1.5rem;
+      max-width: 650px;
+    }
+
+    /* GRID BRUTALISTA Y INDUSTRIAL */
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      padding: 5rem 5%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brutalist-card {
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 380px;
+    }
+
+    .brutalist-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: transparent;
+      transition: background 0.4s ease;
+    }
+
+    .brutalist-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(220, 255, 0, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(220, 255, 0, 0.1);
+    }
+
+    .brutalist-card:hover::before {
+      background: var(--accent-neon);
+    }
+
+    /* DETALLES DE CORTE BRUTALISTA */
+    .card-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: #666;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 1rem;
+    }
+
+    .card-ref {
+      color: var(--accent-neon);
+      font-weight: 700;
+    }
+
+    .card-body {
+      margin: 2rem 0;
+    }
+
+    .card-artist-num {
+      font-family: var(--font-mono);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.07);
+      line-height: 1;
+      position: absolute;
+      right: 1.5rem;
+      top: 4.5rem;
+      pointer-events: none;
+    }
+
+    .card-artist-name {
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-genre {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* BADGE INDUSTRIAL CONFIDENCIAL / PRÓXIMAMENTE */
+    .stamp-container {
+      margin-top: 1.5rem;
+    }
+
+    .brutalist-stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 45, 85, 0.08);
+      border: 1px solid rgba(255, 45, 85, 0.4);
+      color: #ff2d55;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.5rem 1.2rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    .stamp-dot {
+      width: 6px;
+      height: 6px;
+      background: #ff2d55;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #ff2d55;
+      animation: pulseDot 1.8s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .card-footer-info {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      padding-top: 1rem;
     }
   </style>
 </head>
@@ -138,7 +206,7 @@
 
   <div id="page-curtain"></div>
 
-  <!-- HEADER -->
+  <!-- HEADER OFICIAL CON REGRESO A INDEX -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <nav>
@@ -149,76 +217,135 @@
   </header>
 
   <main>
-    <section class="artists-header">
-      <h1 class="artists-title">Roster / Expedientes</h1>
-      <div class="artists-sub">Confidential Artist Dossiers & Archives</div>
+    <!-- HERO BRUTALISTA DE ARTISTAS -->
+    <section class="artists-hero">
+      <div class="hero-meta-artists">
+        <span>CONFIDENTIAL ROSTER</span>
+        <span>CLASSIFIED // 05 FILES</span>
+      </div>
+      <h1 class="artists-title">
+        Expedientes <br><span class="accent-text">De Artistas</span>
+      </h1>
+      <p class="artists-subtitle">
+        Catálogo en desarrollo y curaduría de talentos independientes. Identidad sonora y visual bajo reserva.
+      </p>
     </section>
 
-    <!-- GRID DE LOS 5 EXPEDIENTES -->
+    <!-- GRID DE 5 CASILLAS CONFIDENCIALES -->
     <section class="dossier-grid">
       
-      <!-- EXPEDIENTE 01 -->
-      <div class="dossier-card">
-        <div class="dossier-tab">FILE // 001</div>
-        <div class="dossier-ref">REF. PM-ART-01</div>
-        <div class="dossier-name">Artista 01</div>
-        <div class="dossier-genre">Urban / New Wave — Guatemala City</div>
-        <div class="stamp-badge">Próximamente</div>
-        <div class="dossier-footer">
-          <span>STATUS: RESTRICTED</span>
-          <span>PULSE RECORDS</span>
+      <!-- CASILLA 01 -->
+      <div class="brutalist-card">
+        <div class="card-artist-num">01</div>
+        <div class="card-top-bar">
+          <span class="card-ref">REF. PM-ART-001</span>
+          <span>SYSTEM LOCK</span>
+        </div>
+        <div class="card-body">
+          <div class="card-artist-name">Artista 01</div>
+          <div class="card-genre">Urban / New Wave — GTM Ops</div>
+          <div class="stamp-container">
+            <div class="brutalist-stamp">
+              <span class="stamp-dot"></span>
+              Próximamente
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <span>STATUS: EN CURADURÍA</span>
+          <span>PULSE MEDIA</span>
         </div>
       </div>
 
-      <!-- EXPEDIENTE 02 -->
-      <div class="dossier-card">
-        <div class="dossier-tab">FILE // 002</div>
-        <div class="dossier-ref">REF. PM-ART-02</div>
-        <div class="dossier-name">Artista 02</div>
-        <div class="dossier-genre">Regional Urbano — Global Ops</div>
-        <div class="stamp-badge">Próximamente</div>
-        <div class="dossier-footer">
-          <span>STATUS: RESTRICTED</span>
-          <span>PULSE RECORDS</span>
+      <!-- CASILLA 02 -->
+      <div class="brutalist-card">
+        <div class="card-artist-num">02</div>
+        <div class="card-top-bar">
+          <span class="card-ref">REF. PM-ART-002</span>
+          <span>SYSTEM LOCK</span>
+        </div>
+        <div class="card-body">
+          <div class="card-artist-name">Artista 02</div>
+          <div class="card-genre">Regional Urbano — Global</div>
+          <div class="stamp-container">
+            <div class="brutalist-stamp">
+              <span class="stamp-dot"></span>
+              Próximamente
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <span>STATUS: EN CURADURÍA</span>
+          <span>PULSE MEDIA</span>
         </div>
       </div>
 
-      <!-- EXPEDIENTE 03 -->
-      <div class="dossier-card">
-        <div class="dossier-tab">FILE // 003</div>
-        <div class="dossier-ref">REF. PM-ART-03</div>
-        <div class="dossier-name">Artista 03</div>
-        <div class="dossier-genre">Alternative Sound — Guatemala</div>
-        <div class="stamp-badge">Próximamente</div>
-        <div class="dossier-footer">
-          <span>STATUS: RESTRICTED</span>
-          <span>PULSE RECORDS</span>
+      <!-- CASILLA 03 -->
+      <div class="brutalist-card">
+        <div class="card-artist-num">03</div>
+        <div class="card-top-bar">
+          <span class="card-ref">REF. PM-ART-003</span>
+          <span>SYSTEM LOCK</span>
+        </div>
+        <div class="card-body">
+          <div class="card-artist-name">Artista 03</div>
+          <div class="card-genre">Alternative Sound — GTM</div>
+          <div class="stamp-container">
+            <div class="brutalist-stamp">
+              <span class="stamp-dot"></span>
+              Próximamente
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <span>STATUS: EN CURADURÍA</span>
+          <span>PULSE MEDIA</span>
         </div>
       </div>
 
-      <!-- EXPEDIENTE 04 -->
-      <div class="dossier-card">
-        <div class="dossier-tab">FILE // 004</div>
-        <div class="dossier-ref">REF. PM-ART-04</div>
-        <div class="dossier-name">Artista 04</div>
-        <div class="dossier-genre">Producer / Writer — Global</div>
-        <div class="stamp-badge">Próximamente</div>
-        <div class="dossier-footer">
-          <span>STATUS: RESTRICTED</span>
-          <span>PULSE RECORDS</span>
+      <!-- CASILLA 04 -->
+      <div class="brutalist-card">
+        <div class="card-artist-num">04</div>
+        <div class="card-top-bar">
+          <span class="card-ref">REF. PM-ART-004</span>
+          <span>SYSTEM LOCK</span>
+        </div>
+        <div class="card-body">
+          <div class="card-artist-name">Artista 04</div>
+          <div class="card-genre">Producer / Composer</div>
+          <div class="stamp-container">
+            <div class="brutalist-stamp">
+              <span class="stamp-dot"></span>
+              Próximamente
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <span>STATUS: EN CURADURÍA</span>
+          <span>PULSE MEDIA</span>
         </div>
       </div>
 
-      <!-- EXPEDIENTE 05 -->
-      <div class="dossier-card">
-        <div class="dossier-tab">FILE // 005</div>
-        <div class="dossier-ref">REF. PM-ART-05</div>
-        <div class="dossier-name">Artista 05</div>
-        <div class="dossier-genre">Secret Roster — Pending Release</div>
-        <div class="stamp-badge">Próximamente</div>
-        <div class="dossier-footer">
-          <span>STATUS: RESTRICTED</span>
-          <span>PULSE RECORDS</span>
+      <!-- CASILLA 05 -->
+      <div class="brutalist-card">
+        <div class="card-artist-num">05</div>
+        <div class="card-top-bar">
+          <span class="card-ref">REF. PM-ART-005</span>
+          <span>SYSTEM LOCK</span>
+        </div>
+        <div class="card-body">
+          <div class="card-artist-name">Artista 05</div>
+          <div class="card-genre">Secret Roster — Pending</div>
+          <div class="stamp-container">
+            <div class="brutalist-stamp">
+              <span class="stamp-dot"></span>
+              Próximamente
+            </div>
+          </div>
+        </div>
+        <div class="card-footer-info">
+          <span>STATUS: EN CURADURÍA</span>
+          <span>PULSE MEDIA</span>
         </div>
       </div>
 
