@@ -12,20 +12,21 @@
   <link rel="stylesheet" href="styles.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
   
   <style>
-    /* DESBLOQUEO TOTAL DE SCROLL */
+    /* FORZAR SCROLL LIBRE Y FLUIDO EN PC Y MÓVIL */
     html, body {
-      background: #000;
-      color: #fff;
+      background: #000 !important;
+      color: #fff !important;
       font-family: var(--font-display);
-      min-height: 100vh;
-      overflow-x: hidden;
+      width: 100%;
+      height: auto !important;
+      overflow-x: hidden !important;
       overflow-y: auto !important;
+      position: static !important;
     }
 
-    /* HEADER FIJO IDÉNTICO A TEAM.HTML */
+    /* HEADER FIJO */
     header {
       position: fixed;
       top: 0;
@@ -78,14 +79,19 @@
     }
 
     .artists-main-title {
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-size: clamp(3rem, 7vw, 6rem);
       font-weight: 900;
       line-height: 1.1;
       text-transform: uppercase;
       letter-spacing: -1px;
     }
 
-    /* TIPOGRAFÍA VERDE ESTILIZADA PARA ARTISTAS */
+    /* NUESTROS EN BLANCO Y ARTISTAS EN VERDE ESTILIZADO */
+    .text-white-normal {
+      color: #fff;
+      font-weight: 900;
+    }
+
     .accent-green-font {
       font-family: 'Cinzel Decorative', serif;
       color: var(--accent-neon);
@@ -102,7 +108,7 @@
       line-height: 1.6;
     }
 
-    /* GRID DE TARJETAS IDÉNTICAS AL HOME */
+    /* GRID DE TARJETAS ESTILO HOME */
     .modules-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -157,7 +163,7 @@
       line-height: 1.6;
     }
 
-    /* BADGE INDUSTRIAL PRÓXIMAMENTE */
+    /* BADGE PRÓXIMAMENTE */
     .stamp-container {
       margin-top: 2rem;
     }
@@ -211,7 +217,7 @@
         <span>GUATEMALA / GLOBAL</span>
       </div>
       <h1 class="artists-main-title">
-        <span class="accent-green-font">Artistas</span> con los que trabajamos.
+        <span class="text-white-normal">Nuestros</span> <span class="accent-green-font">Artistas</span>
       </h1>
       <p class="artists-subtitle">
         Impulsamos la identidad visual, dirección creativa y distribución estratégica de la nueva ola de talentos de la industria.
