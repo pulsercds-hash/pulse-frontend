@@ -15,16 +15,64 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  
+  <style>
+    /* ESTILOS EXCLUSIVOS PARA EL TICKER MARQUEE */
+    .marquee-container {
+      background: var(--accent-neon);
+      color: #000;
+      padding: 1rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      z-index: 5;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .marquee-track {
+      display: inline-block;
+      animation: scrollMarquee 25s linear infinite;
+    }
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ESTILOS PARA LAS MÉTRICAS DE IMPACTO */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 3rem;
+    }
+    .metric-number {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      font-family: var(--font-display);
+      color: var(--accent-neon);
+      line-height: 1;
+    }
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body class="theme-dark">
 
-  <!-- CANVAS 3D WEBGL DE FONDO -->
   <canvas id="webgl-canvas"></canvas>
-
-  <!-- TRANSICIÓN DE CORTINA ESTUDIO -->
   <div id="page-curtain"></div>
 
-  <!-- HEADER CON ENLACES A LAS OTRAS VISTAS -->
+  <!-- HEADER -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <nav>
@@ -47,6 +95,14 @@
       <p class="hero-subtitle">El ecosistema definitivo para el género urbano y regional mexicano de nueva generación.</p>
     </section>
 
+    <!-- TICKER EN MOVIMIENTO CON TU MENSAJE -->
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <span>// GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>// GUATEMALA TO THE WORLD — ESCENA URBANA REGIONAL MEXICANO EVOLUCIÓN IDENTIDAD — NO RULES — PURE FLOW &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </div>
+    </div>
+
     <!-- SECCIÓN 2: MANIFIESTO (TEMA CLARO) -->
     <section class="manifesto-section panel" data-theme="light">
       <div class="manifesto-content">
@@ -55,10 +111,26 @@
         <p class="manifesto-text">
           Pulse Media nació en 2025 bajo una visión radical impulsada por Josue Tecun. Fundada para albergar un ecosistema dinámico de compositores, artistas y creadores, nuestra misión va más allá de un sello discográfico tradicional: construimos identidades visuales contundentes, diseñamos estrategias de posicionamiento global y transformamos proyectos musicales en movimientos culturales de alto impacto.
         </p>
+
+        <!-- SECCIÓN DE MÉTRICAS DE IMPACTO -->
+        <div class="metrics-grid">
+          <div>
+            <div class="metric-number">+12M</div>
+            <div class="metric-label">Reproducciones Globales</div>
+          </div>
+          <div>
+            <div class="metric-number">04</div>
+            <div class="metric-label">Años de Evolución Underground</div>
+          </div>
+          <div>
+            <div class="metric-number">100%</div>
+            <div class="metric-label">Transparencia y Regalías</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS / PILARES CON ENFOQUE AUDIO-VISUAL (DARK) -->
+    <!-- SECCIÓN 3: MÓDULOS / PILARES -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES
