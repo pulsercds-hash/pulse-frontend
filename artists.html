@@ -14,19 +14,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   
   <style>
-    /* FORZAR SCROLL LIBRE Y FLUIDO EN PC Y MÓVIL */
+    /* DESBLOQUEO TOTAL Y FORZADO DE SCROLL EN PC Y MÓVIL */
     html, body {
       background: #000 !important;
       color: #fff !important;
       font-family: var(--font-display);
       width: 100%;
       height: auto !important;
+      min-height: 100vh;
       overflow-x: hidden !important;
       overflow-y: auto !important;
       position: static !important;
     }
 
-    /* HEADER FIJO */
+    /* HEADER IDÉNTICO A TEAM.HTML */
     header {
       position: fixed;
       top: 0;
@@ -86,7 +87,6 @@
       letter-spacing: -1px;
     }
 
-    /* NUESTROS EN BLANCO Y ARTISTAS EN VERDE ESTILIZADO */
     .text-white-normal {
       color: #fff;
       font-weight: 900;
@@ -108,94 +108,160 @@
       line-height: 1.6;
     }
 
-    /* GRID DE TARJETAS ESTILO HOME */
-    .modules-grid {
+    /* CONTENEDOR DE FOLDERS / EXPEDIENTES ESTILO IMAGEN */
+    .folder-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      padding: 4rem 5% 6rem;
+      gap: 3rem;
+      padding: 4rem 5% 8rem;
       position: relative;
       z-index: 2;
     }
 
-    .module-card {
-      background: rgba(15, 15, 15, 0.7);
-      backdrop-filter: blur(12px);
+    /* ESTRUCTURA DEL FOLDER DE MANILA OSCURO */
+    .folder-card {
+      background: #181512;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      padding: 2.5rem 2rem;
+      border-radius: 6px;
       position: relative;
+      padding: 2.5rem 2rem 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
       overflow: hidden;
+      min-height: 440px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 350px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .module-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(220, 255, 0, 0.5);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(220, 255, 0, 0.1);
+    .folder-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-neon);
     }
 
-    .module-index {
+    /* PESTAÑA LATERAL DEL FOLDER (TAB) */
+    .folder-tab {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #25211c;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom-left-radius: 8px;
+      padding: 0.4rem 1.2rem;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--accent-neon);
       letter-spacing: 2px;
-      margin-bottom: 1rem;
-    }
-
-    .module-title {
-      font-size: clamp(1.8rem, 2.5vw, 2.2rem);
-      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #fff;
-      margin-bottom: 0.8rem;
-    }
-
-    .module-desc {
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.6;
-    }
-
-    /* BADGE PRÓXIMAMENTE */
-    .stamp-container {
-      margin-top: 2rem;
-    }
-
-    .brutalist-stamp {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(220, 255, 0, 0.08);
-      border: 1px solid var(--accent-neon);
-      color: var(--accent-neon);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
       font-weight: 700;
-      padding: 0.5rem 1.2rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+    }
+
+    /* CLIP METÁLICO SUPERIOR */
+    .folder-clip {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 25px;
+      background: linear-gradient(135deg, #d4d4d4 0%, #666 50%, #333 100%);
+      border-radius: 4px;
+      border: 1px solid #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+    .folder-clip::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 6px;
+      background: #111;
       border-radius: 2px;
     }
 
-    .stamp-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent-neon);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-neon);
-      animation: pulseDot 1.8s infinite;
+    /* ETETA STICKER / ETIQUETA BLANCA PEGADA */
+    .folder-sticker {
+      background: #f4f4f0;
+      color: #000;
+      padding: 1.2rem;
+      border-radius: 2px;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: relative;
     }
 
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+    .sticker-header {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      border-bottom: 1px solid #bbb;
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sticker-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #000;
+    }
+
+    /* SELLO EN ROJO / VERDE CLASSIFIED */
+    .folder-stamp {
+      background: #ff2d55;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.6rem 1rem;
+      text-align: center;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 10px rgba(255, 45, 85, 0.3);
+      transform: rotate(-1.5deg);
+    }
+
+    /* DOCUMENTO INTERNO DESPLEGABLE CON ANIMACIÓN */
+    .folder-content-preview {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      padding: 1rem;
+      margin-top: 1.5rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+
+    .folder-card:hover .folder-content-preview {
+      background: rgba(220, 255, 0, 0.05);
+      border-color: var(--accent-neon);
+      color: #fff;
+    }
+
+    .folder-footer-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 0.8rem;
+      margin-top: 1.5rem;
     }
   </style>
 </head>
@@ -213,92 +279,147 @@
     <!-- HERO SECCIÓN -->
     <section class="artists-hero">
       <div class="hero-meta-artists">
-        <span>// ROSTER OFICIAL</span>
+        <span>// CLASSIFIED FILES</span>
         <span>GUATEMALA / GLOBAL</span>
       </div>
       <h1 class="artists-main-title">
         <span class="text-white-normal">Nuestros</span> <span class="accent-green-font">Artistas</span>
       </h1>
       <p class="artists-subtitle">
-        Impulsamos la identidad visual, dirección creativa y distribución estratégica de la nueva ola de talentos de la industria.
+        Expedientes y carpetas oficiales de proyectos en desarrollo, producción y distribución global.
       </p>
     </section>
 
-    <!-- GRID DE 5 TARJETAS ESTILO HOME -->
-    <section class="modules-grid">
+    <!-- GRID DE FOLDERS TIPO EXPEDIENTE -->
+    <section class="folder-grid">
       
-      <!-- TARJETA 01 -->
-      <div class="module-card">
+      <!-- FOLDER 01 -->
+      <div class="folder-card">
+        <div class="folder-clip"></div>
+        <div class="folder-tab">FILE // 001</div>
+        
         <div>
-          <div class="module-index">[01]</div>
-          <div class="module-title">Artista 01</div>
-          <p class="module-desc">Desarrollo de proyecto, curaduría de identidad y posicionamiento en plataformas globales.</p>
-        </div>
-        <div class="stamp-container">
-          <div class="brutalist-stamp">
-            <span class="stamp-dot"></span>
-            Próximamente
+          <div class="folder-sticker">
+            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
+            <div class="sticker-title">Artista 01</div>
           </div>
+
+          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
+
+          <div class="folder-content-preview">
+            &gt; Fotografía oficial<br>
+            &gt; Biografía & Press Kit<br>
+            &gt; Lanzamientos & Demos
+          </div>
+        </div>
+
+        <div class="folder-footer-meta">
+          <span>STATUS: RESTRICTED</span>
+          <span>PM-ART-001</span>
         </div>
       </div>
 
-      <!-- TARJETA 02 -->
-      <div class="module-card">
+      <!-- FOLDER 02 -->
+      <div class="folder-card">
+        <div class="folder-clip"></div>
+        <div class="folder-tab">FILE // 002</div>
+        
         <div>
-          <div class="module-index">[02]</div>
-          <div class="module-title">Artista 02</div>
-          <p class="module-desc">Desarrollo de proyecto, curaduría de identidad y posicionamiento en plataformas globales.</p>
-        </div>
-        <div class="stamp-container">
-          <div class="brutalist-stamp">
-            <span class="stamp-dot"></span>
-            Próximamente
+          <div class="folder-sticker">
+            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
+            <div class="sticker-title">Artista 02</div>
           </div>
+
+          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
+
+          <div class="folder-content-preview">
+            &gt; Fotografía oficial<br>
+            &gt; Biografía & Press Kit<br>
+            &gt; Lanzamientos & Demos
+          </div>
+        </div>
+
+        <div class="folder-footer-meta">
+          <span>STATUS: RESTRICTED</span>
+          <span>PM-ART-002</span>
         </div>
       </div>
 
-      <!-- TARJETA 03 -->
-      <div class="module-card">
+      <!-- FOLDER 03 -->
+      <div class="folder-card">
+        <div class="folder-clip"></div>
+        <div class="folder-tab">FILE // 003</div>
+        
         <div>
-          <div class="module-index">[03]</div>
-          <div class="module-title">Artista 03</div>
-          <p class="module-desc">Desarrollo de proyecto, curaduría de identidad y posicionamiento en plataformas globales.</p>
-        </div>
-        <div class="stamp-container">
-          <div class="brutalist-stamp">
-            <span class="stamp-dot"></span>
-            Próximamente
+          <div class="folder-sticker">
+            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
+            <div class="sticker-title">Artista 03</div>
           </div>
+
+          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
+
+          <div class="folder-content-preview">
+            &gt; Fotografía oficial<br>
+            &gt; Biografía & Press Kit<br>
+            &gt; Lanzamientos & Demos
+          </div>
+        </div>
+
+        <div class="folder-footer-meta">
+          <span>STATUS: RESTRICTED</span>
+          <span>PM-ART-003</span>
         </div>
       </div>
 
-      <!-- TARJETA 04 -->
-      <div class="module-card">
+      <!-- FOLDER 04 -->
+      <div class="folder-card">
+        <div class="folder-clip"></div>
+        <div class="folder-tab">FILE // 004</div>
+        
         <div>
-          <div class="module-index">[04]</div>
-          <div class="module-title">Artista 04</div>
-          <p class="module-desc">Desarrollo de proyecto, curaduría de identidad y posicionamiento en plataformas globales.</p>
-        </div>
-        <div class="stamp-container">
-          <div class="brutalist-stamp">
-            <span class="stamp-dot"></span>
-            Próximamente
+          <div class="folder-sticker">
+            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
+            <div class="sticker-title">Artista 04</div>
           </div>
+
+          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
+
+          <div class="folder-content-preview">
+            &gt; Fotografía oficial<br>
+            &gt; Biografía & Press Kit<br>
+            &gt; Lanzamientos & Demos
+          </div>
+        </div>
+
+        <div class="folder-footer-meta">
+          <span>STATUS: RESTRICTED</span>
+          <span>PM-ART-004</span>
         </div>
       </div>
 
-      <!-- TARJETA 05 -->
-      <div class="module-card">
+      <!-- FOLDER 05 -->
+      <div class="folder-card">
+        <div class="folder-clip"></div>
+        <div class="folder-tab">FILE // 005</div>
+        
         <div>
-          <div class="module-index">[05]</div>
-          <div class="module-title">Artista 05</div>
-          <p class="module-desc">Desarrollo de proyecto, curaduría de identidad y posicionamiento en plataformas globales.</p>
-        </div>
-        <div class="stamp-container">
-          <div class="brutalist-stamp">
-            <span class="stamp-dot"></span>
-            Próximamente
+          <div class="folder-sticker">
+            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
+            <div class="sticker-title">Artista 05</div>
           </div>
+
+          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
+
+          <div class="folder-content-preview">
+            &gt; Fotografía oficial<br>
+            &gt; Biografía & Press Kit<br>
+            &gt; Lanzamientos & Demos
+          </div>
+        </div>
+
+        <div class="folder-footer-meta">
+          <span>STATUS: RESTRICTED</span>
+          <span>PM-ART-005</span>
         </div>
       </div>
 
