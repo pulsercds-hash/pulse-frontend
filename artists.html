@@ -29,35 +29,6 @@
       padding: 0;
     }
 
-    /* VIDEO DE FONDO AMBIENTAL */
-    .bg-video-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .bg-video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.35;
-      filter: contrast(1.2) brightness(0.5);
-    }
-
-    .bg-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
-    }
-
     /* HEADER FIJO */
     header {
       position: fixed;
@@ -69,7 +40,7 @@
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
       pointer-events: none;
     }
 
@@ -91,9 +62,44 @@
       color: var(--accent-neon);
     }
 
-    /* HERO SECTION */
+    /* HERO SECTION CON VIDEO DE FONDO SOLO DETRÁS DEL TEXTO */
     .artists-hero {
-      padding: 12rem 5% 3rem;
+      position: relative;
+      padding: 12rem 5% 5rem;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* CONTENEDOR DEL VIDEO LIMITADO A LA SECCIÓN HERO */
+    .hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.45;
+      filter: contrast(1.1) brightness(0.6);
+    }
+
+    /* OVERLAY PARA DEGRADADO SUAVE Y DESVANECIMIENTO HACIA ABAJO */
+    .hero-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.95) 100%);
+    }
+
+    .hero-content-relative {
       position: relative;
       z-index: 2;
     }
@@ -140,14 +146,15 @@
       line-height: 1.6;
     }
 
-    /* GRID DE CARPETAS CON PERSPECTIVA 3D */
+    /* GRID DE CARPETAS CON FONDO NEGRO LIMPIO */
     .folder-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 4rem 3rem;
-      padding: 3rem 5% 8rem;
+      padding: 4rem 5% 8rem;
       position: relative;
       z-index: 2;
+      background: #000;
     }
 
     .artist-card-item {
@@ -159,7 +166,7 @@
       perspective: 1000px;
     }
 
-    /* WRAPPER 3D CON ILUMINACIÓN SUTIL Y SUAVE */
+    /* WRAPPER 3D CON RESPLANDOR NEÓN SUTIL */
     .folder-png-wrapper {
       position: relative;
       width: 100%;
@@ -177,12 +184,11 @@
       transform: translateZ(20px);
     }
 
-    /* HOVER SUAVE: RESPLANDOR NEÓN SUTIL (NO BRUSCO) */
     .artist-card-item:hover .folder-png-wrapper {
       filter: drop-shadow(0 0 18px rgba(220, 255, 0, 0.22)) drop-shadow(0 20px 30px rgba(0,0,0,0.9));
     }
 
-    /* PANEL DE METADATOS Y SELLO INTERACTIVO */
+    /* METADATOS Y SELLO */
     .artist-meta-clean {
       margin-top: 1.8rem;
       display: flex;
@@ -204,7 +210,6 @@
       color: var(--accent-neon);
     }
 
-    /* SELLO DINÁMICO */
     .artist-status-clean {
       font-family: var(--font-mono);
       font-size: 0.75rem;
@@ -271,14 +276,6 @@
 </head>
 <body class="theme-dark">
 
-  <!-- VIDEO DE FONDO AMBIENTAL -->
-  <div class="bg-video-container">
-    <video autoplay muted loop playsinline>
-      <source src="videos/fondoartistas[1].mp4" type="video/mp4">
-    </video>
-    <div class="bg-overlay"></div>
-  </div>
-
   <div id="page-curtain"></div>
 
   <!-- HEADER FIJO -->
@@ -288,21 +285,30 @@
   </header>
 
   <main>
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION CON EL VIDEO APLICADO ÚNICAMENTE AL ENCABEZADO -->
     <section class="artists-hero">
-      <div class="hero-meta-artists">
-        <span>// ROSTER OFICIAL</span>
-        <span>GUATEMALA / GLOBAL</span>
+      <div class="hero-video-bg">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="videos/fondoartistas[1].mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
       </div>
-      <h1 class="artists-main-title">
-        <span class="text-white-normal">Nuestros</span> <span class="accent-green-font">Artistas</span>
-      </h1>
-      <p class="artists-subtitle">
-        Expedientes y carpetas oficiales de proyectos en desarrollo, producción y distribución global.
-      </p>
+
+      <div class="hero-content-relative">
+        <div class="hero-meta-artists">
+          <span>// ROSTER OFICIAL</span>
+          <span>GUATEMALA / GLOBAL</span>
+        </div>
+        <h1 class="artists-main-title">
+          <span class="text-white-normal">Nuestros</span> <span class="accent-green-font">Artistas</span>
+        </h1>
+        <p class="artists-subtitle">
+          Expedientes y carpetas oficiales de proyectos en desarrollo, producción y distribución global.
+        </p>
+      </div>
     </section>
 
-    <!-- GRID CON EFECTO 3D Y SELLO INTERACTIVO -->
+    <!-- GRID DE CARPETAS -->
     <section class="folder-grid">
       
       <!-- ARTISTA 01 -->
@@ -384,7 +390,7 @@
     <div>GUATEMALA // GLOBAL OPS</div>
   </footer>
 
-  <!-- SCRIPT PARA EL EFECTO DE INCLINACIÓN 3D (TILT) -->
+  <!-- SCRIPT DE TILT 3D -->
   <script>
     document.querySelectorAll('.artist-card-item').forEach(card => {
       const wrapper = card.querySelector('.folder-png-wrapper');
