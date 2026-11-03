@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Usa la misma hoja de estilos global -->
   <link rel="stylesheet" href="styles.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -21,17 +20,14 @@
   <canvas id="webgl-canvas"></canvas>
   <div id="page-curtain"></div>
 
-  <!-- HEADER GLOBAL -->
+  <!-- HEADER SIMPLIFICADO: SOLO LOGO Y BOTÓN INICIO -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <nav>
-      <a href="team.html" class="nav-link" onclick="triggerCurtain(event, 'team.html')"><span>Team</span></a>
-      <a href="artists.html" class="nav-link" onclick="triggerCurtain(event, 'artists.html')"><span>Artistas</span></a>
-      <a href="register.html" class="nav-link" onclick="triggerCurtain(event, 'register.html')"><span>Registrar</span></a>
+      <a href="index.html" class="nav-link" onclick="triggerCurtain(event, 'index.html')"><span>← Inicio</span></a>
     </nav>
   </header>
 
-  <!-- CONTENIDO ESPECÍFICO DE TEAM -->
   <main>
     <section class="panel" data-theme="dark">
       <div class="hero-meta">
