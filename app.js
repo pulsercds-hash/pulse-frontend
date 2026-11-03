@@ -1,4 +1,4 @@
-// 1. INERCIA DE SCROLL SUAVE (LENIS + GSAP SCROLLTRIGGER)
+// 1. SCROLL INERCIAL CON LENIS + GSAP SCROLLTRIGGER
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -12,7 +12,7 @@ gsap.ticker.add((time) => {
 });
 gsap.ticker.lagSmoothing(0);
 
-// 2. CAMBIO DE TEMA Y COLOR DINÁMICO AL HACER SCROLL
+// 2. CAMBIO DE TEMA FLUIDO AL HACER SCROLL
 gsap.utils.toArray('.panel').forEach((panel) => {
   const theme = panel.getAttribute('data-theme');
   
@@ -35,7 +35,7 @@ function updateTheme(theme) {
   }
 }
 
-// 3. FONDO THREE.JS LIGERO Y FLUIDO
+// 3. FONDO 3D THREE.JS OPTIMIZADO
 const canvas = document.getElementById('webgl-canvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -44,7 +44,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
 const particlesGeometry = new THREE.BufferGeometry();
-const particlesCount = 1200;
+const particlesCount = 1000;
 const posArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
@@ -82,7 +82,7 @@ window.addEventListener('resize', () => {
 });
 
 // 4. TRANSICIÓN DE CORTINA DE PÁGINA
-function triggerCurtain(event, url) {
+function triggerCurtain(event, targetUrl) {
   event.preventDefault();
   const curtain = document.getElementById('page-curtain');
   
@@ -103,4 +103,11 @@ function triggerCurtain(event, url) {
       }, 200);
     }
   });
+}
+
+// 5. MANEJADOR DE ENVÍO DE REGISTRO
+function handleRegister(event) {
+  event.preventDefault();
+  alert('¡Solicitud de registro enviada con éxito al sistema de Pulse Media! Nos pondremos en contacto.');
+  event.target.reset();
 }
