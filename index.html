@@ -5,22 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulse Media — Distribuidora e Identidad Artística</title>
   
-  <!-- Fuentes Google: Plus Jakarta Sans -->
+  <!-- Fuentes Google: Plus Jakarta Sans y Orbitron -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     /* ==========================================
        ESTILOS MINIMALISTAS (DARK SAAS / UNDERGROUND)
        ========================================== */
     :root {
-      --bg-main: #08080a;
-      --bg-card: rgba(18, 18, 22, 0.65);
+      --bg-main: #060608;
+      --bg-card: rgba(16, 16, 22, 0.7);
       --border-card: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(255, 255, 255, 0.2);
+      --border-glow: rgba(255, 255, 255, 0.25);
       --text-white: #ffffff;
       --text-gray: #8e8e9f;
+      --neon-pulse: rgba(140, 40, 255, 0.4);
     }
 
     * {
@@ -40,17 +41,34 @@
       position: relative;
     }
 
-    /* DESTELLOS AMBIENTALES DE FONDO */
-    .ambient-glow {
+    /* DESTELLOS AMBIENTALES ANIMADOS DE FONDO */
+    .ambient-glow-1 {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(120, 0, 255, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
+      top: -150px;
+      left: 20%;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatGlow 12s infinite alternate ease-in-out;
+    }
+
+    .ambient-glow-2 {
       position: fixed;
       width: 450px;
       height: 450px;
-      background: radial-gradient(circle, rgba(112, 0, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+      bottom: -100px;
+      right: 15%;
       pointer-events: none;
       z-index: 0;
+      animation: floatGlow 10s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 50px) scale(1.15); }
     }
 
     /* PANTALLA DE CARGA */
@@ -70,9 +88,10 @@
     }
 
     .loader-title {
+      font-family: 'Orbitron', sans-serif;
       font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 6px;
+      font-weight: 900;
+      letter-spacing: 8px;
       text-transform: uppercase;
       color: var(--text-white);
       margin-bottom: 2rem;
@@ -106,7 +125,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.2rem 8%;
-      background: rgba(8, 8, 10, 0.85);
+      background: rgba(6, 6, 8, 0.85);
       backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
@@ -115,8 +134,9 @@
     }
 
     .logo {
+      font-family: 'Orbitron', sans-serif;
       font-size: 1.1rem;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--text-white);
@@ -163,16 +183,17 @@
       margin-bottom: 1.5rem;
     }
 
+    /* REDISEÑO DEL TÍTULO PULSE MEDIA */
     .hero-title {
-      font-size: clamp(2.8rem, 7vw, 4.8rem);
-      font-weight: 800;
-      letter-spacing: 2px;
-      line-height: 1.1;
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 5.2rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      line-height: 1.05;
       margin-bottom: 1.8rem;
       text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.4) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff;
+      text-shadow: 0 0 25px var(--neon-pulse), 0 0 50px rgba(255, 255, 255, 0.15);
     }
 
     .story-card {
@@ -204,7 +225,7 @@
       font-weight: 600;
     }
 
-    /* CONTENEDOR DE VIDEOS SHOWCASE UNDERGROUND SILENCIADOS */
+    /* VIDEOS PURE UNDERGROUND (BLOQUEADOS Y SILENCIADOS) */
     .video-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -225,7 +246,7 @@
     .video-card:hover {
       border-color: var(--border-glow);
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
     }
 
     .video-container {
@@ -233,7 +254,7 @@
       width: 100%;
       padding-bottom: 56.25%;
       height: 0;
-      pointer-events: none; /* Inhabilita clicks manuales para mantener aspecto minimalista continuo */
+      overflow: hidden;
     }
 
     .video-container iframe {
@@ -243,13 +264,14 @@
       width: 100%;
       height: 100%;
       border: none;
-      filter: grayscale(20%) contrast(105%);
+      filter: grayscale(15%) contrast(108%);
+      pointer-events: none; /* BLOQUEA CLICKS, CONTROLES Y ENLACES EXTERNOS */
     }
 
     .video-info {
       padding: 1.2rem;
       text-align: left;
-      background: rgba(12, 12, 16, 0.9);
+      background: rgba(10, 10, 14, 0.95);
       border-top: 1px solid var(--border-card);
     }
 
@@ -434,9 +456,7 @@
       letter-spacing: 1px;
     }
 
-    /* ==========================================
-       MODAL DE AUTENTICACIÓN SIN SCROLLBAR
-       ========================================== */
+    /* MODAL SIN SCROLLBAR FEA */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -577,7 +597,9 @@
 </head>
 <body>
 
-  <div class="ambient-glow"></div>
+  <!-- LUCES AMBIENTALES DINÁMICAS -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
 
   <!-- PANTALLA DE CARGA -->
   <div id="loader-screen">
@@ -624,34 +646,34 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 2: VIDEOS SILENCIADOS UNDERGROUND SHOWCASE -->
+    <!-- SECCIÓN 2: VIDEOS SILENCIADOS SIN MARCAS NI SUBTÍTULOS -->
     <section>
       <div class="badge">Inspiración & Identidad</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Estética de la Escena Global</h2>
       <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 0.95rem; max-width: 600px;">
-        Visualizamos la música con la misma excelencia y dirección de arte que define a los máximos exponentes del movimiento urbano.
+        Visualizamos la música con la misma excelencia y dirección de arte que define al movimiento de la industria actual.
       </p>
 
       <div class="video-grid">
-        <!-- Video 1: Tainy - Mañana (Silenciado y Loop) -->
+        <!-- Video 1: Tu Identidad Sonora -->
         <div class="video-card">
           <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/LK7eHoocQlE?autoplay=1&mute=1&controls=0&loop=1&playlist=LK7eHoocQlE&modestbranding=1" title="Tainy Visual Concept" allow="autoplay" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/LK7eHoocQlE?autoplay=1&mute=1&controls=0&loop=1&playlist=LK7eHoocQlE&modestbranding=1&rel=0&showinfo=0&disablekb=1&cc_load_policy=0" title="Identidad Visual" allow="autoplay" allowfullscreen></iframe>
           </div>
           <div class="video-info">
-            <div class="video-title">Dirección de Arte & Sonido</div>
-            <div class="video-sub">Tainy — Identidad Sonora Underground</div>
+            <div class="video-title">Tu Identidad Sonora</div>
+            <div class="video-sub">Desarrollo visual y concepto de arte independiente</div>
           </div>
         </div>
 
-        <!-- Video 2: Bad Bunny - BOKeTE (Silenciado y Loop) -->
+        <!-- Video 2: Identidad & Movimiento Visual -->
         <div class="video-card">
           <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&modestbranding=1" title="Bad Bunny Aesthetic" allow="autoplay" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&modestbranding=1&rel=0&showinfo=0&disablekb=1&cc_load_policy=0" title="Movimiento Creativo" allow="autoplay" allowfullscreen></iframe>
           </div>
           <div class="video-info">
-            <div class="video-title">Cultura & Movimiento</div>
-            <div class="video-sub">Bad Bunny — Desarrollo de Imagen</div>
+            <div class="video-title">Identidad & Movimiento Visual</div>
+            <div class="video-sub">Cultura, presencia e imagen de artista</div>
           </div>
         </div>
       </div>
