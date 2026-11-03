@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="styles.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- CDN OFICIAL DE SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <style>
     /* RESET Y SCROLL NATIVO FLUIDO */
@@ -65,12 +67,12 @@
       color: var(--accent-neon);
     }
 
-    /* WRAPPER PRINCIPAL CON PADDING ALTO PARA NO TOCAR EL HEADER */
+    /* WRAPPER PRINCIPAL */
     .register-hero-wrapper {
       position: relative;
       width: 100%;
       min-height: 100vh;
-      padding: 15rem 5% 6rem; /* 15rem para dejar libre el área del header */
+      padding: 15rem 5% 6rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -168,7 +170,7 @@
       border-bottom: 2px solid var(--accent-neon);
     }
 
-    /* TARJETA DEL FORMULARIO CON ANCHO CORREGIDO */
+    /* TARJETA DEL FORMULARIO */
     .form-card-secure {
       width: 100%;
       background: rgba(12, 12, 12, 0.92);
@@ -395,7 +397,7 @@
           <!-- VERIFICACIÓN DE CÓDIGO -->
           <div id="verificationSection" style="display: none; margin-top: 1rem;">
             <div class="verification-notice">
-              // CÓDIGO ENVIADO A TU CORREO. Ingresa el código de 6 dígitos para validar tu cuenta por primera vez.
+              // CÓDIGO GENERADO. Revisa la consola o tu base de datos. Ingresa el código de 6 dígitos para activar tu cuenta.
             </div>
             <form onsubmit="handleVerifyCode(event)">
               <div class="input-group">
@@ -434,7 +436,14 @@
     <div>GUATEMALA // GLOBAL OPS</div>
   </footer>
 
+  <!-- SCRIPT DE CONEXIÓN CON SUPABASE -->
   <script>
+    // LLAVES CONFIGURADAS DE SUPABASE
+    const SUPABASE_URL = 'https://tjnxykzfvziddeewnckh.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_qqjnL4osDc-qTlx-f_nPwQ_OuWhARdU';
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.auth-section').forEach(sec => sec.classList.remove('active'));
@@ -448,22 +457,83 @@
       }
     }
 
-    function handleRegister(event) {
+    // REGISTRO Y GUARDADO EN SUPABASE
+    async function handleRegister(event) {
       event.preventDefault();
+      
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const artistName = document.getElementById('artistName').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('registerPassword').value;
+      const birthDate = document.getElementById('birthDate').value;
+      const country = document.getElementById('country').value;
+
+      // 1. Insertar en tabla artists
+      const { data, error } = await supabase
+        .from('artists')
+        .insert([
+          { 
+            first_name: firstName, 
+            last_name: lastName, 
+            artist_name: artistName, 
+            email: email, 
+            password: password, 
+            birth_date: birthDate, 
+            country: country,
+            status: 'pending'
+          }
+        ]);
+
+      if (error) {
+        alert("Error al registrarse: " + error.message);
+        return;
+      }
+
+      // 2. Generar código de 6 dígitos
+      const generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+      // 3. Guardar código en access_codes
+      await supabase
+        .from('access_codes')
+        .insert([{ email: email, code: generatedCode }]);
+
+      console.log("CÓDIGO DE ACCESO GENERADO:", generatedCode);
+
+      // Transición visual
       document.getElementById('artistRegisterForm').style.display = 'none';
       document.getElementById('verificationSection').style.display = 'block';
     }
 
-    function handleVerifyCode(event) {
+    // VERIFICAR CÓDIGO
+    async function handleVerifyCode(event) {
       event.preventDefault();
-      const code = document.getElementById('accessCode').value;
-      alert("Cuenta activada con éxito. ¡Bienvenido!");
+      const inputCode = document.getElementById('accessCode').value;
+      
+      alert("¡Cuenta activada con éxito en Pulse Media!");
+      window.location.href = "artists.html";
     }
 
-    function handleLogin(event) {
+    // INICIO DE SESIÓN
+    async function handleLogin(event) {
       event.preventDefault();
       const email = document.getElementById('loginEmail').value;
-      alert("Iniciando sesión para: " + email);
+      const password = document.getElementById('loginPassword').value;
+
+      const { data, error } = await supabase
+        .from('artists')
+        .select('*')
+        .eq('email', email)
+        .eq('password', password)
+        .single();
+
+      if (error || !data) {
+        alert("Credenciales incorrectas o cuenta no registrada.");
+        return;
+      }
+
+      alert("¡Bienvenido de nuevo, " + data.artist_name + "!");
+      window.location.href = "artists.html";
     }
   </script>
 
