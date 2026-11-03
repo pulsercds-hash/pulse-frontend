@@ -108,7 +108,7 @@
       line-height: 1.6;
     }
 
-    /* CONTENEDOR DE FOLDERS / EXPEDIENTES ESTILO IMAGEN */
+    /* GRID DE CARPETAS USANDO TUS IMÁGENES REALES COMO FONDO */
     .folder-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -118,150 +118,124 @@
       z-index: 2;
     }
 
-    /* ESTRUCTURA DEL FOLDER DE MANILA OSCURO */
-    .folder-card {
-      background: #181512;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 6px;
+    .folder-card-real {
       position: relative;
-      padding: 2.5rem 2rem 2rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
-      cursor: pointer;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+      width: 100%;
+      height: 480px;
+      border-radius: 8px;
       overflow: hidden;
-      min-height: 440px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+      cursor: pointer;
+    }
+
+    .folder-card-real:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-neon);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(220, 255, 0, 0.15);
+    }
+
+    /* IMAGEN DE FONDO DE LA CARPETA SUBIDA A GITHUB */
+    .folder-bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .folder-card-real:hover .folder-bg-img {
+      transform: scale(1.03);
+      opacity: 1;
+    }
+
+    /* CAPA DE SUPERPOSICIÓN PARA TEXTOS E INTERACTIVIDAD */
+    .folder-overlay-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 2.5rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
     }
 
-    .folder-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--accent-neon);
-    }
-
-    /* PESTAÑA LATERAL DEL FOLDER (TAB) */
-    .folder-tab {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: #25211c;
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      border-bottom-left-radius: 8px;
-      padding: 0.4rem 1.2rem;
+    .folder-tag-top {
       font-family: var(--font-mono);
       font-size: 0.75rem;
       color: var(--accent-neon);
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 700;
-    }
-
-    /* CLIP METÁLICO SUPERIOR */
-    .folder-clip {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 25px;
-      background: linear-gradient(135deg, #d4d4d4 0%, #666 50%, #333 100%);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.3rem 0.8rem;
       border-radius: 4px;
-      border: 1px solid #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      z-index: 10;
-    }
-    .folder-clip::after {
-      content: '';
-      position: absolute;
-      top: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 6px;
-      background: #111;
-      border-radius: 2px;
+      align-self: flex-start;
+      border: 1px solid rgba(220, 255, 0, 0.3);
     }
 
-    /* ETETA STICKER / ETIQUETA BLANCA PEGADA */
-    .folder-sticker {
-      background: #f4f4f0;
-      color: #000;
-      padding: 1.2rem;
-      border-radius: 2px;
-      margin-top: 1rem;
-      border: 1px solid #ccc;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      position: relative;
+    .folder-artist-box {
+      background: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1.5rem;
+      border-radius: 6px;
     }
 
-    .sticker-header {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.7;
-      border-bottom: 1px solid #bbb;
-      padding-bottom: 0.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .sticker-title {
-      font-size: 1.5rem;
+    .folder-artist-name {
+      font-size: 1.8rem;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #000;
+      color: #fff;
+      margin-bottom: 0.4rem;
     }
 
-    /* SELLO EN ROJO / VERDE CLASSIFIED */
-    .folder-stamp {
-      background: #ff2d55;
-      color: #fff;
+    .folder-artist-genre {
       font-family: var(--font-mono);
       font-size: 0.8rem;
-      font-weight: 800;
-      padding: 0.6rem 1rem;
-      text-align: center;
-      letter-spacing: 4px;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* BADGE DE ESTADO DINÁMICO */
+    .folder-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(220, 255, 0, 0.1);
+      border: 1px solid var(--accent-neon);
+      color: var(--accent-neon);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.4rem 1rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
       border-radius: 2px;
-      margin-top: 1.5rem;
-      box-shadow: 0 4px 10px rgba(255, 45, 85, 0.3);
-      transform: rotate(-1.5deg);
+      margin-top: 1rem;
     }
 
-    /* DOCUMENTO INTERNO DESPLEGABLE CON ANIMACIÓN */
-    .folder-content-preview {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px dashed rgba(255, 255, 255, 0.2);
-      padding: 1rem;
-      margin-top: 1.5rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.6);
-      transition: all 0.3s ease;
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-neon);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-neon);
+      animation: pulseDot 1.8s infinite;
     }
 
-    .folder-card:hover .folder-content-preview {
-      background: rgba(220, 255, 0, 0.05);
-      border-color: var(--accent-neon);
-      color: #fff;
-    }
-
-    .folder-footer-meta {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.4);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 0.8rem;
-      margin-top: 1.5rem;
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
   </style>
 </head>
@@ -279,7 +253,7 @@
     <!-- HERO SECCIÓN -->
     <section class="artists-hero">
       <div class="hero-meta-artists">
-        <span>// CLASSIFIED FILES</span>
+        <span>// ROSTER OFICIAL</span>
         <span>GUATEMALA / GLOBAL</span>
       </div>
       <h1 class="artists-main-title">
@@ -290,136 +264,81 @@
       </p>
     </section>
 
-    <!-- GRID DE FOLDERS TIPO EXPEDIENTE -->
+    <!-- GRID DE TARJETAS CON LAS FOTOS REALES DE GITHUB -->
     <section class="folder-grid">
       
-      <!-- FOLDER 01 -->
-      <div class="folder-card">
-        <div class="folder-clip"></div>
-        <div class="folder-tab">FILE // 001</div>
-        
-        <div>
-          <div class="folder-sticker">
-            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
-            <div class="sticker-title">Artista 01</div>
+      <!-- ARTISTA 01 -->
+      <div class="folder-card-real">
+        <img src="artists/artista1.jpg" alt="Artista 01" class="folder-bg-img">
+        <div class="folder-overlay-content">
+          <div class="folder-tag-top">FILE // 001</div>
+          <div class="folder-artist-box">
+            <div class="folder-artist-name">Artista 01</div>
+            <div class="folder-artist-genre">Urban / New Wave</div>
+            <div class="folder-status-badge">
+              <span class="status-dot"></span> Próximamente
+            </div>
           </div>
-
-          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
-
-          <div class="folder-content-preview">
-            &gt; Fotografía oficial<br>
-            &gt; Biografía & Press Kit<br>
-            &gt; Lanzamientos & Demos
-          </div>
-        </div>
-
-        <div class="folder-footer-meta">
-          <span>STATUS: RESTRICTED</span>
-          <span>PM-ART-001</span>
         </div>
       </div>
 
-      <!-- FOLDER 02 -->
-      <div class="folder-card">
-        <div class="folder-clip"></div>
-        <div class="folder-tab">FILE // 002</div>
-        
-        <div>
-          <div class="folder-sticker">
-            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
-            <div class="sticker-title">Artista 02</div>
+      <!-- ARTISTA 02 -->
+      <div class="folder-card-real">
+        <img src="artists/artista2.jpg" alt="Artista 02" class="folder-bg-img">
+        <div class="folder-overlay-content">
+          <div class="folder-tag-top">FILE // 002</div>
+          <div class="folder-artist-box">
+            <div class="folder-artist-name">Artista 02</div>
+            <div class="folder-artist-genre">Regional Urbano</div>
+            <div class="folder-status-badge">
+              <span class="status-dot"></span> Próximamente
+            </div>
           </div>
-
-          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
-
-          <div class="folder-content-preview">
-            &gt; Fotografía oficial<br>
-            &gt; Biografía & Press Kit<br>
-            &gt; Lanzamientos & Demos
-          </div>
-        </div>
-
-        <div class="folder-footer-meta">
-          <span>STATUS: RESTRICTED</span>
-          <span>PM-ART-002</span>
         </div>
       </div>
 
-      <!-- FOLDER 03 -->
-      <div class="folder-card">
-        <div class="folder-clip"></div>
-        <div class="folder-tab">FILE // 003</div>
-        
-        <div>
-          <div class="folder-sticker">
-            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
-            <div class="sticker-title">Artista 03</div>
+      <!-- ARTISTA 03 -->
+      <div class="folder-card-real">
+        <img src="artists/artista3.jpg" alt="Artista 03" class="folder-bg-img">
+        <div class="folder-overlay-content">
+          <div class="folder-tag-top">FILE // 003</div>
+          <div class="folder-artist-box">
+            <div class="folder-artist-name">Artista 03</div>
+            <div class="folder-artist-genre">Alternative Sound</div>
+            <div class="folder-status-badge">
+              <span class="status-dot"></span> Próximamente
+            </div>
           </div>
-
-          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
-
-          <div class="folder-content-preview">
-            &gt; Fotografía oficial<br>
-            &gt; Biografía & Press Kit<br>
-            &gt; Lanzamientos & Demos
-          </div>
-        </div>
-
-        <div class="folder-footer-meta">
-          <span>STATUS: RESTRICTED</span>
-          <span>PM-ART-003</span>
         </div>
       </div>
 
-      <!-- FOLDER 04 -->
-      <div class="folder-card">
-        <div class="folder-clip"></div>
-        <div class="folder-tab">FILE // 004</div>
-        
-        <div>
-          <div class="folder-sticker">
-            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
-            <div class="sticker-title">Artista 04</div>
+      <!-- ARTISTA 04 -->
+      <div class="folder-card-real">
+        <img src="artists/artista4.jpg" alt="Artista 04" class="folder-bg-img">
+        <div class="folder-overlay-content">
+          <div class="folder-tag-top">FILE // 004</div>
+          <div class="folder-artist-box">
+            <div class="folder-artist-name">Artista 04</div>
+            <div class="folder-artist-genre">Producer / Composer</div>
+            <div class="folder-status-badge">
+              <span class="status-dot"></span> Próximamente
+            </div>
           </div>
-
-          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
-
-          <div class="folder-content-preview">
-            &gt; Fotografía oficial<br>
-            &gt; Biografía & Press Kit<br>
-            &gt; Lanzamientos & Demos
-          </div>
-        </div>
-
-        <div class="folder-footer-meta">
-          <span>STATUS: RESTRICTED</span>
-          <span>PM-ART-004</span>
         </div>
       </div>
 
-      <!-- FOLDER 05 -->
-      <div class="folder-card">
-        <div class="folder-clip"></div>
-        <div class="folder-tab">FILE // 005</div>
-        
-        <div>
-          <div class="folder-sticker">
-            <div class="sticker-header">PULSE MEDIA — ARTIST DOSSIER</div>
-            <div class="sticker-title">Artista 05</div>
+      <!-- ARTISTA 05 -->
+      <div class="folder-card-real">
+        <img src="artists/artista5.jpg" alt="Artista 05" class="folder-bg-img">
+        <div class="folder-overlay-content">
+          <div class="folder-tag-top">FILE // 005</div>
+          <div class="folder-artist-box">
+            <div class="folder-artist-name">Artista 05</div>
+            <div class="folder-artist-genre">Secret Roster</div>
+            <div class="folder-status-badge">
+              <span class="status-dot"></span> Próximamente
+            </div>
           </div>
-
-          <div class="folder-stamp">CLASSIFIED / PRÓXIMAMENTE</div>
-
-          <div class="folder-content-preview">
-            &gt; Fotografía oficial<br>
-            &gt; Biografía & Press Kit<br>
-            &gt; Lanzamientos & Demos
-          </div>
-        </div>
-
-        <div class="folder-footer-meta">
-          <span>STATUS: RESTRICTED</span>
-          <span>PM-ART-005</span>
         </div>
       </div>
 
