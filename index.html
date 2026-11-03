@@ -39,9 +39,7 @@
       line-height: 1.7;
     }
 
-    /* ==========================================
-       PANTALLA DE CARGA MINIMALISTA
-       ========================================== */
+    /* PANTALLA DE CARGA */
     #loader-screen {
       position: fixed;
       top: 0;
@@ -82,9 +80,6 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
-    /* ==========================================
-       CONTENIDO PRINCIPAL & NAVBAR
-       ========================================== */
     #main-content {
       opacity: 0;
       transition: opacity 0.8s ease;
@@ -122,7 +117,6 @@
       text-transform: uppercase;
     }
 
-    /* SECCIONES Y ANIMACIONES DE APARICIÓN */
     section {
       padding: 5rem 6%;
       max-width: 950px;
@@ -194,7 +188,6 @@
       font-weight: 600;
     }
 
-    /* GRID DE PILARES */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -230,7 +223,6 @@
       line-height: 1.6;
     }
 
-    /* FAQ ACCORDION */
     .faq-container {
       width: 100%;
       display: flex;
@@ -274,7 +266,6 @@
       display: block;
     }
 
-    /* BOTONES */
     .btn-group {
       display: flex;
       flex-wrap: wrap;
@@ -325,7 +316,6 @@
       box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
     }
 
-    /* CONTACTOS */
     .contact-card {
       display: flex;
       flex-direction: column;
@@ -368,7 +358,7 @@
     }
 
     /* ==========================================
-       MODAL DE AUTENTICACIÓN OTP (NUEVO)
+       MODAL DE AUTENTICACIÓN (REGISTRO / LOGIN)
        ========================================== */
     .modal-overlay {
       position: fixed;
@@ -399,11 +389,13 @@
       border-radius: 24px;
       padding: 2.5rem 2rem;
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       position: relative;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
       transform: scale(0.9);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .modal-overlay.active .modal-box {
@@ -430,26 +422,26 @@
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--text-white);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .modal-subtitle {
       font-size: 0.85rem;
       color: var(--text-gray);
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
       line-height: 1.5;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
-      margin-bottom: 1.8rem;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
       text-align: left;
     }
 
     .form-group label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--text-gray);
       text-transform: uppercase;
@@ -458,8 +450,8 @@
 
     .input-field {
       width: 100%;
-      padding: 0.9rem 1.2rem;
-      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-card);
       color: var(--text-white);
@@ -473,35 +465,6 @@
       border-color: var(--text-white);
     }
 
-    /* TECLADO DE 6 DIGITOS OTP */
-    .otp-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .otp-input {
-      width: 48px;
-      height: 56px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-card);
-      color: var(--text-white);
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-align: center;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    .otp-input:focus {
-      border-color: #ffffff;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-    }
-
-    /* RESPONSIVO MÓVIL */
     @media (max-width: 600px) {
       section {
         padding: 3.5rem 5%;
@@ -511,11 +474,6 @@
       }
       .btn {
         max-width: 100%;
-      }
-      .otp-input {
-        width: 40px;
-        height: 50px;
-        font-size: 1.2rem;
       }
     }
   </style>
@@ -675,60 +633,86 @@
   </div>
 
   <!-- ==========================================
-       MODAL FLOTANTE DE REGISTRO / LOGIN (OTP)
+       MODAL DE AUTENTICACIÓN (REGISTRO Y LOGIN)
        ========================================== -->
   <div class="modal-overlay" id="auth-modal">
     <div class="modal-box">
       <button class="close-modal" onclick="closeAuthModal()">&times;</button>
       
-      <!-- PASO 1: INGRESAR CORREO Y PAÍS -->
-      <div id="step-1">
-        <div class="modal-title">Acceder a Pulse Media</div>
-        <div class="modal-subtitle">Ingresa tu correo para recibir un codigo de acceso seguro. Sin contraseñas.</div>
+      <!-- PASO 1: VERIFICAR CORREO -->
+      <div id="step-email">
+        <div class="modal-title">Acceso Artistas</div>
+        <div class="modal-subtitle">Ingresa tu correo para continuar en Pulse Media.</div>
         
         <div class="form-group">
-          <div>
-            <label>Correo Electrónico</label>
-            <input type="email" class="input-field" id="user-email" placeholder="tu@artista.com" style="margin-top: 0.4rem;">
-          </div>
-          <div>
-            <label>País de Origen</label>
-            <select class="input-field" id="user-country" style="margin-top: 0.4rem; background: #16161e;">
-              <option value="Guatemala">Guatemala 🇬🇹</option>
-              <option value="México">México 🇲🇽</option>
-              <option value="Colombia">Colombia 🇨🇴</option>
-              <option value="Estados Unidos">Estados Unidos 🇺🇸</option>
-              <option value="España">España 🇪🇸</option>
-              <option value="Otro">Otro País</option>
-            </select>
-          </div>
+          <label>Correo Electrónico</label>
+          <input type="email" class="input-field" id="check-email" placeholder="tu@artista.com">
         </div>
 
-        <button class="btn btn-primary" onclick="sendOtpCode()" style="max-width: 100%;">
-          Enviar Código por Correo
+        <button class="btn btn-primary" onclick="checkEmailExists()" style="max-width: 100%;">
+          Continuar
         </button>
       </div>
 
-      <!-- PASO 2: INGRESAR CÓDIGO DE 6 DÍGITOS -->
-      <div id="step-2" style="display: none;">
-        <div class="modal-title">Verifica tu Código</div>
-        <div class="modal-subtitle">Enviamos un código de 6 dígitos a <span id="sent-email-display" style="color: #fff; font-weight: 600;"></span></div>
-
-        <div class="otp-container">
-          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 1)">
-          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 2)">
-          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 3)">
-          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 4)">
-          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 5)">
-          <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 6)">
+      <!-- PASO 2A: SI YA TIENE CUENTA (LOGIN) -->
+      <div id="step-login" style="display: none;">
+        <div class="modal-title">¡Bienvenido de vuelta!</div>
+        <div class="modal-subtitle">Ingresa tu contraseña para acceder a tu panel.</div>
+        
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" class="input-field" id="login-password" placeholder="Tu contraseña">
         </div>
 
-        <button class="btn btn-primary" onclick="verifyOtpCode()" style="max-width: 100%; margin-top: 1rem;">
-          Ingresar al Panel
+        <button class="btn btn-primary" onclick="submitLogin()" style="max-width: 100%;">
+          Iniciar Sesión
         </button>
         
-        <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 1.2rem; cursor: pointer;" onclick="backToStep1()">
-          ← Cambiar correo electrónico
+        <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 1.2rem; cursor: pointer;" onclick="resetAuthModal()">
+          ← Usar otro correo
+        </p>
+      </div>
+
+      <!-- PASO 2B: SI ES NUEVO (REGISTRO COMPLETO) -->
+      <div id="step-register" style="display: none;">
+        <div class="modal-title">Crear Cuenta de Artista</div>
+        <div class="modal-subtitle">Completa tus datos para configurar tu perfil en la plataforma.</div>
+        
+        <div class="form-group">
+          <label>Nombre Real</label>
+          <input type="text" class="input-field" id="reg-name" placeholder="Ej. Juan Pérez">
+
+          <label>Nombre Artístico</label>
+          <input type="text" class="input-field" id="reg-artist-name" placeholder="Ej. Jay Flow">
+
+          <div style="display: flex; gap: 1rem;">
+            <div style="flex: 1;">
+              <label>Edad</label>
+              <input type="number" class="input-field" id="reg-age" placeholder="Ej. 22">
+            </div>
+            <div style="flex: 2;">
+              <label>País</label>
+              <select class="input-field" id="reg-country" style="background: #16161e;">
+                <option value="Guatemala">Guatemala 🇬🇹</option>
+                <option value="México">México 🇲🇽</option>
+                <option value="Colombia">Colombia 🇨🇴</option>
+                <option value="Estados Unidos">Estados Unidos 🇺🇸</option>
+                <option value="España">España 🇪🇸</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <label>Contraseña de Acceso</label>
+          <input type="password" class="input-field" id="reg-password" placeholder="Crea una contraseña segura">
+        </div>
+
+        <button class="btn btn-primary" onclick="submitRegister()" style="max-width: 100%;">
+          Completar Registro
+        </button>
+
+        <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 1.2rem; cursor: pointer;" onclick="resetAuthModal()">
+          ← Usar otro correo
         </p>
       </div>
 
@@ -738,7 +722,6 @@
   <!-- JAVASCRIPT -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Loader JS
       const progressBar = document.getElementById("progress-bar");
       const loaderScreen = document.getElementById("loader-screen");
       const mainContent = document.getElementById("main-content");
@@ -763,7 +746,6 @@
         }
       }, 90);
 
-      // Scroll Reveal
       const sections = document.querySelectorAll("section");
       const checkScroll = () => {
         const triggerBottom = window.innerHeight * 0.85;
@@ -779,15 +761,15 @@
       checkScroll();
     });
 
-    // Función FAQ
     function toggleFaq(element) {
       element.classList.toggle("active");
     }
 
-    // LÓGICA DE MODAL Y OTP
+    // LÓGICA DE MODAL & REGISTRO
     const authModal = document.getElementById("auth-modal");
-    const step1 = document.getElementById("step-1");
-    const step2 = document.getElementById("step-2");
+    const stepEmail = document.getElementById("step-email");
+    const stepLogin = document.getElementById("step-login");
+    const stepRegister = document.getElementById("step-register");
 
     function openAuthModal() {
       authModal.classList.add("active");
@@ -795,49 +777,56 @@
 
     function closeAuthModal() {
       authModal.classList.remove("active");
+      resetAuthModal();
     }
 
-    function sendOtpCode() {
-      const email = document.getElementById("user-email").value;
+    function resetAuthModal() {
+      stepLogin.style.display = "none";
+      stepRegister.style.display = "none";
+      stepEmail.style.display = "block";
+      document.getElementById("check-email").value = "";
+    }
+
+    // Simulación inteligente: Si el correo incluye "test", fingimos que ya existe; si no, es nuevo registro.
+    function checkEmailExists() {
+      const email = document.getElementById("check-email").value;
       if (!email || !email.includes("@")) {
-        alert("Por favor ingresa un correo electrónico válido.");
+        alert("Ingresa un correo electrónico válido.");
         return;
       }
 
-      document.getElementById("sent-email-display").innerText = email;
-      step1.style.display = "none";
-      step2.style.display = "block";
+      stepEmail.style.display = "none";
 
-      // Enfocar el primer dígito automáticamente
-      setTimeout(() => {
-        document.querySelectorAll(".otp-input")[0].focus();
-      }, 100);
-    }
-
-    function backToStep1() {
-      step2.style.display = "none";
-      step1.style.display = "block";
-    }
-
-    // Saltar automáticamente de casilla al escribir el código de 6 dígitos
-    function moveOtpFocus(element, index) {
-      const inputs = document.querySelectorAll(".otp-input");
-      if (element.value.length === 1 && index < 6) {
-        inputs[index].focus();
+      // Lógica de prueba (aquí luego se conectará con la base de datos en Render)
+      if (email.includes("admin") || email.includes("registered")) {
+        stepLogin.style.display = "block"; // Ya tiene cuenta
+      } else {
+        stepRegister.style.display = "block"; // Es nuevo usuario
       }
     }
 
-    function verifyOtpCode() {
-      const inputs = document.querySelectorAll(".otp-input");
-      let code = "";
-      inputs.forEach(input => code += input.value);
+    function submitLogin() {
+      const pass = document.getElementById("login-password").value;
+      if (!pass) {
+        alert("Ingresa tu contraseña.");
+        return;
+      }
+      alert("¡Inicio de sesión exitoso! Entrando a tu panel...");
+      closeAuthModal();
+    }
 
-      if (code.length < 6) {
-        alert("Ingresa el código completo de 6 dígitos.");
+    function submitRegister() {
+      const name = document.getElementById("reg-name").value;
+      const artistName = document.getElementById("reg-artist-name").value;
+      const age = document.getElementById("reg-age").value;
+      const pass = document.getElementById("reg-password").value;
+
+      if (!name || !artistName || !age || !pass) {
+        alert("Por favor completa todos los campos de registro.");
         return;
       }
 
-      alert("¡Verificación exitosa! Conectando con tu panel de artista...");
+      alert("¡Registro exitoso en Pulse Media! Te hemos enviado un correo de confirmación. Bienvenido al ecosistema.");
       closeAuthModal();
     }
   </script>
