@@ -3,71 +3,298 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PULSE MEDIA — Registro de Artistas y Creadores</title>
+  <title>PULSE MEDIA — Registro & Acceso</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  
+  <style>
+    /* DESBLOQUEO TOTAL DE SCROLL NATIVO */
+    html, body {
+      background: #000 !important;
+      color: #fff !important;
+      font-family: var(--font-display);
+      width: 100%;
+      height: auto !important;
+      min-height: 100vh;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      position: static !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* HEADER FIJO */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    header * {
+      pointer-events: auto;
+    }
+
+    .btn-back-home {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .btn-back-home:hover {
+      color: var(--accent-neon);
+    }
+
+    /* CONTENEDOR PRINCIPAL DE REGISTRO */
+    .register-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 13rem 5% 8rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .register-header-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .register-title {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+
+    .register-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      margin-bottom: 3rem;
+    }
+
+    /* TARJETA DEL FORMULARIO ESTILO EXPEDIENTE */
+    .form-card-secure {
+      background: rgba(12, 12, 12, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    }
+
+    .input-group {
+      margin-bottom: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .input-group label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-neon);
+      font-weight: 700;
+    }
+
+    .input-group input, 
+    .input-group select {
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 1rem;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .input-group input:focus, 
+    .input-group select:focus {
+      border-color: var(--accent-neon);
+      box-shadow: 0 0 12px rgba(220, 255, 0, 0.2);
+    }
+
+    /* BOTÓN DE ACCIÓN PRINCIPAL */
+    .btn-submit-secure {
+      width: 100%;
+      background: var(--accent-neon);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 1.2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .btn-submit-secure:hover {
+      background: #fff;
+      box-shadow: 0 0 20px rgba(220, 255, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* SECCIÓN DE VERIFICACIÓN DE CÓDIGO (OCULTA INICIALMENTE) */
+    .verification-section {
+      display: none;
+      margin-top: 2rem;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .verification-notice {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      border-left: 2px solid var(--accent-neon);
+      padding-left: 1rem;
+    }
+  </style>
 </head>
 <body class="theme-dark">
 
-  <canvas id="webgl-canvas"></canvas>
   <div id="page-curtain"></div>
 
-  <!-- HEADER SIMPLIFICADO -->
+  <!-- HEADER FIJO -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
-    <nav>
-      <a href="index.html" class="nav-link" onclick="triggerCurtain(event, 'index.html')"><span>← Inicio</span></a>
-    </nav>
+    <a href="index.html" class="btn-back-home" onclick="triggerCurtain(event, 'index.html')">&larr; INICIO</a>
   </header>
 
   <main>
-    <!-- SECCIÓN DE REGISTRO CON ALTURA NATURAL PARA EVITAR BLOQUEO DE SCROLL -->
-    <section class="register-section" data-theme="dark" style="padding: 10rem 5% 5rem 5%; min-height: auto;">
-      <div class="register-container" style="margin: 0 auto;">
-        <span class="section-tag">// ACCESO AL SISTEMA</span>
-        <h2 class="register-title">Crear Cuenta en <span class="accent-text">Pulse</span></h2>
-        <p class="register-sub">Envía tu propuesta para unirte a nuestro ecosistema de distribución y dirección creativa.</p>
-        
-        <form class="register-form" onsubmit="handleRegister(event)">
-          <div class="form-group">
-            <label>Nombre del Artista / Proyecto</label>
-            <input type="text" placeholder="Ej. Elías El Klan" required>
+    <div class="register-container">
+      <div class="register-header-meta">
+        <span>// SECURE GATEWAY</span>
+        <span>ACREDITACIÓN DE ARTISTAS</span>
+      </div>
+      
+      <h1 class="register-title">Registro <span class="accent-green-font" style="font-family: 'Cinzel Decorative', serif; color: var(--accent-neon);">Oficial</span></h1>
+      <p class="register-subtitle">
+        Ingresa tus credenciales institucionales. El sistema validará tu elegibilidad y emitirá un código de acceso exclusivo de 24 horas a tu correo.
+      </p>
+
+      <div class="form-card-secure">
+        <!-- FORMULARIO DE REGISTRO INICIAL -->
+        <form id="artistRegisterForm" onsubmit="handleRegister(event)">
+          <div class="input-group">
+            <label for="fullName">Nombre Completo</label>
+            <input type="text" id="fullName" required placeholder="Ej. Josue Tecun">
           </div>
-          <div class="form-group">
-            <label>Correo Electrónico</label>
-            <input type="email" placeholder="contacto@pulselabel.com" required>
+
+          <div class="input-group">
+            <label for="artistName">Nombre Artístico / Proyecto</label>
+            <input type="text" id="artistName" required placeholder="Ej. Pulse Sound">
           </div>
-          <div class="form-group">
-            <label>Género Principal</label>
-            <select required>
-              <option value="" disabled selected>Selecciona un género</option>
-              <option value="urbano">Urbano / Trap / Reggaeton</option>
-              <option value="regional">Regional Mexicano / Corridos</option>
-              <option value="alternativo">Fusión / Alternativo</option>
+
+          <div class="input-group">
+            <label for="email">Correo Electrónico Institucional / Personal</label>
+            <input type="email" id="email" required placeholder="ejemplo@correo.com">
+          </div>
+
+          <div class="input-group">
+            <label for="country">País de Operación</label>
+            <select id="country" required>
+              <option value="" disabled selected>Selecciona tu país</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="México">México</option>
+              <option value="Estados Unidos">Estados Unidos</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Argentina">Argentina</option>
+              <option value="España">España</option>
+              <option value="Otro">Otro Global</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Enlace de Referencia (Spotify, SoundCloud o Demo)</label>
-            <input type="url" placeholder="https://soundcloud.com/tu-demo" required>
-          </div>
-          <button type="submit" class="submit-btn">Inicializar Registro</button>
+
+          <button type="submit" class="btn-submit-secure">Generar Código de Acceso</button>
         </form>
+
+        <!-- SECCIÓN DE INGRESO DE CÓDIGO (APARECE DESPUÉS DE REGISTRARSE) -->
+        <div id="verificationSection" class="verification-section">
+          <div class="verification-notice">
+            // CÓDIGO ENVIADO. Revisa tu bandeja de entrada. Este código tiene una validez estricta de 24 horas y acceso exclusivo para tu correo.
+          </div>
+          <form onsubmit="handleVerifyCode(event)">
+            <div class="input-group">
+              <label for="accessCode">Código de Acceso (6 Dígitos)</label>
+              <input type="text" id="accessCode" required maxlength="6" placeholder="Ej. 849201" style="text-align: center; letter-spacing: 4px; font-size: 1.2rem;">
+            </div>
+            <button type="submit" class="btn-submit-secure">Verificar y Acceder</button>
+          </form>
+        </div>
       </div>
-    </section>
+    </div>
   </main>
 
-  <footer style="margin-top: 3rem;">
+  <!-- FOOTER -->
+  <footer>
     <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
     <div>GUATEMALA // GLOBAL OPS</div>
   </footer>
+
+  <script>
+    function handleRegister(event) {
+      event.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const artistName = document.getElementById('artistName').value;
+      const country = document.getElementById('country').value;
+
+      // Ocultar formulario y mostrar sección de código de verificación
+      document.getElementById('artistRegisterForm').style.display = 'none';
+      document.getElementById('verificationSection').style.display = 'block';
+
+      // Nota técnica: Aquí conectaremos el backend (Firebase/Supabase) 
+      // para guardar el país y generar el código de 1 día que llegue al correo de Gmail.
+      console.log("Registrado:", { email, artistName, country });
+    }
+
+    function handleVerifyCode(event) {
+      event.preventDefault();
+      const code = document.getElementById('accessCode').value;
+      
+      alert("Código ingresado: " + code + ". (Validación de acceso exclusivo en proceso)");
+    }
+  </script>
 
   <script src="app.js"></script>
 </body>
