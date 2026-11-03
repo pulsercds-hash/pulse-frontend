@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   
   <style>
-    /* SCROLL NATIVO Y FLUIDO */
+    /* DESBLOQUEO TOTAL DE SCROLL NATIVO EN PC Y MÓVIL */
     html, body {
       background: #000 !important;
       color: #fff !important;
@@ -27,7 +27,7 @@
       position: static !important;
     }
 
-    /* HEADER FIJO */
+    /* HEADER FIJO COMPATIBLE CON TEAM.HTML */
     header {
       position: fixed;
       top: 0;
@@ -60,9 +60,9 @@
       color: var(--accent-neon);
     }
 
-    /* HERO SECTION CON PADDING ADECUADO PARA NO ENCIMAR EL LOGO */
+    /* HERO SECTION */
     .artists-hero {
-      padding: 13rem 5% 3rem;
+      padding: 12rem 5% 3rem;
       position: relative;
     }
 
@@ -108,109 +108,83 @@
       line-height: 1.6;
     }
 
-    /* GRID DE CARPETAS */
+    /* GRID DE CARPETAS INTERACTIVAS */
     .folder-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 4rem 3rem;
       padding: 3rem 5% 8rem;
       position: relative;
       z-index: 2;
     }
 
-    .folder-card-item {
-      position: relative;
-      width: 100%;
+    /* ITEM DE ARTISTA */
+    .artist-card-item {
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
       cursor: pointer;
     }
 
-    .folder-image-wrapper {
+    /* LA IMAGEN PNG QUE SE ILUMINA */
+    .folder-png-wrapper {
       position: relative;
       width: 100%;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #000;
+      max-width: 320px;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
     }
 
-    /* FILTRO PARA OCULTAR CUADRÍCULA FALSA DE FONDO */
-    .folder-img {
+    .folder-png-wrapper img {
       width: 100%;
       height: auto;
       display: block;
-      object-fit: cover;
-      mix-blend-mode: lighten;
-      transition: transform 0.4s ease;
+      object-fit: contain;
     }
 
-    .folder-card-item:hover .folder-image-wrapper {
-      transform: translateY(-8px) scale(1.02);
-      filter: drop-shadow(0 0 25px rgba(220, 255, 0, 0.5));
+    /* RESPLANDOR NEÓN AL PASAR EL CURSOR */
+    .artist-card-item:hover .folder-png-wrapper {
+      transform: translateY(-10px) scale(1.03);
+      filter: drop-shadow(0 0 30px rgba(220, 255, 0, 0.45)) drop-shadow(0 20px 30px rgba(0,0,0,0.9));
     }
 
-    /* INFO PANEL INFERIOR */
-    .folder-info-panel {
-      width: 100%;
-      margin-top: 1.2rem;
-      background: rgba(15, 15, 15, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 4px;
-      padding: 1.2rem;
+    /* TEXTO LIMPIO Y MINIMALISTA ABAJO */
+    .artist-meta-clean {
+      margin-top: 1.8rem;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 0.5rem;
-      transition: border-color 0.3s ease;
     }
 
-    .folder-card-item:hover .folder-info-panel {
-      border-color: var(--accent-neon);
-    }
-
-    .folder-ref-code {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--accent-neon);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .folder-artist-name {
-      font-size: 1.5rem;
+    .artist-title-clean {
+      font-size: 1.6rem;
       font-weight: 900;
       text-transform: uppercase;
-      color: #fff;
-      letter-spacing: 1px;
-    }
-
-    .folder-artist-genre {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-    }
-
-    .folder-status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(220, 255, 0, 0.08);
-      border: 1px solid var(--accent-neon);
-      color: var(--accent-neon);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.4rem 0.8rem;
       letter-spacing: 2px;
-      text-transform: uppercase;
-      border-radius: 2px;
-      width: fit-content;
-      margin-top: 0.4rem;
+      color: #fff;
+      transition: color 0.3s ease;
     }
 
-    .status-dot {
+    .artist-card-item:hover .artist-title-clean {
+      color: var(--accent-neon);
+    }
+
+    .artist-status-clean {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-neon);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot-green {
       width: 5px;
       height: 5px;
       background: var(--accent-neon);
@@ -229,7 +203,7 @@
 
   <div id="page-curtain"></div>
 
-  <!-- HEADER FIJO -->
+  <!-- HEADER FIJO CON BOTÓN INICIO -->
   <header>
     <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <a href="index.html" class="btn-back-home" onclick="triggerCurtain(event, 'index.html')">&larr; INICIO</a>
@@ -250,80 +224,70 @@
       </p>
     </section>
 
-    <!-- GRID DE LOS 5 ARTISTAS -->
+    <!-- GRID CON TUS 5 IMÁGENES PNG REALES -->
     <section class="folder-grid">
       
       <!-- ARTISTA 01 -->
-      <div class="folder-card-item">
-        <div class="folder-image-wrapper">
-          <img src="artist/artista1.jpg" alt="Artista 01" class="folder-img">
+      <div class="artist-card-item">
+        <div class="folder-png-wrapper">
+          <img src="artist/artista1.png" alt="Artista 01">
         </div>
-        <div class="folder-info-panel">
-          <div class="folder-ref-code">FILE // 001</div>
-          <div class="folder-artist-name">Artista 01</div>
-          <div class="folder-artist-genre">Urban / New Wave</div>
-          <div class="folder-status-badge">
-            <span class="status-dot"></span> Próximamente
+        <div class="artist-meta-clean">
+          <div class="artist-title-clean">Artista 01</div>
+          <div class="artist-status-clean">
+            <span class="status-dot-green"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 02 -->
-      <div class="folder-card-item">
-        <div class="folder-image-wrapper">
-          <img src="artist/artista2.jpg" alt="Artista 02" class="folder-img">
+      <div class="artist-card-item">
+        <div class="folder-png-wrapper">
+          <img src="artist/artista2.png" alt="Artista 02">
         </div>
-        <div class="folder-info-panel">
-          <div class="folder-ref-code">FILE // 002</div>
-          <div class="folder-artist-name">Artista 02</div>
-          <div class="folder-artist-genre">Regional Urbano</div>
-          <div class="folder-status-badge">
-            <span class="status-dot"></span> Próximamente
+        <div class="artist-meta-clean">
+          <div class="artist-title-clean">Artista 02</div>
+          <div class="artist-status-clean">
+            <span class="status-dot-green"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 03 -->
-      <div class="folder-card-item">
-        <div class="folder-image-wrapper">
-          <img src="artist/artista3.jpg" alt="Artista 03" class="folder-img">
+      <div class="artist-card-item">
+        <div class="folder-png-wrapper">
+          <img src="artist/artista3.png" alt="Artista 03">
         </div>
-        <div class="folder-info-panel">
-          <div class="folder-ref-code">FILE // 003</div>
-          <div class="folder-artist-name">Artista 03</div>
-          <div class="folder-artist-genre">Alternative Sound</div>
-          <div class="folder-status-badge">
-            <span class="status-dot"></span> Próximamente
+        <div class="artist-meta-clean">
+          <div class="artist-title-clean">Artista 03</div>
+          <div class="artist-status-clean">
+            <span class="status-dot-green"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 04 -->
-      <div class="folder-card-item">
-        <div class="folder-image-wrapper">
-          <img src="artist/artista4.jpg" alt="Artista 04" class="folder-img">
+      <div class="artist-card-item">
+        <div class="folder-png-wrapper">
+          <img src="artist/artista4.png" alt="Artista 04">
         </div>
-        <div class="folder-info-panel">
-          <div class="folder-ref-code">FILE // 004</div>
-          <div class="folder-artist-name">Artista 04</div>
-          <div class="folder-artist-genre">Producer / Composer</div>
-          <div class="folder-status-badge">
-            <span class="status-dot"></span> Próximamente
+        <div class="artist-meta-clean">
+          <div class="artist-title-clean">Artista 04</div>
+          <div class="artist-status-clean">
+            <span class="status-dot-green"></span> Próximamente
           </div>
         </div>
       </div>
 
       <!-- ARTISTA 05 -->
-      <div class="folder-card-item">
-        <div class="folder-image-wrapper">
-          <img src="artist/artista5.jpg" alt="Artista 05" class="folder-img">
+      <div class="artist-card-item">
+        <div class="folder-png-wrapper">
+          <img src="artist/artista5.png" alt="Artista 05">
         </div>
-        <div class="folder-info-panel">
-          <div class="folder-ref-code">FILE // 005</div>
-          <div class="folder-artist-name">Artista 05</div>
-          <div class="folder-artist-genre">Secret Roster</div>
-          <div class="folder-status-badge">
-            <span class="status-dot"></span> Próximamente
+        <div class="artist-meta-clean">
+          <div class="artist-title-clean">Artista 05</div>
+          <div class="artist-status-clean">
+            <span class="status-dot-green"></span> Próximamente
           </div>
         </div>
       </div>
