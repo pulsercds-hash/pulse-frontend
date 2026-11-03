@@ -28,7 +28,6 @@ html, body {
   transition: background-color 0.8s ease, color 0.8s ease;
 }
 
-/* TEMAS DINÁMICOS PARA CAMBIO DE COLOR AL SCROLL */
 body.theme-light {
   background-color: var(--bg-light);
   color: var(--text-light);
@@ -59,7 +58,7 @@ body.theme-dark {
 header {
   position: fixed;
   top: 0; left: 0; width: 100%;
-  padding: 2.5rem 5%;
+  padding: 2rem 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,31 +68,31 @@ header {
 
 .brand-logo {
   font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   font-weight: 900;
   text-transform: uppercase;
   color: #fff;
   text-decoration: none;
 }
 
-nav { display: flex; gap: 2rem; }
+nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
   text-transform: uppercase;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
 }
 
-/* SECCIONES */
+/* SECCIONES Y PANELES RESPONSIVOS */
 .panel {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 5%;
+  padding: 7rem 5% 4rem 5%;
   position: relative;
   z-index: 2;
 }
@@ -101,21 +100,24 @@ nav { display: flex; gap: 2rem; }
 .hero-meta {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
   max-width: 1300px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
   opacity: 0.7;
   border-bottom: 1px solid currentColor;
   padding-bottom: 1rem;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8.5vw, 8.5rem);
+  font-size: clamp(2.5rem, 7vw, 7.5rem);
   font-weight: 900;
-  line-height: 0.92;
+  line-height: 0.95;
   text-transform: uppercase;
   letter-spacing: -2px;
+  word-break: break-word;
 }
 
 .hero-title .accent-text {
@@ -123,15 +125,17 @@ nav { display: flex; gap: 2rem; }
   font-family: var(--font-accent);
 }
 
-/* SECCIÓN MANIFIESTO (TEMA CLARO) */
-.manifesto-section {
-  padding: 8rem 5%;
+.hero-subtitle {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  opacity: 0.75;
+  max-width: 700px;
 }
 
-.manifesto-content {
-  max-width: 1000px;
-}
-
+/* MANIFIESTO */
+.manifesto-section { padding: 6rem 5%; }
+.manifesto-content { max-width: 1000px; }
 .section-tag {
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -141,46 +145,149 @@ nav { display: flex; gap: 2rem; }
   display: block;
   margin-bottom: 1.5rem;
 }
-
 .manifesto-title {
-  font-size: clamp(2rem, 4.5vw, 4.2rem);
+  font-size: clamp(1.8rem, 4vw, 3.8rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.15;
   text-transform: uppercase;
 }
+.manifesto-text {
+  margin-top: 2rem;
+  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  line-height: 1.7;
+  opacity: 0.85;
+}
 
-/* MÓDULOS */
+/* MÓDULOS DE VIDEO / IDENTIDAD */
 .modules-section { padding: 6rem 5%; }
 .modules-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
-
 .module-card {
-  min-height: 400px;
+  min-height: 420px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 2.5rem 2rem;
+  padding: 2.2rem 1.8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   backdrop-filter: blur(10px);
 }
-
 .module-index { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; }
-.module-title { font-size: 2rem; font-weight: 800; text-transform: uppercase; }
-.module-desc { font-size: 0.95rem; opacity: 0.7; line-height: 1.6; }
+.module-title { font-size: clamp(1.4rem, 2.2vw, 1.9rem); font-weight: 800; text-transform: uppercase; line-height: 1.1; }
+.module-desc { font-size: 0.9rem; opacity: 0.75; line-height: 1.6; }
+.card-media-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-neon);
+  letter-spacing: 2px;
+}
 
-footer {
-  padding: 4rem 5%;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+/* SECCIÓN DE REGISTRO */
+.register-section { padding: 6rem 5%; }
+.register-container {
+  max-width: 650px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  backdrop-filter: blur(15px);
+}
+.register-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.register-sub {
   font-family: var(--font-mono);
   font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+.register-form {
   display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--accent-neon);
+}
+.submit-btn {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--accent-neon);
+  color: #000;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* TEAM */
+.team-section { padding: 6rem 5%; }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.team-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2.2rem;
+}
+.team-card h3 { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; }
+.team-role { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-neon); margin: 0.5rem 0 1rem 0; letter-spacing: 1px; }
+.team-desc { font-size: 0.9rem; opacity: 0.75; line-height: 1.5; }
+
+footer {
+  padding: 3rem 5%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 1rem;
+  opacity: 0.7;
   position: relative;
   z-index: 2;
-  opacity: 0.7;
 }
