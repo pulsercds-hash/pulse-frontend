@@ -149,28 +149,30 @@
       text-align: center;
     }
 
-    /* HERO SECTION CON IMAGEN DE FONDO LIMPIA Y PROFESIONAL */
+    /* HERO SECTION CON VIDEO NATIVO LOCAL */
     .hero-section {
       position: relative;
       overflow: hidden;
       background: #000;
     }
-    .hero-bg-img {
+    .hero-video-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 100vh;
       object-fit: cover;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
       z-index: 0;
-      opacity: 0.3;
+      opacity: 0.35;
     }
-    .hero-section > *:not(.hero-bg-img) {
+    .hero-section > *:not(.hero-video-bg) {
       position: relative;
       z-index: 2;
     }
 
-    /* CONTENEDOR DE IMAGEN EN TARJETAS (LIMPIO, SIN YOUTUBE) */
+    /* CONTENEDOR DE VIDEO NATIVO LOCAL EN TARJETAS */
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -181,19 +183,16 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: #000;
+      pointer-events: none;
     }
-    .video-wrapper img {
+    .video-wrapper video {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.85;
-      transition: opacity 0.3s ease;
-    }
-    .video-wrapper img:hover {
-      opacity: 1;
+      pointer-events: none;
     }
 
     /* PREGUNTAS FRECUENTES */
@@ -251,10 +250,11 @@
   </header>
 
   <main>
-    <!-- SECCIÓN 1: HERO CON IMAGEN DE FONDO -->
+    <!-- SECCIÓN 1: HERO CON TU VIDEO NATIVO -->
     <section class="hero-section panel" data-theme="dark">
-      <!-- Usamos una imagen de alta calidad oscura y estética de respaldo -->
-      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1920&auto=format&fit=crop" alt="Hero Background" class="hero-bg-img">
+      <video class="hero-video-bg" autoplay muted loop playsinline preload="auto">
+        <source src="fondo.mp4" type="video/mp4">
+      </video>
 
       <div class="hero-meta">
         <span>// INDEPENDENT MUSIC ECOSYSTEM</span>
@@ -314,7 +314,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: MÓDULOS CON IMÁGENES ESTÉTICAS DE ÉLITE -->
+    <!-- SECCIÓN 3: MÓDULOS CON TUS VIDEOS NATIVOS -->
     <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES & VISUALS
@@ -330,7 +330,9 @@
           </div>
           
           <div class="video-wrapper">
-            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=1000&auto=format&fit=crop" alt="Pulse Media Identity">
+            <video autoplay muted loop playsinline preload="auto">
+              <source src="tarjeta1.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
 
@@ -343,7 +345,9 @@
           </div>
           
           <div class="video-wrapper">
-            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1000&auto=format&fit=crop" alt="Pulse Media Storytelling">
+            <video autoplay muted loop playsinline preload="auto">
+              <source src="tarjeta2.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>
