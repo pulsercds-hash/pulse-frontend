@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulse Media — Distribuidora e Identidad Artística</title>
   
-  <!-- Fuentes Google: Plus Jakarta Sans y Orbitron -->
+  <!-- Fuentes Google: Orbitron y Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,7 +21,6 @@
       --border-glow: rgba(255, 255, 255, 0.25);
       --text-white: #ffffff;
       --text-gray: #8e8e9f;
-      --neon-pulse: rgba(140, 40, 255, 0.4);
     }
 
     * {
@@ -41,34 +40,27 @@
       position: relative;
     }
 
-    /* DESTELLOS AMBIENTALES ANIMADOS DE FONDO */
+    /* DESTELLOS AMBIENTALES DISCRETOS DE FONDO */
     .ambient-glow-1 {
       position: fixed;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(120, 0, 255, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
+      background: radial-gradient(circle, rgba(120, 0, 255, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
       top: -150px;
       left: 20%;
       pointer-events: none;
       z-index: 0;
-      animation: floatGlow 12s infinite alternate ease-in-out;
     }
 
     .ambient-glow-2 {
       position: fixed;
       width: 450px;
       height: 450px;
-      background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.04) 0%, rgba(0, 0, 0, 0) 70%);
       bottom: -100px;
       right: 15%;
       pointer-events: none;
       z-index: 0;
-      animation: floatGlow 10s infinite alternate-reverse ease-in-out;
-    }
-
-    @keyframes floatGlow {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 50px) scale(1.15); }
     }
 
     /* PANTALLA DE CARGA */
@@ -110,7 +102,6 @@
       height: 100%;
       background: #ffffff;
       transition: width 0.1s ease;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
     #main-content {
@@ -183,7 +174,7 @@
       margin-bottom: 1.5rem;
     }
 
-    /* REDISEÑO DEL TÍTULO PULSE MEDIA */
+    /* TÍTULO PULSE MEDIA PLANO Y ELEGANTE (SIN GLOW) */
     .hero-title {
       font-family: 'Orbitron', sans-serif;
       font-size: clamp(2.5rem, 8vw, 5.2rem);
@@ -193,7 +184,6 @@
       margin-bottom: 1.8rem;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 0 25px var(--neon-pulse), 0 0 50px rgba(255, 255, 255, 0.15);
     }
 
     .story-card {
@@ -225,8 +215,8 @@
       font-weight: 600;
     }
 
-    /* VIDEOS PURE UNDERGROUND (BLOQUEADOS Y SILENCIADOS) */
-    .video-grid {
+    /* SECCIÓN VISUAL ABSTRACTA UNDERGROUND (REEMPLAZANDO YOUTUBE) */
+    .visual-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
@@ -234,55 +224,49 @@
       margin-top: 1.5rem;
     }
 
-    .video-card {
+    .visual-card {
       background: var(--bg-card);
       border: 1px solid var(--border-card);
       border-radius: 20px;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-    }
-
-    .video-card:hover {
-      border-color: var(--border-glow);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
-    }
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      filter: grayscale(15%) contrast(108%);
-      pointer-events: none; /* BLOQUEA CLICKS, CONTROLES Y ENLACES EXTERNOS */
-    }
-
-    .video-info {
-      padding: 1.2rem;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
       text-align: left;
-      background: rgba(10, 10, 14, 0.95);
-      border-top: 1px solid var(--border-card);
+      background-size: cover;
+      background-position: center;
     }
 
-    .video-title {
-      font-size: 0.95rem;
+    .visual-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(6,6,8,0.1) 0%, rgba(6,6,8,0.9) 90%);
+      z-index: 1;
+    }
+
+    .visual-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-4px);
+    }
+
+    .visual-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .visual-title {
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-white);
       margin-bottom: 0.2rem;
     }
 
-    .video-sub {
+    .visual-sub {
       font-size: 0.8rem;
       color: var(--text-gray);
     }
@@ -456,7 +440,7 @@
       letter-spacing: 1px;
     }
 
-    /* MODAL SIN SCROLLBAR FEA */
+    /* MODAL SIN SCROLLBAR */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -597,7 +581,7 @@
 </head>
 <body>
 
-  <!-- LUCES AMBIENTALES DINÁMICAS -->
+  <!-- LUCES AMBIENTALES -->
   <div class="ambient-glow-1"></div>
   <div class="ambient-glow-2"></div>
 
@@ -646,7 +630,7 @@
 
     <div class="divider"></div>
 
-    <!-- SECCIÓN 2: VIDEOS SILENCIADOS SIN MARCAS NI SUBTÍTULOS -->
+    <!-- SECCIÓN 2: ESTÉTICA VISUAL UNDERGROUND (SIN YOUTUBE NI BOTONES) -->
     <section>
       <div class="badge">Inspiración & Identidad</div>
       <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fff;">Estética de la Escena Global</h2>
@@ -654,26 +638,20 @@
         Visualizamos la música con la misma excelencia y dirección de arte que define al movimiento de la industria actual.
       </p>
 
-      <div class="video-grid">
-        <!-- Video 1: Tu Identidad Sonora -->
-        <div class="video-card">
-          <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/LK7eHoocQlE?autoplay=1&mute=1&controls=0&loop=1&playlist=LK7eHoocQlE&modestbranding=1&rel=0&showinfo=0&disablekb=1&cc_load_policy=0" title="Identidad Visual" allow="autoplay" allowfullscreen></iframe>
-          </div>
-          <div class="video-info">
-            <div class="video-title">Tu Identidad Sonora</div>
-            <div class="video-sub">Desarrollo visual y concepto de arte independiente</div>
+      <div class="visual-grid">
+        <!-- Tarjeta Visual 1 -->
+        <div class="visual-card" style="background: radial-gradient(circle at center, #1b162c 0%, #0a0a0f 100%);">
+          <div class="visual-content">
+            <div class="visual-title">Tu Identidad Sonora</div>
+            <div class="visual-sub">Desarrollo visual y concepto de arte independiente</div>
           </div>
         </div>
 
-        <!-- Video 2: Identidad & Movimiento Visual -->
-        <div class="video-card">
-          <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/O-WsQlXaa0E?autoplay=1&mute=1&controls=0&loop=1&playlist=O-WsQlXaa0E&modestbranding=1&rel=0&showinfo=0&disablekb=1&cc_load_policy=0" title="Movimiento Creativo" allow="autoplay" allowfullscreen></iframe>
-          </div>
-          <div class="video-info">
-            <div class="video-title">Identidad & Movimiento Visual</div>
-            <div class="video-sub">Cultura, presencia e imagen de artista</div>
+        <!-- Tarjeta Visual 2 -->
+        <div class="visual-card" style="background: radial-gradient(circle at center, #16242c 0%, #0a0a0f 100%);">
+          <div class="visual-content">
+            <div class="visual-title">Identidad & Movimiento Visual</div>
+            <div class="visual-sub">Cultura, presencia e imagen de artista</div>
           </div>
         </div>
       </div>
