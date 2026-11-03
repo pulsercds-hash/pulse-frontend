@@ -24,13 +24,13 @@
   <!-- TRANSICIÓN DE CORTINA ESTUDIO -->
   <div id="page-curtain"></div>
 
-  <!-- HEADER -->
+  <!-- HEADER CON ENLACES A LAS OTRAS VISTAS -->
   <header>
-    <a href="#" class="brand-logo" onclick="triggerCurtain(event, '#')">Pulse Media</a>
+    <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
     <nav>
-      <a href="#team" class="nav-link"><span>Team</span></a>
-      <a href="#artists" class="nav-link"><span>Artistas</span></a>
-      <a href="#register" class="nav-link"><span>Registrar</span></a>
+      <a href="team.html" class="nav-link" onclick="triggerCurtain(event, 'team.html')"><span>Team</span></a>
+      <a href="artists.html" class="nav-link" onclick="triggerCurtain(event, 'artists.html')"><span>Artistas</span></a>
+      <a href="register.html" class="nav-link" onclick="triggerCurtain(event, 'register.html')"><span>Registrar</span></a>
     </nav>
   </header>
 
@@ -59,7 +59,7 @@
     </section>
 
     <!-- SECCIÓN 3: MÓDULOS / PILARES CON ENFOQUE AUDIO-VISUAL (DARK) -->
-    <section class="modules-section panel" data-theme="dark" id="artists">
+    <section class="modules-section panel" data-theme="dark">
       <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
         02 // SYSTEM CORE MODULES
       </div>
@@ -81,55 +81,6 @@
             <p class="module-desc">Llevamos tu música a todas las plataformas digitales del mundo respaldada por campañas de pauta quirúrgica, relaciones públicas y desarrollo de comunidad.</p>
           </div>
           <div class="card-media-badge">// STORYTELLING ENGINE</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECCIÓN 4: REGISTRO / CREACIÓN DE CUENTA (SYSTEM / REGISTRAR) -->
-    <section class="register-section panel" data-theme="dark" id="register">
-      <div class="register-container">
-        <span class="section-tag">// 03. ÚNETE AL SISTEMA</span>
-        <h2 class="register-title">Crea tu cuenta en <span class="accent-text">Pulse</span></h2>
-        <p class="register-sub">Envía tu propuesta artística o activa el acceso a la consola de gestión de tu proyecto.</p>
-        
-        <form class="register-form" onsubmit="handleRegister(event)">
-          <div class="form-group">
-            <label>Nombre del Artista / Proyecto</label>
-            <input type="text" placeholder="Ej. Elías El Klan" required>
-          </div>
-          <div class="form-group">
-            <label>Correo Electrónico</label>
-            <input type="email" placeholder="contacto@pulselabel.com" required>
-          </div>
-          <div class="form-group">
-            <label>Género Principal</label>
-            <select required>
-              <option value="" disabled selected>Selecciona un género</option>
-              <option value="urbano">Urbano / Trap / Reggaeton</option>
-              <option value="regional">Regional Mexicano / Corridos</option>
-              <option value="alternativo">Fusión / Alternativo</option>
-            </select>
-          </div>
-          <button type="submit" class="submit-btn">Inicializar Registro</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- SECCIÓN 5: TEAM (EQUIPO DE ADMINISTRACIÓN) -->
-    <section class="team-section panel" data-theme="dark" id="team">
-      <div style="font-family: var(--font-mono); color: var(--text-muted); letter-spacing: 3px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem;">
-        04 // MANAGEMENT & LEADERSHIP
-      </div>
-      <div class="team-grid">
-        <div class="team-card">
-          <h3>Josue Tecun</h3>
-          <p class="team-role">Founder & CEO</p>
-          <p class="team-desc">Dirección general, visión estratégica y expansión global de catálogos.</p>
-        </div>
-        <div class="team-card">
-          <h3>Pulse Operations</h3>
-          <p class="team-role">Global Management</p>
-          <p class="team-desc">Supervisión de distribución digital, monetización y desarrollo de artistas.</p>
         </div>
       </div>
     </section>
