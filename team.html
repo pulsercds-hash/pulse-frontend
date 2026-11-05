@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>PULSE MEDIA — Team</title>
+  <title>PULSE MEDIA — Executive Team</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,7 +76,7 @@
       color: var(--accent-neon);
     }
 
-    /* HERO SUPERIOR CON DESVANECIDO SUAVE SIN LÍNEAS */
+    /* HERO SUPERIOR CON VIDEO EXACTO */
     .hero-team-banner {
       position: relative;
       width: 100%;
@@ -98,13 +98,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.3;
+      opacity: 0.35;
       filter: contrast(1.15) brightness(0.85);
       z-index: 1;
       pointer-events: none;
     }
 
-    /* DESVANECIDO TOTAL HACIA ABAJO Y ARRIBA */
     .banner-overlay-fade {
       position: absolute;
       top: 0;
@@ -113,8 +112,8 @@
       height: 100%;
       background: linear-gradient(
         to bottom, 
-        rgba(0, 0, 0, 0.8) 0%, 
-        rgba(0, 0, 0, 0.2) 50%, 
+        rgba(0, 0, 0, 0.85) 0%, 
+        rgba(0, 0, 0, 0.3) 50%, 
         #000 100%
       );
       z-index: 2;
@@ -148,31 +147,30 @@
       width: 100%;
       max-width: 1250px;
       margin: 0 auto;
-      padding: 2rem 5% 8rem;
+      padding: 2rem 5% 5rem;
     }
 
-    /* TARJETA DE INTEGRANTE CON VIDEO DE FONDO ENCASILLADO */
+    /* TARJETA DE INTEGRANTE */
     .team-card {
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: 1fr 1.25fr;
+      grid-template-columns: 1fr 1.35fr;
       gap: 3.5rem;
-      align-items: center;
+      align-items: start;
       background: rgba(10, 10, 10, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 3.2rem;
-      margin-bottom: 4rem;
+      padding: 3.5rem;
+      margin-bottom: 4.5rem;
       border-radius: 6px;
       box-shadow: 0 20px 45px rgba(0,0,0,0.9);
       overflow: hidden;
     }
 
     .team-card:nth-child(even) {
-      grid-template-columns: 1.25fr 1fr;
+      grid-template-columns: 1.35fr 1fr;
     }
 
-    /* VIDEO INTERNO DE CADA TARJETA ENCASILLADO */
     .card-bg-video {
       position: absolute;
       top: 0;
@@ -183,7 +181,7 @@
       opacity: 0.15;
       z-index: 1;
       pointer-events: none;
-      filter: contrast(1.2) grayscale(0.3);
+      filter: contrast(1.2) grayscale(0.2);
     }
 
     .card-video-overlay {
@@ -192,7 +190,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, rgba(12,12,12,0.7) 0%, rgba(5,5,5,0.95) 100%);
+      background: radial-gradient(circle at center, rgba(12,12,12,0.65) 0%, rgba(5,5,5,0.95) 100%);
       z-index: 2;
       pointer-events: none;
     }
@@ -253,23 +251,41 @@
       gap: 1.2rem;
     }
 
-    .sticker-tag {
-      align-self: flex-start;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+    .badges-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .badge-insignia {
+      background: rgba(220, 255, 0, 0.1);
+      border: 1px solid var(--accent-neon);
       color: var(--accent-neon);
       font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 0.75rem;
-      padding: 0.3rem 0.9rem;
+      font-weight: 700;
+      font-size: 0.68rem;
+      padding: 0.25rem 0.65rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
+      border-radius: 2px;
+    }
+
+    .badge-location {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.8);
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      padding: 0.25rem 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
       border-radius: 2px;
     }
 
     .member-name {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
       font-weight: 900;
       text-transform: uppercase;
       line-height: 1.1;
@@ -289,29 +305,60 @@
       padding-left: 0.8rem;
     }
 
-    .member-bio {
+    .bio-block {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+    }
+
+    .bio-subtitle {
       font-family: var(--font-body);
-      font-size: clamp(0.9rem, 1.2vw, 1.02rem);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-neon);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .member-bio-text {
+      font-family: var(--font-body);
+      font-size: clamp(0.88rem, 1.1vw, 0.98rem);
       font-weight: 300;
-      line-height: 1.8;
+      line-height: 1.75;
       color: rgba(255, 255, 255, 0.85);
-      margin: 0.5rem 0;
-      letter-spacing: 0.2px;
+      margin: 0;
+    }
+
+    .quote-message-box {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid #fff;
+      padding: 1rem 1.2rem;
+      border-radius: 0 4px 4px 0;
+      margin-top: 0.5rem;
+    }
+
+    .quote-message-text {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.6;
+      margin: 0;
     }
 
     .skills-block {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
       margin-top: 0.4rem;
     }
 
     .skill-chip {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 0.4rem 0.85rem;
+      padding: 0.35rem 0.75rem;
       font-family: var(--font-body);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 400;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -319,7 +366,95 @@
       border-radius: 2px;
     }
 
-    /* RESPONSIVO MÓVIL */
+    /* NUEVA SECCIÓN UNIRSE AL EQUIPO CON VIDEO TARJETA2.MP4 */
+    .join-team-section {
+      position: relative;
+      width: 100%;
+      padding: 6rem 5%;
+      margin-top: 2rem;
+      text-align: center;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      background: #000;
+    }
+
+    .bg-join-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      z-index: 1;
+      pointer-events: none;
+      filter: contrast(1.2);
+    }
+
+    .join-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.85);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .join-content {
+      position: relative;
+      z-index: 3;
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(12, 12, 12, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 3.5rem 2rem;
+      border-radius: 6px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    }
+
+    .join-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 0 0 1rem 0;
+      color: #fff;
+    }
+
+    .join-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+    }
+
+    .btn-join-mail {
+      display: inline-block;
+      background: var(--accent-neon);
+      color: #000;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 1.1rem 2.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-join-mail:hover {
+      background: #fff;
+      box-shadow: 0 0 25px rgba(220, 255, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* RESPONSIVO */
     @media (max-width: 900px) {
       .hero-team-banner {
         padding: 4rem 4% 2rem;
@@ -335,27 +470,27 @@
 </head>
 <body class="theme-dark">
 
-  <!-- HEADER FIJO -->
+  <!-- HEADER -->
   <header>
     <a href="index.html" class="brand-logo">Pulse Media</a>
     <a href="index.html" class="btn-back-home">&larr; VOLVER AL INICIO</a>
   </header>
 
   <main>
-    <!-- HERO SUPERIOR CON DESVANECIDO LIMPIO -->
+    <!-- HERO SUPERIOR CON RUTA EXACTA DE VIDEO -->
     <section class="hero-team-banner">
       <video class="bg-tira-video" autoplay muted loop playsinline preload="metadata">
-        <source src="acercade/tira.mp4" type="video/mp4">
+        <source src="videos/fondoartistas[1].mp4" type="video/mp4">
       </video>
       <div class="banner-overlay-fade"></div>
 
       <h1 class="page-section-title">NUESTRO <span>EQUIPO</span></h1>
     </section>
 
-    <!-- LISTADO DE INTEGRANTES CON VIDEO DE FONDO DENTRO DE CADA TARJETA -->
+    <!-- LISTADO DE INTEGRANTES -->
     <section class="team-container">
 
-      <!-- INTEGRANTE 1: EMERSON -->
+      <!-- INTEGRANTE 1: EMERSON JOSUE TECUN DOMINGO -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -368,22 +503,37 @@
         </div>
 
         <div class="member-info">
-          <div class="sticker-tag">FOUNDER & CEO</div>
+          <div class="badges-container">
+            <span class="badge-insignia">FOUNDER & CEO</span>
+            <span class="badge-insignia">CREATIVE DIRECTOR</span>
+            <span class="badge-location">&#128205; Guatemala</span>
+          </div>
+
           <h2 class="member-name">Emerson Josué Tecún Domingo</h2>
           <div class="member-role">Fundador / Dirección Ejecutiva & Creativa</div>
-          <p class="member-bio">
-            Visionario y pilar fundamental detrás de la fundación de Pulse Media. Encargado de la estrategia institucional, el desarrollo artístico y la preservación de la identidad independiente del sello.
-          </p>
+
+          <div class="bio-block">
+            <div class="bio-subtitle">// Biografía Personal</div>
+            <p class="member-bio-text">
+              Creador y estratega principal de Pulse Media. Con una visión centrada en romper los moldes de la industria musical independiente, lidera la dirección artística y la expansión del catálogo global de la marca.
+            </p>
+          </div>
+
+          <div class="quote-message-box">
+            <p class="quote-message-text">
+              "Pulse Media no nació para seguir tendencias, sino para darle una plataforma auténtica y sin restricciones al talento que de verdad tiene algo que transmitir."
+            </p>
+          </div>
 
           <div class="skills-block">
-            <span class="skill-chip">Dirección Creativa</span>
-            <span class="skill-chip">A&R</span>
-            <span class="skill-chip">Estrategia</span>
+            <span class="skill-chip">Estrategia Global</span>
+            <span class="skill-chip">A&R Direction</span>
+            <span class="skill-chip">Branding</span>
           </div>
         </div>
       </article>
 
-      <!-- INTEGRANTE 2: YERIEL -->
+      <!-- INTEGRANTE 2: YERIEL MIGUEL LORENZANA MORATAYA -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -391,17 +541,32 @@
         <div class="card-video-overlay"></div>
 
         <div class="member-info">
-          <div class="sticker-tag">CO-FOUNDER</div>
+          <div class="badges-container">
+            <span class="badge-insignia">CO-FOUNDER</span>
+            <span class="badge-insignia">HEAD OF PRODUCTION</span>
+            <span class="badge-location">&#128205; Guatemala</span>
+          </div>
+
           <h2 class="member-name">Yeriel Miguel Lorenzana Morataya</h2>
           <div class="member-role">Co-Fundador / Producción & Gestión</div>
-          <p class="member-bio">
-            Cofundador de Pulse Media. Lidera las operaciones de producción musical, supervisión de proyectos en estudio y la coordinación integral para el impulso y desarrollo de nuevos talentos.
-          </p>
+
+          <div class="bio-block">
+            <div class="bio-subtitle">// Biografía Personal</div>
+            <p class="member-bio-text">
+              Cofundador y pilar operativo en la infraestructura sonora del sello. Supervisa los estándares de producción en estudio, el refinamiento técnico de los másters y el acompañamiento directo a los artistas firmados.
+            </p>
+          </div>
+
+          <div class="quote-message-box">
+            <p class="quote-message-text">
+              "En este sello cuidamos cada detalle del sonido con la misma pasión que el propio artista. La lealtad a la música es lo que nos define día a día."
+            </p>
+          </div>
 
           <div class="skills-block">
-            <span class="skill-chip">Producción Musical</span>
+            <span class="skill-chip">Producción Sonora</span>
             <span class="skill-chip">Gestión de Estudio</span>
-            <span class="skill-chip">Operaciones</span>
+            <span class="skill-chip">Desarrollo Técnico</span>
           </div>
         </div>
 
@@ -411,7 +576,7 @@
         </div>
       </article>
 
-      <!-- INTEGRANTE 3: APARTADO ADICIONAL 1 -->
+      <!-- INTEGRANTE 3: APARTADO 3 -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -424,22 +589,36 @@
         </div>
 
         <div class="member-info">
-          <div class="sticker-tag">TALENT & DEVELOPMENT</div>
+          <div class="badges-container">
+            <span class="badge-insignia">TALENT SCOUT</span>
+            <span class="badge-location">&#128205; International Ops</span>
+          </div>
+
           <h2 class="member-name">Dirección de A&R</h2>
-          <div class="member-role">Búsqueda & Scouting de Talentos</div>
-          <p class="member-bio">
-            Búsqueda constante de voces no genéricas dentro de la escena urbana y pop vocal. Evaluación de demos entrantes y curaduría de lanzamientos bajo estándares de distribución global.
-          </p>
+          <div class="member-role">Búsqueda & Curaduría de Talentos</div>
+
+          <div class="bio-block">
+            <div class="bio-subtitle">// Enfoque de Departamento</div>
+            <p class="member-bio-text">
+              Departamento dedicado al rastreo e incubación de voces disruptivas en los géneros urbano, pop y vocal. Filtrado constante de demos entrantes y curaduría institucional.
+            </p>
+          </div>
+
+          <div class="quote-message-box">
+            <p class="quote-message-text">
+              "Buscamos la chispa única que hace que un talento sea inconfundible desde el primer segundo de canción."
+            </p>
+          </div>
 
           <div class="skills-block">
             <span class="skill-chip">Scouting</span>
             <span class="skill-chip">Curaduría</span>
-            <span class="skill-chip">Desarrollo Vocal</span>
+            <span class="skill-chip">Vocal Coaching</span>
           </div>
         </div>
       </article>
 
-      <!-- INTEGRANTE 4: APARTADO ADICIONAL 2 -->
+      <!-- INTEGRANTE 4: APARTADO 4 -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -447,26 +626,57 @@
         <div class="card-video-overlay"></div>
 
         <div class="member-info">
-          <div class="sticker-tag">AUDIO ENGINEERING</div>
-          <h2 class="member-name">Ingeniería & Masterización</h2>
-          <div class="member-role">Control de Calidad Sonora</div>
-          <p class="member-bio">
-            Optimización acústica, mezclas profesionales y procesamiento de señal para garantizar que cada lanzamiento cumpla con las especificaciones exigidas por las plataformas de streaming.
-          </p>
+          <div class="badges-container">
+            <span class="badge-insignia">AUDIO ENGINEERING</span>
+            <span class="badge-location">&#128205; Main Studio</span>
+          </div>
+
+          <h2 class="member-name">Ingeniería de Audio</h2>
+          <div class="member-role">Mezcla, Masterización & DSP</div>
+
+          <div class="bio-block">
+            <div class="bio-subtitle">// Enfoque de Departamento</div>
+            <p class="member-bio-text">
+              Procesamiento de señal y tratamiento acústico de alta fidelidad para garantizar que cada máster oficial responda con la máxima potencia e impacto en plataformas digitales.
+            </p>
+          </div>
+
+          <div class="quote-message-box">
+            <p class="quote-message-text">
+              "La técnica está al servicio de la emoción. Cada frecuencia tiene que transmitir la energía pura del estudio."
+            </p>
+          </div>
 
           <div class="skills-block">
-            <span class="skill-chip">Mixing</span>
-            <span class="skill-chip">Mastering</span>
-            <span class="skill-chip">DSP Audio</span>
+            <span class="skill-chip">Stem Mixing</span>
+            <span class="skill-chip">Dolby Atmos / Mastering</span>
+            <span class="skill-chip">Acoustics</span>
           </div>
         </div>
 
         <div class="photo-frame-placeholder">
           <div class="shape-placeholder" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); border-color: rgba(255,255,255,0.6);"></div>
-          <span class="placeholder-text">// FOTO ESTUDIO / INGENIERÍA</span>
+          <span class="placeholder-text">// FOTO ESTUDIO</span>
         </div>
       </article>
 
+    </section>
+
+    <!-- SECCIÓN FINAL: FORMAR PARTE DEL EQUIPO CON VIDEO TARJETA2.MP4 -->
+    <section class="join-team-section">
+      <video class="bg-join-video" autoplay muted loop playsinline preload="metadata">
+        <source src="videos/tarjeta2.mp4" type="video/mp4">
+      </video>
+      <div class="join-overlay"></div>
+
+      <div class="join-content">
+        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-neon); letter-spacing: 3px; display: block; margin-bottom: 0.8rem;">// UNITE TO PULSE</span>
+        <h2 class="join-title">Forma Parte de Nuestro Equipo</h2>
+        <p class="join-desc">
+          ¿Eres productor, creativo, ingeniero de sonido o tienes una propuesta sólida para sumarte a la estructura de Pulse Media? Envíanos tu información y portafolio profesional.
+        </p>
+        <a href="mailto:pulselabel.oficial@gmail.com" class="btn-join-mail">Postularme al Sello</a>
+      </div>
     </section>
   </main>
 
