@@ -33,7 +33,7 @@
       -webkit-text-size-adjust: 100%;
     }
 
-    /* HEADER FIJO SOBRIO */
+    /* HEADER FIJO */
     header {
       position: sticky;
       top: 0;
@@ -74,7 +74,7 @@
       color: #fff;
     }
 
-    /* HERO SUPERIOR */
+    /* HERO SUPERIOR CON BLOQUE BLANCO DESTACADO EN EL TÍTULO */
     .hero-team-banner {
       position: relative;
       width: 100%;
@@ -122,13 +122,21 @@
       position: relative;
       z-index: 3;
       font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 4rem);
+      font-size: clamp(2rem, 5vw, 4.2rem);
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       margin: 0;
       color: #fff;
       line-height: 1.1;
+    }
+
+    .page-section-title span {
+      background: #fff;
+      color: #000;
+      padding: 0.2rem 0.8rem;
+      display: inline-block;
+      margin-left: 0.5rem;
     }
 
     /* CONTENEDOR PRINCIPAL */
@@ -137,52 +145,7 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem 5% 5rem;
-    }
-
-    /* CARTA DEL FUNDADOR (TEXTO EMOTIVO Y FORMAL) */
-    .founder-letter-card {
-      position: relative;
-      z-index: 3;
-      background: rgba(12, 12, 12, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-left: 2px solid #fff;
-      padding: 3.5rem 3rem;
-      margin-bottom: 5rem;
-      border-radius: 2px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
-    }
-
-    .founder-letter-tag {
-      font-family: var(--font-body);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      color: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
-    .founder-letter-body {
-      font-family: var(--font-body);
-      font-size: clamp(0.92rem, 1.25vw, 1.05rem);
-      font-weight: 300;
-      line-height: 1.95;
-      color: rgba(255, 255, 255, 0.9);
-      margin: 0 0 1.5rem 0;
-      letter-spacing: 0.2px;
-    }
-
-    .founder-signature {
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #fff;
-      margin-top: 2rem;
-      display: block;
+      padding: 1rem 5% 4rem;
     }
 
     /* TARJETA DE INTEGRANTE MINIMALISTA B&W */
@@ -306,18 +269,6 @@
       border-radius: 2px;
     }
 
-    .badge-location {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.5);
-      font-family: var(--font-body);
-      font-size: 0.65rem;
-      padding: 0.25rem 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      border-radius: 2px;
-    }
-
     .member-name {
       font-family: var(--font-display);
       font-size: clamp(1.6rem, 3vw, 2.4rem);
@@ -401,12 +352,58 @@
       border-radius: 2px;
     }
 
+    /* CARTA DEL FUNDADOR (TEXTO EMOTIVO Y FORMAL ANTES DEL RECLUTAMIENTO) */
+    .founder-letter-card {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: 4rem auto 0;
+      background: rgba(12, 12, 12, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-left: 2px solid #fff;
+      padding: 3.5rem 3rem;
+      border-radius: 2px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .founder-letter-tag {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .founder-letter-body {
+      font-family: var(--font-body);
+      font-size: clamp(0.92rem, 1.25vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.95;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 0 1.5rem 0;
+      letter-spacing: 0.2px;
+    }
+
+    .founder-signature {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-top: 2rem;
+      display: block;
+    }
+
     /* SECCIÓN UNIRSE AL EQUIPO B&W */
     .join-team-section {
       position: relative;
       width: 100%;
       padding: 6rem 5%;
-      margin-top: 3rem;
+      margin-top: 4rem;
       text-align: center;
       overflow: hidden;
       border-top: 1px solid rgba(255, 255, 255, 0.12);
@@ -514,36 +511,17 @@
   </header>
 
   <main>
-    <!-- HERO SUPERIOR -->
+    <!-- HERO SUPERIOR CON BLOQUE DESTACADO EN EL TÍTULO -->
     <section class="hero-team-banner">
       <video class="bg-tira-video" autoplay muted loop playsinline preload="metadata">
         <source src="videos/fondoartistas[1].mp4" type="video/mp4">
       </video>
       <div class="banner-overlay-fade"></div>
 
-      <h1 class="page-section-title">NUESTRO EQUIPO</h1>
+      <h1 class="page-section-title">NUESTRO <span>EQUIPO</span></h1>
     </section>
 
     <section class="team-container">
-
-      <!-- CARTA EMOTIVA Y FORMAL DEL FUNDADOR -->
-      <div class="founder-letter-card">
-        <span class="founder-letter-tag">// MANIFIESTO DEL FUNDADOR</span>
-        
-        <p class="founder-letter-body">
-          Mi pasión por la música nació desde muy pequeño. Siempre busqué un espacio al cual pertenecer de verdad; recorrí múltiples proyectos y plataformas, pero en ninguna encontré la ética, la lealtad ni la empatía que un artista merece. De esa búsqueda incansable y de la necesidad de crear un refugio honesto, nació <strong>Pulse Media</strong>.
-        </p>
-
-        <p class="founder-letter-body">
-          Este sello no fue concebido para alojar volúmenes masivos de canciones efímeras guiadas por la moda del momento. Buscamos aquellas obras singulares capaces de transmitir, de narrar una historia genuina y de perdurar en el tiempo. Desde temprana edad comprendí que no encajaba en los estándares convencionales; por ello fundé Pulse: para dar voz a todos aquellos talentos únicos que merecen ser escuchados en sus propios términos.
-        </p>
-
-        <p class="founder-letter-body">
-          Sé perfectamente lo tedioso y desgastante que resulta gestionar una carrera independiente y enfrentarse a la burocracia de lanzar una canción. En Pulse nos encargamos de esa carga ejecutiva para que la inspiración del artista jamás se interrumpa. Tras haber experimentado personalmente la vulnerabilidad de la industria y la falta de transparencia, mi compromiso absoluto es blindar a cada integrante de nuestra casa bajo una política de honestidad y respeto inquebrantable.
-        </p>
-
-        <span class="founder-signature">Emerson Josué Tecún Domingo — Fundador & CEO</span>
-      </div>
 
       <!-- INTEGRANTE 1: EMERSON JOSUE TECUN DOMINGO -->
       <article class="team-card">
@@ -561,7 +539,6 @@
           <div class="badges-container">
             <span class="badge-insignia">FOUNDER & CEO</span>
             <span class="badge-insignia">CREATIVE DIRECTOR</span>
-            <span class="badge-location">Guatemala</span>
           </div>
 
           <h2 class="member-name">Emerson Josué Tecún Domingo</h2>
@@ -599,7 +576,6 @@
           <div class="badges-container">
             <span class="badge-insignia">CO-FOUNDER</span>
             <span class="badge-insignia">HEAD OF PRODUCTION</span>
-            <span class="badge-location">Guatemala</span>
           </div>
 
           <h2 class="member-name">Yeriel Miguel Lorenzana Morataya</h2>
@@ -631,7 +607,7 @@
         </div>
       </article>
 
-      <!-- INTEGRANTE 3: A&R -->
+      <!-- INTEGRANTE 3: ROBERTO GARCÍA -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -640,17 +616,17 @@
 
         <div class="photo-frame-placeholder">
           <div class="shape-placeholder" style="clip-path: circle(50% at 50% 50%);"></div>
-          <span class="placeholder-text">// FOTO A&R</span>
+          <span class="placeholder-text">// FOTO ROBERTO</span>
         </div>
 
         <div class="member-info">
           <div class="badges-container">
             <span class="badge-insignia">TALENT SCOUT</span>
-            <span class="badge-location">International Ops</span>
+            <span class="badge-insignia">A&R DIRECTION</span>
           </div>
 
-          <h2 class="member-name">Dirección de A&R</h2>
-          <div class="member-role">Curaduría & Scouting de Talentos</div>
+          <h2 class="member-name">Roberto García</h2>
+          <div class="member-role">Dirección de A&R / Scouting de Talentos</div>
 
           <div class="bio-block">
             <div class="bio-subtitle">// Curaduría</div>
@@ -673,7 +649,7 @@
         </div>
       </article>
 
-      <!-- INTEGRANTE 4: INGENIERÍA -->
+      <!-- INTEGRANTE 4: PHONKID -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -683,11 +659,11 @@
         <div class="member-info">
           <div class="badges-container">
             <span class="badge-insignia">AUDIO ENGINEERING</span>
-            <span class="badge-location">Main Studio</span>
+            <span class="badge-insignia">MASTERING LEAD</span>
           </div>
 
-          <h2 class="member-name">Ingeniería de Audio</h2>
-          <div class="member-role">Control de Calidad & Masterización</div>
+          <h2 class="member-name">Phonkid</h2>
+          <div class="member-role">Ingeniería de Audio & Control de Calidad</div>
 
           <div class="bio-block">
             <div class="bio-subtitle">// Ingeniería</div>
@@ -705,15 +681,34 @@
           <div class="skills-block">
             <span class="skill-chip">Stem Mixing</span>
             <span class="skill-chip">Mastering</span>
-            <span class="skill-chip">Acoustics</span>
+            <span class="skill-chip">DSP Audio</span>
           </div>
         </div>
 
         <div class="photo-frame-placeholder">
           <div class="shape-placeholder" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
-          <span class="placeholder-text">// FOTO ESTUDIO</span>
+          <span class="placeholder-text">// FOTO PHONKID</span>
         </div>
       </article>
+
+      <!-- CARTA EMOTIVA Y FORMAL DEL FUNDADOR (UBICADA ANTES DEL RECLUTAMIENTO) -->
+      <div class="founder-letter-card">
+        <span class="founder-letter-tag">// MANIFIESTO DEL FUNDADOR</span>
+        
+        <p class="founder-letter-body">
+          Mi pasión por la música nació desde muy pequeño. Siempre busqué un espacio al cual pertenecer de verdad; recorrí múltiples proyectos y plataformas, pero en ninguna encontré la ética, la lealtad ni la empatía que un artista merece. De esa búsqueda incansable y de la necesidad de crear un refugio honesto, nació <strong>Pulse Media</strong>.
+        </p>
+
+        <p class="founder-letter-body">
+          Este sello no fue concebido para alojar volúmenes masivos de canciones efímeras guiadas por la moda del momento. Buscamos aquellas obras singulares capaces de transmitir, de narrar una historia genuina y de perdurar en el tiempo. Desde temprana edad comprendí que no encajaba en los estándares convencionales; por ello fundé Pulse: para dar voz a todos aquellos talentos únicos que merecen ser escuchados en sus propios términos.
+        </p>
+
+        <p class="founder-letter-body">
+          Sé perfectamente lo tedioso y desgastante que resulta gestionar una carrera independiente y enfrentarse a la burocracia de lanzar una canción. En Pulse nos encargamos de esa carga ejecutiva para que la inspiración del artista jamás se interrumpa. Tras haber experimentado personalmente la vulnerabilidad de la industria y la falta de transparencia, mi compromiso absoluto es blindar a cada integrante de nuestra casa bajo una política de honestidad y respeto inquebrantable.
+        </p>
+
+        <span class="founder-signature">Emerson Josué Tecún Domingo — Fundador & CEO</span>
+      </div>
 
     </section>
 
