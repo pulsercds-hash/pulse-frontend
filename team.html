@@ -3,64 +3,323 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PULSE MEDIA — Team & Management</title>
+  <title>PULSE MEDIA — Team</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,700&family=Syne:wght@800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <style>
+    :root {
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --accent-neon: #dcff00;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
+    html, body {
+      background: #0a0a0a !important;
+      color: #fff !important;
+      font-family: var(--font-mono);
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* HEADER FIJO */
+    header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand-logo {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .btn-back-home {
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .btn-back-home:hover {
+      color: var(--accent-neon);
+    }
+
+    /* CONTENEDOR MURAL TEAM STUFF */
+    .team-container {
+      position: relative;
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 5% 8rem;
+    }
+
+    /* TITULAR WATERMARK ESTILO GRAFITI/STREET */
+    .hero-watermark {
+      position: absolute;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 15vw, 12rem);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.03);
+      text-transform: uppercase;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+    }
+
+    .page-section-title {
+      position: relative;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 4rem;
+      text-align: left;
+    }
+
+    .page-section-title span {
+      background: var(--accent-neon);
+      color: #000;
+      padding: 0.2rem 0.8rem;
+      display: inline-block;
+      transform: rotate(-1deg);
+    }
+
+    /* TARJETA DE MIEMBRO ESTILO POSTER STREETWEAR */
+    .team-card {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: center;
+      background: rgba(18, 18, 18, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 3rem;
+      margin-bottom: 5rem;
+      border-radius: 4px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+    }
+
+    .team-card:nth-child(even) {
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    /* CONTENEDOR GEOMÉTRICO (PLACEHOLDER PARA LA FOTO) */
+    .photo-frame-placeholder {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background: #151515;
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .photo-frame-placeholder:hover {
+      border-color: var(--accent-neon);
+    }
+
+    /* Figura geométrica interior ficticia */
+    .shape-placeholder {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, rgba(220, 255, 0, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+      border: 1px solid var(--accent-neon);
+      margin-bottom: 1rem;
+      animation: spinShape 12s linear infinite;
+    }
+
+    @keyframes spinShape {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .placeholder-text {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+    }
+
+    /* INFORMACIÓN Y DETALLES URBANOS */
+    .member-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sticker-tag {
+      align-self: flex-start;
+      background: var(--accent-neon);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transform: rotate(-2deg);
+    }
+
+    .member-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin: 0;
+      color: #fff;
+    }
+
+    .member-role {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-left: 2px solid var(--accent-neon);
+      padding-left: 0.8rem;
+    }
+
+    .member-bio {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+    }
+
+    .skills-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .skill-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    /* ADAPTACIONES RESPONSIVAS */
+    @media (max-width: 900px) {
+      .team-card, .team-card:nth-child(even) {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2rem;
+      }
+    }
+  </style>
 </head>
 <body class="theme-dark">
 
-  <canvas id="webgl-canvas"></canvas>
-  <div id="page-curtain"></div>
-
-  <!-- HEADER SIMPLIFICADO: SOLO LOGO Y BOTÓN INICIO -->
+  <!-- HEADER FIJO -->
   <header>
-    <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
-    <nav>
-      <a href="index.html" class="nav-link" onclick="triggerCurtain(event, 'index.html')"><span>← Inicio</span></a>
-    </nav>
+    <a href="index.html" class="brand-logo">Pulse Media</a>
+    <a href="index.html" class="btn-back-home">&larr; VOLVER AL INICIO</a>
   </header>
 
-  <main>
-    <section class="panel" data-theme="dark">
-      <div class="hero-meta">
-        <span>// DIRECTIVA Y ADMINISTRACIÓN</span>
-        <span>GUATEMALA / GLOBAL</span>
-      </div>
-      <h1 class="hero-title">
-        El <span class="accent-text">Team.</span>
-      </h1>
-      <p class="hero-subtitle">Conoce a la mente creativa detrás de la disquera y la infraestructura operativa que impulsa el talento global.</p>
-    </section>
+  <main class="team-container">
+    <!-- MARCA DE AGUA GIGANTE AL FONDO -->
+    <div class="hero-watermark">PULSE TEAM</div>
 
-    <section class="team-section panel" data-theme="dark">
-      <div class="team-grid">
-        <div class="team-card">
-          <h3>Josue Tecun</h3>
-          <p class="team-role">Founder & CEO</p>
-          <p class="team-desc">Creador de Pulse Media en 2025. Líder en visión estratégica, dirección general y expansión de catálogos para géneros urbanos y regionales.</p>
-        </div>
-        <div class="team-card">
-          <h3>Pulse Operations</h3>
-          <p class="team-role">Global Management</p>
-          <p class="team-desc">Equipo encargado de la distribución digital internacional, monetización transparente y alianzas estratégicas.</p>
+    <h1 class="page-section-title">NUESTRO <span>EQUIPO</span></h1>
+
+    <!-- INTEGRANTE 1: EMERSON -->
+    <article class="team-card">
+      <div class="photo-frame-placeholder">
+        <div class="shape-placeholder"></div>
+        <span class="placeholder-text">// FOTO EMERSON</span>
+      </div>
+
+      <div class="member-info">
+        <div class="sticker-tag">FOUNDER & CEO</div>
+        <h2 class="member-name">Emerson Josué Tecún Domingo</h2>
+        <div class="member-role">Fundador / Dirección Ejecutiva & Creativa</div>
+        <p class="member-bio">
+          Visionario y pilar fundamental detrás de la creación de Pulse Media. Encargado de la estrategia global del sello, el desarrollo artístico y la preservación de la identidad independiente del proyecto.
+        </p>
+
+        <div class="skills-block">
+          <span class="skill-chip">Dirección Creativa</span>
+          <span class="skill-chip">A&R</span>
+          <span class="skill-chip">Estrategia</span>
         </div>
       </div>
-    </section>
+    </article>
+
+    <!-- INTEGRANTE 2: YERIEL -->
+    <article class="team-card">
+      <div class="member-info">
+        <div class="sticker-tag">CO-FOUNDER</div>
+        <h2 class="member-name">Yeriel Miguel Lorenzana Morataya</h2>
+        <div class="member-role">Co-Fundador / Producción & Gestión</div>
+        <p class="member-bio">
+          Cofundador de Pulse Media. Lidera las operaciones de producción musical, supervisión de proyectos en estudio y la coordinación integral para el impulso de nuevos talentos.
+        </p>
+
+        <div class="skills-block">
+          <span class="skill-chip">Producción</span>
+          <span class="skill-chip">Gestión Musical</span>
+          <span class="skill-chip">Operaciones</span>
+        </div>
+      </div>
+
+      <div class="photo-frame-placeholder">
+        <div class="shape-placeholder" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); border-color: #fff;"></div>
+        <span class="placeholder-text">// FOTO YERIEL</span>
+      </div>
+    </article>
   </main>
 
   <footer>
-    <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
-    <div>GUATEMALA // GLOBAL OPS</div>
+    <div style="text-align: center; padding: 2.5rem 0; font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.5; border-top: 1px solid rgba(255,255,255,0.08);">
+      &copy; 2025 - 2026 PULSE MEDIA PUBLISHING // GUATEMALA
+    </div>
   </footer>
 
-  <script src="app.js"></script>
 </body>
 </html>
