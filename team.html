@@ -74,7 +74,34 @@
       color: #fff;
     }
 
-    /* HERO SUPERIOR */
+    /* TIRA ANIMADA CONTINUA (MARQUEE) */
+    .pulse-ticker-bar {
+      width: 100%;
+      background: #fff;
+      color: #000;
+      padding: 0.5rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 10;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      animation: tickerScroll 25s linear infinite;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* HERO SUPERIOR CON MAYOR CLARIDAD EN EL VIDEO */
     .hero-team-banner {
       position: relative;
       width: 100%;
@@ -83,7 +110,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 5rem 5% 3rem;
+      padding: 4rem 5% 3rem;
       text-align: center;
       overflow: hidden;
       background: #000;
@@ -96,8 +123,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.25;
-      filter: contrast(1.1) grayscale(1);
+      opacity: 0.65; /* Mayor claridad pedida */
+      filter: contrast(1.15) brightness(1.1); /* Más luz y nitidez */
       z-index: 1;
       pointer-events: none;
     }
@@ -110,8 +137,8 @@
       height: 100%;
       background: linear-gradient(
         to bottom, 
-        rgba(0, 0, 0, 0.85) 0%, 
-        rgba(0, 0, 0, 0.4) 50%, 
+        rgba(0, 0, 0, 0.6) 0%, 
+        rgba(0, 0, 0, 0.2) 50%, 
         #000 100%
       );
       z-index: 2;
@@ -129,6 +156,7 @@
       margin: 0;
       color: #fff;
       line-height: 1.1;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.8);
     }
 
     .page-section-title span {
@@ -148,7 +176,7 @@
       padding: 1rem 5% 4rem;
     }
 
-    /* TARJETA DE INTEGRANTE (SIN FOTOS, 100% INFORMACIÓN) */
+    /* TARJETA DE INTEGRANTE CON EFECTO X-RAY (ESCANER TÉRMICO AL HOVER) */
     .team-card {
       position: relative;
       z-index: 2;
@@ -159,6 +187,40 @@
       border-radius: 2px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.95);
       overflow: hidden;
+      transition: border-color 0.4s ease, background 0.4s ease;
+    }
+
+    /* CAPA X-RAY INTERACTIVA (SE REVELA AL PASAR EL CURSOR) */
+    .team-card::before {
+      content: "[ X-RAY // NODE_DATA_SECURE // HASH: 0x8F94_PULSE ]";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.15);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+    }
+
+    .team-card:hover::before {
+      opacity: 1;
+    }
+
+    .team-card:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(14, 14, 14, 0.98);
     }
 
     .card-bg-video {
@@ -168,7 +230,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.12;
+      opacity: 0.12; /* Mantiene la oscuridad sutil que te gusta */
       z-index: 1;
       pointer-events: none;
       filter: contrast(1.2) grayscale(1);
@@ -300,7 +362,7 @@
       border-radius: 2px;
     }
 
-    /* MANIFIESTO DEL FUNDADOR CON VIDEOS/FONDO.MP4 */
+    /* MANIFIESTO DEL FUNDADOR CON MÁS CLARIDAD EN EL VIDEO FONDO.MP4 Y EFECTO X-RAY */
     .founder-letter-card {
       position: relative;
       z-index: 3;
@@ -312,6 +374,11 @@
       border-radius: 2px;
       overflow: hidden;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.95);
+      transition: border-color 0.4s ease;
+    }
+
+    .founder-letter-card:hover {
+      border-color: rgba(255, 255, 255, 0.6);
     }
 
     .bg-founder-video {
@@ -321,10 +388,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.22;
+      opacity: 0.55; /* Mayor claridad y luz en el video del manifiesto */
       z-index: 1;
       pointer-events: none;
-      filter: contrast(1.2) grayscale(1);
+      filter: contrast(1.15) brightness(1.05);
     }
 
     .founder-video-overlay {
@@ -333,7 +400,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(6, 6, 6, 0.92);
+      background: rgba(4, 4, 4, 0.82); /* Velo más ligero para que luzca más nítido */
       z-index: 2;
       pointer-events: none;
     }
@@ -348,7 +415,7 @@
       font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 3px;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.6);
       text-transform: uppercase;
       margin-bottom: 1.5rem;
       display: block;
@@ -359,7 +426,7 @@
       font-size: clamp(0.88rem, 1.15vw, 1.02rem);
       font-weight: 300;
       line-height: 1.95;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.95);
       margin: 0 0 1.5rem 0;
       letter-spacing: 0.2px;
     }
@@ -394,10 +461,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.18;
+      opacity: 0.35;
       z-index: 1;
       pointer-events: none;
-      filter: contrast(1.2) grayscale(1);
+      filter: contrast(1.2) brightness(0.9);
     }
 
     .join-overlay {
@@ -406,7 +473,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(4, 4, 4, 0.9);
+      background: rgba(4, 4, 4, 0.88);
       z-index: 2;
       pointer-events: none;
     }
@@ -485,8 +552,15 @@
     <a href="index.html" class="btn-back-home">&larr; VOLVER AL INICIO</a>
   </header>
 
+  <!-- TIRA ANIMADA CONTINUA (MARQUEE) -->
+  <div class="pulse-ticker-bar">
+    <div class="ticker-track">
+      PULSE MEDIA PUBLISHING &nbsp;//&nbsp; NO GENERIC TALENT ONLY &nbsp;//&nbsp; URBAN, POP & VOCAL DIVISION &nbsp;//&nbsp; GUATEMALA &nbsp;//&nbsp; SECURE NODE ACTIVE &nbsp;//&nbsp; PULSE MEDIA PUBLISHING &nbsp;//&nbsp; NO GENERIC TALENT ONLY &nbsp;//&nbsp; URBAN, POP & VOCAL DIVISION &nbsp;//&nbsp; GUATEMALA &nbsp;//&nbsp; SECURE NODE ACTIVE &nbsp;//&nbsp;
+    </div>
+  </div>
+
   <main>
-    <!-- HERO SUPERIOR -->
+    <!-- HERO SUPERIOR CON VIDEO CLARO Y NÍTIDO -->
     <section class="hero-team-banner">
       <video class="bg-tira-video" autoplay muted loop playsinline preload="metadata">
         <source src="videos/fondoartistas[1].mp4" type="video/mp4">
@@ -645,7 +719,7 @@
         </div>
       </article>
 
-      <!-- CARTA DEL FUNDADOR CON VIDEOS/FONDO.MP4 -->
+      <!-- CARTA DEL FUNDADOR CON VIDEO FONDO.MP4 CLARO Y EFECTO X-RAY -->
       <div class="founder-letter-card">
         <video class="bg-founder-video" autoplay muted loop playsinline preload="metadata">
           <source src="videos/fondo.mp4" type="video/mp4">
