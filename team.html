@@ -143,30 +143,22 @@
     .team-container {
       position: relative;
       width: 100%;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 1rem 5% 4rem;
     }
 
-    /* TARJETA DE INTEGRANTE TÉCNICA Y SOBRIA */
+    /* TARJETA DE INTEGRANTE (SIN FOTOS, 100% INFORMACIÓN) */
     .team-card {
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1.35fr;
-      gap: 3.5rem;
-      align-items: start;
       background: rgba(8, 8, 8, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 3.5rem;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
       border-radius: 2px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.95);
       overflow: hidden;
-    }
-
-    .team-card:nth-child(even) {
-      grid-template-columns: 1.35fr 1fr;
     }
 
     .card-bg-video {
@@ -198,50 +190,6 @@
       z-index: 3;
     }
 
-    /* MARCO DE FOTO TÉCNICO */
-    .photo-frame-placeholder {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      background: #050505;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      border-radius: 2px;
-      transition: border-color 0.3s ease;
-    }
-
-    .photo-frame-placeholder:hover {
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .shape-placeholder {
-      width: 80px;
-      height: 80px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-      margin-bottom: 1.2rem;
-      animation: spinShape 16s linear infinite;
-    }
-
-    @keyframes spinShape {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .placeholder-text {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      color: rgba(255, 255, 255, 0.4);
-      text-transform: uppercase;
-    }
-
     /* INFORMACIÓN INTEGRANTE */
     .member-info {
       display: flex;
@@ -271,7 +219,7 @@
 
     .member-name {
       font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
       font-weight: 900;
       text-transform: uppercase;
       line-height: 1.1;
@@ -308,7 +256,7 @@
 
     .member-bio-text {
       font-family: var(--font-mono);
-      font-size: clamp(0.82rem, 1.05vw, 0.92rem);
+      font-size: clamp(0.85rem, 1.1vw, 0.95rem);
       font-weight: 300;
       line-height: 1.75;
       color: rgba(255, 255, 255, 0.8);
@@ -356,7 +304,7 @@
     .founder-letter-card {
       position: relative;
       z-index: 3;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 4rem auto 0;
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-left: 2px solid #fff;
@@ -523,10 +471,8 @@
       .founder-letter-card {
         padding: 2.5rem 1.5rem;
       }
-      .team-card, .team-card:nth-child(even) {
-        grid-template-columns: 1fr;
+      .team-card {
         padding: 2rem 1.5rem;
-        gap: 2rem;
       }
     }
   </style>
@@ -559,11 +505,6 @@
         </video>
         <div class="card-video-overlay"></div>
 
-        <div class="photo-frame-placeholder">
-          <div class="shape-placeholder"></div>
-          <span class="placeholder-text">// FOTO EMERSON</span>
-        </div>
-
         <div class="member-info">
           <div class="badges-container">
             <span class="badge-insignia">FOUNDER & CEO</span>
@@ -571,12 +512,12 @@
           </div>
 
           <h2 class="member-name">Emerson Josué Tecún Domingo</h2>
-          <div class="member-role">Fundador / Dirección Ejecutiva & Creativa</div>
+          <div class="member-role">Fundador / Dirección Ejecutiva, Creativa, Portadas, Marketing & Catálogo</div>
 
           <div class="bio-block">
             <div class="bio-subtitle">// Enfoque Ejecutivo</div>
             <p class="member-bio-text">
-              Fundador y estratega general. Responsable de velar por la integridad artística, la transparencia financiera y la visión global de la marca.
+              Fundador y estratega general. Responsable de la dirección creativa, diseño de portadas, estrategias de marketing y la administración de lanzamientos y catálogo de canciones del sello.
             </p>
           </div>
 
@@ -587,9 +528,10 @@
           </div>
 
           <div class="skills-block">
-            <span class="skill-chip">Estrategia Global</span>
-            <span class="skill-chip">A&R Direction</span>
-            <span class="skill-chip">Branding</span>
+            <span class="skill-chip">Dirección Creativa</span>
+            <span class="skill-chip">Diseño de Portadas</span>
+            <span class="skill-chip">Marketing</span>
+            <span class="skill-chip">Gestión de Catálogo</span>
           </div>
         </div>
       </article>
@@ -603,17 +545,16 @@
 
         <div class="member-info">
           <div class="badges-container">
-            <span class="badge-insignia">CO-FOUNDER</span>
-            <span class="badge-insignia">HEAD OF PRODUCTION</span>
+            <span class="badge-insignia">A&R TEAM</span>
           </div>
 
           <h2 class="member-name">Yeriel Miguel Lorenzana Morataya</h2>
-          <div class="member-role">Co-Fundador / Producción & Gestión</div>
+          <div class="member-role">A&R / Scouting & Desarrollo Artístico</div>
 
           <div class="bio-block">
-            <div class="bio-subtitle">// Enfoque de Producción</div>
+            <div class="bio-subtitle">// Enfoque Artístico</div>
             <p class="member-bio-text">
-              Cofundador y encargado de la supervisión sonora. Coordina los procesos de grabación, afinación técnica de masterización y desarrollo en estudio.
+              Enfocado en la selección, desarrollo y supervisión del talento musical, asegurando que cada proyecto mantenga los estándares de autenticidad del sello.
             </p>
           </div>
 
@@ -624,15 +565,10 @@
           </div>
 
           <div class="skills-block">
-            <span class="skill-chip">Producción Sonora</span>
-            <span class="skill-chip">Gestión de Estudio</span>
-            <span class="skill-chip">Supervisión</span>
+            <span class="skill-chip">A&R</span>
+            <span class="skill-chip">Desarrollo Artístico</span>
+            <span class="skill-chip">Curaduría</span>
           </div>
-        </div>
-
-        <div class="photo-frame-placeholder">
-          <div class="shape-placeholder" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);"></div>
-          <span class="placeholder-text">// FOTO YERIEL</span>
         </div>
       </article>
 
@@ -643,24 +579,18 @@
         </video>
         <div class="card-video-overlay"></div>
 
-        <div class="photo-frame-placeholder">
-          <div class="shape-placeholder" style="clip-path: circle(50% at 50% 50%);"></div>
-          <span class="placeholder-text">// FOTO ROBERTO</span>
-        </div>
-
         <div class="member-info">
           <div class="badges-container">
-            <span class="badge-insignia">TALENT SCOUT</span>
-            <span class="badge-insignia">A&R DIRECTION</span>
+            <span class="badge-insignia">A&R & MARKETING</span>
           </div>
 
           <h2 class="member-name">Roberto García</h2>
-          <div class="member-role">Dirección de A&R / Scouting de Talentos</div>
+          <div class="member-role">A&R / Marketing & Promoción</div>
 
           <div class="bio-block">
-            <div class="bio-subtitle">// Curaduría</div>
+            <div class="bio-subtitle">// Enfoque de Promoción</div>
             <p class="member-bio-text">
-              Identificación y acompañamiento de voces con identidad única en la escena urbana, pop y vocal independiente.
+              Estrategias de posicionamiento, búsqueda de talentos emergentes y conexión directa con la difusión de los lanzamientos oficiales.
             </p>
           </div>
 
@@ -671,9 +601,9 @@
           </div>
 
           <div class="skills-block">
-            <span class="skill-chip">Scouting</span>
-            <span class="skill-chip">Curaduría</span>
-            <span class="skill-chip">Acompañamiento</span>
+            <span class="skill-chip">A&R</span>
+            <span class="skill-chip">Marketing</span>
+            <span class="skill-chip">Promoción</span>
           </div>
         </div>
       </article>
@@ -687,17 +617,17 @@
 
         <div class="member-info">
           <div class="badges-container">
-            <span class="badge-insignia">AUDIO ENGINEERING</span>
-            <span class="badge-insignia">MASTERING LEAD</span>
+            <span class="badge-insignia">AUDIO QUALITY & A&R</span>
+            <span class="badge-insignia">CREATIVE DIRECTION</span>
           </div>
 
           <h2 class="member-name">Phonkid</h2>
-          <div class="member-role">Ingeniería de Audio & Control de Calidad</div>
+          <div class="member-role">Control de Calidad, A&R & Dirección Creativa</div>
 
           <div class="bio-block">
-            <div class="bio-subtitle">// Ingeniería</div>
+            <div class="bio-subtitle">// Enfoque Técnico y Creativo</div>
             <p class="member-bio-text">
-              Optimizaciones acústicas y estándares de masterización para distribución global en todas las plataformas digitales.
+              Supervisión de los estándares de calidad sonora en estudio, apoyo en A&R y aportes en la dirección visual y conceptual de los lanzamientos.
             </p>
           </div>
 
@@ -708,15 +638,10 @@
           </div>
 
           <div class="skills-block">
-            <span class="skill-chip">Stem Mixing</span>
-            <span class="skill-chip">Mastering</span>
-            <span class="skill-chip">DSP Audio</span>
+            <span class="skill-chip">Control de Calidad</span>
+            <span class="skill-chip">A&R</span>
+            <span class="skill-chip">Dirección Creativa</span>
           </div>
-        </div>
-
-        <div class="photo-frame-placeholder">
-          <div class="shape-placeholder" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
-          <span class="placeholder-text">// FOTO PHONKID</span>
         </div>
       </article>
 
