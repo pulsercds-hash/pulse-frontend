@@ -101,7 +101,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* HERO SUPERIOR CON MAYOR CLARIDAD EN EL VIDEO */
+    /* HERO SUPERIOR (VIDEO LIGERAMENTE MÁS ATENUADO) */
     .hero-team-banner {
       position: relative;
       width: 100%;
@@ -123,8 +123,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.65; /* Mayor claridad pedida */
-      filter: contrast(1.15) brightness(1.1); /* Más luz y nitidez */
+      opacity: 0.45; /* Ligeramente más atenuado como pediste */
+      filter: contrast(1.1) brightness(0.9);
       z-index: 1;
       pointer-events: none;
     }
@@ -137,8 +137,8 @@
       height: 100%;
       background: linear-gradient(
         to bottom, 
-        rgba(0, 0, 0, 0.6) 0%, 
-        rgba(0, 0, 0, 0.2) 50%, 
+        rgba(0, 0, 0, 0.75) 0%, 
+        rgba(0, 0, 0, 0.3) 50%, 
         #000 100%
       );
       z-index: 2;
@@ -159,14 +159,6 @@
       text-shadow: 0 10px 30px rgba(0,0,0,0.8);
     }
 
-    .page-section-title span {
-      background: #fff;
-      color: #000;
-      padding: 0.2rem 0.8rem;
-      display: inline-block;
-      margin-left: 0.5rem;
-    }
-
     /* CONTENEDOR PRINCIPAL */
     .team-container {
       position: relative;
@@ -176,7 +168,7 @@
       padding: 1rem 5% 4rem;
     }
 
-    /* TARJETA DE INTEGRANTE CON EFECTO X-RAY (ESCANER TÉRMICO AL HOVER) */
+    /* TARJETA DE INTEGRANTE CON EFECTO X-RAY */
     .team-card {
       position: relative;
       z-index: 2;
@@ -190,7 +182,6 @@
       transition: border-color 0.4s ease, background 0.4s ease;
     }
 
-    /* CAPA X-RAY INTERACTIVA (SE REVELA AL PASAR EL CURSOR) */
     .team-card::before {
       content: "[ X-RAY // NODE_DATA_SECURE // HASH: 0x8F94_PULSE ]";
       position: absolute;
@@ -230,7 +221,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.12; /* Mantiene la oscuridad sutil que te gusta */
+      opacity: 0.12;
       z-index: 1;
       pointer-events: none;
       filter: contrast(1.2) grayscale(1);
@@ -362,13 +353,13 @@
       border-radius: 2px;
     }
 
-    /* MANIFIESTO DEL FUNDADOR CON MÁS CLARIDAD EN EL VIDEO FONDO.MP4 Y EFECTO X-RAY */
+    /* MANIFIESTO DEL FUNDADOR (VIDEO FONDO.MP4 MUCHO MÁS CLARO Y VISIBLE) */
     .founder-letter-card {
       position: relative;
       z-index: 3;
       max-width: 1100px;
       margin: 4rem auto 0;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-left: 2px solid #fff;
       padding: 4rem 3.5rem;
       border-radius: 2px;
@@ -388,10 +379,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.55; /* Mayor claridad y luz en el video del manifiesto */
+      opacity: 0.85; /* Altísima claridad para que el video luzca nítido e iluminado */
       z-index: 1;
       pointer-events: none;
-      filter: contrast(1.15) brightness(1.05);
+      filter: contrast(1.1) brightness(1.2);
     }
 
     .founder-video-overlay {
@@ -400,7 +391,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(4, 4, 4, 0.82); /* Velo más ligero para que luzca más nítido */
+      background: rgba(4, 4, 4, 0.68); /* Velo translúcido para total legibilidad del texto con luz clara */
       z-index: 2;
       pointer-events: none;
     }
@@ -415,7 +406,7 @@
       font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 3px;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.7);
       text-transform: uppercase;
       margin-bottom: 1.5rem;
       display: block;
@@ -426,7 +417,7 @@
       font-size: clamp(0.88rem, 1.15vw, 1.02rem);
       font-weight: 300;
       line-height: 1.95;
-      color: rgba(255, 255, 255, 0.95);
+      color: rgba(255, 255, 255, 0.98);
       margin: 0 0 1.5rem 0;
       letter-spacing: 0.2px;
     }
@@ -560,14 +551,14 @@
   </div>
 
   <main>
-    <!-- HERO SUPERIOR CON VIDEO CLARO Y NÍTIDO -->
+    <!-- HERO SUPERIOR -->
     <section class="hero-team-banner">
       <video class="bg-tira-video" autoplay muted loop playsinline preload="metadata">
         <source src="videos/fondoartistas[1].mp4" type="video/mp4">
       </video>
       <div class="banner-overlay-fade"></div>
 
-      <h1 class="page-section-title">NUESTRO <span>EQUIPO</span></h1>
+      <h1 class="page-section-title">NUESTRO EQUIPO</h1>
     </section>
 
     <section class="team-container">
@@ -719,7 +710,7 @@
         </div>
       </article>
 
-      <!-- CARTA DEL FUNDADOR CON VIDEO FONDO.MP4 CLARO Y EFECTO X-RAY -->
+      <!-- CARTA DEL FUNDADOR (CON VIDEO FONDO.MP4 CLARO E ILUMINADO) -->
       <div class="founder-letter-card">
         <video class="bg-founder-video" autoplay muted loop playsinline preload="metadata">
           <source src="videos/fondo.mp4" type="video/mp4">
