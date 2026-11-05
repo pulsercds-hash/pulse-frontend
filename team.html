@@ -7,16 +7,14 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500;600&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 
   <style>
     :root {
       --font-display: 'Syne', sans-serif;
-      --font-title: 'Cinzel Decorative', serif;
       --font-body: 'Inter', sans-serif;
-      --accent-neon: #dcff00;
     }
 
     *, *::before, *::after {
@@ -35,7 +33,7 @@
       -webkit-text-size-adjust: 100%;
     }
 
-    /* HEADER FIJO */
+    /* HEADER FIJO SOBRIO */
     header {
       position: sticky;
       top: 0;
@@ -48,12 +46,12 @@
       z-index: 999;
       background: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .brand-logo {
       font-family: var(--font-display);
-      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-size: clamp(1rem, 2vw, 1.25rem);
       font-weight: 900;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -63,9 +61,9 @@
 
     .btn-back-home {
       font-family: var(--font-body);
-      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+      font-size: clamp(0.7rem, 1.2vw, 0.8rem);
       font-weight: 500;
-      color: #fff;
+      color: rgba(255, 255, 255, 0.7);
       text-decoration: none;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -73,14 +71,14 @@
     }
 
     .btn-back-home:hover {
-      color: var(--accent-neon);
+      color: #fff;
     }
 
-    /* HERO SUPERIOR CON VIDEO EXACTO */
+    /* HERO SUPERIOR */
     .hero-team-banner {
       position: relative;
       width: 100%;
-      min-height: 38vh;
+      min-height: 35vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -98,8 +96,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.35;
-      filter: contrast(1.15) brightness(0.85);
+      opacity: 0.25;
+      filter: contrast(1.1) grayscale(1);
       z-index: 1;
       pointer-events: none;
     }
@@ -113,7 +111,7 @@
       background: linear-gradient(
         to bottom, 
         rgba(0, 0, 0, 0.85) 0%, 
-        rgba(0, 0, 0, 0.3) 50%, 
+        rgba(0, 0, 0, 0.4) 50%, 
         #000 100%
       );
       z-index: 2;
@@ -124,33 +122,70 @@
       position: relative;
       z-index: 3;
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+      font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       margin: 0;
       color: #fff;
       line-height: 1.1;
-    }
-
-    .page-section-title span {
-      background: #fff;
-      color: #000;
-      padding: 0.2rem 0.8rem;
-      display: inline-block;
-      margin-left: 0.5rem;
     }
 
     /* CONTENEDOR PRINCIPAL */
     .team-container {
       position: relative;
       width: 100%;
-      max-width: 1250px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 5% 5rem;
+      padding: 1rem 5% 5rem;
     }
 
-    /* TARJETA DE INTEGRANTE */
+    /* CARTA DEL FUNDADOR (TEXTO EMOTIVO Y FORMAL) */
+    .founder-letter-card {
+      position: relative;
+      z-index: 3;
+      background: rgba(12, 12, 12, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-left: 2px solid #fff;
+      padding: 3.5rem 3rem;
+      margin-bottom: 5rem;
+      border-radius: 2px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    .founder-letter-tag {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .founder-letter-body {
+      font-family: var(--font-body);
+      font-size: clamp(0.92rem, 1.25vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.95;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 0 1.5rem 0;
+      letter-spacing: 0.2px;
+    }
+
+    .founder-signature {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-top: 2rem;
+      display: block;
+    }
+
+    /* TARJETA DE INTEGRANTE MINIMALISTA B&W */
     .team-card {
       position: relative;
       z-index: 2;
@@ -158,12 +193,12 @@
       grid-template-columns: 1fr 1.35fr;
       gap: 3.5rem;
       align-items: start;
-      background: rgba(10, 10, 10, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(8, 8, 8, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 3.5rem;
-      margin-bottom: 4.5rem;
-      border-radius: 6px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.9);
+      margin-bottom: 4rem;
+      border-radius: 2px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.95);
       overflow: hidden;
     }
 
@@ -178,10 +213,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.15;
+      opacity: 0.12;
       z-index: 1;
       pointer-events: none;
-      filter: contrast(1.2) grayscale(0.2);
+      filter: contrast(1.2) grayscale(1);
     }
 
     .card-video-overlay {
@@ -190,7 +225,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, rgba(12,12,12,0.65) 0%, rgba(5,5,5,0.95) 100%);
+      background: radial-gradient(circle at center, rgba(10,10,10,0.7) 0%, rgba(0,0,0,0.98) 100%);
       z-index: 2;
       pointer-events: none;
     }
@@ -200,34 +235,34 @@
       z-index: 3;
     }
 
-    /* MARCO DE FOTO TEMPORAL */
+    /* MARCO DE FOTO MINIMALISTA */
     .photo-frame-placeholder {
       position: relative;
       width: 100%;
       aspect-ratio: 4 / 5;
-      background: rgba(5, 5, 5, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #050505;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      border-radius: 4px;
+      border-radius: 2px;
       transition: border-color 0.3s ease;
     }
 
     .photo-frame-placeholder:hover {
-      border-color: rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.4);
     }
 
     .shape-placeholder {
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-      border: 1px solid rgba(255, 255, 255, 0.4);
       margin-bottom: 1.2rem;
-      animation: spinShape 14s linear infinite;
+      animation: spinShape 16s linear infinite;
     }
 
     @keyframes spinShape {
@@ -237,10 +272,10 @@
 
     .placeholder-text {
       font-family: var(--font-body);
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 500;
       letter-spacing: 2px;
-      color: rgba(255, 255, 255, 0.45);
+      color: rgba(255, 255, 255, 0.4);
       text-transform: uppercase;
     }
 
@@ -259,12 +294,12 @@
     }
 
     .badge-insignia {
-      background: rgba(220, 255, 0, 0.1);
-      border: 1px solid var(--accent-neon);
-      color: var(--accent-neon);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
       font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.68rem;
+      font-weight: 600;
+      font-size: 0.65rem;
       padding: 0.25rem 0.65rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -272,11 +307,11 @@
     }
 
     .badge-location {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.8);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
       font-family: var(--font-body);
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       padding: 0.25rem 0.65rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -285,7 +320,7 @@
 
     .member-name {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
       font-weight: 900;
       text-transform: uppercase;
       line-height: 1.1;
@@ -296,52 +331,52 @@
 
     .member-role {
       font-family: var(--font-body);
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
       text-transform: uppercase;
       letter-spacing: 2px;
-      border-left: 2px solid var(--accent-neon);
+      border-left: 2px solid #fff;
       padding-left: 0.8rem;
     }
 
     .bio-block {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding-top: 1rem;
     }
 
     .bio-subtitle {
       font-family: var(--font-body);
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.68rem;
+      font-weight: 600;
       letter-spacing: 2px;
-      color: var(--accent-neon);
+      color: rgba(255, 255, 255, 0.5);
       text-transform: uppercase;
       margin-bottom: 0.4rem;
     }
 
     .member-bio-text {
       font-family: var(--font-body);
-      font-size: clamp(0.88rem, 1.1vw, 0.98rem);
+      font-size: clamp(0.85rem, 1.1vw, 0.95rem);
       font-weight: 300;
       line-height: 1.75;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.8);
       margin: 0;
     }
 
     .quote-message-box {
-      background: rgba(255, 255, 255, 0.03);
-      border-left: 3px solid #fff;
-      padding: 1rem 1.2rem;
-      border-radius: 0 4px 4px 0;
-      margin-top: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid rgba(255, 255, 255, 0.4);
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 2px 2px 0;
+      margin-top: 0.4rem;
     }
 
     .quote-message-text {
       font-family: var(--font-body);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-style: italic;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.85);
       line-height: 1.6;
       margin: 0;
     }
@@ -349,33 +384,32 @@
     .skills-block {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.4rem;
       margin-top: 0.4rem;
     }
 
     .skill-chip {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 0.35rem 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.3rem 0.7rem;
       font-family: var(--font-body);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 400;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
+      color: rgba(255, 255, 255, 0.7);
       border-radius: 2px;
     }
 
-    /* NUEVA SECCIÓN UNIRSE AL EQUIPO CON VIDEO TARJETA2.MP4 */
+    /* SECCIÓN UNIRSE AL EQUIPO B&W */
     .join-team-section {
       position: relative;
       width: 100%;
       padding: 6rem 5%;
-      margin-top: 2rem;
+      margin-top: 3rem;
       text-align: center;
       overflow: hidden;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       background: #000;
     }
 
@@ -386,10 +420,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.25;
+      opacity: 0.18;
       z-index: 1;
       pointer-events: none;
-      filter: contrast(1.2);
+      filter: contrast(1.2) grayscale(1);
     }
 
     .join-overlay {
@@ -398,7 +432,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(5, 5, 5, 0.85);
+      background: rgba(4, 4, 4, 0.9);
       z-index: 2;
       pointer-events: none;
     }
@@ -406,59 +440,62 @@
     .join-content {
       position: relative;
       z-index: 3;
-      max-width: 700px;
+      max-width: 680px;
       margin: 0 auto;
-      background: rgba(12, 12, 12, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 3.5rem 2rem;
-      border-radius: 6px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+      border-radius: 2px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
     }
 
     .join-title {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
       font-weight: 900;
       text-transform: uppercase;
       margin: 0 0 1rem 0;
       color: #fff;
+      letter-spacing: 1px;
     }
 
     .join-desc {
       font-family: var(--font-body);
-      font-size: clamp(0.88rem, 1.3vw, 1rem);
+      font-size: clamp(0.85rem, 1.2vw, 0.95rem);
       font-weight: 300;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.75);
       margin-bottom: 2.2rem;
       line-height: 1.7;
     }
 
     .btn-join-mail {
       display: inline-block;
-      background: var(--accent-neon);
+      background: #fff;
       color: #000;
       font-family: var(--font-body);
-      font-size: 0.85rem;
-      font-weight: 800;
+      font-size: 0.8rem;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
-      padding: 1.1rem 2.8rem;
-      border-radius: 4px;
+      padding: 1.1rem 2.6rem;
+      border-radius: 2px;
       text-decoration: none;
-      transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease;
     }
 
     .btn-join-mail:hover {
-      background: #fff;
-      box-shadow: 0 0 25px rgba(220, 255, 0, 0.4);
+      background: rgba(255, 255, 255, 0.85);
       transform: translateY(-2px);
     }
 
-    /* RESPONSIVO */
+    /* RESPONSIVO MÓVIL */
     @media (max-width: 900px) {
       .hero-team-banner {
         padding: 4rem 4% 2rem;
         min-height: 28vh;
+      }
+      .founder-letter-card {
+        padding: 2rem 1.5rem;
       }
       .team-card, .team-card:nth-child(even) {
         grid-template-columns: 1fr;
@@ -470,25 +507,43 @@
 </head>
 <body class="theme-dark">
 
-  <!-- HEADER -->
+  <!-- HEADER FIJO SOBRIO -->
   <header>
     <a href="index.html" class="brand-logo">Pulse Media</a>
     <a href="index.html" class="btn-back-home">&larr; VOLVER AL INICIO</a>
   </header>
 
   <main>
-    <!-- HERO SUPERIOR CON RUTA EXACTA DE VIDEO -->
+    <!-- HERO SUPERIOR -->
     <section class="hero-team-banner">
       <video class="bg-tira-video" autoplay muted loop playsinline preload="metadata">
         <source src="videos/fondoartistas[1].mp4" type="video/mp4">
       </video>
       <div class="banner-overlay-fade"></div>
 
-      <h1 class="page-section-title">NUESTRO <span>EQUIPO</span></h1>
+      <h1 class="page-section-title">NUESTRO EQUIPO</h1>
     </section>
 
-    <!-- LISTADO DE INTEGRANTES -->
     <section class="team-container">
+
+      <!-- CARTA EMOTIVA Y FORMAL DEL FUNDADOR -->
+      <div class="founder-letter-card">
+        <span class="founder-letter-tag">// MANIFIESTO DEL FUNDADOR</span>
+        
+        <p class="founder-letter-body">
+          Mi pasión por la música nació desde muy pequeño. Siempre busqué un espacio al cual pertenecer de verdad; recorrí múltiples proyectos y plataformas, pero en ninguna encontré la ética, la lealtad ni la empatía que un artista merece. De esa búsqueda incansable y de la necesidad de crear un refugio honesto, nació <strong>Pulse Media</strong>.
+        </p>
+
+        <p class="founder-letter-body">
+          Este sello no fue concebido para alojar volúmenes masivos de canciones efímeras guiadas por la moda del momento. Buscamos aquellas obras singulares capaces de transmitir, de narrar una historia genuina y de perdurar en el tiempo. Desde temprana edad comprendí que no encajaba en los estándares convencionales; por ello fundé Pulse: para dar voz a todos aquellos talentos únicos que merecen ser escuchados en sus propios términos.
+        </p>
+
+        <p class="founder-letter-body">
+          Sé perfectamente lo tedioso y desgastante que resulta gestionar una carrera independiente y enfrentarse a la burocracia de lanzar una canción. En Pulse nos encargamos de esa carga ejecutiva para que la inspiración del artista jamás se interrumpa. Tras haber experimentado personalmente la vulnerabilidad de la industria y la falta de transparencia, mi compromiso absoluto es blindar a cada integrante de nuestra casa bajo una política de honestidad y respeto inquebrantable.
+        </p>
+
+        <span class="founder-signature">Emerson Josué Tecún Domingo — Fundador & CEO</span>
+      </div>
 
       <!-- INTEGRANTE 1: EMERSON JOSUE TECUN DOMINGO -->
       <article class="team-card">
@@ -506,22 +561,22 @@
           <div class="badges-container">
             <span class="badge-insignia">FOUNDER & CEO</span>
             <span class="badge-insignia">CREATIVE DIRECTOR</span>
-            <span class="badge-location">&#128205; Guatemala</span>
+            <span class="badge-location">Guatemala</span>
           </div>
 
           <h2 class="member-name">Emerson Josué Tecún Domingo</h2>
           <div class="member-role">Fundador / Dirección Ejecutiva & Creativa</div>
 
           <div class="bio-block">
-            <div class="bio-subtitle">// Biografía Personal</div>
+            <div class="bio-subtitle">// Enfoque Ejecutivo</div>
             <p class="member-bio-text">
-              Creador y estratega principal de Pulse Media. Con una visión centrada en romper los moldes de la industria musical independiente, lidera la dirección artística y la expansión del catálogo global de la marca.
+              Fundador y estratega general. Responsable de velar por la integridad artística, la transparencia financiera y la visión global de la marca.
             </p>
           </div>
 
           <div class="quote-message-box">
             <p class="quote-message-text">
-              "Pulse Media no nació para seguir tendencias, sino para darle una plataforma auténtica y sin restricciones al talento que de verdad tiene algo que transmitir."
+              "Construimos este espacio para proteger el arte auténtico y garantizar que el creador nunca vuelva a sentirse desprotegido."
             </p>
           </div>
 
@@ -544,39 +599,39 @@
           <div class="badges-container">
             <span class="badge-insignia">CO-FOUNDER</span>
             <span class="badge-insignia">HEAD OF PRODUCTION</span>
-            <span class="badge-location">&#128205; Guatemala</span>
+            <span class="badge-location">Guatemala</span>
           </div>
 
           <h2 class="member-name">Yeriel Miguel Lorenzana Morataya</h2>
           <div class="member-role">Co-Fundador / Producción & Gestión</div>
 
           <div class="bio-block">
-            <div class="bio-subtitle">// Biografía Personal</div>
+            <div class="bio-subtitle">// Enfoque de Producción</div>
             <p class="member-bio-text">
-              Cofundador y pilar operativo en la infraestructura sonora del sello. Supervisa los estándares de producción en estudio, el refinamiento técnico de los másters y el acompañamiento directo a los artistas firmados.
+              Cofundador y encargado de la supervisión sonora. Coordina los procesos de grabación, afinación técnica de masterización y desarrollo en estudio.
             </p>
           </div>
 
           <div class="quote-message-box">
             <p class="quote-message-text">
-              "En este sello cuidamos cada detalle del sonido con la misma pasión que el propio artista. La lealtad a la música es lo que nos define día a día."
+              "Cuidamos cada frecuencia con el respeto que merece la visión original del artista."
             </p>
           </div>
 
           <div class="skills-block">
             <span class="skill-chip">Producción Sonora</span>
             <span class="skill-chip">Gestión de Estudio</span>
-            <span class="skill-chip">Desarrollo Técnico</span>
+            <span class="skill-chip">Supervisión</span>
           </div>
         </div>
 
         <div class="photo-frame-placeholder">
-          <div class="shape-placeholder" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); border-color: rgba(255,255,255,0.6);"></div>
+          <div class="shape-placeholder" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);"></div>
           <span class="placeholder-text">// FOTO YERIEL</span>
         </div>
       </article>
 
-      <!-- INTEGRANTE 3: APARTADO 3 -->
+      <!-- INTEGRANTE 3: A&R -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -584,41 +639,41 @@
         <div class="card-video-overlay"></div>
 
         <div class="photo-frame-placeholder">
-          <div class="shape-placeholder" style="clip-path: circle(50% at 50% 50%); border-color: var(--accent-neon);"></div>
-          <span class="placeholder-text">// FOTO A&R DIRECTION</span>
+          <div class="shape-placeholder" style="clip-path: circle(50% at 50% 50%);"></div>
+          <span class="placeholder-text">// FOTO A&R</span>
         </div>
 
         <div class="member-info">
           <div class="badges-container">
             <span class="badge-insignia">TALENT SCOUT</span>
-            <span class="badge-location">&#128205; International Ops</span>
+            <span class="badge-location">International Ops</span>
           </div>
 
           <h2 class="member-name">Dirección de A&R</h2>
-          <div class="member-role">Búsqueda & Curaduría de Talentos</div>
+          <div class="member-role">Curaduría & Scouting de Talentos</div>
 
           <div class="bio-block">
-            <div class="bio-subtitle">// Enfoque de Departamento</div>
+            <div class="bio-subtitle">// Curaduría</div>
             <p class="member-bio-text">
-              Departamento dedicado al rastreo e incubación de voces disruptivas en los géneros urbano, pop y vocal. Filtrado constante de demos entrantes y curaduría institucional.
+              Identificación y acompañamiento de voces con identidad única en la escena urbana, pop y vocal independiente.
             </p>
           </div>
 
           <div class="quote-message-box">
             <p class="quote-message-text">
-              "Buscamos la chispa única que hace que un talento sea inconfundible desde el primer segundo de canción."
+              "Buscamos propuestas singulares que tengan un mensaje genuino que transmitir al mundo."
             </p>
           </div>
 
           <div class="skills-block">
             <span class="skill-chip">Scouting</span>
             <span class="skill-chip">Curaduría</span>
-            <span class="skill-chip">Vocal Coaching</span>
+            <span class="skill-chip">Acompañamiento</span>
           </div>
         </div>
       </article>
 
-      <!-- INTEGRANTE 4: APARTADO 4 -->
+      <!-- INTEGRANTE 4: INGENIERÍA -->
       <article class="team-card">
         <video class="card-bg-video" autoplay muted loop playsinline preload="metadata">
           <source src="acercade/pulsfond.mp4" type="video/mp4">
@@ -628,41 +683,41 @@
         <div class="member-info">
           <div class="badges-container">
             <span class="badge-insignia">AUDIO ENGINEERING</span>
-            <span class="badge-location">&#128205; Main Studio</span>
+            <span class="badge-location">Main Studio</span>
           </div>
 
           <h2 class="member-name">Ingeniería de Audio</h2>
-          <div class="member-role">Mezcla, Masterización & DSP</div>
+          <div class="member-role">Control de Calidad & Masterización</div>
 
           <div class="bio-block">
-            <div class="bio-subtitle">// Enfoque de Departamento</div>
+            <div class="bio-subtitle">// Ingeniería</div>
             <p class="member-bio-text">
-              Procesamiento de señal y tratamiento acústico de alta fidelidad para garantizar que cada máster oficial responda con la máxima potencia e impacto en plataformas digitales.
+              Optimizaciones acústicas y estándares de masterización para distribución global en todas las plataformas digitales.
             </p>
           </div>
 
           <div class="quote-message-box">
             <p class="quote-message-text">
-              "La técnica está al servicio de la emoción. Cada frecuencia tiene que transmitir la energía pura del estudio."
+              "La técnica debe potenciar la emoción pura grabada en la toma original."
             </p>
           </div>
 
           <div class="skills-block">
             <span class="skill-chip">Stem Mixing</span>
-            <span class="skill-chip">Dolby Atmos / Mastering</span>
+            <span class="skill-chip">Mastering</span>
             <span class="skill-chip">Acoustics</span>
           </div>
         </div>
 
         <div class="photo-frame-placeholder">
-          <div class="shape-placeholder" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); border-color: rgba(255,255,255,0.6);"></div>
+          <div class="shape-placeholder" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
           <span class="placeholder-text">// FOTO ESTUDIO</span>
         </div>
       </article>
 
     </section>
 
-    <!-- SECCIÓN FINAL: FORMAR PARTE DEL EQUIPO CON VIDEO TARJETA2.MP4 -->
+    <!-- SECCIÓN UNIRSE AL EQUIPO -->
     <section class="join-team-section">
       <video class="bg-join-video" autoplay muted loop playsinline preload="metadata">
         <source src="videos/tarjeta2.mp4" type="video/mp4">
@@ -670,10 +725,9 @@
       <div class="join-overlay"></div>
 
       <div class="join-content">
-        <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-neon); letter-spacing: 3px; display: block; margin-bottom: 0.8rem;">// UNITE TO PULSE</span>
         <h2 class="join-title">Forma Parte de Nuestro Equipo</h2>
         <p class="join-desc">
-          ¿Eres productor, creativo, ingeniero de sonido o tienes una propuesta sólida para sumarte a la estructura de Pulse Media? Envíanos tu información y portafolio profesional.
+          ¿Eres productor, creativo o ingeniero y compartes nuestros valores de lealtad y transparencia? Envíanos tu propuesta.
         </p>
         <a href="mailto:pulselabel.oficial@gmail.com" class="btn-join-mail">Postularme al Sello</a>
       </div>
@@ -681,7 +735,7 @@
   </main>
 
   <footer>
-    <div style="text-align: center; padding: 2.5rem 0; font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 1px; opacity: 0.5; border-top: 1px solid rgba(255,255,255,0.08);">
+    <div style="text-align: center; padding: 2.5rem 0; font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 1px; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.08);">
       &copy; 2025 - 2026 PULSE MEDIA PUBLISHING // GUATEMALA
     </div>
   </footer>
