@@ -101,7 +101,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* HERO SUPERIOR (VIDEO LIGERAMENTE MÁS ATENUADO) */
+    /* HERO SUPERIOR */
     .hero-team-banner {
       position: relative;
       width: 100%;
@@ -123,7 +123,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.45; /* Ligeramente más atenuado como pediste */
+      opacity: 0.45;
       filter: contrast(1.1) brightness(0.9);
       z-index: 1;
       pointer-events: none;
@@ -156,7 +156,22 @@
       margin: 0;
       color: #fff;
       line-height: 1.1;
-      text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    /* SUBRAYADO BLANCO LIMPIO EN EL TÍTULO */
+    .page-section-title span {
+      position: relative;
+      display: inline-block;
+    }
+
+    .page-section-title span::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #fff;
     }
 
     /* CONTENEDOR PRINCIPAL */
@@ -353,7 +368,7 @@
       border-radius: 2px;
     }
 
-    /* MANIFIESTO DEL FUNDADOR (VIDEO FONDO.MP4 MUCHO MÁS CLARO Y VISIBLE) */
+    /* MANIFIESTO DEL FUNDADOR (CON VIDEO FONDO.MP4 CLARO E ILUMINADO) */
     .founder-letter-card {
       position: relative;
       z-index: 3;
@@ -379,7 +394,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.85; /* Altísima claridad para que el video luzca nítido e iluminado */
+      opacity: 0.85;
       z-index: 1;
       pointer-events: none;
       filter: contrast(1.1) brightness(1.2);
@@ -391,7 +406,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(4, 4, 4, 0.68); /* Velo translúcido para total legibilidad del texto con luz clara */
+      background: rgba(4, 4, 4, 0.68);
       z-index: 2;
       pointer-events: none;
     }
@@ -551,14 +566,14 @@
   </div>
 
   <main>
-    <!-- HERO SUPERIOR -->
+    <!-- HERO SUPERIOR CON SUBRAYADO BLANCO LIMPIO -->
     <section class="hero-team-banner">
       <video class="bg-tira-video" autoplay muted loop playsinline preload="metadata">
         <source src="videos/fondoartistas[1].mp4" type="video/mp4">
       </video>
       <div class="banner-overlay-fade"></div>
 
-      <h1 class="page-section-title">NUESTRO EQUIPO</h1>
+      <h1 class="page-section-title">NUESTRO <span>EQUIPO</span></h1>
     </section>
 
     <section class="team-container">
