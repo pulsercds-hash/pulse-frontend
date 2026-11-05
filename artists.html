@@ -2,56 +2,68 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>PULSE MEDIA — Artistas</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  
   <style>
-    /* DESBLOQUEO TOTAL DE SCROLL NATIVO EN PC Y MÓVIL */
+    :root {
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+
     html, body {
       background: #000 !important;
       color: #fff !important;
-      font-family: var(--font-display);
+      font-family: var(--font-mono);
       width: 100%;
-      height: auto !important;
       min-height: 100vh;
       overflow-x: hidden !important;
-      overflow-y: auto !important;
-      position: static !important;
       margin: 0;
       padding: 0;
+      -webkit-text-size-adjust: 100%;
     }
 
     /* HEADER FIJO */
     header {
-      position: fixed;
+      position: sticky;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 2rem 5%;
+      padding: 1.2rem 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
-      pointer-events: none;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    header * {
-      pointer-events: auto;
+    .brand-logo {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
     }
 
     .btn-back-home {
       font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: #fff;
+      font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
       text-decoration: none;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -59,359 +71,377 @@
     }
 
     .btn-back-home:hover {
-      color: var(--accent-neon);
+      color: #fff;
     }
 
-    /* HERO SECTION CON VIDEO DE FONDO SOLO DETRÁS DEL TEXTO */
-    .artists-hero {
+    /* HERO SUPERIOR */
+    .hero-artists-section {
       position: relative;
-      padding: 12rem 5% 5rem;
+      width: 100%;
+      padding: 4rem 5% 3rem;
+      background: #000;
       overflow: hidden;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* CONTENEDOR DEL VIDEO LIMITADO A LA SECCIÓN HERO */
-    .hero-video-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .hero-video-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.45;
-      filter: contrast(1.1) brightness(0.6);
-    }
-
-    /* OVERLAY PARA DEGRADADO SUAVE Y DESVANECIMIENTO HACIA ABAJO */
-    .hero-video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.95) 100%);
-    }
-
-    .hero-content-relative {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-meta-artists {
+    .hero-meta-top {
       display: flex;
       justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
+      align-items: center;
+      font-size: 0.7rem;
       color: rgba(255, 255, 255, 0.5);
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      padding-bottom: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .artists-main-title {
-      font-size: clamp(3rem, 7vw, 6rem);
+    .page-main-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
       font-weight: 900;
-      line-height: 1.1;
       text-transform: uppercase;
+      line-height: 0.95;
+      margin: 0 0 1.5rem 0;
       letter-spacing: -1px;
     }
 
-    .text-white-normal {
+    .page-main-title .line-white {
       color: #fff;
-      font-weight: 900;
+      display: block;
     }
 
-    .accent-green-font {
-      font-family: 'Cinzel Decorative', serif;
-      color: var(--accent-neon);
-      font-weight: 900;
-      text-transform: lowercase;
+    .page-main-title .line-yellow {
+      color: #ccff00;
+      display: block;
+      margin-top: 0.2rem;
     }
 
-    .artists-subtitle {
+    .hero-description {
       font-family: var(--font-mono);
-      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 1.5rem;
-      max-width: 650px;
+      font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 600px;
       line-height: 1.6;
+      margin: 0;
     }
 
-    /* GRID DE CARPETAS CON FONDO NEGRO LIMPIO */
-    .folder-grid {
+    /* CONTENEDOR DE CARPETAS */
+    .folders-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 2rem auto 5rem;
+      padding: 0 5%;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 4rem 3rem;
-      padding: 4rem 5% 8rem;
-      position: relative;
-      z-index: 2;
-      background: #000;
+      gap: 2rem;
     }
 
-    .artist-card-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+    /* ESTILO DE LA CARPETA */
+    .folder-card {
+      background: #080808;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease;
       cursor: pointer;
-      perspective: 1000px;
     }
 
-    /* WRAPPER 3D CON RESPLANDOR NEÓN SUTIL */
-    .folder-png-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 320px;
-      transform-style: preserve-3d;
-      transition: transform 0.2s ease-out, filter 0.5s ease;
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
+    .folder-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(204, 255, 0, 0.5);
     }
 
-    .folder-png-wrapper img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      transform: translateZ(20px);
-    }
-
-    .artist-card-item:hover .folder-png-wrapper {
-      filter: drop-shadow(0 0 18px rgba(220, 255, 0, 0.22)) drop-shadow(0 20px 30px rgba(0,0,0,0.9));
-    }
-
-    /* METADATOS Y SELLO */
-    .artist-meta-clean {
-      margin-top: 1.8rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .artist-title-clean {
-      font-size: 1.6rem;
-      font-weight: 900;
+    .folder-tab {
+      position: absolute;
+      top: -18px;
+      left: 20px;
+      background: #c2b280;
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.25rem 0.8rem;
+      border-radius: 3px 3px 0 0;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
+    }
+
+    .folder-content {
+      margin-top: 1rem;
+    }
+
+    .folder-artist-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
       color: #fff;
-      transition: color 0.3s ease;
+      margin: 0 0 0.5rem 0;
     }
 
-    .artist-card-item:hover .artist-title-clean {
-      color: var(--accent-neon);
+    .folder-artist-genre {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #ccff00;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
     }
 
-    .artist-status-clean {
+    .folder-artist-bio {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .folder-action-btn {
+      display: inline-block;
       font-family: var(--font-mono);
       font-size: 0.75rem;
       font-weight: 700;
-      color: var(--accent-neon);
-      letter-spacing: 3px;
+      color: #000;
+      background: #fff;
+      padding: 0.6rem 1.2rem;
+      text-decoration: none;
       text-transform: uppercase;
-      opacity: 0.85;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      position: relative;
-      overflow: hidden;
-      height: 20px;
-      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
 
-    .status-text {
-      display: inline-block;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+    .folder-action-btn:hover {
+      background: #ccff00;
     }
 
-    .artist-card-item:hover .status-text {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-
-    .status-text-hover {
-      position: absolute;
+    /* VENTANA MODAL (EXPEDIENTE FLOTANTE) */
+    .modal-overlay {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
       display: flex;
-      align-items: center;
       justify-content: center;
-      transform: translateY(100%);
+      align-items: center;
+      z-index: 9999;
       opacity: 0;
-      color: #fff;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .artist-card-item:hover .status-text-hover {
-      transform: translateY(0);
+    .modal-overlay.active {
       opacity: 1;
+      visibility: visible;
     }
 
-    .status-dot-green {
-      width: 5px;
-      height: 5px;
-      background: var(--accent-neon);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-neon);
-      animation: pulseDot 1.8s infinite;
+    .modal-content {
+      background: #0c0c0c;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: 3px solid #ccff00;
+      width: 90%;
+      max-width: 600px;
+      padding: 2.5rem;
+      border-radius: 4px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
     }
 
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 0 0 0.5rem 0;
+      color: #fff;
+    }
+
+    .modal-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #ccff00;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-body-text {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .modal-link-btn {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.6rem 1.2rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .modal-link-btn:hover {
+      background: #ccff00;
+      color: #000;
+      border-color: #ccff00;
+    }
+
+    @media (max-width: 768px) {
+      .hero-artists-section {
+        padding: 3rem 4% 2rem;
+      }
+      .folders-container {
+        padding: 0 4%;
+      }
+      .modal-content {
+        padding: 1.8rem;
+      }
     }
   </style>
 </head>
 <body class="theme-dark">
 
-  <div id="page-curtain"></div>
-
   <!-- HEADER FIJO -->
   <header>
-    <a href="index.html" class="brand-logo" onclick="triggerCurtain(event, 'index.html')">Pulse Media</a>
-    <a href="index.html" class="btn-back-home" onclick="triggerCurtain(event, 'index.html')">&larr; INICIO</a>
+    <a href="index.html" class="brand-logo">Pulse Media</a>
+    <a href="index.html" class="btn-back-home">&larr; INICIO</a>
   </header>
 
   <main>
-    <!-- HERO SECTION CON EL VIDEO APLICADO ÚNICAMENTE AL ENCABEZADO -->
-    <section class="artists-hero">
-      <div class="hero-video-bg">
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="videos/fondoartistas[1].mp4" type="video/mp4">
-        </video>
-        <div class="hero-video-overlay"></div>
+    <!-- HERO PRINCIPAL -->
+    <section class="hero-artists-section">
+      <div class="hero-meta-top">
+        <span>// ROSTER OFICIAL</span>
+        <span>GUATEMALA / GLOBAL</span>
       </div>
 
-      <div class="hero-content-relative">
-        <div class="hero-meta-artists">
-          <span>// ROSTER OFICIAL</span>
-          <span>GUATEMALA / GLOBAL</span>
-        </div>
-        <h1 class="artists-main-title">
-          <span class="text-white-normal">Nuestros</span> <span class="accent-green-font">Artistas</span>
-        </h1>
-        <p class="artists-subtitle">
-          Expedientes y carpetas oficiales de proyectos en desarrollo, producción y distribución global.
-        </p>
-      </div>
+      <h1 class="page-main-title">
+        <span class="line-white">NUESTROS</span>
+        <span class="line-yellow">ARTISTAS</span>
+      </h1>
+
+      <p class="hero-description">
+        Expedientes y carpetas oficiales de proyectos en desarrollo, producción y distribución global.
+      </p>
     </section>
 
-    <!-- GRID DE CARPETAS -->
-    <section class="folder-grid">
-      
-      <!-- ARTISTA 01 -->
-      <div class="artist-card-item" data-tilt>
-        <div class="folder-png-wrapper">
-          <img src="artist/artista1.png" alt="Artista 01">
-        </div>
-        <div class="artist-meta-clean">
-          <div class="artist-title-clean">Artista 01</div>
-          <div class="artist-status-clean">
-            <span class="status-text"><span class="status-dot-green"></span> Próximamente</span>
-            <span class="status-text-hover">FILE // SECURE-01</span>
-          </div>
-        </div>
-      </div>
+    <!-- SECCIÓN DE CARPETAS DE ARTISTAS -->
+    <div class="folders-container">
 
-      <!-- ARTISTA 02 -->
-      <div class="artist-card-item" data-tilt>
-        <div class="folder-png-wrapper">
-          <img src="artist/artista2.png" alt="Artista 02">
+      <!-- CARPETA 1: KID$TRANGE -->
+      <article class="folder-card">
+        <div class="folder-tab">EXPEDIENTE #01</div>
+        <div class="folder-content">
+          <h3 class="folder-artist-name">KID$TRANGE</h3>
+          <div class="folder-artist-genre">// Urban / Alternative Division</div>
+          <p class="folder-artist-bio">
+            Proyecto alternativo enfocado en frecuencias urbanas vanguardistas y producciones independientes de alto impacto sonoro.
+          </p>
+          <button class="folder-action-btn" onclick="openModal()">Ver Expediente</button>
         </div>
-        <div class="artist-meta-clean">
-          <div class="artist-title-clean">Artista 02</div>
-          <div class="artist-status-clean">
-            <span class="status-text"><span class="status-dot-green"></span> Próximamente</span>
-            <span class="status-text-hover">FILE // SECURE-02</span>
-          </div>
-        </div>
-      </div>
+      </article>
 
-      <!-- ARTISTA 03 -->
-      <div class="artist-card-item" data-tilt>
-        <div class="folder-png-wrapper">
-          <img src="artist/artista3.png" alt="Artista 03">
+      <!-- CARPETA 2: PRÓXIMO INGRESO -->
+      <article class="folder-card">
+        <div class="folder-tab">EXPEDIENTE #02</div>
+        <div class="folder-content">
+          <h3 class="folder-artist-name">Próximo Ingreso</h3>
+          <div class="folder-artist-genre">// Scouting & A&R</div>
+          <p class="folder-artist-bio">
+            Espacio reservado para nuevas firmas de talento no genérico dentro de la estructura de Pulse Media.
+          </p>
+          <a href="mailto:pulselabel.oficial@gmail.com" class="folder-action-btn" style="text-decoration:none; display:inline-block; text-align:center;">Enviar Demo</a>
         </div>
-        <div class="artist-meta-clean">
-          <div class="artist-title-clean">Artista 03</div>
-          <div class="artist-status-clean">
-            <span class="status-text"><span class="status-dot-green"></span> Próximamente</span>
-            <span class="status-text-hover">FILE // SECURE-03</span>
-          </div>
-        </div>
-      </div>
+      </article>
 
-      <!-- ARTISTA 04 -->
-      <div class="artist-card-item" data-tilt>
-        <div class="folder-png-wrapper">
-          <img src="artist/artista4.png" alt="Artista 04">
-        </div>
-        <div class="artist-meta-clean">
-          <div class="artist-title-clean">Artista 04</div>
-          <div class="artist-status-clean">
-            <span class="status-text"><span class="status-dot-green"></span> Próximamente</span>
-            <span class="status-text-hover">FILE // SECURE-04</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ARTISTA 05 -->
-      <div class="artist-card-item" data-tilt>
-        <div class="folder-png-wrapper">
-          <img src="artist/artista5.png" alt="Artista 05">
-        </div>
-        <div class="artist-meta-clean">
-          <div class="artist-title-clean">Artista 05</div>
-          <div class="artist-status-clean">
-            <span class="status-text"><span class="status-dot-green"></span> Próximamente</span>
-            <span class="status-text-hover">FILE // SECURE-05</span>
-          </div>
-        </div>
-      </div>
-
-    </section>
+    </div>
   </main>
 
-  <!-- FOOTER -->
+  <!-- VENTANA MODAL (EXPEDIENTE DE KID$TRANGE) -->
+  <div class="modal-overlay" id="artistModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">[X] CERRAR</button>
+      <h2 class="modal-title">KID$TRANGE</h2>
+      <div class="modal-subtitle">// Expediente Oficial & Roster</div>
+      <p class="modal-body-text">
+        Artista enfocado en la escena urbana alternativa. Con repertorio disponible en plataformas digitales como Spotify y una presencia activa en redes sociales bajo el registro oficial <strong>@kidstrangeee</strong>.
+      </p>
+      <div class="modal-links">
+        <a href="https://www.instagram.com/kidstrangeee" target="_blank" class="modal-link-btn">Instagram (@kidstrangeee)</a>
+        <a href="https://open.spotify.com" target="_blank" class="modal-link-btn">Spotify Roster</a>
+      </div>
+    </div>
+  </div>
+
   <footer>
-    <div>&copy; 2025 - 2026 PULSE MEDIA PUBLISHING</div>
-    <div>GUATEMALA // GLOBAL OPS</div>
+    <div style="text-align: center; padding: 2.5rem 0; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 1px; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.08);">
+      &copy; 2025 - 2026 PULSE MEDIA PUBLISHING // GUATEMALA
+    </div>
   </footer>
 
-  <!-- SCRIPT DE TILT 3D -->
   <script>
-    document.querySelectorAll('.artist-card-item').forEach(card => {
-      const wrapper = card.querySelector('.folder-png-wrapper');
+    // Funciones para abrir y cerrar la ventana flotante del artista
+    function openModal() {
+      document.getElementById('artistModal').classList.add('active');
+    }
 
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        
-        const rotateX = (-y / 12);
-        const rotateY = (x / 12);
+    function closeModal() {
+      document.getElementById('artistModal').classList.remove('active');
+    }
 
-        wrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        wrapper.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
-      });
-    });
+    // Cerrar modal al hacer clic fuera del cuadro de contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById('artistModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
   </script>
 
-  <script src="app.js"></script>
 </body>
 </html>
