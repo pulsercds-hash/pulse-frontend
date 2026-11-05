@@ -7,14 +7,14 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
 
   <style>
     :root {
       --font-display: 'Syne', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     *, *::before, *::after {
@@ -24,7 +24,7 @@
     html, body {
       background: #000 !important;
       color: #fff !important;
-      font-family: var(--font-body);
+      font-family: var(--font-mono);
       width: 100%;
       min-height: 100vh;
       overflow-x: hidden !important;
@@ -60,7 +60,7 @@
     }
 
     .btn-back-home {
-      font-family: var(--font-body);
+      font-family: var(--font-mono);
       font-size: clamp(0.7rem, 1.2vw, 0.8rem);
       font-weight: 500;
       color: rgba(255, 255, 255, 0.7);
@@ -74,7 +74,7 @@
       color: #fff;
     }
 
-    /* HERO SUPERIOR CON BLOQUE BLANCO DESTACADO EN EL TÍTULO */
+    /* HERO SUPERIOR */
     .hero-team-banner {
       position: relative;
       width: 100%;
@@ -148,7 +148,7 @@
       padding: 1rem 5% 4rem;
     }
 
-    /* TARJETA DE INTEGRANTE MINIMALISTA B&W */
+    /* TARJETA DE INTEGRANTE TÉCNICA Y SOBRIA */
     .team-card {
       position: relative;
       z-index: 2;
@@ -198,7 +198,7 @@
       z-index: 3;
     }
 
-    /* MARCO DE FOTO MINIMALISTA */
+    /* MARCO DE FOTO TÉCNICO */
     .photo-frame-placeholder {
       position: relative;
       width: 100%;
@@ -234,7 +234,7 @@
     }
 
     .placeholder-text {
-      font-family: var(--font-body);
+      font-family: var(--font-mono);
       font-size: 0.68rem;
       font-weight: 500;
       letter-spacing: 2px;
@@ -260,7 +260,7 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
-      font-family: var(--font-body);
+      font-family: var(--font-mono);
       font-weight: 600;
       font-size: 0.65rem;
       padding: 0.25rem 0.65rem;
@@ -281,12 +281,12 @@
     }
 
     .member-role {
-      font-family: var(--font-body);
-      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       font-weight: 400;
       color: rgba(255, 255, 255, 0.6);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       border-left: 2px solid #fff;
       padding-left: 0.8rem;
     }
@@ -297,7 +297,7 @@
     }
 
     .bio-subtitle {
-      font-family: var(--font-body);
+      font-family: var(--font-mono);
       font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 2px;
@@ -307,8 +307,8 @@
     }
 
     .member-bio-text {
-      font-family: var(--font-body);
-      font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+      font-family: var(--font-mono);
+      font-size: clamp(0.82rem, 1.05vw, 0.92rem);
       font-weight: 300;
       line-height: 1.75;
       color: rgba(255, 255, 255, 0.8);
@@ -324,8 +324,8 @@
     }
 
     .quote-message-text {
-      font-family: var(--font-body);
-      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
       font-style: italic;
       color: rgba(255, 255, 255, 0.85);
       line-height: 1.6;
@@ -343,8 +343,8 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 0.3rem 0.7rem;
-      font-family: var(--font-body);
-      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
       font-weight: 400;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -352,22 +352,51 @@
       border-radius: 2px;
     }
 
-    /* CARTA DEL FUNDADOR (TEXTO EMOTIVO Y FORMAL ANTES DEL RECLUTAMIENTO) */
+    /* MANIFIESTO DEL FUNDADOR CON VIDEOS/FONDO.MP4 */
     .founder-letter-card {
       position: relative;
       z-index: 3;
       max-width: 1200px;
       margin: 4rem auto 0;
-      background: rgba(12, 12, 12, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-left: 2px solid #fff;
-      padding: 3.5rem 3rem;
+      padding: 4rem 3.5rem;
       border-radius: 2px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.95);
+    }
+
+    .bg-founder-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.22;
+      z-index: 1;
+      pointer-events: none;
+      filter: contrast(1.2) grayscale(1);
+    }
+
+    .founder-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(6, 6, 6, 0.92);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .founder-letter-card > *:not(.bg-founder-video):not(.founder-video-overlay) {
+      position: relative;
+      z-index: 3;
     }
 
     .founder-letter-tag {
-      font-family: var(--font-body);
+      font-family: var(--font-mono);
       font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 3px;
@@ -378,8 +407,8 @@
     }
 
     .founder-letter-body {
-      font-family: var(--font-body);
-      font-size: clamp(0.92rem, 1.25vw, 1.05rem);
+      font-family: var(--font-mono);
+      font-size: clamp(0.88rem, 1.15vw, 1.02rem);
       font-weight: 300;
       line-height: 1.95;
       color: rgba(255, 255, 255, 0.9);
@@ -398,7 +427,7 @@
       display: block;
     }
 
-    /* SECCIÓN UNIRSE AL EQUIPO B&W */
+    /* SECCIÓN UNIRSE AL EQUIPO */
     .join-team-section {
       position: relative;
       width: 100%;
@@ -457,8 +486,8 @@
     }
 
     .join-desc {
-      font-family: var(--font-body);
-      font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+      font-family: var(--font-mono);
+      font-size: clamp(0.82rem, 1.1vw, 0.92rem);
       font-weight: 300;
       color: rgba(255, 255, 255, 0.75);
       margin-bottom: 2.2rem;
@@ -469,15 +498,15 @@
       display: inline-block;
       background: #fff;
       color: #000;
-      font-family: var(--font-body);
-      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
       padding: 1.1rem 2.6rem;
       border-radius: 2px;
       text-decoration: none;
-      transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease;
+      transition: transform 0.2s ease, background 0.3s ease;
     }
 
     .btn-join-mail:hover {
@@ -492,7 +521,7 @@
         min-height: 28vh;
       }
       .founder-letter-card {
-        padding: 2rem 1.5rem;
+        padding: 2.5rem 1.5rem;
       }
       .team-card, .team-card:nth-child(even) {
         grid-template-columns: 1fr;
@@ -504,14 +533,14 @@
 </head>
 <body class="theme-dark">
 
-  <!-- HEADER FIJO SOBRIO -->
+  <!-- HEADER FIJO -->
   <header>
     <a href="index.html" class="brand-logo">Pulse Media</a>
     <a href="index.html" class="btn-back-home">&larr; VOLVER AL INICIO</a>
   </header>
 
   <main>
-    <!-- HERO SUPERIOR CON BLOQUE DESTACADO EN EL TÍTULO -->
+    <!-- HERO SUPERIOR -->
     <section class="hero-team-banner">
       <video class="bg-tira-video" autoplay muted loop playsinline preload="metadata">
         <source src="videos/fondoartistas[1].mp4" type="video/mp4">
@@ -691,8 +720,13 @@
         </div>
       </article>
 
-      <!-- CARTA EMOTIVA Y FORMAL DEL FUNDADOR (UBICADA ANTES DEL RECLUTAMIENTO) -->
+      <!-- CARTA DEL FUNDADOR CON VIDEOS/FONDO.MP4 -->
       <div class="founder-letter-card">
+        <video class="bg-founder-video" autoplay muted loop playsinline preload="metadata">
+          <source src="videos/fondo.mp4" type="video/mp4">
+        </video>
+        <div class="founder-video-overlay"></div>
+
         <span class="founder-letter-tag">// MANIFIESTO DEL FUNDADOR</span>
         
         <p class="founder-letter-body">
@@ -730,7 +764,7 @@
   </main>
 
   <footer>
-    <div style="text-align: center; padding: 2.5rem 0; font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 1px; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.08);">
+    <div style="text-align: center; padding: 2.5rem 0; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 1px; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.08);">
       &copy; 2025 - 2026 PULSE MEDIA PUBLISHING // GUATEMALA
     </div>
   </footer>
